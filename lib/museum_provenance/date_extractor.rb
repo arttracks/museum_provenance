@@ -33,7 +33,7 @@ module MuseumProvenance
 
       private
 
-      def extract_centuries(str) 
+      def DateExtractor.extract_centuries(str) 
         century_regex = /\b(\d{1,2})(?:st|rd|th|nd)?\s+century(?:\s+(ad|bc|bce|ce))?\b/i
         centuries = []
         century = str.match century_regex
@@ -53,7 +53,7 @@ module MuseumProvenance
         end
       end
 
-      def extract_decades(str)
+      def DateExtractor.extract_decades(str)
         decade_regex =/\b(\d{1,3})0s(?:\s+(?:ad|bc|bce|ce))?\b/i
         decades = []
         decade = str.match decade_regex
@@ -70,7 +70,7 @@ module MuseumProvenance
         end
       end
 
-      def extract_years(str)
+      def DateExtractor.extract_years(str)
           years_regex = /
             (?<!(?:january|febuary|october)\s) # ignore months...
             (?<!(?:march|april)\s)
@@ -106,7 +106,7 @@ module MuseumProvenance
           end
       end
 
-      def extract_months(str)
+      def DateExtractor.extract_months(str)
         month_regex =/\b
                          (?:jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)
                          \.?,?    # possible punctuation
@@ -130,7 +130,7 @@ module MuseumProvenance
           end
       end
 
-      def extract_days(str)
+      def DateExtractor.extract_days(str)
         day_regex = /\b
                       (?:jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)
                       \.?,?\s\d{1,2}
