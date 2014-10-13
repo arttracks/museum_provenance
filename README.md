@@ -2,7 +2,7 @@
 
 A ruby library for converting provenance records for works of art into structured date for museums and other cultural institutions.  
 
-A subproject of the [Art Tracks] project for the Carnegie Museum of Art in Pittsburgh, PA.
+A subproject of the [Art Tracks](http://blog.cmoa.org/tag/art-tracks/) project for the [Carnegie Museum of Art](http://www.cmoa.org) in Pittsburgh, PA.
 
 ## Installation
 
