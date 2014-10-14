@@ -160,23 +160,6 @@ describe Timeline do
       t.insert_after(p1,p3)
       p1.direct_transfer.must_equal false
     end
-    it "automatically sets beginning dates for direct transfers" do
-      skip
-      p1.ending = Date.new(2000,1,1)
-      p3.beginning = Date.new(2004,1,1)
-      t.insert_direct(p1)
-      t.insert_direct(p2)
-      t.insert_direct(p3)
-      p2.beginning.must_equal p1.ending
-      p2.ending.must_equal p3.beginning
-    end
-    it "complains if a direct transfer has contradictory dates" do
-      skip
-      p1.ending = Date.new(2000,1,1)
-      p2.beginning = Date.new(2004,1,1)
-      t.insert_direct(p1)
-      proc {t.insert_direct(p2)}.must_raise MuseumProvenance::DateError
-    end
   end
 
   describe "Linking" do

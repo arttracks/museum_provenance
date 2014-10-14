@@ -166,7 +166,7 @@ module MuseumProvenance
     # Setter for the {#next_period}.  
     # Will also reset direct transfer to false.
     # @param p [Period] the period directly following this period
-    # @return [Void]
+    # @return [void]
     def next_period=(p) 
       @next_period = p
       @direct_transfer = false
@@ -175,7 +175,7 @@ module MuseumProvenance
     # Setter for the {#previous_period}.  
     # Will also reset the previous period's direct transfer to false.
     # @param p [Period] the period directly preceding this period
-    # @return [Void]
+    # @return [void]
     def previous_period=(p)
       @previous_period = p
       @previous_period.direct_transfer = false if @previous_period

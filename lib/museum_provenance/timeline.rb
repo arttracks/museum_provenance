@@ -1,4 +1,6 @@
 require "csv"
+require 'json'
+
 module MuseumProvenance
   # Timeline is the main representation of the provenance of an artwork.
   # It's a container for a ordered array of {Period}s, representing the individual
@@ -15,11 +17,6 @@ module MuseumProvenance
     #   @return [String] The latest period within the timeline.
     attr_reader :earliest, :latest
 
-    # @return [String] The provenance of the timeline.
-    # @see #provenance
-    def to_s
-      provenance
-    end
 
     # Array access to the {Period}s contained within the Timeline.
     # @param n [Fixnum] The provenance record desired
@@ -40,7 +37,7 @@ module MuseumProvenance
     end
 
     # Standard Enumerable method for yielding a block to each {Period} within the {Timeline}.
-    # @return [Void]
+    # @return [void]
     def each
       current = earliest
       while !current.nil?
@@ -60,9 +57,16 @@ module MuseumProvenance
        end
     end
 
-    # @return [JSON] a JSON string of the timeline
-    # @todo Not currently implemented.
+    # Generates a JSON for the timeline.
+    # @return [JSON] a JSON array of the timeline
     def to_json
+      arry = []
+      self.each do |p|
+        hash =  p.generate_output.to_h
+        hash.each{|key,val| hash.delete key if val.nil?}
+        arry.push hash
+      end
+      arry.to_json
     end
 
     # Generates the complete provenance of all Periods within the Timeline.
@@ -84,13 +88,13 @@ module MuseumProvenance
       footnote_split = Provenance::FOOTNOTE_DIVIDER unless footnotes.blank?
       [records, footnote_split, footnotes].flatten.join(" ").strip
     end
-    
+    alias :to_s :provenance
 
     # Insert a new period at the end of the timeline
     # and mark the previous period as a direct transfer.
     # Will function the same as {#insert} if there is not a preceding period.
     # @param period [Period]
-    # @return [Void]
+    # @return [void]
     def insert_direct(period)
       insert_latest(period)
       period.previous_period.direct_transfer = true unless period.previous_period.nil?
@@ -100,7 +104,7 @@ module MuseumProvenance
     # This allows insertion in arbitrary order.
     # @param period [Period] the new period.
     # @param following_period [Period] the period you wish to insert in front of.
-    # @return [Void]
+    # @return [void]
     def insert_before(following_period,period)
       period.previous_period = following_period.previous_period
       period.next_period  = following_period
@@ -116,7 +120,7 @@ module MuseumProvenance
     # This allows insertion in arbitrary order.
     # @param period [Period] the new period.
     # @param preceding_period [Period] the period you wish to insert behind.
-    # @return [Void]
+    # @return [void]
     def insert_after(period,preceding_period)
       preceding_period.previous_period = period
       preceding_period.next_period = period.next_period
@@ -131,7 +135,7 @@ module MuseumProvenance
     # Same as {#insert_after}, but wil also mark ther period as a direct transfer.
     # @param period [Period] the new period.
     # @param preceding_period [Period] the period you wish to insert behind.
-    # @return [Void]
+    # @return [void]
     def insert_directly_after(period,preceding_period)
       insert_after(period,preceding_period)
       period.direct_transfer = true
@@ -139,7 +143,7 @@ module MuseumProvenance
 
     # Insert a new period at the end of the timeline.
     # @param period [Period]
-    # @return [Void]
+    # @return [void]
     def insert_latest(period)
       if latest.nil?
         insert_earliest(period)
@@ -151,7 +155,7 @@ module MuseumProvenance
 
     # Insert a new period at the beginning of the timeline.
     # @param period [Period]
-    # @return [Void]
+    # @return [void]
     def insert_earliest(period)
       if earliest.nil?
         @earliest = period
