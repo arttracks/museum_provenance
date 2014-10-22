@@ -18,6 +18,16 @@ module MuseumProvenance
       @@all_methods ||= []
     end
 
+    # Finds an instance of {AcquisitionMethod} with a given name.
+    #
+    # Returns nil if no match is found.
+    #
+    # @param name [String] a string containing the acquisition method name.
+    # @return [AcquisitionMethod] the found acquisition method.  
+    def AcquisitionMethod.find_by_name(name)
+      @@all_methods.find{|method| method.name == name}
+    end
+
     
     # Finds an instance of {AcquisitionMethod} containing the provided text
     #

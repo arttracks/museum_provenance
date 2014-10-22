@@ -61,13 +61,27 @@ module MuseumProvenance
     # @return [JSON] a JSON array of the timeline
     def to_json
       arry = []
+      i = 0
       self.each do |p|
         hash =  p.generate_output.to_h
+        hash[:date_string] = p.time_string
+        hash[:order] = i
+        hash[:acquisition_time_span] = p.beginning.to_s
+        hash[:deacquisition_time_span] = p.ending.to_s 
+        hash[:earliest_possible] = p.earliest_possible
+        hash[:latest_possible] = p.latest_possible
+        hash[:earliest_definite] = p.earliest_definite
+        hash[:latest_definite] =  p.latest_definite
         hash.each{|key,val| hash.delete key if val.nil?}
         arry.push hash
+        i +=1
       end
-      arry.to_json
+      {
+        period: arry,
+        provenance: provenance 
+      }.to_json
     end
+
 
     # Generates the complete provenance of all Periods within the Timeline.
     # It also re-numbers and re-attaches the footnotes, seperated by {Provenance::FOOTNOTE_DIVIDER}.

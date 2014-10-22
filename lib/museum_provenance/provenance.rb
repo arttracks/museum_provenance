@@ -31,6 +31,25 @@ module MuseumProvenance
         timeline
       end
 
+      # Extract a provenance record from JSON. 
+      # @param json [String] a JSON string representing a provenance record.
+      # @return [Timeline] The structured representation of the provenance
+      def from_json(json)
+        timeline = Timeline.new
+        last_was_direct = false
+        data = JSON.parse(json, {symbolize_names: true})
+        data[:period].each do |period|
+          p = Period.new("",period)
+          if last_was_direct 
+            timeline.insert_direct(p)
+          else
+            timeline.insert(p)
+          end
+          last_was_direct = period[:direct_transfer]
+        end
+        return timeline    
+      end
+
       private
 
       def extract_text_and_notes(input)

@@ -73,4 +73,15 @@ describe AcquisitionMethod do
       method.must_equal AcquisitionMethod::SALE
     end
   end
+  describe "Name Find" do
+    it "does not find when there's nothing there" do
+      method = AcquisitionMethod.find_by_name("Regurgitated")
+      method.must_be_nil
+
+    end
+    it "finds standard acquisition methods" do
+      method = AcquisitionMethod.find_by_name("Sale")
+      method.must_be_instance_of AcquisitionMethod
+      method.must_equal AcquisitionMethod::SALE
+    end  end
 end

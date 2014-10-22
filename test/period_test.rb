@@ -195,6 +195,13 @@ describe Period do
       p1.latest_possible.must_equal p3.begin_of_the_end
     end
 
+    it "manages earliest_definite" do
+      skip
+    end
+
+    it "manages latest_definite" do
+      skip
+    end
     
   end
 
@@ -214,10 +221,6 @@ describe Period do
     it "allows footnotes to be assigned" do
       p1.note = "This is a test note"
       p1.note.must_equal "This is a test note"
-    end
-    it "allows footnote assignment in the init" do
-      px = Period.new("test",{note: "test_note"})
-      px.note.must_equal "test_note"
     end
     it "returns nil if there isn't a footnote" do
       p1.note.must_be_nil

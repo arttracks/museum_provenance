@@ -17,15 +17,50 @@ module MuseumProvenance
     # Create a new party.
     # @todo replace the generic hash with a PeriodOutput.
     # @param _name [String] The party name of the Period
-    # @param opts [Hash] A (poorly) used way to initialize the period.
-    def initialize(_name = "", opts={})
+    # @param opts [Hash] allows a period to be initialized using a hash.
+    def initialize(_name = "", opts=Hash.new)
       @direct_transfer = false
-      self.party = _name
 
+      self.party = _name 
+
+      # Intialize party
+      self.party  = opts[:party] if opts[:party]
+      @party.certain= opts[:party_certainty]  unless opts[:party_certainty].nil?
+      @party.birth= Date.parse(opts[:birth])  if opts[:birth]
+      @party.birth.certainty= opts[:birth_certainty]  unless opts[:birth_certainty].nil?
+      @party.birth.precision= DateTimePrecision::YEAR if opts[:birth]
+      @party.death= Date.parse(opts[:death])  if opts[:death]
+      @party.death.certainty= opts[:death_certainty] unless opts[:death_certainty].nil?
+      @party.death.precision = DateTimePrecision::YEAR if opts[:death]
+
+      # Initialize global state
+      self.acquisition_method = AcquisitionMethod.find_by_name(opts[:acquisition_method]) 
+      self.certainty = opts[:period_certainty] unless opts[:period_certainty].nil?
+
+      # initialize location
       self.location = opts[:location]
-      self.note = opts[:note]
-      @beginning = opts[:begin]
-      @ending = opts[:end]
+      self.location.certain = opts[:location_certainty] unless opts[:location_certainty].nil?
+
+      # intialize metadata
+      self.stock_number = opts[:stock_number]
+      self.note = opts[:footnote] if opts[:footnote] != ""
+
+      # intitialze dates
+      b_o_t_e = Date.parse(opts[:bote]) if opts[:bote]
+      b_o_t_e.certainty = opts[:bote_certainty] unless opts[:bote_certainty].nil?
+      b_o_t_e.precision = opts[:bote_precision] unless !b_o_t_e || opts[:bote_precision].nil?
+      e_o_t_e = Date.parse(opts[:eote]) if opts[:eote]
+      e_o_t_e.certainty = opts[:eote_certainty] unless opts[:eote_certainty].nil?
+      e_o_t_e.precision = opts[:eote_precision] unless !e_o_t_e || opts[:eote_precision].nil?
+      b_o_t_b = Date.parse(opts[:botb]) if opts[:botb]
+      b_o_t_b.certainty = opts[:botb_certainty] unless opts[:botb_certainty].nil?
+      b_o_t_b.precision = opts[:botb_precision] unless !b_o_t_b || opts[:botb_precision].nil?
+      e_o_t_b = Date.parse(opts[:eotb]) if opts[:eotb]
+      e_o_t_b.certainty = opts[:eotb_certainty] unless opts[:eotb_certainty].nil?
+      e_o_t_b.precision = opts[:eotb_precision] unless !e_o_t_b || opts[:eotb_precision].nil?
+      @beginning = TimeSpan.new(b_o_t_b,e_o_t_b) if b_o_t_b || e_o_t_b
+      @ending = TimeSpan.new(b_o_t_e,e_o_t_e)    if b_o_t_e || e_o_t_e 
+
      end
 
      # Denormalize the period into a {PeriodOutput}.
@@ -503,5 +538,23 @@ module MuseumProvenance
       return nil
     end
 
+    # Find the earliest definite date for this period
+    #
+    # @return [Date, Nil] The earliest definite date for this period
+    def earliest_definite
+      return eotb if eotb
+      return bote if bote
+      return nil
+    end
+
+# Find the latest definite date for this period
+    #
+    # @return [Date, Nil] The latest definite date for this period
+    def latest_definite
+     return Time.now.to_date if is_ongoing?
+     return next_period.earliest_possible if direct_transfer? 
+     return bote if bote
+     return nil
+    end
   end
 end
