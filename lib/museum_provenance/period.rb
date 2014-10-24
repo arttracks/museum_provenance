@@ -17,47 +17,66 @@ module MuseumProvenance
     # Create a new party.
     # @todo replace the generic hash with a PeriodOutput.
     # @param _name [String] The party name of the Period
-    # @param opts [Hash] allows a period to be initialized using a hash.
+    # @param opts [Hash] allows a period to be initialized using a hash;way to initialize the period.
     def initialize(_name = "", opts=Hash.new)
       @direct_transfer = false
 
       self.party = _name 
 
+      # remove blank values
+      opts.delete_if { |k, v| (v.is_a?(String) && v.empty?) }
+
       # Intialize party
       self.party  = opts[:party] if opts[:party]
-      @party.certain= opts[:party_certainty]  unless opts[:party_certainty].nil?
-      @party.birth= Date.parse(opts[:birth])  if opts[:birth]
-      @party.birth.certainty= opts[:birth_certainty]  unless opts[:birth_certainty].nil?
-      @party.birth.precision= DateTimePrecision::YEAR if opts[:birth]
-      @party.death= Date.parse(opts[:death])  if opts[:death]
-      @party.death.certainty= opts[:death_certainty] unless opts[:death_certainty].nil?
-      @party.death.precision = DateTimePrecision::YEAR if opts[:death]
+      @party.certain= opts[:party_certainty].to_bool unless opts[:party_certainty].nil?
+      if opts[:birth]
+        @party.birth= Date.parse(opts[:birth])
+        @party.birth.certainty= opts[:birth_certainty].to_bool unless opts[:birth_certainty].nil?
+        @party.birth.precision= DateTimePrecision::YEAR
+      end
+      if opts[:death]
+        @party.death= Date.parse(opts[:death]) 
+        @party.death.certainty= opts[:death_certainty].to_bool unless opts[:death_certainty].nil?
+        @party.death.precision = DateTimePrecision::YEAR
+      end
 
       # Initialize global state
       self.acquisition_method = AcquisitionMethod.find_by_name(opts[:acquisition_method]) 
-      self.certainty = opts[:period_certainty] unless opts[:period_certainty].nil?
+      self.certainty = opts[:period_certainty].to_bool unless opts[:period_certainty].nil?
 
       # initialize location
-      self.location = opts[:location]
-      self.location.certain = opts[:location_certainty] unless opts[:location_certainty].nil?
-
+      if opts[:location]
+        self.location = opts[:location]
+        self.location.certain = opts[:location_certainty].to_bool unless opts[:location_certainty].nil?
+      end
       # intialize metadata
       self.stock_number = opts[:stock_number]
-      self.note = opts[:footnote] if opts[:footnote] != ""
+      unless opts[:footnote].blank?
+        puts "opts[:footnote]: #{opts[:footnote]}"
+        self.note = [opts[:footnote]]
+      end
 
       # intitialze dates
-      b_o_t_e = Date.parse(opts[:bote]) if opts[:bote]
-      b_o_t_e.certainty = opts[:bote_certainty] unless opts[:bote_certainty].nil?
-      b_o_t_e.precision = opts[:bote_precision] unless !b_o_t_e || opts[:bote_precision].nil?
-      e_o_t_e = Date.parse(opts[:eote]) if opts[:eote]
-      e_o_t_e.certainty = opts[:eote_certainty] unless opts[:eote_certainty].nil?
-      e_o_t_e.precision = opts[:eote_precision] unless !e_o_t_e || opts[:eote_precision].nil?
-      b_o_t_b = Date.parse(opts[:botb]) if opts[:botb]
-      b_o_t_b.certainty = opts[:botb_certainty] unless opts[:botb_certainty].nil?
-      b_o_t_b.precision = opts[:botb_precision] unless !b_o_t_b || opts[:botb_precision].nil?
-      e_o_t_b = Date.parse(opts[:eotb]) if opts[:eotb]
-      e_o_t_b.certainty = opts[:eotb_certainty] unless opts[:eotb_certainty].nil?
-      e_o_t_b.precision = opts[:eotb_precision] unless !e_o_t_b || opts[:eotb_precision].nil?
+      if opts[:bote]
+        b_o_t_e = Date.parse(opts[:bote]) 
+        b_o_t_e.certainty = opts[:bote_certainty].to_bool unless opts[:bote_certainty].nil?
+        b_o_t_e.precision = opts[:bote_precision].to_i unless opts[:bote_precision].nil?
+      end
+      if opts[:eote]
+        e_o_t_e = Date.parse(opts[:eote]) 
+        e_o_t_e.certainty = opts[:eote_certainty].to_bool unless opts[:eote_certainty].nil?
+        e_o_t_e.precision = opts[:eote_precision].to_i unless opts[:eote_precision].nil?
+      end
+      if opts[:botb]
+        b_o_t_b = Date.parse(opts[:botb]) 
+        b_o_t_b.certainty = opts[:botb_certainty].to_bool unless opts[:botb_certainty].nil?
+        b_o_t_b.precision = opts[:botb_precision].to_i unless opts[:botb_precision].nil?
+      end
+      if opts[:eotb]
+        e_o_t_b = Date.parse(opts[:eotb]) 
+        e_o_t_b.certainty = opts[:eotb_certainty].to_bool unless opts[:eotb_certainty].nil?
+        e_o_t_b.precision = opts[:eotb_precision].to_i unless opts[:eotb_precision].nil?
+      end
       @beginning = TimeSpan.new(b_o_t_b,e_o_t_b) if b_o_t_b || e_o_t_b
       @ending = TimeSpan.new(b_o_t_e,e_o_t_e)    if b_o_t_e || e_o_t_e 
 
@@ -509,6 +528,7 @@ module MuseumProvenance
     # @return [Date, Nil] The earliest possible date for this period
     def earliest_possible
       return begin_of_the_begin if begin_of_the_begin
+      return party.birth if party && party.birth
       if previous_period
         return previous_period.begin_of_the_end if previous_period.begin_of_the_end
         return previous_period.end_of_the_begin if previous_period.end_of_the_begin
@@ -529,6 +549,7 @@ module MuseumProvenance
     def latest_possible
       return end_of_the_end if end_of_the_end
       return Date.today if is_ongoing?
+      return party.death if party && party.death
       if next_period
         return next_period.end_of_the_begin if next_period.end_of_the_begin
         return next_period.begin_of_the_end if next_period.begin_of_the_end

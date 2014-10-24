@@ -37,7 +37,13 @@ module MuseumProvenance
       def from_json(json)
         timeline = Timeline.new
         last_was_direct = false
-        data = JSON.parse(json, {symbolize_names: true})
+        if json.is_a? String
+          data = JSON.parse(json, {symbolize_names: true})
+        elsif json.is_a? Hash
+            data = json
+        else
+          raise "I don't know what!"
+        end
         data[:period].each do |period|
           p = Period.new("",period)
           if last_was_direct 
