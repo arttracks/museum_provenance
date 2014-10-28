@@ -195,7 +195,12 @@ module MuseumProvenance
     # Determine if a TimeSpan's earliest and latest match.
     #@return [Boolean] true if the TimeSpan's {#earliest} and {#latest} are identical
     def same?
-      self.defined? && @earliest == @latest && @earliest.precision == @latest.precision
+      !!(self.defined? && 
+        @earliest && 
+        @latest && 
+        @earliest.precision == @latest.precision && 
+        @earliest.fragments[0..@earliest.precision] == @latest.fragments[0..@latest.precision]
+      )
     end
 
     # Determine if a TimeSpan is accurate to within a day

@@ -68,10 +68,16 @@ module MuseumProvenance
         hash[:order] = i
         hash[:acquisition_time_span] = p.beginning.to_s
         hash[:deacquisition_time_span] = p.ending.to_s 
-        hash[:earliest_possible] = p.earliest_possible
-        hash[:latest_possible] = p.latest_possible
-        hash[:earliest_definite] = p.earliest_definite
-        hash[:latest_definite] =  p.latest_definite
+        hash[:earliest_possible] = p.earliest_possible.to_time.to_i if  p.earliest_possible
+        hash[:latest_possible] = p.latest_possible.latest.to_time.to_i if p.latest_possible
+        hash[:earliest_definite] = p.earliest_definite.to_time.to_i if p.earliest_definite
+        hash[:latest_definite] =  p.latest_definite.latest.to_time.to_i if p.latest_definite
+        hash[:eotb] = p.eotb.to_time.to_i if p.eotb        
+        hash[:eote] = p.eote.to_time.to_i if p.eote        
+        hash[:botb] = p.botb.to_time.to_i if p.botb        
+        hash[:bote] = p.bote.to_time.to_i if p.bote        
+        hash[:birth] = hash[:birth].to_time.to_i if hash[:birth]  
+        hash[:death] = hash[:death].to_time.to_i if hash[:death]  
         hash.each{|key,val| hash.delete key if val.nil?}
         arry.push hash
         i +=1

@@ -10,7 +10,7 @@ describe PeriodOutput do
                   :party_certainty=>false, 
                   :birth=>Date.new(1950),
                   :birth_certainty=>true, 
-                  :death=>Date.new(2014),
+                  :death=>Date.new(2014).latest,
                   :death_certainty=>false, 
                   :location=>"Belgrade", 
                   :location_certainty=>true, 

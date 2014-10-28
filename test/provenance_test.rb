@@ -152,14 +152,14 @@ describe Provenance do
       timeline = Provenance.extract("David [1880-1980], Pittsburgh, PA")
       timeline[0].to_h[:birth].must_equal Date.new 1880
       timeline[0].to_h[:birth_certainty].must_equal true
-      timeline[0].to_h[:death].must_equal  Date.new 1980
+      timeline[0].to_h[:death].must_equal  Date.new(1980).latest
       timeline[0].to_h[:death_certainty].must_equal true
       timeline[0].to_h[:party].must_equal "David"
       timeline[0].to_h[:location].must_equal "Pittsburgh, PA"  
     end
     it "finds death dates" do
       timeline = Provenance.extract("David (d. 1980), Pittsburgh, PA")
-      timeline[0].to_h[:death].must_equal  Date.new 1980
+      timeline[0].to_h[:death].must_equal  Date.new(1980).latest
       timeline[0].to_h[:death_certainty].must_equal true
       timeline[0].to_h[:birth].must_be_nil
       timeline[0].to_h[:party].must_equal "David"
@@ -168,7 +168,7 @@ describe Provenance do
     end
     it "finds uncertain death dates" do
       timeline = Provenance.extract("David (d. 1980?), Pittsburgh, PA")
-      timeline[0].to_h[:death].must_equal  Date.new 1980
+      timeline[0].to_h[:death].must_equal  Date.new(1980).latest
       timeline[0].to_h[:death_certainty].must_equal false
     end
     it "finds birth dates" do
@@ -191,7 +191,7 @@ describe Provenance do
     it "finds deaths with people who don't have birthdates" do
       timeline = Provenance.extract("David (-1980), Pittsburgh, PA")
       timeline[0].to_h[:birth].must_be_nil
-      timeline[0].to_h[:death].must_equal  Date.new 1980
+      timeline[0].to_h[:death].must_equal Date.new(1980).latest
       timeline[0].to_h[:death_certainty].must_equal true
       timeline[0].to_h[:party].must_equal "David"
       timeline[0].to_h[:location].must_equal "Pittsburgh, PA"  
@@ -201,7 +201,7 @@ describe Provenance do
       timeline = Provenance.extract("David [1880?-1980?], Pittsburgh, PA")
       timeline[0].to_h[:birth].must_equal Date.new 1880
       timeline[0].to_h[:birth_certainty].must_equal false
-      timeline[0].to_h[:death].must_equal  Date.new 1980
+      timeline[0].to_h[:death].must_equal Date.new(1980).latest
       timeline[0].to_h[:death_certainty].must_equal false
       timeline[0].to_h[:party].must_equal "David"
       timeline[0].to_h[:location].must_equal "Pittsburgh, PA"  

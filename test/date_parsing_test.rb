@@ -237,4 +237,5 @@ describe "Date Parsing Rules" do
     p.ending.latest.must_equal Date.new(1955).latest
     p.ending.same?.must_equal true
   end
+  
 end

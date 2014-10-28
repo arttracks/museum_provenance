@@ -15,6 +15,9 @@ describe "Provenance Records from JSON" do
       next if i % 2 == 0 
       provenance = line
       prov = MuseumProvenance::Provenance.extract(provenance)
+      # puts ""
+      # puts prov.to_json
+      # puts ""
       reprov =  Provenance.from_json(prov.to_json)
       prov.provenance.must_equal reprov.provenance
     end

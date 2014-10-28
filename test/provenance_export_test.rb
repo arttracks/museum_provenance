@@ -95,7 +95,7 @@ describe "Provenance Export" do
     @output.birth_certainty.must_equal true
   end
   it "captures death date" do
-    @output.death.must_equal Date.new(2014)
+    @output.death.must_equal Date.new(2014).latest
   end
   it "captures death certainty" do
     @output.death_certainty.must_equal false

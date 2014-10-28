@@ -56,6 +56,13 @@ describe Period do
       p1.ending.must_equal TimeSpan.new("1981",nil)
       p1.time_string.must_equal "in 1981"
     end
+    it "handles in/by with differing precisions" do
+      str = p1.parse_time_string("David, by January 1981 until at least 1981")
+      str.must_equal "David"
+      p1.beginning.must_equal TimeSpan.new(nil,"January 1981")
+      p1.ending.must_equal TimeSpan.new("1981",nil)
+      p1.time_string.must_equal "by January 1981 until at least 1981"
+    end
     it "handles by until at least" do
       str = p1.parse_time_string("David, by 1981 until at least 1982")
       str.must_equal "David"
