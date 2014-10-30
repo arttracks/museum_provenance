@@ -51,7 +51,7 @@ module MuseumProvenance
           else
             timeline.insert(p)
           end
-          last_was_direct = period[:direct_transfer]
+          last_was_direct = period[:direct_transfer].to_bool
         end
         return timeline    
       end

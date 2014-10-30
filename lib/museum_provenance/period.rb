@@ -124,7 +124,7 @@ module MuseumProvenance
        o.original_text = self.original_text
        o.provenance = self.provenance
        o.parsable = self.parsable?
-       o.direct_transfer = self.direct_transfer
+       o.direct_transfer = self.direct_transfer?
        o.stock_number = self.stock_number
        o.footnote = self.note.join("; ") if self.note
        return o
@@ -570,7 +570,7 @@ module MuseumProvenance
       return n if n && !d 
       return d if d && !n
       return [n,d].min if n && d
-      return nil
+      return Date.today
     end
 
     # Find the earliest definite date for this period
@@ -588,7 +588,7 @@ module MuseumProvenance
     def latest_definite
      return Time.now.to_date if is_ongoing?
      return bote if bote
-     return next_period.eotb if direct_transfer? && next_period.beginning && next_period.beginning.same?
+     return next_period.botb if direct_transfer? && next_period.beginning && next_period.beginning.same?
      return eotb if eotb
      return nil
     end

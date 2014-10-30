@@ -137,7 +137,7 @@ describe Period do
   describe "Certainty" do
     it "is nil by default" do
       p1.earliest_possible.must_be_nil
-      p1.latest_possible.must_be_nil
+      p3.latest_possible.must_equal Time.now.to_date
     end
     it "gives its own earliest if it has one" do
       p1.beginning=Date.new(2000)
@@ -189,7 +189,7 @@ describe Period do
       t.insert p2
       t.insert p1
       p1.earliest_possible.must_be_nil 
-      p3.latest_possible.must_be_nil
+      p3.latest_possible.must_equal Time.now.to_date
     end
     it "follows multiple links backwards" do
       t = Timeline.new
