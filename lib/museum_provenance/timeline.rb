@@ -78,6 +78,7 @@ module MuseumProvenance
         hash[:bote] = p.bote.to_time.to_i if p.bote        
         hash[:birth] = hash[:birth].to_time.to_i if hash[:birth]  
         hash[:death] = hash[:death].to_time.to_i if hash[:death]  
+        hash[:timestring] = p.time_string
         hash.each{|key,val| hash.delete key if val.nil?}
         arry.push hash
         i +=1

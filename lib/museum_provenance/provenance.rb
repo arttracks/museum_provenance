@@ -4,7 +4,7 @@ module MuseumProvenance
   class Provenance
 
     # A list of abbreviations.  A "." following any of these will not signify a new period.
-    ABBREVIATIONS  = ["Mme.", "Mr.", "Mrs.", "Dr.", "no.", "No.", "Esq.", "Co.", "St.", "illus.", "inc.", "Inc.", "Jr.", "Ltd.", "Dept.", "M.","P.", "Miss."]
+    ABBREVIATIONS  = ["Mme.", "Mr.", "Mrs.", "Dr.", "no.", "No.", "Esq.", "Co.", "St.", "illus.", "inc.", "Inc.", "Jr.", "Ltd.", "Dept.", "M.","P.", "Miss.", "Ph.D", "DC.", "D.C."]
     # A list of name suffixes.  A "," preceding any of these will not signify the end of a name.
     NAME_EXTENDERS = ["Esq", "Jr", "Count", "Earl", "Inc.", "Ltd.", "Lord", "MP", "M.P.", "2nd", "3rd", "son of", "daughter of", "wife of", "husband of", "the artist", "his wife", "his nephew", "his son", "his daughter"]
     # A character used to stand in for a period during parsing.  Only used internally.

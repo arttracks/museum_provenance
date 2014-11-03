@@ -144,7 +144,7 @@ module MuseumProvenance
      # @param recursion_count [Fixnum] Used to count number of recursions to prevent infinite recursion
      # @return [String] the string with the time reference removed
      def parse_time_string(str, recursion_count = 0)
-      raise "Too much recursion" if recursion_count > 10
+      raise DateError, "Too much recursion" if recursion_count > 10
       tokens = ["on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
       found_token = tokens.collect{|t| str.scan(/\b#{t}\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
       #puts "Tokens: '#{found_token}', String: '#{str}'"
