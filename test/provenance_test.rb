@@ -233,7 +233,12 @@ describe Provenance do
       timeline = Provenance.extract("David, Countess of Northbrook, Pittsburgh")
       timeline[0].to_h[:party].must_equal "David, Countess of Northbrook"
       timeline[0].to_h[:location].must_equal "Pittsburgh"
-    end  
+    end 
+    it "handles Srs" do
+      timeline = Provenance.extract("David, Sr., Pittsburgh")
+      timeline[0].to_h[:party].must_equal "David, Sr."
+      timeline[0].to_h[:location].must_equal "Pittsburgh"
+    end   
   end
  
   describe "Line Splitting" do
