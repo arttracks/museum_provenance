@@ -7,7 +7,7 @@ module MuseumProvenance
     ABBREVIATIONS  = ["Mme.", "Mr.", "Mrs.", "Dr.", "no.", "No.", "Esq.", "Co.", "St.", "illus.", "inc.", "Inc.", "Jr.", "Sr.", "Ltd.", "Dept.", "M.","P.", "Miss.", "Ph.D", "DC.", "D.C."]
     # A list of name suffixes.  A "," preceding any of these will not signify the end of a name.
     NAME_EXTENDERS = ["Esq", "Jr", "Sr", "Count", "Earl", "Inc.", "Ltd.", "Lord", "MP", "M.P.", 
-      "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "son of", "daughter of", "wife of", "husband of", "the artist", "his wife", "his nephew", "his son", "his daughter"]
+      "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "son of", "daughter of", "wife of", "husband of", "the artist", "his wife", "her husband", "his nephew", "his son", "his daughter", "her daughter", "her son", "their daughter", "their son"]
     # A character used to stand in for a period during parsing.  Only used internally.
     FAKE_PERIOD = "\u2024"
     # The string used to seperate the footnotes of a provenance record from the actual records.
