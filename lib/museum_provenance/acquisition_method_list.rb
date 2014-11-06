@@ -1,7 +1,7 @@
 module MuseumProvenance
     class AcquisitionMethod
     # Given in a will
-    BEQUEST = AcquisitionMethod.new("Bequest", "bequeathed to", "by bequest", "Given in a will", AcquisitionMethod::Prefix)
+    BEQUEST = AcquisitionMethod.new("Bequest", "bequeathed to", "by bequest", "Given in a will", AcquisitionMethod::Prefix, ['bequest to"])
     
     # Transfer from anscestor via unknown means
     BY_DESCENT = AcquisitionMethod.new("By descent", "by descent to", "by descent", "Transfer from anscestor via unknown means", AcquisitionMethod::Prefix)
