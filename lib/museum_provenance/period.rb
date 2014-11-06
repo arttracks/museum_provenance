@@ -357,8 +357,8 @@ module MuseumProvenance
         new_name = @acquisition_method.nil? ? party.name_with_birth_death : @acquisition_method.attach_to_name(party.name_with_birth_death)
         record_cert = self.certainty ? nil : PERIOD_CERTAINTY_STRING
         val = [record_cert, [new_name, @location,time_string,stock_number].compact.join(", ")].compact.join(" ").gsub("  "," ")
-        val[0] = val[0].upcase unless was_directly_transferred
-        val
+        val[0] = val[0].upcase unless was_directly_transferred || val.blank?
+        "" + val
     end
     alias :to_s :provenance
    

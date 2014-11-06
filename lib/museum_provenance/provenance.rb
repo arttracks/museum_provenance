@@ -108,6 +108,8 @@ module MuseumProvenance
       # Scan a given block of text for birth and death dates.
       #--------------------------------------------------------
       def find_birth_and_death(text) 
+        return text, nil if text.blank?
+
         b,d = nil,nil
 
         birth_death_regex = /
@@ -178,6 +180,7 @@ module MuseumProvenance
       end
 
       def extract_acquisition_method(text) 
+        return text, nil if text.blank?
         acquisition_method = AcquisitionMethod.find(text)
         if acquisition_method
           f = acquisition_method.forms
@@ -203,6 +206,7 @@ module MuseumProvenance
 
       def extract_certainty(text) 
         record_is_certain = true
+        return record_is_certain if text.blank?
         Certainty::CertantyWords.each do |w|
           if text.split(" ").first.include?(w)
             record_is_certain = false 
@@ -218,6 +222,7 @@ module MuseumProvenance
       end
 
       def extract_name_and_location(text)
+        return text, nil if text.blank?
         name = text.split(",").first
         counter = 1
         while (text.split(", ")[counter].start_with?(*NAME_EXTENDERS) rescue false) do
@@ -238,6 +243,8 @@ module MuseumProvenance
 
 
       def extract_stock_numbers(text)
+        return text, nil if text.blank?
+
         stock_regex = /
           (?:stock\s)?
           no\.\s
@@ -293,7 +300,7 @@ module MuseumProvenance
           generated_period.note = notes
           generated_period.stock_number = stock_number
           begin
-            text = generated_period.parse_time_string(text)
+            text = generated_period.parse_time_string(text) unless text.blank?
           rescue DateError
           end
           ## Link it into the timeline
