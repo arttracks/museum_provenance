@@ -29,7 +29,8 @@ module MuseumProvenance
                     :parsable,
                     :direct_transfer,
                     :stock_number,
-                    :footnote]
+                    :footnote,
+                    :primary_owner]
                     
       attr_accessor *@@attributes
     

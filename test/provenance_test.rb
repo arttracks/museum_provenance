@@ -26,6 +26,32 @@ describe Provenance do
     end
   end
 
+  describe "dealer parentheticals" do
+    it "extracts primary ownership" do
+      timeline = Provenance.extract "David Newbury, 1995"
+      timeline[0].primary_owner.must_equal true
+      timeline[0].to_h[:party].must_equal "David Newbury"
+      timeline[0].beginning.must_equal TimeSpan.parse("1995")
+      timeline[0].provenance.must_equal "David Newbury, 1995"
+      timeline[0].to_h[:primary_owner].must_equal true
+      timeline[0].to_h[:original_text].must_equal "David Newbury, 1995"
+   end
+    it "extracts non-primary ownership" do
+      timeline = Provenance.extract "(David Newbury, 1995)."
+      timeline[0].primary_owner.must_equal false
+      timeline[0].to_h[:party].must_equal "David Newbury"
+      timeline[0].beginning.must_equal TimeSpan.parse("1995")
+      timeline[0].provenance.must_equal "(David Newbury, 1995)"
+      timeline[0].to_h[:primary_owner].must_equal false
+      timeline[0].to_h[:original_text].must_equal "(David Newbury, 1995)"
+    end
+    it "works with JSON" do
+      timeline = Provenance.extract "(David Newbury, 1995)."
+      timeline2 = Provenance.from_json(timeline.to_json)
+      timeline2[0].provenance.must_equal "(David Newbury, 1995)"
+    end
+  end
+
   describe "acq. method extraction" do
 
     it "does not remove anything if it's not a method" do

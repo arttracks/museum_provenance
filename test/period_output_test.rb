@@ -31,7 +31,8 @@ describe PeriodOutput do
                   :parsable=>true, 
                   :direct_transfer=>nil, 
                   :stock_number=>"stock no. 1", 
-                  :footnote=>""
+                  :footnote=>"",
+                  :primary_owner=>true
                 } 
               }
 

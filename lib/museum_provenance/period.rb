@@ -11,7 +11,7 @@ module MuseumProvenance
 
     prepend Certainty   
     attr_reader  :next_period, :previous_period, :party, :location
-    attr_accessor  :acquisition_method, :note, :original_text, :stock_number
+    attr_accessor  :acquisition_method, :note, :original_text, :stock_number, :primary_owner
 
 
     # Create a new party.
@@ -21,6 +21,7 @@ module MuseumProvenance
     def initialize(_name = "", opts=Hash.new)
       begin
         @direct_transfer = false
+        self.primary_owner = true
 
         self.party = _name 
 
@@ -45,6 +46,7 @@ module MuseumProvenance
         # Initialize global state
         self.acquisition_method = AcquisitionMethod.find_by_name(opts[:acquisition_method]) 
         self.certainty = opts[:period_certainty].to_bool unless opts[:period_certainty].nil?
+        self.primary_owner = opts[:primary_owner].to_bool unless opts[:primary_owner].nil?
 
         # initialize location
         if opts[:location]
@@ -127,6 +129,7 @@ module MuseumProvenance
        o.direct_transfer = self.direct_transfer?
        o.stock_number = self.stock_number
        o.footnote = self.note.join("; ") if self.note
+       o.primary_owner = self.primary_owner
        return o
      end
 
@@ -358,7 +361,9 @@ module MuseumProvenance
         record_cert = self.certainty ? nil : PERIOD_CERTAINTY_STRING
         val = [record_cert, [new_name, @location,time_string,stock_number].compact.join(", ")].compact.join(" ").gsub("  "," ")
         val[0] = val[0].upcase unless was_directly_transferred || val.blank?
+        val = "(#{val})" unless primary_owner
         "" + val
+
     end
     alias :to_s :provenance
    

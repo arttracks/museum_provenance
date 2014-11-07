@@ -242,6 +242,14 @@ module MuseumProvenance
       end
 
 
+      def extract_primary_ownership(text)
+        primary = true
+        if text[0] == "("
+          primary = false
+          text = text[/\((.*)\)$/,1]
+        end
+        return primary, text
+      end 
 
       def extract_stock_numbers(text)
         return text, nil if text.blank?
@@ -275,10 +283,15 @@ module MuseumProvenance
           direct_transfer = !text.scan("transferred: ").empty?
           text = text.gsub("transferred: ","").strip
           
+       
           #extract footnotes
           notes, text = extract_footnotes(text)
 
           original_text = text
+
+          #extract primary ownership
+          primary_ownership, text = extract_primary_ownership(text)
+
 
           # pull off record certainty
 
@@ -300,6 +313,7 @@ module MuseumProvenance
           generated_period.acquisition_method = acquisition_method
           generated_period.note = notes
           generated_period.stock_number = stock_number
+          generated_period.primary_owner = primary_ownership
           begin
             text = generated_period.parse_time_string(text) unless text.blank?
           rescue DateError
