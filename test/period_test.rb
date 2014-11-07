@@ -70,6 +70,13 @@ describe Period do
       p1.ending.must_equal TimeSpan.new("1982",nil)
       p1.time_string.must_equal "by 1981 until at least 1982"
     end
+    it 'is case insensitive' do
+      str = p1.parse_time_string("David, 1981 UNTIL 1982")
+      str.must_equal "David"
+      p1.beginning.must_equal TimeSpan.new("1981","1981")
+      p1.ending.must_equal TimeSpan.new("1982","1982")
+      p1.time_string.must_equal "1981 until 1982"
+    end
   end
 
 

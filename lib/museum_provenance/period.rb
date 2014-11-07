@@ -150,7 +150,6 @@ module MuseumProvenance
       raise DateError, "Too much recursion" if recursion_count > 10
       tokens = ["on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
       found_token = tokens.collect{|t| str.scan(/\b#{t}\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
-      #puts "Tokens: '#{found_token}', String: '#{str}'"
         if found_token.nil?
           vals = str.split(",")
           
@@ -170,12 +169,12 @@ module MuseumProvenance
           str = vals.join(",")
           date_string = current_phrase.join(',')
         else
-          str, date_string = str.split(found_token)
+          str, date_string = str.split(/\b#{found_token}\b/i)
           date_string.strip! unless date_string.nil?
           str.strip 
         end
        
-        case found_token
+        case (found_token.downcase rescue nil)
            when nil, "on"
             self.beginning = TimeSpan.parse(date_string)
            when "before", "by", "as of"
