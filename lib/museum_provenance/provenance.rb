@@ -97,8 +97,8 @@ module MuseumProvenance
       # This will replace all periods in the record that are not record seperators with \u2024, which is "․"
       #--------------------------------------------------------
       def substitute_periods(text)
-        modified = text.gsub(/b\. (\d{4})/, 'BORN \1') || text  # born
-        modified.gsub!(/d\.\s(\d{4})/, 'DIED \1')   # died
+        modified = text.gsub(/b\. (\d{4})/, "b#{FAKE_PERIOD} \\1") || text  # born
+        modified.gsub!(/d\.\s(\d{4})/, "d#{FAKE_PERIOD} \\1")   # died
         modified.gsub!(/(\s[A-Z])\./, "\\1#{FAKE_PERIOD}") # initials
         modified.gsub!(/^([A-Z])\./, "\\1#{FAKE_PERIOD}") # intial initials
         ABBREVIATIONS.each {|title| modified.gsub!(title, title.gsub(".",FAKE_PERIOD))}
@@ -116,8 +116,8 @@ module MuseumProvenance
         birth_death_regex = /
           \s*?         # leading whitespace
           [\(|\[]      # Date bracketing — open paren or bracket
-          (?!BORN)
-          (?!DIED)
+          (?!b.)
+          (?!d.)
           \s*?          # any char
           (\d{3,4})?    # one to four numbers
           (\?)?         # find certainty
@@ -132,7 +132,7 @@ module MuseumProvenance
           \s*?         # leading whitespace
           [\(|\[]      # Date bracketing — open paren or bracket
           \s*?         # any number of whitespaces
-          DIED\s
+          d\.\s
           (\d{3,4})
           (\?)?         # find certainty
           \s*?         # any number of whitespaces
@@ -144,7 +144,7 @@ module MuseumProvenance
           \s*?         # leading whitespace
           [\(|\[]      # Date bracketing — open paren or bracket
           \s*?         # any number of whitespaces
-          BORN\s
+          b\.\s
           (\d{3,4})
           (\?)?         # find certainty
           \s*?         # any number of whitespaces

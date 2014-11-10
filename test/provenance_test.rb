@@ -26,6 +26,16 @@ describe Provenance do
     end
   end
 
+  describe "death original text" do
+    it "has the proper text for death notes" do
+      text = 'David Newbury (d. 1935), Pittsburgh'
+      timeline = Provenance.extract(text)
+      record = timeline[0].to_h
+      record[:original_text].must_equal text
+      record[:death].must_equal Date.new(1935).latest
+    end
+  end
+
   describe "dealer parentheticals" do
     it "extracts primary ownership" do
       timeline = Provenance.extract "David Newbury, 1995"
