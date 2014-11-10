@@ -32,6 +32,7 @@ describe Provenance do
       timeline = Provenance.extract(text)
       record = timeline[0].to_h
       record[:original_text].must_equal text
+      record[:provenance].must_equal "David Newbury [-1935], Pittsburgh"
       record[:death].must_equal Date.new(1935).latest
     end
   end
