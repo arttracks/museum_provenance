@@ -77,6 +77,12 @@ describe Period do
       p1.ending.must_equal TimeSpan.new("1982","1982")
       p1.time_string.must_equal "1981 until 1982"
     end
+    it "handles blank strings" do
+      str = p1.parse_time_string(" ")
+      p1.beginning.must_be_nil
+      p1.ending.must_be_nil
+      p1.time_string.must_be_nil
+    end
   end
 
 
