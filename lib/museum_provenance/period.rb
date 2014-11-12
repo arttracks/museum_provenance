@@ -268,6 +268,7 @@ module MuseumProvenance
       else
         timeframe.gsub!(/\s+/," ")
       end
+      timeframe.strip! unless timeframe.nil?
       return timeframe
     end
 

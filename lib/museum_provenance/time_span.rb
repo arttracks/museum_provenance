@@ -92,14 +92,14 @@ module MuseumProvenance
     # @return [String] A string representation of the date
     def to_s
       return nil unless self.defined?
-      return "#{earliest.to_s(:long)}" if self.precise?
-      return "#{@earliest.to_s(:long)}" if self.same?
+      return "#{earliest.smart_to_s(:long)}" if self.precise?
+      return "#{@earliest.smart_to_s(:long)}" if self.same?
       if @earliest && @latest
-        "between #{@earliest.to_s(:long)} and #{@latest.to_s(:long)}"
+        "between #{@earliest.smart_to_s(:long)} and #{@latest.smart_to_s(:long)}"
       elsif @latest
-        "by #{@latest.to_s(:long)}"
+        "by #{@latest.smart_to_s(:long)}"
       elsif @earliest
-        "after #{@earliest.to_s(:long)}"
+        "after #{@earliest.smart_to_s(:long)}"
       else
         return nil
       end

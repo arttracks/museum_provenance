@@ -2,6 +2,15 @@
 class Date
   prepend MuseumProvenance::Certainty
 
+  def smart_to_s(*args)
+    if self.precision > DateTimePrecision::CENTURY
+      to_s(*args)
+    else
+      year = (self.century/100+1)
+      "the #{year.ordinalize} Century#{certain_string}"
+    end
+  end
+
   unless method_defined?(:earliest)
     # The earliest date for an inprecise date.
     # The returned date will have DateTimePrecision::DAY

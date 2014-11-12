@@ -284,5 +284,13 @@ describe "Date Parsing Rules" do
     p.ending.latest.must_equal Date.new(1955).latest
     p.ending.same?.must_equal true
   end
+
+  it "handles until centuries" do
+    p.parse_time_string "until the 7th Century"
+    p.beginning.must_be_nil
+    p.ending.must_be_instance_of TimeSpan  
+    p.ending.earliest.must_equal Date.new(601).earliest
+    p.ending.latest.must_equal Date.new(700).latest
+  end
   
 end

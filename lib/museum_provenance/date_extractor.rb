@@ -34,7 +34,7 @@ module MuseumProvenance
       private
 
       def DateExtractor.extract_centuries(str) 
-        century_regex = /\b(\d{1,2})(?:st|rd|th|nd)?\s+century(?:\s+(ad|bc|bce|ce))?\b(\?)?/i
+        century_regex = /\b(?:the\s)?(\d{1,2})(?:st|rd|th|nd)?\s+century(?:\s+(ad|bc|bce|ce))?\b(\?)?/i
         centuries = []
         century = str.match century_regex
         until century.nil?

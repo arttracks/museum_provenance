@@ -197,6 +197,15 @@ describe Provenance do
       timeline[0].party.name.must_equal "Mr. and Mrs. James L. Winokur"
       timeline[0].location.name.must_equal "Pittsburgh"
     end
+    it "handles century dates" do
+      timeline = Provenance.extract "Moses, Egypt, until the 7th Century; gift to museum, 1968"
+      timeline.count.must_equal 2
+      timeline[0].bote.must_equal Date.new(601)
+      timeline[0].eote.must_equal Date.new(700).latest
+      timeline[0].time_string.must_equal "until the 7th Century"
+      timeline[0].party.name.must_equal "Moses"
+      timeline[0].location.name.must_equal "Egypt"
+    end
   end
 
   describe "Birth and Death Extraction" do
