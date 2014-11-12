@@ -257,6 +257,9 @@ module MuseumProvenance
           loc = nil
         end
         loc = nil if loc == ""
+        # Remove paretheses
+        name.gsub!(/[\(\)]/,"") unless name.nil?
+        loc.gsub!(/[\(\)]/,"") unless loc.nil?
         return name, loc
       end
 
@@ -284,6 +287,7 @@ module MuseumProvenance
         stock = text.scan(stock_regex).first
         stock = text.scan(lot_regex).first if stock.nil?
         text = text.gsub(stock,"").strip if stock
+        stock.gsub!(/[\(\)]/,"") unless stock.nil?
         return stock, text
       end
 
