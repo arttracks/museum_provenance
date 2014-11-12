@@ -111,6 +111,15 @@ describe Period do
       p1.ending.must_equal TimeSpan.new("January 31, 1922","January 31, 1922")
       p1.time_string.must_equal "January 30, 1922 until January 31, 1922"
     end
+    it "handles uncertainty in time strings" do
+      str = p1.parse_time_string  "J. Gardner Cassatt, Pennsylvania, 1922?"
+      str.must_equal "J. Gardner Cassatt, Pennsylvania"
+      p1.beginning.must_equal TimeSpan.new("1922","1922")
+      p1.botb.certain?.must_equal false
+      p1.eotb.certain?.must_equal false
+      p1.ending.must_be_nil
+      p1.time_string.must_equal "1922?"
+    end
 
   end
 

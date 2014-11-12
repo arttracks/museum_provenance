@@ -34,7 +34,7 @@ module MuseumProvenance
       private
 
       def DateExtractor.extract_centuries(str) 
-        century_regex = /\b(\d{1,2})(?:st|rd|th|nd)?\s+century(?:\s+(ad|bc|bce|ce))?\b/i
+        century_regex = /\b(\d{1,2})(?:st|rd|th|nd)?\s+century(?:\s+(ad|bc|bce|ce))?\b(\?)?/i
         centuries = []
         century = str.match century_regex
         until century.nil?
@@ -47,14 +47,17 @@ module MuseumProvenance
           val = (c[1].to_s + "01").to_i - 100
           val = ((val + 99) * -1) if is_BCE
          
+          uncertain = c[3] && c[3] == "?"
+
           century = Date.new(val)
           century.precision = DateTimePrecision::CENTURY
+          century.certainty = !uncertain
           century
         end
       end
 
       def DateExtractor.extract_decades(str)
-        decade_regex =/\b(\d{1,3})0s(?:\s+(?:ad|bc|bce|ce))?\b/i
+        decade_regex =/\b(\d{1,3})0s(?:\s+(?:ad|bc|bce|ce))?\b(\?)?/i
         decades = []
         decade = str.match decade_regex
         until decade.nil?
@@ -64,8 +67,10 @@ module MuseumProvenance
 
         decades.collect do |d|
           val = (d[1].to_s + "0").to_i
+          uncertain = d[2] && d[2] == "?"
           decade = Date.new(val)
           decade.precision = DateTimePrecision::DECADE
+          decade.certainty = !uncertain
           decade
         end
       end
@@ -89,6 +94,7 @@ module MuseumProvenance
             (?:\s+(ad|bc|bce|ce))? # optionally capture era
             \b  
             (?!\scentury) # ignore centuries
+            (\?)? # Optionally capture uncertainty
           /ix
           years = []
           year = str.match years_regex
@@ -99,10 +105,12 @@ module MuseumProvenance
           
           years.collect do |c|
             is_BCE = c[2] && (c[2].upcase == "BC" || c[2].upcase == "BCE")
-
+            uncertain = c[3] && c[3] == "?"
             val = c[1].to_i
             val = val * -1 if is_BCE
-            Date.new(val)
+            d = Date.new(val)
+            d.certainty = !uncertain
+            d
           end
       end
 
@@ -116,6 +124,7 @@ module MuseumProvenance
                          (?!,)       # skip it if it is followed by a comma , which might be a BAD IDEA. 
                          (?!\s\d)    # skip it if it is followed by a digit
                          \b
+                         (\?)? # Optionally capture uncertainty
                        /ix
           months = []
           month = str.match month_regex
@@ -125,8 +134,12 @@ module MuseumProvenance
           end
 
           months.collect do |d|
-            val = Chronic.parse(d[0].to_s).to_date
-            Date.new(val.year,val.month)
+            date_val = d[0].to_s
+            certain = date_val.gsub!("?","")
+            val = Chronic.parse(date_val).to_date
+            m = Date.new(val.year,val.month)
+            m.certainty = certain.nil?
+            m
           end
       end
 
@@ -137,7 +150,9 @@ module MuseumProvenance
                       (?:st|rd|th|nd)?\s?
                       ,?
                       \s\d{1,4}
-                      (?:\s+(?:ad|bc|bce|ce))?\b
+                      (?:\s+(?:ad|bc|bce|ce))?
+                      \b
+                      (\?)? # Optionally capture uncertainty
                     /ix
           days = []
           day = str.match day_regex
@@ -147,7 +162,11 @@ module MuseumProvenance
           end
 
           days.collect do |d|
-            Chronic.parse(d[0].to_s).to_date
+            date_val = d[0].to_s
+            certain = date_val.gsub!("?","")
+            day = Chronic.parse(date_val).to_date
+            day.certainty = certain.nil?
+            day
           end
       end
     end

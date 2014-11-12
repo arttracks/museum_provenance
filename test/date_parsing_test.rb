@@ -22,6 +22,14 @@ describe DateExtractor do
     date.first.earliest.must_equal Date.new(-400).earliest
     date.first.latest.must_equal Date.new(-301).latest
   end
+  it "handles uncertain centuries" do
+    date = DateExtractor.find_dates_in_string("1st century BCE?")
+    date.length.must_equal 1
+    date.first.earliest.must_equal Date.new(-100).earliest
+    date.first.latest.must_equal Date.new(-1).latest
+    date.first.certainty.must_equal false
+  end
+
   it "handles decades" do
     date = DateExtractor.find_dates_in_string("The 1990s")
     date.length.must_equal 1
@@ -33,6 +41,14 @@ describe DateExtractor do
     date = date.first
     date.earliest.must_equal Date.new(1500).earliest
     date.latest.must_equal Date.new(1509).latest
+  end
+   it "handles uncertain decades" do
+    date = DateExtractor.find_dates_in_string("The 1990s?")
+    date.length.must_equal 1
+    date = date.first
+    date.earliest.must_equal Date.new(1990).earliest
+    date.latest.must_equal Date.new(1999).latest
+    date.certainty.must_equal false
   end
   it "handles years" do
     date = DateExtractor.find_dates_in_string("sometime in 1990")
@@ -47,6 +63,13 @@ describe DateExtractor do
     date = date.first
     date.earliest.must_equal Date.new(-800).earliest
     date.latest.must_equal Date.new(-800).latest
+  end 
+  it "handles uncertain years" do
+    date = DateExtractor.find_dates_in_string("sometime in 1990?")
+    date.length.must_equal 1
+    date = date.first
+    date.must_equal Date.new(1990)
+    date.certainty.must_equal false
   end 
   it "handles multiple years" do
     date = DateExtractor.find_dates_in_string("Between 400 BCE and 800 AD")
@@ -64,6 +87,14 @@ describe DateExtractor do
     date = date.first
     date.earliest.must_equal Date.new(1995,1).earliest
     date.latest.must_equal Date.new(1995,1).latest
+  end
+  it "handles uncertain months" do
+    date = DateExtractor.find_dates_in_string("January 1995?")
+    date.length.must_equal 1
+    date = date.first
+    date.earliest.must_equal Date.new(1995,1).earliest
+    date.latest.must_equal Date.new(1995,1).latest
+    date.certainty.must_equal false
   end
   it "handles abbrev months" do
     date = DateExtractor.find_dates_in_string("Oct. 885")
@@ -85,7 +116,13 @@ describe DateExtractor do
     date = date.first
     date.must_equal Date.new(1980,10,17)
   end
-
+  it "handles uncertain days" do
+    date = DateExtractor.find_dates_in_string("October 17, 1980?")
+    date.length.must_equal 1
+    date = date.first
+    date.must_equal Date.new(1980,10,17)
+    date.certainty.must_equal false
+  end
   it "handles days with ordinals" do
     date = DateExtractor.find_dates_in_string("October 17th, 1980")
     date.length.must_equal 1
