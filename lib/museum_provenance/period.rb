@@ -154,23 +154,27 @@ module MuseumProvenance
       end
       raise DateError, "Too much recursion" if recursion_count > 10
 
-      #substitution for trivial date pattern: "1918-1919"
+      #substitution for trivial date pattern: "1918-1919" becomes "1918 until 1919"
       date_range_regex = /(\d{4})\s?[-–—]\s?(\d{4})/
       str.gsub!(date_range_regex,'\1 until \2')
 
-      # substitution for "May 5-6, 1980"
+      # substitution for "May 5-6, 1980" becomes "May 5, 1980 until May 6, 1980"
       multiday_regex = /(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{1,2})\s?[–—-]\s?(\d{1,2}),\s(\d{2,4})/i
       str.gsub!(multiday_regex, '\1 \2, \4 until \1 \3, \4')
 
-      # substitution for "30-31 January 1922"
+      # substitution for "30-31 January 1922" becomes "January 30, 1922 until January 31, 1922"
       multiday_regex_2 = /\s(\d{1,2})\s?[–—-]\s?(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
       str.gsub!(multiday_regex_2, '\3 \1, \4 until \3 \2, \4')
 
-      # Substitution for euro-dates: "9 June 1932"
+      # Substitution for euro-dates: "9 June 1932" becomes "June 9, 1932"
       euro_dates_regex = /\s(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
       str.gsub!(euro_dates_regex, '\2 \1, \3')
 
-      tokens = ["on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
+      # Substitution for "c. 1945" becomes "circa 1945"
+      circa_regex = /\bc\.\s(\d{4})\b/
+      str.gsub!(circa_regex, 'circa \1')
+
+      tokens = ["circa", "on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
       found_token = tokens.collect{|t| str.scan(/\b#{t}\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
         if found_token.nil?
           vals = str.split(",")
@@ -196,9 +200,14 @@ module MuseumProvenance
           str.strip 
         end
        
+        #puts "found_token: #{found_token}"
         case (found_token.downcase rescue nil)
            when nil, "on"
             self.beginning = TimeSpan.parse(date_string)
+          when "circa"
+            self.beginning = TimeSpan.parse(date_string)
+            self.beginning.earliest_raw.certainty = false
+            self.beginning.latest_raw.certainty = false            
            when "before", "by", "as of"
             self.beginning =TimeSpan.new(nil, date_string)
            when "after"

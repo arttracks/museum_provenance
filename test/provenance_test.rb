@@ -175,14 +175,28 @@ describe Provenance do
       timeline.count.must_equal 2
     end
 
-    it "handles c. dates" do
-      timeline = Provenance.extract "Mr. and Mrs. James L. Winokur, Pittsburgh, c. 1965; gift to museum, 1968"
+    it "handles circa dates" do
+      timeline = Provenance.extract "Mr. and Mrs. James L. Winokur, Pittsburgh, circa 1965; gift to museum, 1968"
       timeline.count.must_equal 2
-      timeline[0].time_string.must_equal "1965"
+      timeline[0].botb.must_equal Date.new(1965)
+      timeline[0].eotb.must_equal Date.new(1965).latest
+      timeline[0].botb.certainty.must_equal false
+      timeline[0].eotb.certainty.must_equal false
+      timeline[0].time_string.must_equal "1965?"
       timeline[0].party.name.must_equal "Mr. and Mrs. James L. Winokur"
       timeline[0].location.name.must_equal "Pittsburgh"
     end
-
+    it "handles c. dates" do
+      timeline = Provenance.extract "Mr. and Mrs. James L. Winokur, Pittsburgh, c. 1965; gift to museum, 1968"
+      timeline.count.must_equal 2
+      timeline[0].botb.must_equal Date.new(1965)
+      timeline[0].eotb.must_equal Date.new(1965).latest
+      timeline[0].botb.certainty.must_equal false
+      timeline[0].eotb.certainty.must_equal false
+      timeline[0].time_string.must_equal "1965?"
+      timeline[0].party.name.must_equal "Mr. and Mrs. James L. Winokur"
+      timeline[0].location.name.must_equal "Pittsburgh"
+    end
   end
 
   describe "Birth and Death Extraction" do
