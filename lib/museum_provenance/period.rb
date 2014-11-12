@@ -202,9 +202,12 @@ module MuseumProvenance
        
         #puts "found_token: #{found_token}"
         case (found_token.downcase rescue nil)
-           when nil, "on"
+           when nil
             self.beginning = TimeSpan.parse(date_string)
-          when "circa"
+           when  "on"
+             self.beginning = TimeSpan.parse(date_string)
+             self.ending = TimeSpan.parse(date_string) if self.beginning.earliest_raw.precision == DateTimePrecision::DAY
+           when "circa"
             self.beginning = TimeSpan.parse(date_string)
             self.beginning.earliest_raw.certainty = false
             self.beginning.latest_raw.certainty = false            
@@ -241,6 +244,7 @@ module MuseumProvenance
     # Generate a textual representation of the timeframe of the period.
     # @return [String]
     def time_string
+      #  TODO:  What the hell is this?
       if(   @beginning && @ending &&
             !@beginning.latest.nil? && !@ending.earliest.nil? && 
             !@beginning.earliest && !@ending.latest && 
@@ -248,6 +252,11 @@ module MuseumProvenance
             @beginning.latest_raw.fragments[0..@beginning.latest.precision] == @ending.earliest_raw.fragments[0..@ending.earliest.precision]
         )       
         timeframe = "in #{@beginning.to_s.gsub("by ","")}"
+      # Handle "on January 1, 2001" instead of "January 1, 2001 until January 1, 2001"
+      elsif (
+        @beginning && @ending && @beginning.precise? && @ending.precise? && botb == eote 
+      )
+        timeframe = "on #{beginning.to_s}"
       else
         timeframe = @beginning.to_s || ""
         unless ending.nil?

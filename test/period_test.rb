@@ -120,7 +120,14 @@ describe Period do
       p1.ending.must_be_nil
       p1.time_string.must_equal "1922?"
     end
-
+    it "handles 'on' time strings" do
+      str = p1.parse_time_string  "J. Gardner Cassatt, Pennsylvania, on January 1, 1922"
+      str.must_equal "J. Gardner Cassatt, Pennsylvania"
+      d = Date.new(1922,1,1);
+      p1.beginning.must_equal TimeSpan.new(d,d)
+      p1.ending.must_equal TimeSpan.new(d,d)
+      p1.time_string.must_equal "on January 1, 1922"
+    end
   end
 
 

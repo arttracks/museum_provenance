@@ -161,9 +161,19 @@ describe "Date Parsing Rules" do
     p.beginning.earliest.must_equal Date.new(2004,1,15).earliest
     p.beginning.latest.must_equal Date.new(2004,1,15).latest
     p.beginning.precise?.must_equal true
-    p.ending.must_be_nil  
+    p.ending.earliest.must_equal Date.new(2004,1,15).earliest
+    p.ending.latest.must_equal Date.new(2004,1,15).latest
+    p.ending.precise?.must_equal true
   end
   
+  it "handles imprecise 'on' in a string" do
+    p.parse_time_string "on January 2004"
+    p.beginning.must_be_instance_of TimeSpan
+    p.beginning.earliest.must_equal Date.new(2004,1).earliest
+    p.beginning.latest.must_equal Date.new(2004,1).latest
+    p.ending.must_be_nil
+  end
+
   it "handles before in a string" do
     p.parse_time_string "before the 5th Century"
     p.beginning.must_be_instance_of TimeSpan
