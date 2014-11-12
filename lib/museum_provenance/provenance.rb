@@ -114,7 +114,7 @@ module MuseumProvenance
       def substitute_periods(text)
         modified = text.gsub(/b\. (\d{4})/, "b#{FAKE_PERIOD} \\1") || text  # born
         modified.gsub!(/d\.\s(\d{4})/, "d#{FAKE_PERIOD} \\1")   # died
-        modified.gsub!(/(\s[A-Z])\./, "\\1#{FAKE_PERIOD}") # initials
+        modified.gsub!(/(\s[A-Zc])\./, "\\1#{FAKE_PERIOD}") # initials, circas
         modified.gsub!(/^([A-Z])\./, "\\1#{FAKE_PERIOD}") # intial initials
         ABBREVIATIONS.each {|title| modified.gsub!(title, title.gsub(".",FAKE_PERIOD))}
         STATES.each do |st|

@@ -96,8 +96,22 @@ describe Period do
       p1.beginning.must_equal TimeSpan.new("May 6, 1918","May 6, 1918")
       p1.ending.must_equal TimeSpan.new("May 8, 1918","May 8, 1918")
       p1.time_string.must_equal "May 6, 1918 until May 8, 1918"
-
     end
+    it "handles weird Costas dates" do
+      str = p1.parse_time_string  "Galerie Georges Petit, Paris, 9 June 1932"
+      str.must_equal "Galerie Georges Petit, Paris"
+      p1.beginning.must_equal TimeSpan.new("June 9, 1932","June 9, 1932")
+      p1.ending.must_be_nil
+      p1.time_string.must_equal "June 9, 1932"
+    end
+    it "handles weird Costas date pairs" do
+      str = p1.parse_time_string  "Kelekian sale, American Art Association, New York, NY, 30-31 January 1922"
+      str.must_equal "Kelekian sale, American Art Association, New York, NY"
+      p1.beginning.must_equal TimeSpan.new("January 30, 1922","January 30, 1922")
+      p1.ending.must_equal TimeSpan.new("January 31, 1922","January 31, 1922")
+      p1.time_string.must_equal "January 30, 1922 until January 31, 1922"
+    end
+
   end
 
 

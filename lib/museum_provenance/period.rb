@@ -162,6 +162,14 @@ module MuseumProvenance
       multiday_regex = /(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{1,2})\s?[–—-]\s?(\d{1,2}),\s(\d{2,4})/i
       str.gsub!(multiday_regex, '\1 \2, \4 until \1 \3, \4')
 
+      # substitution for "30-31 January 1922"
+      multiday_regex_2 = /\s(\d{1,2})\s?[–—-]\s?(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
+      str.gsub!(multiday_regex_2, '\3 \1, \4 until \3 \2, \4')
+
+      # Substitution for euro-dates: "9 June 1932"
+      euro_dates_regex = /\s(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
+      str.gsub!(euro_dates_regex, '\2 \1, \3')
+
       tokens = ["on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
       found_token = tokens.collect{|t| str.scan(/\b#{t}\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
         if found_token.nil?
