@@ -153,6 +153,11 @@ module MuseumProvenance
         return ""
       end
       raise DateError, "Too much recursion" if recursion_count > 10
+
+      #substitution for trivial date pattern
+      date_range_regex = /(\d{4})\s?[-–—]\s?(\d{4})/
+      str.gsub!(date_range_regex,'\1 until \2')
+
       tokens = ["on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
       found_token = tokens.collect{|t| str.scan(/\b#{t}\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
         if found_token.nil?

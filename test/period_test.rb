@@ -83,6 +83,13 @@ describe Period do
       p1.ending.must_be_nil
       p1.time_string.must_be_nil
     end
+    it "handles two dates with a dash between them" do
+      str = p1.parse_time_string "Mr. and Mrs. Charles J. Rosenbloom, Pittsburgh, 1947-1969"
+      str.must_equal "Mr. and Mrs. Charles J. Rosenbloom, Pittsburgh"
+      p1.beginning.must_equal TimeSpan.new("1947","1947")
+      p1.ending.must_equal TimeSpan.new("1969","1969")
+      p1.time_string.must_equal "1947 until 1969"
+    end
   end
 
 
