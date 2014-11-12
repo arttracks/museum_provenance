@@ -154,9 +154,13 @@ module MuseumProvenance
       end
       raise DateError, "Too much recursion" if recursion_count > 10
 
-      #substitution for trivial date pattern
+      #substitution for trivial date pattern: "1918-1919"
       date_range_regex = /(\d{4})\s?[-–—]\s?(\d{4})/
       str.gsub!(date_range_regex,'\1 until \2')
+
+      # substitution for "May 5-6, 1980"
+      multiday_regex = /(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{1,2})\s?[–—-]\s?(\d{1,2}),\s(\d{2,4})/i
+      str.gsub!(multiday_regex, '\1 \2, \4 until \1 \3, \4')
 
       tokens = ["on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
       found_token = tokens.collect{|t| str.scan(/\b#{t}\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
@@ -233,7 +237,11 @@ module MuseumProvenance
           timeframe += " until " + @ending.to_s.gsub("after", "at least")
         end
       end
-      timeframe = nil if timeframe.empty?
+      if timeframe.empty?
+        timeframe = nil 
+      else
+        timeframe.gsub!(/\s+/," ")
+      end
       return timeframe
     end
 

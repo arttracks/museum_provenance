@@ -90,6 +90,14 @@ describe Period do
       p1.ending.must_equal TimeSpan.new("1969","1969")
       p1.time_string.must_equal "1947 until 1969"
     end
+    it "handles dates with two days as a range" do
+      str = p1.parse_time_string  "sale I, Galerie Georges Petit, Paris, May 6-8, 1918"
+      str.must_equal "sale I, Galerie Georges Petit, Paris"
+      p1.beginning.must_equal TimeSpan.new("May 6, 1918","May 6, 1918")
+      p1.ending.must_equal TimeSpan.new("May 8, 1918","May 8, 1918")
+      p1.time_string.must_equal "May 6, 1918 until May 8, 1918"
+
+    end
   end
 
 
