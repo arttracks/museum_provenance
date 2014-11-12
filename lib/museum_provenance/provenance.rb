@@ -14,7 +14,8 @@ module MuseumProvenance
       "Inc.", "Ltd", "Ltd.", "LLC", "llc",
       "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", 
       "the artist", 
-      "son of", "daughter of", "wife of", "husband of", "nephew of", "niece of",
+      "son of", "daughter of", "wife of", "husband of", "nephew of", "niece of", "brother of", 
+      "sister of", "uncle of", "aunt of", "grandparent of", "grandfather of", "grandmother of",
       "his wife", "his nephew", "his son", "his daughter", "his niece",
       "her husband", "her daughter", "her son", "her nephew", "her niece",
       "their daughter", "their son"
