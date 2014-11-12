@@ -298,6 +298,12 @@ describe Provenance do
     it "splits sentences with abbrev." do
       Provenance.extract("Dr. Mario says I am a sentence. I am another sentence.").count.must_equal 2
     end
+
+    it "splits sentences with states" do
+      val = Provenance.extract("Mr. and Mrs. Alvin P. Fenderson, Paoli, Pa., by 1947;  I am another sentence.")
+      val.count.must_equal 2
+      val[0].location.name.must_equal "Paoli, PA"
+    end
   end
 
 end

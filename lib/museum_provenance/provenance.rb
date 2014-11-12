@@ -20,6 +20,9 @@ module MuseumProvenance
       "their daughter", "their son"
     ]
 
+    # A list of American states.  Excludes CO, OH, OK, & OR because they can be ambiguous. 
+    STATES = %W{AL AK AZ AR CA CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND PA RI SC SD TN TX UT VT VA WA WV WI WY}
+
     # A character used to stand in for a period during parsing.  Only used internally.
     FAKE_PERIOD = "\u2024"
 
@@ -114,6 +117,10 @@ module MuseumProvenance
         modified.gsub!(/(\s[A-Z])\./, "\\1#{FAKE_PERIOD}") # initials
         modified.gsub!(/^([A-Z])\./, "\\1#{FAKE_PERIOD}") # intial initials
         ABBREVIATIONS.each {|title| modified.gsub!(title, title.gsub(".",FAKE_PERIOD))}
+        STATES.each do |st|
+          ab_ver = "" + st[0] + st[1].downcase + "."
+          modified.gsub!(ab_ver,st)
+        end
         modified
       end
 
