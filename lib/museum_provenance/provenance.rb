@@ -117,7 +117,10 @@ module MuseumProvenance
         modified.gsub!(/d\.\s(\d{4})/, "d#{FAKE_PERIOD} \\1")   # died
         modified.gsub!(/(\s[A-Zc])\./, "\\1#{FAKE_PERIOD}") # initials, circas
         modified.gsub!(/^([A-Z])\./, "\\1#{FAKE_PERIOD}") # intial initials
-        ABBREVIATIONS.each {|title| modified.gsub!(title, title.gsub(".",FAKE_PERIOD))}
+        ABBREVIATIONS.each do |title|
+         mod_title = title.gsub('.','\.')
+         modified.gsub!(/\b#{mod_title}/, mod_title.gsub('\.',FAKE_PERIOD))
+        end
         STATES.each do |st|
           ab_ver = "" + st[0] + st[1].downcase + "."
           modified.gsub!(ab_ver,st)
@@ -260,7 +263,7 @@ module MuseumProvenance
         loc = nil if loc == ""
         # Remove mismatched paretheses
         name.gsub!(/[\(\)]/,"") unless name.nil? || name.count("(") == name.count(")")
-        loc.gsub!(/[\(\)]/,"") unless loc.nil? || loc.count("(") == locs.count(")")
+        loc.gsub!(/[\(\)]/,"") unless loc.nil? || loc.count("(") == loc.count(")")
         return name, loc
       end
 

@@ -353,7 +353,9 @@ describe Provenance do
     it "splits sentences with abbrev." do
       Provenance.extract("Dr. Mario says I am a sentence. I am another sentence.").count.must_equal 2
     end
-
+    it "does split on embedded abbrev" do
+      Provenance.extract("Dr. Mario says I am a loca. I am another sentence.").count.must_equal 2
+    end
     it "splits sentences with states" do
       val = Provenance.extract("Mr. and Mrs. Alvin P. Fenderson, Paoli, Pa., by 1947;  I am another sentence.")
       val.count.must_equal 2
