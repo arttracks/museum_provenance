@@ -170,8 +170,8 @@ module MuseumProvenance
       euro_dates_regex = /\s(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
       str.gsub!(euro_dates_regex, '\2 \1, \3')
 
-      # Substitution for "c. 1945" becomes "circa 1945"
-      circa_regex = /\bc\.\s(\d{4})\b/
+      # Substitution for "c. 1945" or "ca. 1945" becomes "circa 1945"
+      circa_regex = /\bc(?:a)?\.\s(\d{4})\b/
       str.gsub!(circa_regex, 'circa \1')
 
       tokens = ["circa", "on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]

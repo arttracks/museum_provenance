@@ -6,7 +6,7 @@ module MuseumProvenance
     # A list of abbreviations.  A "." following any of these will not signify a new period.
     ABBREVIATIONS  = ["Col.", "Sgt.", "Mme.", "Mr.", "Mrs.", "Dr.", "no.", "No.", 
                       "Esq.", "Co.", "St.", "illus.", "inc.", "Inc.", "Jr.", "Sr.", 
-                      "Ltd.", "Dept.", "M.","P.", "Miss.", "Ph.D", "DC.", "D.C."]
+                      "Ltd.", "Dept.", "M.","P.", "Miss.", "Ph.D", "DC.", "D.C.", 'ca.']
 
     # A list of name suffixes.  A "," preceding any of these will not signify the end of a name.
     NAME_EXTENDERS = [
@@ -258,16 +258,16 @@ module MuseumProvenance
           loc = nil
         end
         loc = nil if loc == ""
-        # Remove paretheses
-        name.gsub!(/[\(\)]/,"") unless name.nil?
-        loc.gsub!(/[\(\)]/,"") unless loc.nil?
+        # Remove mismatched paretheses
+        name.gsub!(/[\(\)]/,"") unless name.nil? || name.count("(") == name.count(")")
+        loc.gsub!(/[\(\)]/,"") unless loc.nil? || loc.count("(") == locs.count(")")
         return name, loc
       end
 
 
       def extract_primary_ownership(text)
         primary = true
-        if text[0] == "("
+        if text[0] == "(" && text.strip[-1] == ")"
           primary = false
           text = text[/\((.*)\)$/,1]
         end

@@ -61,6 +61,13 @@ describe Provenance do
       timeline2 = Provenance.from_json(timeline.to_json)
       timeline2[0].provenance.must_equal "(David Newbury, 1995)"
     end
+    it "works with names that begin with parenthesis" do
+      timeline = Provenance.extract "(David) Newbury, 1995."
+      timeline[0].primary_owner.must_equal true
+      timeline[0].to_h[:party].must_equal "(David) Newbury"
+      timeline[0].beginning.must_equal TimeSpan.parse("1995")
+      timeline[0].provenance.must_equal "(David) Newbury, 1995"
+    end
   end
 
   describe "acq. method extraction" do
@@ -127,6 +134,11 @@ describe Provenance do
       timeline = Provenance.extract  "I am certain."
       timeline[0].certain?.must_equal true
     end
+    it "works with likely" do
+      timeline = Provenance.extract  "Likely David, Pittsburgh."
+      timeline[0].certain?.must_equal false
+      timeline[0].party.must_equal Party.new("David")
+    end
   end
 
 
@@ -188,6 +200,17 @@ describe Provenance do
     end
     it "handles c. dates" do
       timeline = Provenance.extract "Mr. and Mrs. James L. Winokur, Pittsburgh, c. 1965; gift to museum, 1968"
+      timeline.count.must_equal 2
+      timeline[0].botb.must_equal Date.new(1965)
+      timeline[0].eotb.must_equal Date.new(1965).latest
+      timeline[0].botb.certainty.must_equal false
+      timeline[0].eotb.certainty.must_equal false
+      timeline[0].time_string.must_equal "1965?"
+      timeline[0].party.name.must_equal "Mr. and Mrs. James L. Winokur"
+      timeline[0].location.name.must_equal "Pittsburgh"
+    end
+    it "handles ca. dates" do
+      timeline = Provenance.extract "Mr. and Mrs. James L. Winokur, Pittsburgh, ca. 1965; gift to museum, 1968"
       timeline.count.must_equal 2
       timeline[0].botb.must_equal Date.new(1965)
       timeline[0].eotb.must_equal Date.new(1965).latest

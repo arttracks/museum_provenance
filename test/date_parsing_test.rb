@@ -292,5 +292,14 @@ describe "Date Parsing Rules" do
     p.ending.earliest.must_equal Date.new(601).earliest
     p.ending.latest.must_equal Date.new(700).latest
   end
+
+  it "handles ca. dates" do
+    p.parse_time_string "ca. 1955"
+    p.ending.must_be_nil
+    p.beginning.must_be_instance_of TimeSpan  
+    p.beginning.earliest.must_equal Date.new(1955).earliest
+    p.beginning.latest.must_equal Date.new(1955).latest
+    p.botb.certain.must_equal false
+  end
   
 end
