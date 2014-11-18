@@ -89,11 +89,13 @@ module MuseumProvenance
             (?<!\d\s)  # preceding digit, for jan 1 2014, to ignore the 1
             (?<!\d(?:st|rd|th|nd)\s)  # ordinal, for jan 1st 2014, to ignore the 1
             (?<!\d(?:st|rd|th|nd),\s)  # preceding digit, for jan 1st, 2014, to ignore the 1
+            (?<!\/)                    # preceding slash for to ignore traditional dates
             \b
             (\d{1,4}) # capture year
             (?:\s+(ad|bc|bce|ce))? # optionally capture era
             \b  
             (?!\scentury) # ignore centuries
+            (?!\/) # ignore following slash to ignore traidtional dates
             (\?)? # Optionally capture uncertainty
           /ix
           years = []
@@ -159,6 +161,18 @@ module MuseumProvenance
           until day.nil?
             days.push day
             day = day.post_match.match day_regex
+          end
+
+          traditional_day_regex = /\b
+            \d{1,2}\/\d{1,2}\/\d{2,4}
+            (?:\s+(?:ad|bc|bce|ce))?
+            \b
+            (\?)? # Optionally capture uncertainty
+          /ix
+          day = str.match traditional_day_regex
+          until day.nil?
+            days.push day
+            day = day.post_match.match traditional_day_regex
           end
 
           days.collect do |d|

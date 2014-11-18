@@ -136,11 +136,18 @@ describe DateExtractor do
 
   it "handles days with odd formatting" do
     date = DateExtractor.find_dates_in_string("Jan 17 1980")
- #   date.each {|d| puts "\n#{d}, #{d.precision}\n"}
     date.length.must_equal 1
     date = date.first
     date.must_equal Date.new(1980,1,17)
   end
+
+   it "handles traditional dates" do
+     date = DateExtractor.find_dates_in_string("1/17/1980")
+     date.length.must_equal 1
+     date = date.first
+     date.must_equal Date.new(1980,1,17)
+   end
+
 end
 
 describe "Date Parsing Rules" do
