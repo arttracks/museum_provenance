@@ -148,6 +148,12 @@ describe DateExtractor do
      date.must_equal Date.new(1980,1,17)
    end
 
+   it "handles xml dates" do
+     date = DateExtractor.find_dates_in_string("1980-1-17")
+     date.length.must_equal 1
+     date = date.first
+     date.must_equal Date.new(1980,1,17)
+   end
 end
 
 describe "Date Parsing Rules" do
