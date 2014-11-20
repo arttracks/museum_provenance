@@ -314,5 +314,21 @@ describe "Date Parsing Rules" do
     p.beginning.latest.must_equal Date.new(1955).latest
     p.botb.certain.must_equal false
   end
-  
+
+  it "handles decades without a the" do
+    p.parse_time_string "Estate sale, Cleveland, Ohio, the 1950s"
+    p.ending.must_be_nil
+    p.beginning.must_be_instance_of TimeSpan
+    p.beginning.earliest.must_equal Date.new(1950).earliest
+    p.beginning.latest.must_equal Date.new(1959).latest
+    p.beginning.to_s.must_equal "1950s"
+  end
+  it "does not notice the spurious 'in' and think it's part of the date" do
+     p.parse_time_string  "Estate sale in Cleveland, Ohio, 1950s"
+     p.time_string.must_equal "1950s"
+     p.ending.must_be_nil
+     p.beginning.must_be_instance_of TimeSpan
+     p.beginning.earliest.must_equal Date.new(1950).earliest
+     p.beginning.latest.must_equal Date.new(1959).latest
+  end
 end

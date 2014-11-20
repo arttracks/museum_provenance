@@ -64,22 +64,22 @@ module MuseumProvenance
         if opts[:bote]
           b_o_t_e = Time.at(opts[:bote].to_i).to_date
           b_o_t_e.certainty = opts[:bote_certainty].to_bool unless opts[:bote_certainty].nil?
-          b_o_t_e.precision = opts[:bote_precision].to_i unless opts[:bote_precision].nil?
+          b_o_t_e.precision = opts[:bote_precision].to_f unless opts[:bote_precision].nil?
         end
         if opts[:eote]
           e_o_t_e = Time.at(opts[:eote].to_i).to_date
           e_o_t_e.certainty = opts[:eote_certainty].to_bool unless opts[:eote_certainty].nil?
-          e_o_t_e.precision = opts[:eote_precision].to_i unless opts[:eote_precision].nil?
+          e_o_t_e.precision = opts[:eote_precision].to_f unless opts[:eote_precision].nil?
         end
         if opts[:botb]
           b_o_t_b =  Time.at(opts[:botb].to_i).to_date
           b_o_t_b.certainty = opts[:botb_certainty].to_bool unless opts[:botb_certainty].nil?
-          b_o_t_b.precision = opts[:botb_precision].to_i unless opts[:botb_precision].nil?
+          b_o_t_b.precision = opts[:botb_precision].to_f unless opts[:botb_precision].nil?
         end
         if opts[:eotb]
           e_o_t_b =  Time.at(opts[:eotb].to_i).to_date
           e_o_t_b.certainty = opts[:eotb_certainty].to_bool unless opts[:eotb_certainty].nil?
-          e_o_t_b.precision = opts[:eotb_precision].to_i unless opts[:eotb_precision].nil?
+          e_o_t_b.precision = opts[:eotb_precision].to_f unless opts[:eotb_precision].nil?
         end
         @beginning = TimeSpan.new(b_o_t_b,e_o_t_b) if b_o_t_b || e_o_t_b
         @ending = TimeSpan.new(b_o_t_e,e_o_t_e)    if b_o_t_e || e_o_t_e 
