@@ -132,7 +132,7 @@ module MuseumProvenance
       # Scan a given block of text for birth and death dates.
       #--------------------------------------------------------
       def find_birth_and_death(text) 
-        return text, nil if text.blank?
+        return nil, nil, text if text.blank?
 
         b,d = nil,nil
 

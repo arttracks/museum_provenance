@@ -361,6 +361,13 @@ describe Provenance do
       val.count.must_equal 2
       val[0].location.name.must_equal "Paoli, PA"
     end
-  end
+    it 'handles things with only an aquisition method' do
+      val = Provenance.extract "Louis Majorelle, Villa Jika, Nancy; by descent; Charles Janoray, New York, LLC in 2007"
+      val.count.must_equal 3
+      val[1].party.name.must_equal ""
+      val[1].acquisition_method.must_equal AcquisitionMethod::BY_DESCENT
+      val.to_json.must_be_instance_of String
+    end
+   end
 
 end
