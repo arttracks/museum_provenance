@@ -11,10 +11,10 @@ module MuseumProvenance
   class Timeline
     include Enumerable
 
-    # @!attribute [r] earliest
-    #   @return [String] The earliest period within the timeline. 
     # @!attribute [r] latest
     #   @return [String] The latest period within the timeline.
+    # @!attribute [r] earliest
+    #   @return [String] The earliest period within the timeline. 
     attr_reader :earliest, :latest
 
 
@@ -59,7 +59,7 @@ module MuseumProvenance
 
     # Generates a JSON for the timeline.
     # @return [JSON] a JSON array of the timeline
-    def to_json
+    def to_json(*args)
       arry = []
       i = 0
       self.each do |p|

@@ -10,14 +10,53 @@ module MuseumProvenance
     PERIOD_CERTAINTY_STRING = "Possibly"
 
     prepend Certainty   
+
+    # @!attribute [rw] acquisition_method
+    #   @return [AcquisitionMethod] The method of acqusition of this period. 
+
+    # @!attribute [rw] note
+    #   @return [String] The footnote associated with this period. 
+
+    # @!attribute [rw] original_text
+    #   The text used to generate this record.
+    #   This is the text used for verification and comparison against the generated record.  
+    #   It can be manually set if needed.
+    #
+    #   @return [String]  
+
+    # @!attribute [rw] primary_owner
+    #   Is the owner a primary owner, or a dealer, sale, or gallery?
+    #   This is a concept defined in the AAM standard for Provenance.  In the standard,
+    #   non-primary owners have their record defined by wrapping the provenance clause in parentheses.
+    #   
+    #   @return [Boolean] Returns true if the owner is considered a primary owner. 
+
+    # @!attribute [rw] stock_number
+    #   @depreciated true
+    #   @return [String] The stock number of the artwork in the collection of this owner.
+
+    # @!attribute [r] party
+    #   @return [Party] The party who owned the work during this period. 
+
+    # @!attribute [r] location
+    #   @return [Location] The location where the artwork was located during this period. 
+
+    # @!attribute [r] next_period
+    #   @return [Period] The location immediately preceding this period within the record. 
+
+
+    # @!attribute [r] previous_period
+    #   @return [Period] The location immediately following this period within the record.
+
+
     attr_reader  :next_period, :previous_period, :party, :location
     attr_accessor  :acquisition_method, :note, :original_text, :stock_number, :primary_owner
 
 
-    # Create a new party.
+    # Create a new [Period}.
     # @todo replace the generic hash with a PeriodOutput.
     # @param _name [String] The party name of the Period
-    # @param opts [Hash] allows a period to be initialized using a hash;way to initialize the period.
+    # @param opts [Hash] allows a period to be initialized using a hash.
     def initialize(_name = "", opts=Hash.new)
       begin
         @direct_transfer = false
@@ -206,7 +245,8 @@ module MuseumProvenance
             self.beginning = TimeSpan.parse(date_string)
            when  "on"
              self.beginning = TimeSpan.parse(date_string)
-             self.ending = TimeSpan.parse(date_string) if self.beginning.earliest_raw.precision == DateTimePrecision::DAY
+             # if self.beginning &&
+             self.ending = TimeSpan.parse(date_string) if  self.beginning.earliest_raw.precision == DateTimePrecision::DAY
            when "circa"
             self.beginning = TimeSpan.parse(date_string)
             self.beginning.earliest_raw.certainty = false

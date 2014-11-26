@@ -191,8 +191,11 @@ module MuseumProvenance
           days.collect do |d|
             date_val = d[0].to_s
             certain = date_val.gsub!("?","")
-            day = Chronic.parse(date_val).to_date
-            day.certainty = certain.nil?
+            day = Chronic.parse(date_val)
+            unless day.nil?
+              day = day.to_date 
+              day.certainty = certain.nil?
+            end
             day
           end
       end

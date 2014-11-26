@@ -6,6 +6,12 @@ describe Provenance do
     Provenance.extract("sample text").must_be_kind_of Timeline
   end
 
+  it "handles nothingness well" do
+    p = Provenance.extract(nil)
+    p.must_be_kind_of Timeline
+    p.count.must_equal 0
+  end
+
   it "handles crlfs" do
     text = "sample text
     second line"
@@ -369,5 +375,12 @@ describe Provenance do
       val.to_json.must_be_instance_of String
     end
    end
-
+   describe "Text Transformations" do
+    it "handles his gift" do
+      val = Provenance.extract  "Kenneth Seaver, Pittsburgh, PA; his gift to Museum, January 1949."
+      val.count.must_equal 2
+      val[1].party.name.must_equal "Museum"
+      val[1].acquisition_method.must_equal AcquisitionMethod::GIFT
+    end
+   end
 end

@@ -36,6 +36,7 @@ module MuseumProvenance
       # @param provenance_string [String] The textual provenance record
       # @return [Timeline] The structured representation of the provenance
       def extract(provenance_string)
+        return Timeline.new if provenance_string.blank?
         provenance_string.gsub!("\n"," ")
         text, notes = extract_text_and_notes(provenance_string)
         timeline = generate_timeline(text)
@@ -205,6 +206,10 @@ module MuseumProvenance
 
       def extract_acquisition_method(text) 
         return text, nil if text.blank?
+
+        # Transform strange forms
+        text.gsub!(/\b(?:his|her:their)\s+gift\s+to\b/i,"gift to")
+
         acquisition_method = AcquisitionMethod.find(text)
         if acquisition_method
           f = acquisition_method.forms
