@@ -83,5 +83,6 @@ describe AcquisitionMethod do
       method = AcquisitionMethod.find_by_name("Sale")
       method.must_be_instance_of AcquisitionMethod
       method.must_equal AcquisitionMethod::SALE
-    end  end
+    end
+  end
 end

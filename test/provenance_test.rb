@@ -382,5 +382,35 @@ describe Provenance do
       val[1].party.name.must_equal "Museum"
       val[1].acquisition_method.must_equal AcquisitionMethod::GIFT
     end
-   end
+    it "uses proper synonyms for painted by" do
+      val = Provenance.extract  "painted for the chapel of Girolamo Ferretti, S. Francesco delle Scale, Ancona"
+      val.count.must_equal 1
+      val[0].acquisition_method.must_equal AcquisitionMethod::COMMISSION
+      val[0].party.name.must_equal "the chapel of Girolamo Ferretti"
+      val[0].provenance.must_equal "Commissioned by the chapel of Girolamo Ferretti, S. Francesco delle Scale, Ancona"     
+    end
+    it "detects Luht numbers" do
+      types = ["(Lugt, suppl., 2451a)",
+      "(Lugt Suppl. 1808h)",
+      "(L., Supplément, 633b)",
+      "(Lugt 690)",
+      "(L.1383)",
+      "(L.633b)",
+      "(Lugt 1606 and 2398)",
+      "(Lugt 624-626)",
+      "(Lugt suppl. 2187a)",
+      "(L. 2215b)",
+      "(Lugt. 657)"]
+      nums = ["2451a","1808h","633b","690","1383","633b","1606","2398","624","626","2187a","2215b","657"]
+      types.each do |t|
+        val = Provenance.extract  "Kenneth Seaver, Pittsburgh, PA #{t}; gift to Museum, January 1949."
+        val.count.must_equal 2
+        val[0].party.name.must_equal "Kenneth Seaver"
+        val[1].party.name.must_equal "Museum"
+        val[0].stock_number.split(" ").each do |sn|
+          nums.collect{|n| "(L.#{n})"}.must_include sn
+        end
+      end
+    end
+  end
 end

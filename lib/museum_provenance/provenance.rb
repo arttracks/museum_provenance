@@ -293,17 +293,52 @@ module MuseumProvenance
         lot_regex = /
           \blot\s.*\b
         /ix
-        stock = text.scan(stock_regex).first
-        stock = text.scan(lot_regex).first if stock.nil?
-        text = text.gsub(stock,"").strip if stock
-        stock.gsub!(/[\(\)]/,"") unless stock.nil?
+        luht_regex = /
+          \(L.\d{1,6}[a-z]?\)
+        /ix
+        stock = []
+        stock.push text.scan(stock_regex)
+        stock.push text.scan(lot_regex)
+        stock.push text.scan(luht_regex)        
+        stock.flatten.compact.each do |sn|
+          text = text.gsub(sn,"").strip
+        end
+        #stock.gsub!(/[\(\)]/,"") unless stock.nil?
+        stock = stock.flatten.compact
+        if stock.count > 0
+          stock = stock.collect{|s| s.strip}.join(" ").strip  
+        else
+          stock = nil
+        end      
         return stock, text
+      end
+
+      def convert_lugt_numbers(text)
+        luht_regex = /
+               \( # open paren
+               (?:Lugt|l).?,?       # lught or l, with optional punctuation
+               \s?(?:suppl\.?\,?)?  # possible suppl.
+               (?:ément,)?          # possible suffix for french
+               \s?                  # possible white space
+               (\d{1,6}[a-z]?)      # actual number
+               (?:\sand\s)?         # possible and
+               (?:-)?               # possible dash
+               (\d{1,6}[a-z]?)?     # possible second number
+               \)                   # closing paren
+              /ix
+        text.gsub!(luht_regex) do |match|
+          str = "(L#{FAKE_PERIOD}#{$1})"
+          str += " (L#{FAKE_PERIOD}#{$2})" if $2
+          str
+        end
+        text
       end
 
        def generate_timeline(text)
 
         # Replace non-terminating periods with FAKE_PERIOD
         t = Timeline.new
+        text = convert_lugt_numbers(text)
         text = substitute_periods(text)
         lines =  text.split(".")
         lines = lines.map{|line| line.split(";").join("\ntransferred: ").split("\n")}.flatten

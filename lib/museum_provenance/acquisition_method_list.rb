@@ -53,7 +53,7 @@ module MuseumProvenance
     TRANSFER = AcquisitionMethod.new("Transfer", "transferred to", "by transfer", "??? Sometime seen after looted work is returned ???", AcquisitionMethod::Prefix)
     
     #work acquired via artist commission
-    COMMISSION = AcquisitionMethod.new("Commission", "by commission, to", "by commission", "work acquired via artist commission", AcquisitionMethod::Suffix)
+    COMMISSION = AcquisitionMethod.new("Commission", "commissioned by", "by commission", "work acquired via artist commission", AcquisitionMethod::Prefix, ["by commission, to", "painted for", "created for"])
     
     #Acquired via collection in a field
     FIELD_COLLECTION = AcquisitionMethod.new("Field Collection", "field collected by", "by field collection", "Acquired via collection in a field", AcquisitionMethod::Prefix)
