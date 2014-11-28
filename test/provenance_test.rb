@@ -375,6 +375,14 @@ describe Provenance do
       val.to_json.must_be_instance_of String
     end
    end
+   describe "Problem Records" do
+    it "handles Michael Snow, c/o The Isaacs Gallery, Toronto, ON" do      
+       val = Provenance.extract   "Michael Snow, c/o The Isaacs Gallery, Toronto, ON"
+       val.count.must_equal 1
+       val[0].party.name.must_equal "Michael Snow"
+       val[0].location.name.must_equal "c/o The Isaacs Gallery, Toronto, ON"
+    end
+   end
    describe "Text Transformations" do
     it "handles his gift" do
       val = Provenance.extract  "Kenneth Seaver, Pittsburgh, PA; his gift to Museum, January 1949."
@@ -388,6 +396,18 @@ describe Provenance do
       val[0].acquisition_method.must_equal AcquisitionMethod::COMMISSION
       val[0].party.name.must_equal "the chapel of Girolamo Ferretti"
       val[0].provenance.must_equal "Commissioned by the chapel of Girolamo Ferretti, S. Francesco delle Scale, Ancona"     
+    end
+    it "luht problems" do
+      val = Provenance.extract "William Esdaile (1758-1837), London, England (L.2617), probably sold 1840; Robert Balmanno (1780-1866), London, England (L.213); Hermann Weber (1817-1854), Bonn, Germany (L.1383), probably September 17, 1855 sale; Dr. August Sträter (1810-1897), Aachen, Germany (L.787), May 10-14, 1898 sale; P. von Baldinger-Seidenberg (d. 1911), Stuttgart, Germany (L.212), probably May 7-11, 1912 sale; Cortland Field Bishop (1870-1935), New York (L.2770b), probably sold at November 19-20, 1935 sale; Kennedy Galleries, New York, stock no. A70789; Charles J. Rosenbloom (1898-1973), Pittsburgh, PA (L.633b)"
+      val.count.must_equal 8
+      val[0].stock_number.must_equal "(L.2617)"
+      val[1].stock_number.must_equal "(L.213)"
+      val[2].stock_number.must_equal "(L.1383)"
+      val[3].stock_number.must_equal "(L.787)"
+      val[4].stock_number.must_equal "(L.212)"
+      val[5].stock_number.must_equal "(L.2770b)"
+      val[6].stock_number.must_equal "stock no. A70789"
+      val[7].stock_number.must_equal "(L.633b)"
     end
     it "detects Luht numbers" do
       types = ["(Lugt, suppl., 2451a)",

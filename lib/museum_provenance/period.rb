@@ -214,7 +214,7 @@ module MuseumProvenance
       str.gsub!(circa_regex, 'circa \1')
 
       tokens = ["circa", "on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
-      found_token = tokens.collect{|t| str.scan(/\b#{t}\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
+      found_token = tokens.collect{|t| str.scan(/\b#{t}(?=\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dev|[1-9]|the\s[1-9]))\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
         if found_token.nil?
           vals = str.split(",")
           

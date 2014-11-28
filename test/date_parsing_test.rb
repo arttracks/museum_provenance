@@ -315,6 +315,12 @@ describe "Date Parsing Rules" do
     p.botb.certain.must_equal false
   end
 
+  it "handles no time" do
+    lambda { p.parse_time_string "Michael Snow, c/o The Isaacs Gallery, Toronto, ON"}.must_raise MuseumProvenance::DateError
+    p.ending.must_be_nil
+    p.beginning.must_be_nil
+  end
+
   it "handles decades without a the" do
     p.parse_time_string "Estate sale, Cleveland, Ohio, the 1950s"
     p.ending.must_be_nil
