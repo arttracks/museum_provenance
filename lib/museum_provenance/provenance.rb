@@ -6,7 +6,8 @@ module MuseumProvenance
     # A list of abbreviations.  A "." following any of these will not signify a new period.
     ABBREVIATIONS  = ["Col.", "Sgt.", "Mme.", "Mr.", "Mrs.", "Dr.", "no.", "No.", 
                       "Esq.", "Co.", "St.", "illus.", "inc.", "Inc.", "Jr.", "Sr.", 
-                      "Ltd.", "Dept.", "M.","P.", "Miss.", "Ph.D", "DC.", "D.C.", 'ca.']
+                      "Ltd.", "Dept.", "M.","P.", "Miss.", "Ph.D", "DC.", "D.C.", 'ca.',
+                       'Ave.']
 
     # A list of name suffixes.  A "," preceding any of these will not signify the end of a name.
     NAME_EXTENDERS = [
@@ -125,6 +126,7 @@ module MuseumProvenance
         STATES.each do |st|
           ab_ver = "" + st[0] + st[1].downcase + "."
           modified.gsub!(ab_ver,st)
+          modified.gsub!("#{st}.,","#{st},")
         end
         modified
       end
