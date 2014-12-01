@@ -19,7 +19,7 @@ module MuseumProvenance
       "sister of", "uncle of", "aunt of", "grandparent of", "grandfather of", "grandmother of",
       "his wife", "his nephew", "his son", "his daughter", "his niece",
       "her husband", "her daughter", "her son", "her nephew", "her niece",
-      "their daughter", "their son"
+      "their daughter", "their son", 'his widow', 'her widow', 'her widower', 'his widower'
     ]
 
     # A list of American states.  Excludes CO, OH, OK, & OR because they can be ambiguous. 
