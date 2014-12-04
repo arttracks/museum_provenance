@@ -317,8 +317,7 @@ module MuseumProvenance
 
       def convert_lugt_numbers(text)
         luht_regex = /
-               \( # open paren
-               (?:Lugt|l).?,?       # lught or l, with optional punctuation
+               (?:\((?:Lugt|l).?,?|Lugt)       # lught or l, with optional punctuation
                \s?(?:suppl\.?\,?)?  # possible suppl.
                (?:ément,)?          # possible suffix for french
                \s?                  # possible white space
@@ -326,7 +325,7 @@ module MuseumProvenance
                (?:\sand\s)?         # possible and
                (?:-)?               # possible dash
                (\d{1,6}[a-z]?)?     # possible second number
-               \)                   # closing paren
+               \)?                   # closing paren
               /ix
         text.gsub!(luht_regex) do |match|
           str = "(L#{FAKE_PERIOD}#{$1})"

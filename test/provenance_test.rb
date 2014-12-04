@@ -420,8 +420,9 @@ describe Provenance do
       "(Lugt 624-626)",
       "(Lugt suppl. 2187a)",
       "(L. 2215b)",
-      "(Lugt. 657)"]
-      nums = ["2451a","1808h","633b","690","1383","633b","1606","2398","624","626","2187a","2215b","657"]
+      "(Lugt. 657)",
+      "Lugt 1780"]
+      nums = ["2451a","1808h","633b","690","1383","633b","1606","2398","624","626","2187a","2215b","657","1780"]
       types.each do |t|
         val = Provenance.extract  "Kenneth Seaver, Pittsburgh, PA #{t}; gift to Museum, January 1949."
         val.count.must_equal 2
