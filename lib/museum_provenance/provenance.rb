@@ -79,11 +79,17 @@ module MuseumProvenance
 
       def extract_text_and_notes(input)
         text, notes = input.split(FOOTNOTE_DIVIDER)
-        if notes.nil?  
+        if notes.blank?  
          text, notes = input.split(" 1. ")
          notes = "1. " + notes if notes
         end
-        if notes.nil? 
+        if notes.blank?
+         text, notes = input.split(/\s\[1\]/)
+         notes = "[1] " + notes if notes
+        end
+
+        
+        if notes.blank? 
           text = input
         end
         text = text.strip
@@ -335,10 +341,16 @@ module MuseumProvenance
         text
       end
 
+      def rotate_footnotes(text)
+        text.gsub!(/([\.;])(\[\d+\])/,'\2\1')
+        text
+      end
+
        def generate_timeline(text)
 
         # Replace non-terminating periods with FAKE_PERIOD
         t = Timeline.new
+        text = rotate_footnotes(text)
         text = convert_lugt_numbers(text)
         text = substitute_periods(text)
         lines =  text.split(".")
@@ -357,27 +369,29 @@ module MuseumProvenance
 
           original_text = text
 
-          #extract primary ownership
-          primary_ownership, text = extract_primary_ownership(text)
-
-
           # pull off record certainty
-
           record_is_certain , text = extract_certainty(text)
 
-
-          # pull off acquisition prefixes
-          text, acquisition_method = extract_acquisition_method(text)
+          #extract primary ownership
+          primary_ownership, text = extract_primary_ownership(text)
 
           # extract birth and death from text
           birth, death, text = find_birth_and_death(text)
 
-          stock_number, text = extract_stock_numbers(text)
-            
+
           # create the period
           generated_period = Period.new()
           generated_period.certain = record_is_certain
           generated_period.original_text = original_text
+
+
+
+
+          stock_number, text = extract_stock_numbers(text)
+            
+          # pull off acquisition prefixes
+          text, acquisition_method = extract_acquisition_method(text)
+
           generated_period.acquisition_method = acquisition_method
           generated_period.note = notes
           generated_period.stock_number = stock_number
@@ -391,6 +405,11 @@ module MuseumProvenance
           # split off names and locs
           generated_period.party, generated_period.location = extract_name_and_location(text)
 
+          if acquisition_method.nil?
+            c = generated_period.party.certainty
+            generated_period.party.name,  generated_period.acquisition_method = extract_acquisition_method(generated_period.party.name) 
+            generated_period.party.certainty = c
+          end
           # add in births and deaths
           generated_period.party.birth = birth
           generated_period.party.death = death

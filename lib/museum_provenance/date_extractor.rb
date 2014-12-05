@@ -21,16 +21,26 @@ module MuseumProvenance
     # @return [Array<Date>] An array of dates found within the string
     def DateExtractor.find_dates_in_string(str)
 
-          centuries = extract_centuries(str)
-          decades = extract_decades(str)
-          years = extract_years(str)
-          months = extract_months(str)
-          days = extract_days(str)
+          centuries, str = extract_centuries(str)
+          decades, str = extract_decades(str)
+          years, str = extract_years(str)
+          months, str = extract_months(str)
+          days, str = extract_days(str)
+
 
           [centuries, decades, years, months, days].flatten.compact
         end
       end
 
+      def DateExtractor.remove_dates_in_string(str)
+        centuries, str = extract_centuries(str)
+        decades, str = extract_decades(str)
+        years, str = extract_years(str)
+        months, str = extract_months(str)
+        days, str = extract_days(str)
+        return str.gsub("  ", " ").strip
+      end
+ 
       private
 
       def DateExtractor.extract_centuries(str) 
@@ -54,6 +64,7 @@ module MuseumProvenance
           century.certainty = !uncertain
           century
         end
+        return centuries, str.gsub(century_regex,"")
       end
 
       def DateExtractor.extract_decades(str)
@@ -65,7 +76,7 @@ module MuseumProvenance
           decade = decade.post_match.match decade_regex
         end
 
-        decades.collect do |d|
+        decades = decades.collect do |d|
           val = (d[1].to_s + "0").to_i
           uncertain = d[2] && d[2] == "?"
           decade = Date.new(val)
@@ -73,6 +84,7 @@ module MuseumProvenance
           decade.certainty = !uncertain
           decade
         end
+        return decades, str.gsub(decade_regex,"")
       end
 
       def DateExtractor.extract_years(str)
@@ -107,7 +119,7 @@ module MuseumProvenance
             year = year.post_match.match years_regex
           end
           
-          years.collect do |c|
+          years = years.collect do |c|
             is_BCE = c[2] && (c[2].upcase == "BC" || c[2].upcase == "BCE")
             uncertain = c[3] && c[3] == "?"
             val = c[1].to_i
@@ -116,6 +128,8 @@ module MuseumProvenance
             d.certainty = !uncertain
             d
           end
+          return years, str.gsub(years_regex, "")
+
       end
 
       def DateExtractor.extract_months(str)
@@ -137,7 +151,7 @@ module MuseumProvenance
             month = month.post_match.match month_regex
           end
 
-          months.collect do |d|
+          months = months.collect do |d|
             date_val = d[0].to_s
             certain = date_val.gsub!("?","")
             val = Chronic.parse(date_val).to_date
@@ -145,6 +159,8 @@ module MuseumProvenance
             m.certainty = certain.nil?
             m
           end
+          return months, str.gsub(month_regex, "")
+
       end
 
       def DateExtractor.extract_days(str)
@@ -188,7 +204,7 @@ module MuseumProvenance
             day  = day.post_match.match xml_day_regex
           end
 
-          days.collect do |d|
+          days = days.collect do |d|
             date_val = d[0].to_s
             certain = date_val.gsub!("?","")
             day = Chronic.parse(date_val)
@@ -198,5 +214,7 @@ module MuseumProvenance
             end
             day
           end
+          str = str.gsub(day_regex, "").gsub(traditional_day_regex, "").gsub(xml_day_regex, "")
+          return days, str
       end
     end

@@ -203,15 +203,16 @@ module MuseumProvenance
 
       # substitution for "30-31 January 1922" becomes "January 30, 1922 until January 31, 1922"
       multiday_regex_2 = /\s(\d{1,2})\s?[–—-]\s?(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
-      str.gsub!(multiday_regex_2, '\3 \1, \4 until \3 \2, \4')
+      str.gsub!(multiday_regex_2, ' \3 \1, \4 until \3 \2, \4')
 
       # Substitution for euro-dates: "9 June 1932" becomes "June 9, 1932"
       euro_dates_regex = /\s(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
-      str.gsub!(euro_dates_regex, '\2 \1, \3')
+      str.gsub!(euro_dates_regex, ' \2 \1, \3')
 
       # Substitution for "c. 1945" or "ca. 1945" becomes "circa 1945"
       circa_regex = /\bc(?:a)?\.\s(\d{4})\b/
       str.gsub!(circa_regex, 'circa \1')
+
 
       tokens = ["circa", "on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
       found_token = tokens.collect{|t| str.scan(/\b#{t}(?=\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dev|[1-9]|the\s[1-9]))\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
@@ -231,21 +232,25 @@ module MuseumProvenance
             end
             last_date = current_date
           end
-          str = vals.join(",")
+          str = vals.join(",") 
           date_string = current_phrase.join(',')
+          str += DateExtractor.remove_dates_in_string(date_string)
         else
           str, date_string = str.split(/\b#{found_token}\b/i)
           date_string.strip! unless date_string.nil?
           str.strip 
         end
        
+        #puts "found_token: '#{found_token}'"
+        #puts "date_string: '#{date_string}'"
+        #puts "str: '#{str}'"
+
         #puts "found_token: #{found_token}"
         case (found_token.downcase rescue nil)
            when nil
             self.beginning = TimeSpan.parse(date_string)
            when  "on"
              self.beginning = TimeSpan.parse(date_string)
-             # if self.beginning &&
              self.ending = TimeSpan.parse(date_string) if  self.beginning.earliest_raw.precision == DateTimePrecision::DAY
            when "circa"
             self.beginning = TimeSpan.parse(date_string)

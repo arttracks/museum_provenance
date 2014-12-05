@@ -1,5 +1,4 @@
 require 'json'
-require "babosa"
 
 describe "Provenance Files" do
   it "handles all existing files" do

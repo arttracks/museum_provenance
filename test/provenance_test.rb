@@ -349,6 +349,22 @@ describe Provenance do
     end      
   end
  
+  describe "NGA Record modification" do
+    it "handles standard lines" do
+      val =  Provenance.extract "gift 1937 to NGA"
+      val[0].acquisition_method.must_equal AcquisitionMethod::GIFT
+      val[0].time_string.must_equal "1937"
+      val[0].party.name.must_equal "NGA"
+    end
+    it "handles footnotes on the wrong side" do
+      val = Provenance.extract "sold August 1911 to Baron de Herzog.[1] Marczell von Nemes, Budapest, by 1912;[2] (his sale, Galerie Manzi Joyant, Paris, 18 June 1913, no. 84). [1] Letter of 26 March 1930 from Durand-Ruel to Mrs. Chester Dale, in NGA curatorial files. [2] The painting was included in a 1912 exhibition of his collection in Dusseldorf."
+      val.count.must_equal 3
+      val[0].note.must_include "Letter of 26 March 1930 from Durand-Ruel to Mrs. Chester Dale, in NGA curatorial files."
+      val[1].note.must_include "The painting was included in a 1912 exhibition of his collection in Dusseldorf."
+      val[2].note.must_equal []
+    end
+  end
+
   describe "Line Splitting" do
     it "splits sentences" do
       Provenance.extract("I am a sentence.  I am another sentence.").count.must_equal 2
