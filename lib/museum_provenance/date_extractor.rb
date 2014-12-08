@@ -38,7 +38,7 @@ module MuseumProvenance
         years, str = extract_years(str)
         months, str = extract_months(str)
         days, str = extract_days(str)
-        return str.gsub("  ", " ").strip
+        return str.gsub(/\s\s*/, " ").strip
       end
  
       private
@@ -64,7 +64,7 @@ module MuseumProvenance
           century.certainty = !uncertain
           century
         end
-        return centuries, str.gsub(century_regex,"")
+        return centuries, str.gsub(century_regex," ")
       end
 
       def DateExtractor.extract_decades(str)
@@ -84,7 +84,7 @@ module MuseumProvenance
           decade.certainty = !uncertain
           decade
         end
-        return decades, str.gsub(decade_regex,"")
+        return decades, str.gsub(decade_regex," ")
       end
 
       def DateExtractor.extract_years(str)
@@ -128,7 +128,7 @@ module MuseumProvenance
             d.certainty = !uncertain
             d
           end
-          return years, str.gsub(years_regex, "")
+          return years, str.gsub(years_regex, " ")
 
       end
 
@@ -159,7 +159,7 @@ module MuseumProvenance
             m.certainty = certain.nil?
             m
           end
-          return months, str.gsub(month_regex, "")
+          return months, str.gsub(month_regex, " ")
 
       end
 
@@ -214,7 +214,7 @@ module MuseumProvenance
             end
             day
           end
-          str = str.gsub(day_regex, "").gsub(traditional_day_regex, "").gsub(xml_day_regex, "")
+          str = str.gsub(day_regex, " ").gsub(traditional_day_regex, " ").gsub(xml_day_regex, " ")
           return days, str
       end
     end

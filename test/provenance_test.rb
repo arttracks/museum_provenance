@@ -352,9 +352,9 @@ describe Provenance do
   describe "NGA Record modification" do
     it "handles standard lines" do
       val =  Provenance.extract "gift 1937 to NGA"
+      val[0].party.name.must_equal "NGA"
       val[0].acquisition_method.must_equal AcquisitionMethod::GIFT
       val[0].time_string.must_equal "1937"
-      val[0].party.name.must_equal "NGA"
     end
     it "handles footnotes on the wrong side" do
       val = Provenance.extract "sold August 1911 to Baron de Herzog.[1] Marczell von Nemes, Budapest, by 1912;[2] (his sale, Galerie Manzi Joyant, Paris, 18 June 1913, no. 84). [1] Letter of 26 March 1930 from Durand-Ruel to Mrs. Chester Dale, in NGA curatorial files. [2] The painting was included in a 1912 exhibition of his collection in Dusseldorf."
@@ -397,6 +397,15 @@ describe Provenance do
        val.count.must_equal 1
        val[0].party.name.must_equal "Michael Snow"
        val[0].location.name.must_equal "c/o The Isaacs Gallery, Toronto, ON"
+    end
+
+    it "handles Wildenstein & Company, Inc., New York, NY, December 1969" do
+      
+      val = Provenance.extract "Wildenstein & Company, Inc., New York, NY, until December 1969"
+      val.count.must_equal 1
+      val[0].party.name.must_equal "Wildenstein & Company, Inc."
+      val[0].location.name.must_equal "New York, NY"
+      val[0].time_string.must_equal "until December 1969"
     end
    end
    describe "Text Transformations" do

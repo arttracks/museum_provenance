@@ -328,6 +328,10 @@ describe "Date Parsing Rules" do
     p.beginning.must_be_nil
   end
 
+  it "handles until December 1969" do
+    p.parse_time_string "until December 1969"
+  end
+
   it "handles decades without a the" do
     p.parse_time_string "Estate sale, Cleveland, Ohio, the 1950s"
     p.ending.must_be_nil

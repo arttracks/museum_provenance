@@ -45,7 +45,7 @@ module MuseumProvenance
           notes = split_notes(notes)
         end
         timeline.each do |line| 
-          line.note = line.note.collect{|num| notes[num]} if line.note
+          line.note = line.note.collect{|num| notes[num] rescue "(Missing footnote)"} if line.note
         end
         timeline
       end
