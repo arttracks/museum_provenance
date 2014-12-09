@@ -283,6 +283,7 @@ module MuseumProvenance
 
       def extract_primary_ownership(text)
         primary = true
+        return primary, text if text.blank?
         if text[0] == "(" && text.strip[-1] == ")"
           primary = false
           text = text[/\((.*)\)$/,1]
