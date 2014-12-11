@@ -4,7 +4,7 @@ module MuseumProvenance
     BEQUEST = AcquisitionMethod.new("Bequest", "bequest to", "by bequest", "Given in a will", AcquisitionMethod::Prefix, ['bequeathed to'])
     
     # Transfer from anscestor via unknown means
-    BY_DESCENT = AcquisitionMethod.new("By descent", "by descent to", "by descent", "Transfer from anscestor via unknown means", AcquisitionMethod::Prefix)
+    BY_DESCENT = AcquisitionMethod.new("By descent", "by descent to", "by descent", "Transfer from anscestor via unknown means", AcquisitionMethod::Prefix, ['by inheritance to'])
    
     # Transfer from several anscestor via unknown means
     BY_DESCENT_THROUGH = AcquisitionMethod.new("By descent through", "by descent through", nil, "Transfer from several anscestors via unknown means", AcquisitionMethod::Prefix)
@@ -13,7 +13,7 @@ module MuseumProvenance
     SALE = AcquisitionMethod.new("Sale", "sold to", nil, "Direct purchase, without an agent", AcquisitionMethod::Prefix)
     
     # Purchase, possibly with an agent
-    PURCHASE = AcquisitionMethod.new("Purchase", "purchased by", nil, "Purchase, possibly with an agent", AcquisitionMethod::Prefix, ['bought at sale by', "bought by"])
+    PURCHASE = AcquisitionMethod.new("Purchase", "purchased by", nil, "Purchase, possibly with an agent", AcquisitionMethod::Prefix, ['bought at sale by', "bought by", "by purchase"])
     
     # Purchase, via an agent
     AGENT_PURCHASE = AcquisitionMethod.new("Purchase via Agent", "purchased for", nil, "Purchase, via an agent", AcquisitionMethod::Prefix, ["as agent for"])
@@ -34,7 +34,7 @@ module MuseumProvenance
     BEQUEST_BY_EXCHANGE = AcquisitionMethod.new("Bequest, by exchange", "bequest by exchange, to", "bequest, by exchange", "a different work was bequested, that work was exchanged for this", AcquisitionMethod::Suffix)
     
     # Gift
-    GIFT = AcquisitionMethod.new("Gift", "gift to", nil, "Gift", AcquisitionMethod::Prefix, ["gifted to", "donated to"])
+    GIFT = AcquisitionMethod.new("Gift", "gift to", nil, "Gift", AcquisitionMethod::Prefix, ["gifted to", "donated to", "given to"])
     
     #Acquisition without legal right
     CONVERSION = AcquisitionMethod.new("Conversion", "by conversion, to", "by conversion", "Acquisition without legal right", AcquisitionMethod::Prefix, ["confiscated by"])

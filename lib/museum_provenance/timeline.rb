@@ -78,7 +78,7 @@ module MuseumProvenance
         hash[:acquisition_timestring] = p.beginning.to_s
         hash[:deacquisition_timestring] = p.ending.to_s 
         hash[:timestring] = p.time_string
-        hash.each{|key,val| hash.delete key if val.nil?}
+        #hash.each{|key,val| hash.delete key if val.nil?}
         arry.push hash
         i +=1
       end

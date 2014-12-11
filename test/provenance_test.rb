@@ -170,6 +170,21 @@ describe Provenance do
       timeline[0].to_h[:provenance].must_equal 'I have a footnote'
       timeline[0].to_h[:footnote].must_include 'I am the note.'
     end
+
+    it "counts footnotes well" do
+      str = <<-eos
+        The artist, New York; to Robert Self Gallery, London, probably 1979 [1]; to Paul Kasmin, London [2]; to Paul Kasmin Gallery, New York [3]; purchased by Thomas Walther, September 29, 1989 [4]; purchased by The Museum of Modern Art, New York, 2001.
+        [1] MacGill/Walther 2001(3), p. 1. A show of work by Eugène Atget and Berenice Abbott took place at Robert Self Gallery in 1979.
+        [2] Ibid.
+        [3] Ibid.
+        [4] Ibid.; and MacGill/Walther 2000(2), p. 35.
+      eos
+      timeline = Provenance.extract str
+      timeline[1].note.must_include "MacGill/Walther 2001(3), p. 1. A show of work by Eugène Atget and Berenice Abbott took place at Robert Self Gallery in 1979."
+      timeline[2].note.must_include "Ibid."
+      timeline[3].note.must_include "Ibid."
+      timeline[4].note.must_include "Ibid.; and MacGill/Walther 2000(2), p. 35."
+    end
   end
 
   describe "Period Substitution" do
@@ -409,12 +424,7 @@ describe Provenance do
     end
    end
    describe "Text Transformations" do
-    it "handles his gift" do
-      val = Provenance.extract  "Kenneth Seaver, Pittsburgh, PA; his gift to Museum, January 1949."
-      val.count.must_equal 2
-      val[1].party.name.must_equal "Museum"
-      val[1].acquisition_method.must_equal AcquisitionMethod::GIFT
-    end
+
     it "uses proper synonyms for painted by" do
       val = Provenance.extract  "painted for the chapel of Girolamo Ferretti, S. Francesco delle Scale, Ancona"
       val.count.must_equal 1
@@ -422,6 +432,29 @@ describe Provenance do
       val[0].party.name.must_equal "the chapel of Girolamo Ferretti"
       val[0].provenance.must_equal "Commissioned by the chapel of Girolamo Ferretti, S. Francesco delle Scale, Ancona"     
     end
+    it "removes beginning 'to'" do
+      val = Provenance.extract  "to Paul Kasmin Gallery, New York."
+      val.count.must_equal 1
+      val[0].acquisition_method.must_be_nil
+      val[0].party.name.must_equal "Paul Kasmin Gallery"
+      val[0].provenance.must_equal "Paul Kasmin Gallery, New York"     
+    end
+    it "reformats his gift to" do
+      val = Provenance.extract  "his gift to Museum; her gift to Museum; their gift to Museum";
+      val.count.must_equal 3
+      val.each do |v|
+        v.acquisition_method.must_equal AcquisitionMethod::GIFT
+        v.party.name.must_equal "Museum"
+        v.provenance.downcase.must_equal "gift to museum"     
+      end
+    end
+    it "deals with possibly dates" do
+      val = Provenance.extract "to Robert Self Gallery, London, probably 1979."
+      val[0].location.name.must_equal "London"
+      val[0].location.certainty.must_equal true
+      val[0].time_string.must_equal "1979?"
+    end
+
     it "lugt problems" do
       val = Provenance.extract "William Esdaile (1758-1837), London, England (L.2617), probably sold 1840; Robert Balmanno (1780-1866), London, England (L.213); Hermann Weber (1817-1854), Bonn, Germany (L.1383), probably September 17, 1855 sale; Dr. August Sträter (1810-1897), Aachen, Germany (L.787), May 10-14, 1898 sale; P. von Baldinger-Seidenberg (d. 1911), Stuttgart, Germany (L.212), probably May 7-11, 1912 sale; Cortland Field Bishop (1870-1935), New York (L.2770b), probably sold at November 19-20, 1935 sale; Kennedy Galleries, New York, stock no. A70789; Charles J. Rosenbloom (1898-1973), Pittsburgh, PA (L.633b)"
       val.count.must_equal 8

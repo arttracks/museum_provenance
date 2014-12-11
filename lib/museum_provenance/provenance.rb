@@ -11,7 +11,7 @@ module MuseumProvenance
 
     # A list of name suffixes.  A "," preceding any of these will not signify the end of a name.
     NAME_EXTENDERS = [
-      "Esq", "Jr", "Sr", "Count", "Earl",  "Lord", "MP", "M.P.",
+      "Esq", "Jr", "Sr", "Count", "Earl",  "Lord", "MP", "M.P.", "marquis",
       "Inc.", "Ltd", "Ltd.", "LLC", "llc",
       "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", 
       "the artist", 
@@ -70,9 +70,17 @@ module MuseumProvenance
           else
             timeline.insert(p)
           end
-          last_was_direct = period[:direct_transfer].to_bool
+          begin
+            last_was_direct = period[:direct_transfer].to_bool
+          rescue => e
+            puts "-----"
+            puts e
+            puts "--"
+            puts period
+            puts "  -----   "
+          end
         end
-        return timeline    
+        return self.extract(timeline.provenance)  
       end
 
       private
@@ -80,11 +88,12 @@ module MuseumProvenance
       def extract_text_and_notes(input)
         text, notes = input.split(FOOTNOTE_DIVIDER)
         if notes.blank?  
-         text, notes = input.split(" 1. ")
+         text, notes = input.split(/(?<!\s\w\.)\s1\.\s/)
          notes = "1. " + notes if notes
         end
         if notes.blank?
-         text, notes = input.split(/\s\[1\]/)
+         text, other_text, notes = input.split("[1]")
+         text = text + "[1]" + other_text unless other_text.blank?
          notes = "[1] " + notes if notes
         end
 
@@ -216,7 +225,9 @@ module MuseumProvenance
         return text, nil if text.blank?
 
         # Transform strange forms
-        text.gsub!(/\b(?:his|her:their)\s+gift\s+to\b/i,"gift to")
+        text.gsub!(/\b(?:his|her|their)\s+gift\s+to\b/i,"gift to")
+
+        text.gsub!(/^to\s/,"")
 
         acquisition_method = AcquisitionMethod.find(text)
         if acquisition_method
@@ -239,6 +250,13 @@ module MuseumProvenance
          text.gsub!(/\[(\d+)\]/,"")
          text.gsub!(/\[.*?note (\d+)\]/,"")
          return footnotes, text.strip
+      end
+
+      def handle_misplaced_certainty(text)
+        probs = Certainty::CertantyWords.reject { |e| e == "?" }
+        probably_regex = /\b(?:#{probs.join("|")})\s(.*?)(?=(?:\z|,))/i
+        text.gsub!(probably_regex,'\1?')
+        return text
       end
 
       def extract_certainty(text) 
@@ -372,6 +390,9 @@ module MuseumProvenance
 
           # pull off record certainty
           record_is_certain , text = extract_certainty(text)
+
+          # move odd certainty
+          text = handle_misplaced_certainty(text)
 
           #extract primary ownership
           primary_ownership, text = extract_primary_ownership(text)

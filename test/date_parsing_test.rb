@@ -348,4 +348,16 @@ describe "Date Parsing Rules" do
      p.beginning.earliest.must_equal Date.new(1950).earliest
      p.beginning.latest.must_equal Date.new(1959).latest
   end
+
+  it "handles year ranges without century" do
+    p.parse_time_string "1954-55"
+    p.beginning.must_be_instance_of TimeSpan
+    p.beginning.earliest.must_equal Date.new(1954).earliest
+    p.beginning.latest.must_equal Date.new(1954).latest
+    p.beginning.same?.must_equal true    
+    p.ending.must_be_instance_of TimeSpan  
+    p.ending.earliest.must_equal Date.new(1955).earliest
+    p.ending.latest.must_equal Date.new(1955).latest
+    p.ending.same?.must_equal true
+  end
 end

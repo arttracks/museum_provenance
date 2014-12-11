@@ -193,6 +193,10 @@ module MuseumProvenance
       end
       raise DateError, "Too much recursion" if recursion_count > 10
 
+      #substitution for (horrible) date pattern:  "1985-86" becomes "1985 until 1986"
+      horrid_date_range_regex = /(\d{2})(\d{2})\s?[-–—]\s?(\d{2})\b/
+      str.gsub!(horrid_date_range_regex,'\1\2 until \1\3')
+
       #substitution for trivial date pattern: "1918-1919" becomes "1918 until 1919"
       date_range_regex = /(\d{4})\s?[-–—]\s?(\d{4})/
       str.gsub!(date_range_regex,'\1 until \2')
@@ -205,8 +209,8 @@ module MuseumProvenance
       multiday_regex_2 = /\s(\d{1,2})\s?[–—-]\s?(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
       str.gsub!(multiday_regex_2, ' \3 \1, \4 until \3 \2, \4')
 
-      # Substitution for euro-dates: "9 June 1932" becomes "June 9, 1932"
-      euro_dates_regex = /\s(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
+      # Substitution for euro-dates: "9 June 1932" or "9 June, 1932" becomes "June 9, 1932"
+      euro_dates_regex = /\s(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december),?\s(\d{2,4})/i
       str.gsub!(euro_dates_regex, ' \2 \1, \3')
 
       # Substitution for "c. 1945" or "ca. 1945" becomes "circa 1945"

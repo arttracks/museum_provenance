@@ -104,6 +104,13 @@ describe Period do
       p1.ending.must_be_nil
       p1.time_string.must_equal "June 9, 1932"
     end
+    it "handles euro dates with a comma" do
+      str = p1.parse_time_string  "Galerie Georges Petit, Paris, 9 June, 1932"
+      str.must_equal "Galerie Georges Petit, Paris"
+      p1.beginning.must_equal TimeSpan.new("June 9, 1932","June 9, 1932")
+      p1.ending.must_be_nil
+      p1.time_string.must_equal "June 9, 1932"
+    end
     it "handles weird Costas date pairs" do
       str = p1.parse_time_string  "Kelekian sale, American Art Association, New York, NY, 30-31 January 1922"
       str.must_equal "Kelekian sale, American Art Association, New York, NY"
