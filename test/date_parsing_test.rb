@@ -159,7 +159,7 @@ end
 describe "Date removal" do
   it "handles dates" do
     str = DateExtractor.remove_dates_in_string("Sold January 1, 1980")
-    str.must_equal "Sold"
+    str.must_equal "Sold "
   end
 end
 

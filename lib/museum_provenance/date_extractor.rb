@@ -38,7 +38,7 @@ module MuseumProvenance
         years, str = extract_years(str)
         months, str = extract_months(str)
         days, str = extract_days(str)
-        return str.gsub(/\s\s*/, " ").strip
+        return str.gsub(/\s\s*/, " ")
       end
  
       private

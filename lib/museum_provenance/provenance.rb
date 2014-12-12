@@ -40,6 +40,10 @@ module MuseumProvenance
         return Timeline.new if provenance_string.blank?
         provenance_string.gsub!("\n"," ")
         text, notes = extract_text_and_notes(provenance_string)
+
+        # Handle strange punctuation
+        text = handle_doubled_punctuation(text)
+
         timeline = generate_timeline(text)
         unless notes.nil?
           notes = split_notes(notes)
@@ -252,7 +256,18 @@ module MuseumProvenance
          return footnotes, text.strip
       end
 
+      def handle_doubled_punctuation(text)
+         return text if text.blank?
+         text.gsub!(".;", ";")       
+         loop do
+           val = text.gsub!("..",".")
+           break unless val
+         end
+         return text
+      end
+
       def handle_misplaced_certainty(text)
+        return text if text.blank?
         probs = Certainty::CertantyWords.reject { |e| e == "?" }
         probably_regex = /\b(?:#{probs.join("|")})\s(.*?)(?=(?:\z|,))/i
         text.gsub!(probably_regex,'\1?')
@@ -393,6 +408,7 @@ module MuseumProvenance
 
           # move odd certainty
           text = handle_misplaced_certainty(text)
+
 
           #extract primary ownership
           primary_ownership, text = extract_primary_ownership(text)

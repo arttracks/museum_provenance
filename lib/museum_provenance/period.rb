@@ -239,6 +239,7 @@ module MuseumProvenance
           str = vals.join(",") 
           date_string = current_phrase.join(',')
           str += DateExtractor.remove_dates_in_string(date_string)
+          str.gsub!(/\s\s*/, " ")
         else
           str, date_string = str.split(/\b#{found_token}\b/i)
           date_string.strip! unless date_string.nil?
