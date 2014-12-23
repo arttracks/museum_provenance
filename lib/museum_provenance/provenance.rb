@@ -5,9 +5,10 @@ module MuseumProvenance
 
     # A list of abbreviations.  A "." following any of these will not signify a new period.
     ABBREVIATIONS  = ["Col.", "Sgt.", "Mme.", "Mr.", "Mrs.", "Dr.", "no.", "No.", 
-                      "Esq.", "Co.", "St.", "illus.", "inc.", "Inc.", "Jr.", "Sr.", 
+                      "Esq.", "Co.", "illus.", "inc.", "Inc.", "Jr.", "Sr.", 
                       "Ltd.", "Dept.", "M.","P.", "Miss.", "Ph.D", "DC.", "D.C.", 'ca.',
-                       'Ave.']
+                       'Ave.', "St.",
+                       'Jan.', "Feb.", "Mar.", "Apr.", "Jun.", "Jul.", "Aug.", "Sept.", "Sep.", "Oct.", "Nov.", "Dec."]
 
     # A list of name suffixes.  A "," preceding any of these will not signify the end of a name.
     NAME_EXTENDERS = [

@@ -210,7 +210,7 @@ module MuseumProvenance
       str.gsub!(multiday_regex_2, ' \3 \1, \4 until \3 \2, \4')
 
       # Substitution for euro-dates: "9 June 1932" or "9 June, 1932" becomes "June 9, 1932"
-      euro_dates_regex = /\s(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december),?\s(\d{2,4})/i
+      euro_dates_regex = /\s(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december).?,?\s(\d{2,4})/i
       str.gsub!(euro_dates_regex, ' \2 \1, \3')
 
       # Substitution for "c. 1945" or "ca. 1945" becomes "circa 1945"
