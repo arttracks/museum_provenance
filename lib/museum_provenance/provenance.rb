@@ -258,12 +258,12 @@ module MuseumProvenance
       end
 
       def handle_doubled_punctuation(text)
-         return text if text.blank?
-         text.gsub!(".;", ";")       
-         loop do
-           val = text.gsub!("..",".")
-           break unless val
-         end
+         #return text if text.blank?
+         #text.gsub!(".;", ";")       
+         #loop do
+         #  val = text.gsub!("..",".")
+         #  break unless val
+         #end
          return text
       end
 
