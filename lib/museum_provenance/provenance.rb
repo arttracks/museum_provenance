@@ -1,6 +1,6 @@
 module MuseumProvenance
   
-  # This is a utility class for extracting a {Timeline} from a String.
+  # This is a utility class for extracting a {Timeline} from a String.h
   class Provenance
 
     # A list of abbreviations.  A "." following any of these will not signify a new period.
@@ -258,8 +258,8 @@ module MuseumProvenance
       end
 
       def handle_doubled_punctuation(text)
-         #return text if text.blank?
-         #text.gsub!(".;", ";")       
+         return text if text.blank?
+         text.gsub!(".;", ";")       
          #loop do
          #  val = text.gsub!("..",".")
          #  break unless val

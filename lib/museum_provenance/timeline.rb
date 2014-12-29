@@ -103,7 +103,7 @@ module MuseumProvenance
         end
         record += r.direct_transfer == true ? ";" : "." 
       end.join(" ")
-      footnotes = footnotes.collect.with_index{|n,i| "#{i+1}. #{n}"}
+      footnotes = footnotes.collect.with_index{|n,i| Period::formatted_footnote(i+1,n)}
       footnote_split = nil
       footnote_split = Provenance::FOOTNOTE_DIVIDER unless footnotes.blank?
       [records, footnote_split, footnotes].flatten.join(" ").strip

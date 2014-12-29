@@ -90,7 +90,7 @@ describe "Provenance Records" do
   end
 
   describe "Wheat Fields after the Rain (modified)" do
-    let (:prov_text) {"Mme. J. van Gogh-Bonger?, Amsterdam; Possibly Mme. Maria Slavona, Paris; Possibly Paul Cassirer Art Gallery, Berlin; Harry Graf von Kessler, Berlin and Weimar, by 1901 until at least 1929 [1]; Reid and Lefevre Art Gallery, London, by 1939 until at least 1941; E. Bignou Art Gallery, New York, NY; Mr. and Mrs. Marshall Field, New York, NY, by 1939 until at least 1958 [2]; Galerie Beyeler, Basel, Switzerland; purchased by Museum, October 1968. NOTES: 1. probably 1897 to Fall 1931. 2. referenced several times between 1939 and 1958."
+    let (:prov_text) {"Mme. J. van Gogh-Bonger?, Amsterdam; Possibly Mme. Maria Slavona, Paris; Possibly Paul Cassirer Art Gallery, Berlin; Harry Graf von Kessler, Berlin and Weimar, by 1901 until at least 1929 [1]; Reid and Lefevre Art Gallery, London, by 1939 until at least 1941; E. Bignou Art Gallery, New York, NY; Mr. and Mrs. Marshall Field, New York, NY, by 1939 until at least 1958 [2]; Galerie Beyeler, Basel, Switzerland; purchased by Museum, October 1968. NOTES: [1] probably 1897 to Fall 1931. [2] referenced several times between 1939 and 1958."
     }
     let(:prov) {Provenance.extract prov_text}
 
@@ -170,7 +170,7 @@ describe "Provenance Records" do
   end
 
   describe "Young Woman Picking Fruit" do
-    let(:prov_text) {"Galeries Durand-Ruel, Paris [1]; Durand-Ruel Galleries, New York, NY, 1895; purchased by Museum, October 1922. NOTES: 1. recorded in stock books, August 1892."}
+    let(:prov_text) {"Galeries Durand-Ruel, Paris [1]; Durand-Ruel Galleries, New York, NY, 1895; purchased by Museum, October 1922. NOTES: [1] recorded in stock books, August 1892."}
     let(:prov) {Provenance.extract prov_text}
 
 

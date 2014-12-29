@@ -461,13 +461,6 @@ module MuseumProvenance
     end
     alias :to_s :provenance
    
-    # Debug view for showing a single {Period} with footnote.
-    # The footnote will always be #1.
-    # @todo Handle multiple footnotes within the record
-    # @return [String] the provenance with the attached footnote.
-    def provenance_with_note
-      has_note? ? "#{provenance} [1]. 1. #{note}" : provenance
-    end
 
     # Does this period output provenance that matches the original text used to generate it.
     #
@@ -691,5 +684,9 @@ module MuseumProvenance
      return eotb if eotb
      return nil
     end
+  end
+
+  def Period.formatted_footnote(number,note)
+    return "[#{number}] #{note}" if note
   end
 end

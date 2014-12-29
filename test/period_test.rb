@@ -320,10 +320,6 @@ describe Period do
     it "returns nil if there isn't a footnote" do
       p1.note.must_be_nil
     end
-    it "allows generation with a footnote" do
-      p1.note = "I should be a footnote"
-      p1.provenance_with_note.must_equal "#{p1.party} [1]. 1. #{p1.note}"
-    end
   end
   
   describe "Locations" do

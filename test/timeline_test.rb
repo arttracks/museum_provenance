@@ -90,8 +90,8 @@ describe Timeline do
       it "handles linking footnotes to elements" do
         p1.note = "note 1"
         p2.note = "note 2"
-        t.provenance.must_include " 1. note 1"
-        t.provenance.must_include " 2. note 2"
+        t.provenance.must_include Period.formatted_footnote(1, "note 1")
+        t.provenance.must_include Period.formatted_footnote(2, "note 2")
       end
 
       it "handles earliest dates" do

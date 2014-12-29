@@ -257,7 +257,7 @@ describe Provenance do
       timeline[1].party.name.must_equal "Frank"
     end
     it "handles .;" do
-      timeline = Provenance.extract "David, Boston, Mass.;Frank, 1968"
+      timeline = Provenance.extract "David, Boston, Mass.; Frank, 1968"
       timeline.count.must_equal 2
       timeline[0].party.name.must_equal "David"
       timeline[1].party.name.must_equal "Frank"
