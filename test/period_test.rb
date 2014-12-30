@@ -97,6 +97,14 @@ describe Period do
       p1.ending.must_equal TimeSpan.new("May 8, 1918","May 8, 1918")
       p1.time_string.must_equal "May 6, 1918 until May 8, 1918"
     end
+    it "handles dates like 23 October - 12 November 1926" do
+      str = p1.parse_time_string "sale, Durand-Ruel, New York, 23 October - 12 November 1926"
+      p1.beginning.must_equal TimeSpan.new("October 23, 1926","October 23, 1926")
+      p1.ending.must_equal TimeSpan.new("November 12, 1926","November 12, 1926")
+      p1.time_string.must_equal "October 23, 1926 until November 12, 1926"
+      str.must_equal "sale, Durand-Ruel, New York"
+    end
+
     it "handles weird Costas dates" do
       str = p1.parse_time_string  "Galerie Georges Petit, Paris, 9 June 1932"
       str.must_equal "Galerie Georges Petit, Paris"

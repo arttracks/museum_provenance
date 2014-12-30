@@ -209,6 +209,18 @@ module MuseumProvenance
       multiday_regex_2 = /\s(\d{1,2})\s?[–—-]\s?(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
       str.gsub!(multiday_regex_2, ' \3 \1, \4 until \3 \2, \4')
 
+
+      # substitution for "23 October - 12 November 1926"
+      multiday_regex_3 = /
+         \s(\d{1,2})\s
+         (jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)
+         \s?[–—-]\s?
+         (\d{1,2})\s
+         (jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)
+         \s(\d{1,4})
+      /ix
+      str.gsub!(multiday_regex_3, ' \2 \1, \5 until \4 \3, \5')
+      
       # Substitution for euro-dates: "9 June 1932" or "9 June, 1932" becomes "June 9, 1932"
       euro_dates_regex = /\s(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december).?,?\s(\d{2,4})/i
       str.gsub!(euro_dates_regex, ' \2 \1, \3')
@@ -216,6 +228,7 @@ module MuseumProvenance
       # Substitution for "c. 1945" or "ca. 1945" becomes "circa 1945"
       circa_regex = /\bc(?:a)?\.\s(\d{4})\b/
       str.gsub!(circa_regex, 'circa \1')
+
 
 
       tokens = ["circa", "on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
