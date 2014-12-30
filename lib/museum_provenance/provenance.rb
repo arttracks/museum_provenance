@@ -4,7 +4,7 @@ module MuseumProvenance
   class Provenance
 
     # A list of abbreviations.  A "." following any of these will not signify a new period.
-    ABBREVIATIONS  = ["Col.", "Sgt.", "Mme.", "Mr.", "Mrs.", "Dr.", "no.", "No.", 
+    ABBREVIATIONS  = ["Col.", "Sgt.", "Mme.", "Mlle.", "Mr.", "Mrs.", "Dr.", "no.", "No.",  
                       "Esq.", "Co.", "illus.", "inc.", "Inc.", "Jr.", "Sr.", 
                       "Ltd.", "Dept.", "M.","P.", "Miss.", "Ph.D", "DC.", "D.C.", 'ca.',
                        'Ave.', "St.",
@@ -18,8 +18,8 @@ module MuseumProvenance
       "the artist", 
       "son of", "daughter of", "wife of", "husband of", "nephew of", "niece of", "brother of", 
       "sister of", "uncle of", "aunt of", "grandparent of", "grandfather of", "grandmother of",
-      "his wife", "his nephew", "his son", "his daughter", "his niece",
-      "her husband", "her daughter", "her son", "her nephew", "her niece",
+      "his wife", "his nephew", "his son", "his daughter", "his niece","his godson", "his goddaughter",
+      "her husband", "her daughter", "her son", "her nephew", "her niece", "her godson", "her goddaughter",
       "their daughter", "their son", 'his widow', 'her widow', 'her widower', 'his widower'
     ]
 
