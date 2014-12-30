@@ -272,7 +272,7 @@ describe "Date Parsing Rules" do
 
   it "handles 'until sometime before' in a string" do
     
-    p.parse_time_string "until sometime before 1954"
+    p.parse_time_string "david, until sometime before 1954"
     p.beginning.must_be_nil 
     p.ending.must_be_instance_of TimeSpan  
     p.ending.earliest.must_be_nil

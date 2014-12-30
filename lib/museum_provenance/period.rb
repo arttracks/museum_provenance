@@ -71,13 +71,12 @@ module MuseumProvenance
         self.party  = opts[:party] if opts[:party]
         @party.certain= opts[:party_certainty].to_bool unless opts[:party_certainty].nil?
         if opts[:birth]
-          @party.birth= Time.at(opts[:birth].to_i).to_date
+          @party.birth= Date.jd(opts[:birth])
           @party.birth.certainty= opts[:birth_certainty].to_bool unless opts[:birth_certainty].nil?
           @party.birth.precision= DateTimePrecision::YEAR
         end
         if opts[:death]
-          death_year = Time.at(opts[:death].to_i).to_date.year
-          @party.death= Date.new(death_year)
+          @party.death= Date.jd(opts[:death])
           @party.death.certainty= opts[:death_certainty].to_bool unless opts[:death_certainty].nil?
           @party.death.precision = DateTimePrecision::YEAR
         end
@@ -101,22 +100,22 @@ module MuseumProvenance
 
         # intitialze dates
         if opts[:bote]
-          b_o_t_e = Time.at(opts[:bote].to_i).to_date
+          b_o_t_e = Date.jd(opts[:bote])
           b_o_t_e.certainty = opts[:bote_certainty].to_bool unless opts[:bote_certainty].nil?
           b_o_t_e.precision = opts[:bote_precision].to_f unless opts[:bote_precision].nil?
         end
         if opts[:eote]
-          e_o_t_e = Time.at(opts[:eote].to_i).to_date
+          e_o_t_e = Date.jd(opts[:eote])
           e_o_t_e.certainty = opts[:eote_certainty].to_bool unless opts[:eote_certainty].nil?
           e_o_t_e.precision = opts[:eote_precision].to_f unless opts[:eote_precision].nil?
         end
         if opts[:botb]
-          b_o_t_b =  Time.at(opts[:botb].to_i).to_date
+          b_o_t_b =  Date.jd(opts[:botb])
           b_o_t_b.certainty = opts[:botb_certainty].to_bool unless opts[:botb_certainty].nil?
           b_o_t_b.precision = opts[:botb_precision].to_f unless opts[:botb_precision].nil?
         end
         if opts[:eotb]
-          e_o_t_b =  Time.at(opts[:eotb].to_i).to_date
+          e_o_t_b =  Date.jd(opts[:eotb])
           e_o_t_b.certainty = opts[:eotb_certainty].to_bool unless opts[:eotb_certainty].nil?
           e_o_t_b.precision = opts[:eotb_precision].to_f unless opts[:eotb_precision].nil?
         end
@@ -315,6 +314,7 @@ module MuseumProvenance
             @beginning.latest_raw.fragments[0..@beginning.latest.precision] == @ending.earliest_raw.fragments[0..@ending.earliest.precision]
         )       
         timeframe = "in #{@beginning.to_s.gsub("by ","")}"
+
       # Handle "on January 1, 2001" instead of "January 1, 2001 until January 1, 2001"
       elsif (
         @beginning && @ending && @beginning.precise? && @ending.precise? && botb == eote 
@@ -323,7 +323,7 @@ module MuseumProvenance
       else
         timeframe = @beginning.to_s || ""
         unless ending.nil?
-          timeframe += " until " + @ending.to_s.gsub("after", "at least")
+          timeframe += " until " + @ending.to_s.gsub("after", "at least").gsub("by","sometime before")
         end
       end
       if timeframe.empty?

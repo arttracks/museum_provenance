@@ -434,8 +434,31 @@ describe Provenance do
       val[0].location.name.must_equal "New York, NY"
       val[0].time_string.must_equal "until December 1969"
     end
+
+    # extra space before the word "sale" 
+    it "handles (sale, Alliance des Arts, Paris, 26 April 1844, no. 14)" do
+      val = Provenance.extract "(sale, Alliance des Arts, Paris, 26 April 1844, no. 14)"
+      val[0].provenance.must_equal "(Sale, Alliance des Arts, Paris, April 26, 1844, no. 14)"
+    end
+
+
+
    end
    describe "Text Transformations" do
+    it "handles inline (dealer)" do
+      skip
+      val = Provenance.extract "Victor D. Spark (dealer), New York, by 1953"
+      val.provenance.must_equal "(Victor D. Spark, New York, by 1953)"
+    end
+
+    it "handles backwards provenance if the previous party was the same" do
+      skip
+      val = Provenance.extract "John W. Pepper, 1900; bequest of John W. Pepper to PMA, 1935."
+      val.count.must_equal 2
+      val[1].provenance.must_equal "bequest to PMA, 1935"     
+      val[1].acquisition_method.must_equal AcquisitionMethod::BEQUEST
+      val[1].party.name.must_equal "PMA"
+    end
 
     it "uses proper synonyms for painted by" do
       val = Provenance.extract  "painted for the chapel of Girolamo Ferretti, S. Francesco delle Scale, Ancona"
@@ -452,7 +475,7 @@ describe Provenance do
       val[0].provenance.must_equal "Paul Kasmin Gallery, New York"     
     end
     it "reformats his gift to" do
-      val = Provenance.extract  "his gift to Museum; her gift to Museum; their gift to Museum";
+      val = Provenance.extract  "his gift to Museum; her gift to Museum; their gift to Museum"
       val.count.must_equal 3
       val.each do |v|
         v.acquisition_method.must_equal AcquisitionMethod::GIFT
@@ -465,6 +488,11 @@ describe Provenance do
       val[0].location.name.must_equal "London"
       val[0].location.certainty.must_equal true
       val[0].time_string.must_equal "1979?"
+    end
+
+    it "until sometime before" do
+      val = Provenance.extract "Robert K. Bennett, Westerville, OH, until sometime before 1990"
+      val[0].time_string.must_equal "until sometime before 1990"
     end
 
     it "lugt problems" do

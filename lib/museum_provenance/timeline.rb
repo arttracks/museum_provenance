@@ -65,16 +65,16 @@ module MuseumProvenance
       self.each do |p|
         hash =  p.generate_output.to_h
         hash[:order] = i
-        hash[:earliest_possible] = p.earliest_possible.to_time.to_i if  p.earliest_possible
-        hash[:latest_possible] = p.latest_possible.latest.to_time.to_i if p.latest_possible
-        hash[:earliest_definite] = p.earliest_definite.to_time.to_i if p.earliest_definite
-        hash[:latest_definite] =  p.latest_definite.latest.to_time.to_i if p.latest_definite
-        hash[:eotb] = p.eotb.to_time.to_i if p.eotb        
-        hash[:eote] = p.eote.to_time.to_i if p.eote        
-        hash[:botb] = p.botb.to_time.to_i if p.botb        
-        hash[:bote] = p.bote.to_time.to_i if p.bote        
-        hash[:birth] = hash[:birth].to_time.to_i if hash[:birth]  
-        hash[:death] = hash[:death].to_time.to_i if hash[:death]  
+        hash[:earliest_possible] = p.earliest_possible.jd if  p.earliest_possible
+        hash[:latest_possible] = p.latest_possible.latest.jd if p.latest_possible
+        hash[:earliest_definite] = p.earliest_definite.jd if p.earliest_definite
+        hash[:latest_definite] =  p.latest_definite.latest.jd if p.latest_definite
+        hash[:eotb] = p.eotb.jd if p.eotb        
+        hash[:eote] = p.eote.jd if p.eote        
+        hash[:botb] = p.botb.jd if p.botb        
+        hash[:bote] = p.bote.jd if p.bote        
+        hash[:birth] = hash[:birth].jd if hash[:birth]  
+        hash[:death] = hash[:death].jd if hash[:death]  
         hash[:acquisition_timestring] = p.beginning.to_s
         hash[:deacquisition_timestring] = p.ending.to_s 
         hash[:timestring] = p.time_string

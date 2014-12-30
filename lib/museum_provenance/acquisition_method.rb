@@ -99,6 +99,7 @@ module MuseumProvenance
       else
         s = [name,suffix].compact.join(" ")
       end
+      s.strip
     end
 
     # @return [String] The preferred form.
