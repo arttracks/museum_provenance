@@ -71,12 +71,12 @@ module MuseumProvenance
         self.party  = opts[:party] if opts[:party]
         @party.certain= opts[:party_certainty].to_bool unless opts[:party_certainty].nil?
         if opts[:birth]
-          @party.birth= Date.jd(opts[:birth])
+          @party.birth= Date.jd(opts[:birth].to_i)
           @party.birth.certainty= opts[:birth_certainty].to_bool unless opts[:birth_certainty].nil?
           @party.birth.precision= DateTimePrecision::YEAR
         end
         if opts[:death]
-          @party.death= Date.jd(opts[:death])
+          @party.death= Date.jd(opts[:death].to_i)
           @party.death.certainty= opts[:death_certainty].to_bool unless opts[:death_certainty].nil?
           @party.death.precision = DateTimePrecision::YEAR
         end
@@ -100,22 +100,22 @@ module MuseumProvenance
 
         # intitialze dates
         if opts[:bote]
-          b_o_t_e = Date.jd(opts[:bote])
+          b_o_t_e = Date.jd(opts[:bote].to_i)
           b_o_t_e.certainty = opts[:bote_certainty].to_bool unless opts[:bote_certainty].nil?
           b_o_t_e.precision = opts[:bote_precision].to_f unless opts[:bote_precision].nil?
         end
         if opts[:eote]
-          e_o_t_e = Date.jd(opts[:eote])
+          e_o_t_e = Date.jd(opts[:eote].to_i)
           e_o_t_e.certainty = opts[:eote_certainty].to_bool unless opts[:eote_certainty].nil?
           e_o_t_e.precision = opts[:eote_precision].to_f unless opts[:eote_precision].nil?
         end
         if opts[:botb]
-          b_o_t_b =  Date.jd(opts[:botb])
+          b_o_t_b =  Date.jd(opts[:botb].to_i)
           b_o_t_b.certainty = opts[:botb_certainty].to_bool unless opts[:botb_certainty].nil?
           b_o_t_b.precision = opts[:botb_precision].to_f unless opts[:botb_precision].nil?
         end
         if opts[:eotb]
-          e_o_t_b =  Date.jd(opts[:eotb])
+          e_o_t_b =  Date.jd(opts[:eotb].to_i)
           e_o_t_b.certainty = opts[:eotb_certainty].to_bool unless opts[:eotb_certainty].nil?
           e_o_t_b.precision = opts[:eotb_precision].to_f unless opts[:eotb_precision].nil?
         end
