@@ -10,6 +10,6 @@ require 'active_support/core_ext/integer/inflections'
 Dir["#{File.dirname(__FILE__)}/museum_provenance/**/*.rb"].each { |f| require(f) }
 
 # MuseumProvenance is a general-purpose library for cultural institutions 
-# @todo Write this, dodo
+# @todo Write this, please.
 module MuseumProvenance
 end
