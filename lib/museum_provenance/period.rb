@@ -76,7 +76,9 @@ module MuseumProvenance
           @party.birth.precision= DateTimePrecision::YEAR
         end
         if opts[:death]
-          @party.death= Date.jd(opts[:death].to_i)
+
+          death_year = Time.at(opts[:death].to_i).to_date.year
+          @party.death= Date.new(Date.jd(opts[:death].to_i).year)
           @party.death.certainty= opts[:death_certainty].to_bool unless opts[:death_certainty].nil?
           @party.death.precision = DateTimePrecision::YEAR
         end
