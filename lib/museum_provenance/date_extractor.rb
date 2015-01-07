@@ -21,6 +21,11 @@ module MuseumProvenance
     # @return [Array<Date>] An array of dates found within the string
     def DateExtractor.find_dates_in_string(str)
 
+          # Substitution for euro-dates: "9 June 1932" or "9 June, 1932" becomes "June 9, 1932"
+          euro_dates_regex = /\b(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\.?,?\s(\d{2,4})/i
+          str.gsub!(euro_dates_regex, ' \2 \1, \3')
+
+
           centuries, str = extract_centuries(str)
           decades, str = extract_decades(str)
           years, str = extract_years(str)
@@ -33,6 +38,11 @@ module MuseumProvenance
       end
 
       def DateExtractor.remove_dates_in_string(str)
+        # Substitution for euro-dates: "9 June 1932" or "9 June, 1932" becomes "June 9, 1932"
+        euro_dates_regex = /\b(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\.?,?\s(\d{2,4})/i
+        str.gsub!(euro_dates_regex, ' \2 \1, \3')
+
+
         centuries, str = extract_centuries(str)
         decades, str = extract_decades(str)
         years, str = extract_years(str)
@@ -68,7 +78,7 @@ module MuseumProvenance
       end
 
       def DateExtractor.extract_decades(str)
-        decade_regex =/\b(\d{1,3})0s(?:\s+(?:ad|bc|bce|ce))?\b(\?)?/i
+        decade_regex =/\b(\d{1,3})0s(?:\s+(ad|bc|bce|ce))?\b(\?)?/i
         decades = []
         decade = str.match decade_regex
         until decade.nil?
@@ -78,11 +88,16 @@ module MuseumProvenance
 
         decades = decades.collect do |d|
           val = (d[1].to_s + "0").to_i
-          uncertain = d[2] && d[2] == "?"
-          decade = Date.new(val)
-          decade.precision = DateTimePrecision::DECADE
-          decade.certainty = !uncertain
-          decade
+          is_BCE = d[2] && (d[2].upcase == "BC" || d[2].upcase == "BCE")
+          if !is_BCE && val > 100
+            uncertain = d[3] && d[3] == "?"
+            decade = Date.new(val)
+            decade.precision = DateTimePrecision::DECADE
+            decade.certainty = !uncertain
+            decade
+          else
+            nil
+          end
         end
         return decades, str.gsub(decade_regex," ")
       end
@@ -97,6 +112,14 @@ module MuseumProvenance
             (?<!(?:december|november|february)\s)
             (?<!(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s)
             (?<!(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\.\s) # ...lots of months, these ones with the dot
+            (?<!(?:january|febuary|october),\s) # same thing, but with preceding commas...
+            (?<!(?:march|april),\s)
+            (?<!(?:june|july|sept),\s)
+            (?<!(?:august),\s)
+            (?<!(?:september),\s)
+            (?<!(?:december|november|february),\s)
+            (?<!(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec),\s)
+            (?<!(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\.,\s) 
             (?<!\d,\s)  # preceding digit and comma, for jan 1, 2014, to ignore the 1
             (?<!\d\s)  # preceding digit, for jan 1 2014, to ignore the 1
             (?<!\d(?:st|rd|th|nd)\s)  # ordinal, for jan 1st 2014, to ignore the 1
@@ -109,7 +132,7 @@ module MuseumProvenance
             \b  
             (?!\scentury) # ignore centuries
             (?!\/) # ignore following slash to ignore traidtional dates
-            (?!-) # ignore following slash to ignore xml dates
+            (?!-) # ignore following dash to ignore xml dates
             (\?)? # Optionally capture uncertainty
           /ix
           years = []
@@ -170,7 +193,7 @@ module MuseumProvenance
                       (?:st|rd|th|nd)?\s?
                       ,?
                       \s\d{1,4}
-                      (?:\s+(?:ad|bc|bce|ce))?
+                      (?:\s+(ad|bc|bce|ce))?
                       \b
                       (\?)? # Optionally capture uncertainty
                     /ix
@@ -183,7 +206,7 @@ module MuseumProvenance
 
           traditional_day_regex = /\b
             \d{1,2}\/\d{1,2}\/\d{2,4}
-            (?:\s+(?:ad|bc|bce|ce))?
+            (?:\s+(ad|bc|bce|ce))?
             \b
             (\?)? # Optionally capture uncertainty
           /ix
@@ -207,9 +230,11 @@ module MuseumProvenance
           days = days.collect do |d|
             date_val = d[0].to_s
             certain = date_val.gsub!("?","")
+            is_BCE = d[1] && (d[1].upcase == "BC" || d[1].upcase == "BCE")
             day = Chronic.parse(date_val)
             unless day.nil?
               day = day.to_date 
+              day = Date.new(day.year*-1,day.month,day.day) if is_BCE
               day.certainty = certain.nil?
             end
             day

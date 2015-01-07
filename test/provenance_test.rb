@@ -164,7 +164,26 @@ describe Provenance do
       timeline[0].to_h[:provenance].must_equal 'I have a footnote'
       timeline[0].to_h[:footnote].must_include 'I am the note.'
     end
-    
+
+    it "finds notes with asterisks" do
+      timeline = Provenance.extract "John Smith, London*; Jane Doe, Pittsburgh**; *I live in London. **I live in Pittsburgh."
+      timeline[0].party.name.must_equal "John Smith"
+      timeline[1].party.name.must_equal "Jane Doe"
+      timeline[0].location.name.must_equal "London"
+      timeline[1].location.name.must_equal "Pittsburgh"
+      timeline[0].note.must_include "I live in London."
+      timeline[1].note.must_include "I live in Pittsburgh."
+    end
+    it "finds notes with asterisks on the wrong side" do
+      timeline = Provenance.extract "John Smith, London;* Jane Doe, Pittsburgh;** *I live in London. **I live in Pittsburgh."
+      timeline[0].party.name.must_equal "John Smith"
+      timeline[1].party.name.must_equal "Jane Doe"
+      timeline[0].location.name.must_equal "London"
+      timeline[1].location.name.must_equal "Pittsburgh"
+      timeline[0].note.must_include "I live in London."
+      timeline[1].note.must_include "I live in Pittsburgh."
+    end   
+
     it "will find notes in note blocks" do
       timeline = Provenance.extract (other_note)
       timeline[0].to_h[:provenance].must_equal 'I have a footnote'
@@ -208,6 +227,13 @@ describe Provenance do
       timeline.count.must_equal 2
     end
 
+    it "handles stacked Initials" do
+      timeline = Provenance.extract("G.D.D. David, Pittsburgh.  I am another sentence.")
+      timeline[0].party.name.must_equal "G.D.D. David"
+      timeline.count.must_equal 2
+
+    end
+
     it "handles circa dates" do
       timeline = Provenance.extract "Mr. and Mrs. James L. Winokur, Pittsburgh, circa 1965; gift to museum, 1968"
       timeline.count.must_equal 2
@@ -246,7 +272,7 @@ describe Provenance do
       timeline.count.must_equal 2
       timeline[0].bote.must_equal Date.new(601)
       timeline[0].eote.must_equal Date.new(700).latest
-      timeline[0].time_string.must_equal "until the 7th Century"
+      timeline[0].time_string.must_equal "until the 7th century CE"
       timeline[0].party.name.must_equal "Moses"
       timeline[0].location.name.must_equal "Egypt"
     end

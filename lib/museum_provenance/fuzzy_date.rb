@@ -3,12 +3,50 @@ class Date
   prepend MuseumProvenance::Certainty
 
   def smart_to_s(*args)
-    if self.precision > DateTimePrecision::CENTURY
-      to_s(*args)
+    str = ""
+    if self.precision > DateTimePrecision::MONTH
+      str = self.strftime("%B %e, ")
+     if year >=1
+       year_str = self.year.to_s
+       year_str += " CE" if year < 1000
+     elsif year == 0
+       year_str = "1 BCE"
+     else
+       year_str = "#{-year} BCE"
+     end
+
+      str += year_str
+    elsif self.precision == DateTimePrecision::MONTH
+      str = self.to_s(*args).gsub(certain_string,"")
+      splits = str.split(" ")
+      splits[1].gsub!(/^0+/,"")
+      str = splits.join(" ")
+      str += " CE" if year < 1000
+    elsif self.precision == DateTimePrecision::YEAR
+      if year >=1
+        str = self.year.to_s
+        str += " CE" if year < 1000
+      elsif year == 0
+        str = "1 BCE"
+      else
+        str = "#{-year} BCE"
+      end
+    elsif self.precision == DateTimePrecision::DECADE
+      str = "the #{self.year}s"
     else
+      bce = false
       year = (self.century/100+1)
-      "the #{year.ordinalize} Century#{certain_string}"
+      if year <= 0
+        year = -(year-2)
+        bce = true
+      end  
+      str = "the #{year.ordinalize} century"
+      str += " CE" if year >= 1 && year < 10 && !bce
+      str += " BCE" if bce
+      str
     end
+    str += certain_string unless self.certain?
+    str
   end
 
   unless method_defined?(:earliest)

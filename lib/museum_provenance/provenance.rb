@@ -15,7 +15,7 @@ module MuseumProvenance
       "Esq", "Jr", "Sr", "Count", "Earl",  "Lord", "MP", "M.P.", "marquis",
       "Inc.", "Ltd", "Ltd.", "LLC", "llc",
       "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", 
-      "the artist", 
+      "the artist", "the sitter",
       "son of", "daughter of", "wife of", "husband of", "nephew of", "niece of", "brother of", 
       "sister of", "uncle of", "aunt of", "grandparent of", "grandfather of", "grandmother of",
       "his wife", "his nephew", "his son", "his daughter", "his niece","his godson", "his goddaughter",
@@ -40,10 +40,15 @@ module MuseumProvenance
       def extract(provenance_string)
         return Timeline.new if provenance_string.blank?
         provenance_string.gsub!("\n"," ")
+
+        # Handle strange footnote types
+        provenance_string = handle_asterisk_footnotes(provenance_string)
+
         text, notes = extract_text_and_notes(provenance_string)
 
         # Handle strange punctuation
         text = handle_doubled_punctuation(text)
+
 
         timeline = generate_timeline(text)
         unless notes.nil?
@@ -54,6 +59,7 @@ module MuseumProvenance
         end
         timeline
       end
+
 
       # Extract a provenance record from JSON. 
       # @param json [String] a JSON string representing a provenance record.
@@ -137,8 +143,10 @@ module MuseumProvenance
       def substitute_periods(text)
         modified = text.gsub(/b\. (\d{4})/, "b#{FAKE_PERIOD} \\1") || text  # born
         modified.gsub!(/d\.\s(\d{4})/, "d#{FAKE_PERIOD} \\1")   # died
-        modified.gsub!(/(\s[A-Zc])\./, "\\1#{FAKE_PERIOD}") # initials, circas
-        modified.gsub!(/^([A-Z])\./, "\\1#{FAKE_PERIOD}") # intial initials
+        initials = modified.scan(/(?:^|\s)((?:[A-Zc]\.)+)/) # initials, circas
+        initials.each do |i|
+          modified.gsub!(i[0],i[0].gsub(".",FAKE_PERIOD,))
+        end
         ABBREVIATIONS.each do |title|
          mod_title = title.gsub('.','\.')
          modified.gsub!(/\b#{mod_title}/, mod_title.gsub('\.',FAKE_PERIOD))
@@ -256,6 +264,18 @@ module MuseumProvenance
          text.gsub!(/\[.*?note (\d+)\]/,"")
          return footnotes, text.strip
       end
+
+      def handle_asterisk_footnotes(text)
+         return text if text.blank?
+         if text.include?("*")
+          100.downto(1).each do |num|
+            aa = "*"*num
+            text.gsub!(aa,"[#{num}]")
+          end 
+         end
+         return text
+      end
+
 
       def handle_doubled_punctuation(text)
          return text if text.blank?

@@ -164,7 +164,7 @@ describe Period do
       d.precision = DateTimePrecision::DECADE
       p1.beginning.must_equal TimeSpan.new(d,d)
       p1.ending.must_be_nil
-      p1.time_string.must_equal "1950s"
+      p1.time_string.must_equal "the 1950s"
     end
   end
 

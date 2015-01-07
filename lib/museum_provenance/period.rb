@@ -195,11 +195,11 @@ module MuseumProvenance
       raise DateError, "Too much recursion" if recursion_count > 10
 
       #substitution for (horrible) date pattern:  "1985-86" becomes "1985 until 1986"
-      horrid_date_range_regex = /(\d{2})(\d{2})\s?[-–—]\s?(\d{2})\b/
+      horrid_date_range_regex = /(\d{2})(\d{2})\s?[-–—]\s?(\d{2})(?!-)\b/
       str.gsub!(horrid_date_range_regex,'\1\2 until \1\3')
 
       #substitution for trivial date pattern: "1918-1919" becomes "1918 until 1919"
-      date_range_regex = /(\d{4})\s?[-–—]\s?(\d{4})/
+      date_range_regex = /(\d{4})\s?[-–—]\s?(\d{4})(?!-)/
       str.gsub!(date_range_regex,'\1 until \2')
 
       # substitution for "May 5-6, 1980" becomes "May 5, 1980 until May 6, 1980"
@@ -210,10 +210,9 @@ module MuseumProvenance
       multiday_regex_2 = /\s(\d{1,2})\s?[–—-]\s?(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
       str.gsub!(multiday_regex_2, ' \3 \1, \4 until \3 \2, \4')
 
-
       # substitution for "23 October - 12 November 1926"
       multiday_regex_3 = /
-         \s(\d{1,2})\s
+         \b(\d{1,2})\s
          (jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)
          \s?[–—-]\s?
          (\d{1,2})\s
@@ -222,15 +221,9 @@ module MuseumProvenance
       /ix
       str.gsub!(multiday_regex_3, ' \2 \1, \5 until \4 \3, \5')
       
-      # Substitution for euro-dates: "9 June 1932" or "9 June, 1932" becomes "June 9, 1932"
-      euro_dates_regex = /\s(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december).?,?\s(\d{2,4})/i
-      str.gsub!(euro_dates_regex, ' \2 \1, \3')
-
       # Substitution for "c. 1945" or "ca. 1945" becomes "circa 1945"
       circa_regex = /\bc(?:a)?\.\s(\d{4})\b/
       str.gsub!(circa_regex, 'circa \1')
-
-
 
       tokens = ["circa", "on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
       found_token = tokens.collect{|t| str.scan(/\b#{t}(?=\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|[1-9]|the\s[1-9]))\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
@@ -242,6 +235,8 @@ module MuseumProvenance
           while vals.count >= 1
             word = vals.pop
             current_phrase.unshift word
+
+            # Look for dates that have embedded commas in them.  October 14, 1980, August, 1980
             date_phrase = current_phrase.join(",")
             current_date = DateExtractor.find_dates_in_string(date_phrase).first
             if !current_date.nil? && current_date == last_date && current_date.precision == last_date.precision

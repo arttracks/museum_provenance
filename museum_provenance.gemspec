@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest"
   spec.add_development_dependency 'minitest-reporters'
   spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'yard'
 
   spec.add_runtime_dependency 'date_time_precision'
   spec.add_runtime_dependency 'chronic'

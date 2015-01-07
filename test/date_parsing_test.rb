@@ -338,11 +338,11 @@ describe "Date Parsing Rules" do
     p.beginning.must_be_instance_of TimeSpan
     p.beginning.earliest.must_equal Date.new(1950).earliest
     p.beginning.latest.must_equal Date.new(1959).latest
-    p.beginning.to_s.must_equal "1950s"
+    p.beginning.to_s.must_equal "the 1950s"
   end
   it "does not notice the spurious 'in' and think it's part of the date" do
      p.parse_time_string  "Estate sale in Cleveland, Ohio, 1950s"
-     p.time_string.must_equal "1950s"
+     p.time_string.must_equal "the 1950s"
      p.ending.must_be_nil
      p.beginning.must_be_instance_of TimeSpan
      p.beginning.earliest.must_equal Date.new(1950).earliest
@@ -359,5 +359,167 @@ describe "Date Parsing Rules" do
     p.ending.earliest.must_equal Date.new(1955).earliest
     p.ending.latest.must_equal Date.new(1955).latest
     p.ending.same?.must_equal true
+  end
+end
+
+describe "Date rules" do
+  let(:p) {Period.new("Date Test Period")}
+  let(:p?) {Period.new("Uncertain Date Test Period")}
+  let(:pbce) {Period.new("BCE Date Test Period")}
+
+  it "handles standard centuries" do
+    time_strings = ["the 19th century", "19th century", "19 century", "the 19 century", "19th Century", "19th Century AD", "19th Century ad", "the 19th Century CE"]
+    time_strings.each do |ts|
+      p.parse_time_string ts
+      p.beginning.earliest.year.must_equal 1801
+      p.beginning.latest.year.must_equal 1900
+      p.beginning.earliest_raw.precision.must_equal DateTimePrecision::CENTURY
+      p.time_string.must_equal "the 19th century"
+      p?.parse_time_string "#{ts}?"
+      p?.time_string.must_equal "the 19th century?"
+
+    end
+  end
+  it "handles early CE centuries" do
+    time_strings = ["the 8th century", "8th century", "8 century", "the 8 century", "8th Century", "8th Century AD", "8th Century ad", "the 8th Century CE"]
+    time_strings.each do |ts|
+      p.parse_time_string ts
+      p.beginning.earliest.year.must_equal 701
+      p.beginning.latest.year.must_equal 800  
+      p.beginning.earliest_raw.precision.must_equal DateTimePrecision::CENTURY
+      p.time_string.must_equal "the 8th century CE"
+      p?.parse_time_string "#{ts}?"
+      p?.time_string.must_equal "the 8th century CE?"
+    end
+  end
+  it "handles BCE centuries" do
+    time_strings = ["the 8th century BCE", "8th century BCE", "8 century BCE", "the 8 century BCE", "8th Century BCE", "8th Century BC"]
+    time_strings.each do |ts|
+      p.parse_time_string ts
+      p.beginning.earliest.year.must_equal -800
+      p.beginning.latest.year.must_equal -701
+      p.beginning.earliest_raw.precision.must_equal DateTimePrecision::CENTURY
+      p.time_string.must_equal "the 8th century BCE"
+      p?.parse_time_string "#{ts}?"
+      p?.time_string.must_equal "the 8th century BCE?"
+    end
+  end
+  it "handles decades" do
+    time_strings = ["the 1880s", "1880s", "1880s CE", "the 1880s ad"]
+    time_strings.each do |ts|
+      p.parse_time_string ts
+      p.beginning.earliest.year.must_equal 1880
+      p.beginning.latest.year.must_equal 1889
+      p.beginning.earliest_raw.precision.must_equal DateTimePrecision::DECADE
+      p.time_string.must_equal "the 1880s"
+      p?.parse_time_string "#{ts}?"
+      p?.time_string.must_equal "the 1880s?"
+
+    end
+  end
+  it "does not handle invalid decades" do
+    time_strings = ["the 80s", "880s BCE", "1880s BCE"]
+    time_strings.each do |ts|
+      lambda{p.parse_time_string ts}.must_raise MuseumProvenance::DateError
+      p.time_string.must_be_nil
+      p.beginning.must_be_nil
+    end
+  end
+  it "handles years" do
+     time_strings = ["1880", "1880 ad", "1880 AD", "1880 CE", "1880 ce"]
+    time_strings.each do |ts|
+      p.parse_time_string ts
+      p.beginning.earliest.year.must_equal 1880
+      p.beginning.latest.year.must_equal 1880
+      p.beginning.earliest_raw.precision.must_equal DateTimePrecision::YEAR
+      p.time_string.must_equal "1880"
+      p?.parse_time_string "#{ts}?"
+      p?.time_string.must_equal "1880?"
+      
+    end
+  end
+  it "handles years BCE" do
+     time_strings = ["1880 bc", "1880 bce", "1880 BC", "1880 BCE"]
+    time_strings.each do |ts|
+      p.parse_time_string ts
+      p.beginning.earliest.year.must_equal -1880
+      p.beginning.latest.year.must_equal -1880
+      p.beginning.earliest_raw.precision.must_equal DateTimePrecision::YEAR
+      p.time_string.must_equal "1880 BCE"
+      p?.parse_time_string "#{ts}?"
+      p?.time_string.must_equal "1880 BCE?"
+
+    end
+  end
+  it "handles  early years CE" do
+     time_strings = ["880", "880 ce", "880 ad", "880 CE"]
+    time_strings.each do |ts|
+      p.parse_time_string ts
+      p.beginning.earliest.year.must_equal 880
+      p.beginning.latest.year.must_equal 880
+      p.beginning.earliest_raw.precision.must_equal DateTimePrecision::YEAR
+      p.time_string.must_equal "880 CE"
+      p?.parse_time_string "#{ts}?"
+      p?.time_string.must_equal "880 CE?"
+    end
+  end
+  it "handles months" do
+    time_strings = ["October 1990", "October 1990 CE", "Oct. 1990", " oct 1990 CE", "oct. 1990", "october 1990", "October, 1990", "Oct., 1990"]
+    time_strings.each do |ts|
+      p.parse_time_string ts
+      "#{ts} becomes #{p.time_string}".must_equal "#{ts} becomes October 1990"
+      p.beginning.earliest.year.must_equal 1990
+      p.beginning.latest.year.must_equal 1990
+      p.beginning.earliest.month.must_equal 10
+      p.beginning.earliest.month.must_equal 10
+      p.beginning.earliest_raw.precision.must_equal DateTimePrecision::MONTH
+      p?.parse_time_string "#{ts}?"
+      p?.time_string.must_equal "October 1990?"
+    end
+  end
+  it "handles early months" do
+    time_strings = ["October 990", "October 990 CE", "Oct. 990", " oct 990 CE", "oct. 990", "october 990"]
+    time_strings.each do |ts|
+      p.parse_time_string ts
+      p.time_string.must_equal "October 990 CE"
+      p.beginning.earliest.year.must_equal 990
+      p.beginning.latest.year.must_equal 990
+      p.beginning.earliest.month.must_equal 10
+      p.beginning.earliest.month.must_equal 10
+      p.beginning.earliest_raw.precision.must_equal DateTimePrecision::MONTH
+      p?.parse_time_string "#{ts}?"
+      p?.time_string.must_equal "October 990 CE?"
+    end
+  end
+  it "handles days" do
+    time_strings = ["October 17, 1990", "October 17, 1990 CE","October 17, 1990 AD", "Oct. 17, 1990", 
+                    "oct 17, 1990 CE", "oct. 17, 1990", "october 17, 1990", 
+                    "October 17 1990", "Oct 17, 1990", 
+                    "17 October 1990", "17 October, 1990", "17 Oct. 1990", "17 Oct., 1990",
+                    "10/17/1990", "1990-10-17"]
+    time_strings.each do |ts|
+      p.parse_time_string ts
+      "#{ts} becomes #{p.time_string}".must_equal "#{ts} becomes October 17, 1990"
+      p.beginning.earliest.year.must_equal 1990
+      p.beginning.latest.year.must_equal 1990
+      p.beginning.earliest.month.must_equal 10
+      p.beginning.earliest.month.must_equal 10
+      p.beginning.earliest.day.must_equal 17
+      p.beginning.latest.day.must_equal 17
+      p.beginning.earliest_raw.precision.must_equal DateTimePrecision::DAY
+      ts2 = "#{ts.gsub(" CE","").gsub(" AD","")} BCE"
+      unless ts == "1990-10-17"
+        pbce.parse_time_string ts2
+        "#{ts2} becomes #{pbce.time_string}".must_equal "#{ts2} becomes October 17, 1990 BCE"
+        pbce.beginning.earliest.year.must_equal -1990
+        pbce.beginning.latest.year.must_equal -1990
+        pbce.beginning.earliest.month.must_equal 10
+        pbce.beginning.earliest.month.must_equal 10
+        pbce.beginning.earliest.day.must_equal 17
+        pbce.beginning.latest.day.must_equal 17
+      end
+      p?.parse_time_string "#{ts}?"
+      p?.time_string.must_equal "October 17, 1990?"
+    end
   end
 end
