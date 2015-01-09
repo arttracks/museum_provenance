@@ -127,13 +127,18 @@ module MuseumProvenance
             (?<!\/)                    # preceding slash for to ignore traditional dates
             (?<!-)                    # preceding slash for to ignore xml dates
             \b
-            (\d{1,4}) # capture year
-            (?:\s+(ad|bc|bce|ce))? # optionally capture era
+            (?:
+              (?<year_result>\d{4}) # capture years 1000-9999
+              (?:\s+(?<era_result>ad|bc|bce|ce))? # optionally capture era
+              |
+              (?<year_result>\d{1,3}) # capture years 0-999
+              (?:\s+(?<era_result>ad|bc|bce|ce)) # capture era
+            )
             \b  
             (?!\scentury) # ignore centuries
             (?!\/) # ignore following slash to ignore traidtional dates
             (?!-) # ignore following dash to ignore xml dates
-            (\?)? # Optionally capture uncertainty
+            (?<certainty_result>\?)? # Optionally capture uncertainty
           /ix
           years = []
           year = str.match years_regex
@@ -143,9 +148,9 @@ module MuseumProvenance
           end
           
           years = years.collect do |c|
-            is_BCE = c[2] && (c[2].upcase == "BC" || c[2].upcase == "BCE")
-            uncertain = c[3] && c[3] == "?"
-            val = c[1].to_i
+            is_BCE = c[:era_result] && (c[:era_result].upcase == "BC" || c[:era_result].upcase == "BCE")
+            uncertain = c[:certainty_result] && c[:certainty_result] == "?"
+            val = c[:year_result].to_i
             val = val * -1 if is_BCE
             d = Date.new(val)
             d.certainty = !uncertain

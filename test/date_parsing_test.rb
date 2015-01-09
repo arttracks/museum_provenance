@@ -452,7 +452,7 @@ describe "Date rules" do
     end
   end
   it "handles  early years CE" do
-     time_strings = ["880", "880 ce", "880 ad", "880 CE"]
+    time_strings = ["880 ce", "880 ad", "880 CE"]
     time_strings.each do |ts|
       p.parse_time_string ts
       p.beginning.earliest.year.must_equal 880
@@ -462,6 +462,9 @@ describe "Date rules" do
       p?.parse_time_string "#{ts}?"
       p?.time_string.must_equal "880 CE?"
     end
+  end
+  it "does not handle raw early years CE" do
+    lambda{p.parse_time_string "880"}.must_raise MuseumProvenance::DateError
   end
   it "handles months" do
     time_strings = ["October 1990", "October 1990 CE", "Oct. 1990", " oct 1990 CE", "oct. 1990", "october 1990", "October, 1990", "Oct., 1990"]

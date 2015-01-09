@@ -178,7 +178,7 @@ module MuseumProvenance
           \s*?          # any char
           (\d{3,4})?    # three to four numbers
           (\?)?         # find certainty
-          \s?\D?\s?     # single char splitter, maybe surrounded by spaces
+          \s?\D\s?     # single char splitter, maybe surrounded by spaces
           (\d{2,4})?    # two to four numbers
           (\?)?         # find certainty
           [\)|\]]      # close paren or brackets
@@ -348,7 +348,7 @@ module MuseumProvenance
         end
         loc = nil if loc == ""
         # Remove mismatched paretheses
-        name.gsub!(/^to\b/i, "") unless name.nil?
+        name.gsub!(/^(?:to|by)\b/i, "") unless name.nil?
         name.gsub!(/[\(\)]/,"") unless name.nil? || name.count("(") == name.count(")")
         loc.gsub!(/[\(\)]/,"") unless loc.nil? || loc.count("(") == loc.count(")")
         return name, loc
@@ -374,7 +374,7 @@ module MuseumProvenance
           .*\b
         /ix
         lot_regex = /
-          \blot\s.*\b
+          \blot\.?\s.*\b
         /ix
         luht_regex = /
           \(L.\d{1,6}[a-z]?\)

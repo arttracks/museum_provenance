@@ -32,7 +32,11 @@ describe PeriodOutput do
                   :direct_transfer=>nil, 
                   :stock_number=>"stock no. 1", 
                   :footnote=>"",
-                  :primary_owner=>true
+                  :primary_owner=>true,
+                  :earliest_possible=>nil,
+                  :earliest_definite=>nil,
+                  :latest_definite=>nil,
+                  :latest_possible=>nil
                 } 
               }
 

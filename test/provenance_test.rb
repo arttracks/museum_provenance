@@ -433,7 +433,7 @@ describe Provenance do
  
   describe "Yale Record modification" do
     it "handles by whoms" do
-      val = Provenance.extract "Capt. Charles Golding Constable, son of the artist (d.1878), by whom sold Christie’s July 11, 1887 (69) from whom purchased Yale"
+      val = Provenance.extract "Capt. Charles Golding Constable, son of the artist (d.1878), by whom sold Christie’s July 11, 1887 from whom purchased Yale"
       val.count.must_equal 3
       val[0].party.name.must_equal "Capt. Charles Golding Constable, son of the artist"
       val[0].party.death.must_equal Date.new(1878)
@@ -464,6 +464,14 @@ describe Provenance do
       val[0].location.must_be_nil
       val[0].party.name.must_equal "the Earl of Northbrook"
       val[0].acquisition_method.must_equal AcquisitionMethod::EXCHANGE
+    end
+    it "doesn't fail on random numbers in parens" do
+      val = Provenance.extract "probably sold Dartrey Castle sale, Jackson Stopes & McCabe, April 19, 1937 (220)"
+      val[0].time_string.must_equal "April 19, 1937"
+      val[0].location.name.must_equal "Jackson Stopes & McCabe (220)"
+      val[0].party.name.must_equal "sold Dartrey Castle"
+      val[0].acquisition_method.must_equal AcquisitionMethod::IN_SALE
+      val[0].certainty.must_equal false
     end
   end
   describe "NGA Record modification" do
