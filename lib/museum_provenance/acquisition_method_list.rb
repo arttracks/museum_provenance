@@ -4,16 +4,19 @@ module MuseumProvenance
     BEQUEST = AcquisitionMethod.new("Bequest", "bequest to", "by bequest", "Given in a will", AcquisitionMethod::Prefix, ['bequeathed to'])
     
     # Transfer from anscestor via unknown means
-    BY_DESCENT = AcquisitionMethod.new("By descent", "by descent to", "by descent", "Transfer from anscestor via unknown means", AcquisitionMethod::Prefix, ['by inheritance to'])
+    BY_DESCENT = AcquisitionMethod.new("By descent", "by descent to", "by descent", "Transfer from anscestor via unknown means", AcquisitionMethod::Prefix, ['by inheritance to', "by inheritance"])
    
     # Transfer from several anscestor via unknown means
     BY_DESCENT_THROUGH = AcquisitionMethod.new("By descent through", "by descent through", nil, "Transfer from several anscestors via unknown means", AcquisitionMethod::Prefix)
 
     # Direct purchase, without an agent
-    SALE = AcquisitionMethod.new("Sale", "sold to", nil, "Direct purchase, without an agent", AcquisitionMethod::Prefix)
+    SALE = AcquisitionMethod.new("Sale", "sold to", nil, "Direct purchase, without an agent", AcquisitionMethod::Prefix, ["sold"])
+
+    # Direct purchase, without an agent
+    PRIVATE_SALE = AcquisitionMethod.new("Private Sale", "sold privately to", nil, "Direct purchase, without an agent or gallery", AcquisitionMethod::Prefix, "sold privately")
     
     # Purchase, possibly with an agent
-    PURCHASE = AcquisitionMethod.new("Purchase", "purchased by", nil, "Purchase, possibly with an agent", AcquisitionMethod::Prefix, ['bought at sale by', "bought by", "by purchase"])
+    PURCHASE = AcquisitionMethod.new("Purchase", "purchased by", nil, "Purchase, possibly with an agent", AcquisitionMethod::Prefix, ['bought at sale by', "bought by", "by purchase", "purchased"])
     
     # Purchase, via an agent
     AGENT_PURCHASE = AcquisitionMethod.new("Purchase via Agent", "purchased for", nil, "Purchase, via an agent", AcquisitionMethod::Prefix, ["as agent for"])
@@ -25,7 +28,7 @@ module MuseumProvenance
     AUCTION = AcquisitionMethod.new("Auction", "by auction, to", "by auction", "Obtained via an auction", AcquisitionMethod::Suffix)
     
     #Obtained via an exchange
-    EXCHANGE = AcquisitionMethod.new("Exchange", "by exchange, to", "by exchange", "Obtained via an exchange", AcquisitionMethod::Suffix)
+    EXCHANGE = AcquisitionMethod.new("Exchange", "by exchange, to", "by exchange", "Obtained via an exchange", AcquisitionMethod::Suffix, "acquired by exchange")
     
     #A different work was gifted, that work was exchanged for this
     GIFT_BY_EXCHANGE = AcquisitionMethod.new("Gift, by exchange", "gift by exchange, to", "gift, by exchange", "a different work was gifted, that work was exchanged for this", AcquisitionMethod::Suffix)

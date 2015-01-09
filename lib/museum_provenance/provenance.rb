@@ -4,15 +4,17 @@ module MuseumProvenance
   class Provenance
 
     # A list of abbreviations.  A "." following any of these will not signify a new period.
-    ABBREVIATIONS  = ["Col.", "Sgt.", "Mme.", "Mlle.", "Mr.", "Mrs.", "Dr.", "no.", "No.",  
+    ABBREVIATIONS  = ["Col.", "Sgt.", "Mme.", "Mlle.", "Mr.", "Mrs.", "Dr.", "Capt.",
+                     "no.", "No.", "anon.", 'ca.', 'lot.',
                       "Esq.", "Co.", "illus.", "inc.", "Inc.", "Jr.", "Sr.", 
-                      "Ltd.", "Dept.", "M.","P.", "Miss.", "Ph.D", "DC.", "D.C.", 'ca.',
-                       'Ave.', "St.",
-                       'Jan.', "Feb.", "Mar.", "Apr.", "Jun.", "Jul.", "Aug.", "Sept.", "Sep.", "Oct.", "Nov.", "Dec."]
+                      "Ltd.", "Dept.", "M.","P.", "Miss.", "Ph.D", "DC.", "D.C.",
+                      "Thos.",
+                      'Ave.', "St.", "Rd.",
+                      'Jan.', "Feb.", "Mar.", "Apr.", "Jun.", "Jul.", "Aug.", "Sept.", "Sep.", "Oct.", "Nov.", "Dec."]
 
     # A list of name suffixes.  A "," preceding any of these will not signify the end of a name.
     NAME_EXTENDERS = [
-      "Esq", "Jr", "Sr", "Count", "Earl",  "Lord", "MP", "M.P.", "marquis",
+      "Esq", "Jr", "Sr", "Count", "Earl",  "Lord", "MP", "M.P.", "marquis", "Dowager",
       "Inc.", "Ltd", "Ltd.", "LLC", "llc",
       "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", 
       "the artist", "the sitter",
@@ -43,6 +45,7 @@ module MuseumProvenance
 
         # Handle strange footnote types
         provenance_string = handle_asterisk_footnotes(provenance_string)
+        provenance_string = handle_inline_footnotes(provenance_string)
 
         text, notes = extract_text_and_notes(provenance_string)
 
@@ -141,9 +144,9 @@ module MuseumProvenance
       # This will replace all periods in the record that are not record seperators with \u2024, which is "․"
       #--------------------------------------------------------
       def substitute_periods(text)
-        modified = text.gsub(/b\. (\d{4})/, "b#{FAKE_PERIOD} \\1") || text  # born
-        modified.gsub!(/d\.\s(\d{4})/, "d#{FAKE_PERIOD} \\1")   # died
-        initials = modified.scan(/(?:^|\s)((?:[A-Zc]\.)+)/) # initials, circas
+        modified = text.gsub(/b\.\s?(\d{4})/, "b#{FAKE_PERIOD} \\1") || text  # born
+        modified.gsub!(/d\.\s?(\d{4})/, "d#{FAKE_PERIOD} \\1")   # died
+        initials = modified.scan(/(?:^|\s|\()((?:[A-Zc]\.)+)/) # initials, circas
         initials.each do |i|
           modified.gsub!(i[0],i[0].gsub(".",FAKE_PERIOD,))
         end
@@ -173,10 +176,10 @@ module MuseumProvenance
           (?!b.)
           (?!d.)
           \s*?          # any char
-          (\d{3,4})?    # one to four numbers
+          (\d{3,4})?    # three to four numbers
           (\?)?         # find certainty
           \s?\D?\s?     # single char splitter, maybe surrounded by spaces
-          (\d{3,4})?    # one to four numbers
+          (\d{2,4})?    # two to four numbers
           (\?)?         # find certainty
           [\)|\]]      # close paren or brackets
           \s*?         # trailing whitespace
@@ -209,6 +212,9 @@ module MuseumProvenance
         if (range = text.scan(birth_death_regex).flatten) != []
           b, bcert, d, dcert = range
           unless b.nil?
+            if !d.nil? && b.length == 4 && d.length == 2
+              d = (b[0..1] + d)
+            end
             b = DateExtractor.find_dates_in_string(b).first 
             b.certainty = bcert.nil?
           end
@@ -239,7 +245,7 @@ module MuseumProvenance
 
         # Transform strange forms
         text.gsub!(/\b(?:his|her|their)\s+gift\s+to\b/i,"gift to")
-
+        text.gsub!(/\b(?:his|her|their)\s+sale(:?,)?\s/i,"sale ") #TODO: Might be too much magic
         text.gsub!(/^to\s/,"")
 
         acquisition_method = AcquisitionMethod.find(text)
@@ -260,7 +266,7 @@ module MuseumProvenance
          footnotes = text.scan(/\[(\d+)\]/)
          footnotes += text.scan(/\[.*?note (\d+)\]/)
          footnotes.flatten!
-         text.gsub!(/\[(\d+)\]/,"")
+         text.gsub!(/\[(\d+)\]/,"") 
          text.gsub!(/\[.*?note (\d+)\]/,"")
          return footnotes, text.strip
       end
@@ -274,6 +280,19 @@ module MuseumProvenance
           end 
          end
          return text
+      end
+      def handle_inline_footnotes(text)
+        return text if text.blank?
+        inline_footnote_regex = /\[(:?[A-Zace-z].{4,}?)\]/
+        inline_footnotes = text.scan(inline_footnote_regex)
+        unless inline_footnotes.empty?
+          text += " #{FOOTNOTE_DIVIDER} "
+          inline_footnotes.each.with_index do |f,i|
+            text.gsub!("[#{f[0]}]", "[#{i+1}]")
+            text += "[#{i+1}] #{f[0]} "
+          end
+        end
+        return text
       end
 
 
@@ -329,6 +348,7 @@ module MuseumProvenance
         end
         loc = nil if loc == ""
         # Remove mismatched paretheses
+        name.gsub!(/^to\b/i, "") unless name.nil?
         name.gsub!(/[\(\)]/,"") unless name.nil? || name.count("(") == name.count(")")
         loc.gsub!(/[\(\)]/,"") unless loc.nil? || loc.count("(") == loc.count(")")
         return name, loc
@@ -396,6 +416,12 @@ module MuseumProvenance
         text
       end
 
+      def convert_by_whom(text)
+        if text
+          text.gsub!(/,? (:?by|from) whom\b/, ";")
+        end
+        return text
+      end
       def rotate_footnotes(text)
         text.gsub!(/([\.;])(\[\d+\])/,'\2\1')
         text
@@ -406,6 +432,7 @@ module MuseumProvenance
         # Replace non-terminating periods with FAKE_PERIOD
         t = Timeline.new
         text = rotate_footnotes(text)
+        text = convert_by_whom(text)
         text = convert_lugt_numbers(text)
         text = substitute_periods(text)
         lines =  text.split(".")

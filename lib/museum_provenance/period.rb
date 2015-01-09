@@ -187,6 +187,9 @@ module MuseumProvenance
      # @param recursion_count [Fixnum] Used to count number of recursions to prevent infinite recursion
      # @return [String] the string with the time reference removed
      def parse_time_string(str, recursion_count = 0)
+      time_debug = false# str.include? "Newcastle"
+
+      puts str if time_debug
       if str.strip == "" && recursion_count == 0
         self.beginning = nil
         self.ending = nil
@@ -207,7 +210,7 @@ module MuseumProvenance
       str.gsub!(multiday_regex, '\1 \2, \4 until \1 \3, \4')
 
       # substitution for "30-31 January 1922" becomes "January 30, 1922 until January 31, 1922"
-      multiday_regex_2 = /\s(\d{1,2})\s?[–—-]\s?(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{2,4})/i
+      multiday_regex_2 = /\s(\d{1,2})\s?[–—-]\s?(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\,?\s(\d{2,4})/i
       str.gsub!(multiday_regex_2, ' \3 \1, \4 until \3 \2, \4')
 
       # substitution for "23 October - 12 November 1926"
@@ -225,72 +228,76 @@ module MuseumProvenance
       circa_regex = /\bc(?:a)?\.\s(\d{4})\b/
       str.gsub!(circa_regex, 'circa \1')
 
+      puts  "2: #{str}"  if time_debug
+
+
       tokens = ["circa", "on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
       found_token = tokens.collect{|t| str.scan(/\b#{t}(?=\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|[1-9]|the\s[1-9]))\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
-        if found_token.nil?
-          vals = str.split(",")
-          
-          current_phrase = []
-          last_date = nil
-          while vals.count >= 1
-            word = vals.pop
-            current_phrase.unshift word
+      puts found_token if time_debug
+      if found_token.nil?
+        vals = str.split(",")
+        
+        current_phrase = []
+        last_date = nil
+        while vals.count >= 1
+          word = vals.pop
+          current_phrase.unshift word
 
-            # Look for dates that have embedded commas in them.  October 14, 1980, August, 1980
-            date_phrase = current_phrase.join(",")
-            current_date = DateExtractor.find_dates_in_string(date_phrase).first
-            if !current_date.nil? && current_date == last_date && current_date.precision == last_date.precision
-              vals.push current_phrase.shift
-              break
-            end
-            last_date = current_date
+          # Look for dates that have embedded commas in them.  October 14, 1980, August, 1980
+          date_phrase = current_phrase.join(",")
+          current_date = DateExtractor.find_dates_in_string(date_phrase).first
+          if !current_date.nil? && current_date == last_date && current_date.precision == last_date.precision
+            vals.push current_phrase.shift
+            break
           end
-          str = vals.join(",") 
-          date_string = current_phrase.join(',')
-          str += DateExtractor.remove_dates_in_string(date_string)
-          str.gsub!(/\s\s*/, " ")
-        else
-          str, date_string = str.split(/\b#{found_token}\b/i)
-          date_string.strip! unless date_string.nil?
-          str.strip 
+          last_date = current_date
         end
-       
-        #puts "found_token: '#{found_token}'"
-        #puts "date_string: '#{date_string}'"
-        #puts "str: '#{str}'"
+        str = vals.join(",") 
+        date_string = current_phrase.join(',')
+        str += DateExtractor.remove_dates_in_string(date_string)
+        str.gsub!(/\s\s*/, " ")
+      else
+        str, date_string = str.split(/\b#{found_token}\b/i)
+        date_string.strip! unless date_string.nil?
+        str.strip
+        puts "3: #{str}, #{date_string}" if  time_debug
+      end
 
-        #puts "found_token: #{found_token}"
-        case (found_token.downcase rescue nil)
-           when nil
-            self.beginning = TimeSpan.parse(date_string)
-           when  "on"
-             self.beginning = TimeSpan.parse(date_string)
-             self.ending = TimeSpan.parse(date_string) if  self.beginning.earliest_raw.precision == DateTimePrecision::DAY
-           when "circa"
-            self.beginning = TimeSpan.parse(date_string)
-            self.beginning.earliest_raw.certainty = false
-            self.beginning.latest_raw.certainty = false            
-           when "before", "by", "as of"
-            self.beginning =TimeSpan.new(nil, date_string)
-           when "after"
-            self.beginning = TimeSpan.new(date_string,nil)
-           when "until sometime after", "until at least", "to at least"
-            self.ending = TimeSpan.new(date_string,nil)
-           when "until"
-              self.ending = TimeSpan.new(date_string,date_string)
-           when "until sometime before" 
-            self.ending = TimeSpan.new(nil,date_string)
-           when "in"
-            self.beginning = TimeSpan.new(nil,date_string)
-            self.ending = TimeSpan.new(date_string,nil)
-           when "between"
-            dates = date_string.split(" and ")
-            self.beginning = TimeSpan.new(dates[0],dates[0])
-            self.ending = TimeSpan.new(dates[1],dates[1])
-        end
+      case (found_token.downcase rescue nil)
+         when nil
+          self.beginning = TimeSpan.parse(date_string)
+         when  "on"
+           self.beginning = TimeSpan.parse(date_string)
+           self.ending = TimeSpan.parse(date_string) if  self.beginning.earliest_raw.precision == DateTimePrecision::DAY
+         when "circa"
+          self.beginning = TimeSpan.parse(date_string)
+          self.beginning.earliest_raw.certainty = false
+          self.beginning.latest_raw.certainty = false            
+         when "before", "by", "as of"
+          self.beginning =TimeSpan.new(nil, date_string)
+         when "after"
+          self.beginning = TimeSpan.new(date_string,nil)
+         when "until sometime after", "until at least", "to at least"
+          self.ending = TimeSpan.new(date_string,nil)
+         when "until"
+            self.ending = TimeSpan.new(date_string,date_string)
+         when "until sometime before" 
+          self.ending = TimeSpan.new(nil,date_string)
+         when "in"
+          self.beginning = TimeSpan.new(nil,date_string)
+          self.ending = TimeSpan.new(date_string,nil)
+         when "between"
+          dates = date_string.split(" and ")
+          self.beginning = TimeSpan.new(dates[0],dates[0])
+          self.ending = TimeSpan.new(dates[1],dates[1])
+      end
+      if str.blank? 
+        str =  DateExtractor.remove_dates_in_string(date_string)
+      end
       str.strip!
-      str.gsub!(/,$/,"")
+      str.gsub!(/,$/,"") # trailing commas
       str.strip!
+
       # recursively run until it can't find another date
       begin
         rerun = parse_time_string(str, recursion_count +1)

@@ -30,7 +30,12 @@ module MuseumProvenance
                     :direct_transfer,
                     :stock_number,
                     :footnote,
-                    :primary_owner]
+                    :primary_owner,
+                    :earliest_possible,
+                    :earliest_definite,
+                    :latest_definite,
+                    :latest_possible
+                ]
                     
       attr_accessor *@@attributes
     

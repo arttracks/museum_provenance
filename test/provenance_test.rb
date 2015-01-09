@@ -184,6 +184,11 @@ describe Provenance do
       timeline[1].note.must_include "I live in Pittsburgh."
     end   
 
+    it "handles inline footnotes" do
+      timeline = Provenance.extract "George Greville, 4th Earl of Warwick [1818-1893]; possibly his sale (Christie’s, London, 20-21 May, 1896, [lot number unknown]); Hugh Scarfe; sold privately ca. 1956 to Ralph Holland [1917-2012], Newcastle upon Tyne; his sale, Sotheby’s, London, 5 July 2013, no. 354 [sold with The Education of Achilles]; (W. M. Brady & Co., New York); purchased July 2014 by the Yale Center for British Art"
+      timeline[1].note[0].must_equal "lot number unknown"
+      timeline[4].note[0].must_equal "sold with The Education of Achilles"
+    end
     it "will find notes in note blocks" do
       timeline = Provenance.extract (other_note)
       timeline[0].to_h[:provenance].must_equal 'I have a footnote'
@@ -231,7 +236,12 @@ describe Provenance do
       timeline = Provenance.extract("G.D.D. David, Pittsburgh.  I am another sentence.")
       timeline[0].party.name.must_equal "G.D.D. David"
       timeline.count.must_equal 2
-
+    end
+    it "handles initials in dealer records" do
+      timeline = Provenance.extract "(W. M. Brady & Co., New York);"
+      timeline[0].party.name.must_equal "W. M. Brady & Co."
+      timeline[0].primary_owner.must_equal false
+      timeline.count.must_equal 1
     end
 
     it "handles circa dates" do
@@ -331,6 +341,15 @@ describe Provenance do
       timeline[0].to_h[:location].must_equal "Pittsburgh, PA" 
       timeline.count.must_equal 1
     end
+    it "finds birth dates without spaces" do
+      timeline = Provenance.extract("David (b.1980), Pittsburgh, PA")
+      timeline[0].to_h[:birth].must_equal  Date.new 1980
+      timeline[0].to_h[:birth_certainty].must_equal true
+      timeline[0].to_h[:death].must_be_nil
+      timeline[0].to_h[:party].must_equal "David"
+      timeline[0].to_h[:location].must_equal "Pittsburgh, PA" 
+      timeline.count.must_equal 1
+    end
     it "finds births with people who haven't died" do
       timeline = Provenance.extract("David (1980-), Pittsburgh, PA")
       timeline[0].to_h[:birth].must_equal  Date.new 1980
@@ -339,6 +358,16 @@ describe Provenance do
       timeline[0].to_h[:party].must_equal "David"
       timeline[0].to_h[:location].must_equal "Pittsburgh, PA"  
     end
+    it "finds dates with the second year truncated" do
+      timeline = Provenance.extract "commissioned by George Garnier (1703-63), Pittsburgh, PA"
+      timeline[0].to_h[:birth].must_equal Date.new(1703).earliest
+      timeline[0].to_h[:death].must_equal Date.new(1763).latest
+      timeline[0].to_h[:birth_certainty].must_equal true
+      timeline[0].to_h[:death_certainty].must_equal true
+      timeline[0].to_h[:party].must_equal "George Garnier"
+      timeline[0].to_h[:location].must_equal "Pittsburgh, PA"
+      timeline[0].acquisition_method.must_equal AcquisitionMethod::COMMISSION 
+    end 
     it "finds deaths with people who don't have birthdates" do
       timeline = Provenance.extract("David (-1980), Pittsburgh, PA")
       timeline[0].to_h[:birth].must_be_nil
@@ -402,6 +431,41 @@ describe Provenance do
     end      
   end
  
+  describe "Yale Record modification" do
+    it "handles by whoms" do
+      val = Provenance.extract "Capt. Charles Golding Constable, son of the artist (d.1878), by whom sold Christie’s July 11, 1887 (69) from whom purchased Yale"
+      val.count.must_equal 3
+      val[0].party.name.must_equal "Capt. Charles Golding Constable, son of the artist"
+      val[0].party.death.must_equal Date.new(1878)
+      val[1].acquisition_method.must_equal AcquisitionMethod::SALE
+      val[1].time_string.must_equal "July 11, 1887"
+      val[1].party.name.must_equal "Christie’s"
+      val[2].party.name.must_equal "Yale"
+      val[2].acquisition_method.must_equal AcquisitionMethod::PURCHASE
+    end
+    it "handles ca. dates in the center of acquisition methods" do
+      val = Provenance.extract "sold privately 1956 to Ralph Holland [1917-2012], Newcastle upon Tyne; sold privately ca. 1956 to Ralph Holland [1917-2012], Newcastle upon Tyne;"
+      val[0].acquisition_method.must_equal AcquisitionMethod::PRIVATE_SALE
+      val[0].time_string.must_equal "1956"
+      val[0].location.name.must_equal "Newcastle upon Tyne"
+      val[0].party.birth.must_equal Date.new(1917)
+      val[0].party.death.must_equal Date.new(2012)
+      val[0].party.name.must_equal "Ralph Holland"
+      val[1].acquisition_method.must_equal AcquisitionMethod::PRIVATE_SALE
+      val[1].time_string.must_equal "1956?"
+      val[1].location.name.must_equal "Newcastle upon Tyne"
+      val[1].party.birth.must_equal Date.new(1917)
+      val[1].party.death.must_equal Date.new(2012)
+      val[1].party.name.must_equal "Ralph Holland"
+    end
+    it "handles acquired by exchange" do
+      val = Provenance.extract "the Earl of Northbrook, acquired by exchange in 1881;"
+      val[0].time_string.must_equal "in 1881"
+      val[0].location.must_be_nil
+      val[0].party.name.must_equal "the Earl of Northbrook"
+      val[0].acquisition_method.must_equal AcquisitionMethod::EXCHANGE
+    end
+  end
   describe "NGA Record modification" do
     it "handles standard lines" do
       val =  Provenance.extract "gift 1937 to NGA"

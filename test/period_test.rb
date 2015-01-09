@@ -140,6 +140,13 @@ describe Period do
       p1.ending.must_equal TimeSpan.new("January 31, 1922","January 31, 1922")
       p1.time_string.must_equal "January 30, 1922 until January 31, 1922"
     end
+    it "handles Yale date pairs" do
+      str = p1.parse_time_string "Christie’s, London, 20-21 May, 1896"
+      str.must_equal "Christie’s, London"
+      p1.beginning.must_equal TimeSpan.new("May 20, 1896","May 20, 1896")
+      p1.ending.must_equal TimeSpan.new("May 21, 1896","May 21, 1896")
+      p1.time_string.must_equal "May 20, 1896 until May 21, 1896"
+    end
     it "handles uncertainty in time strings" do
       str = p1.parse_time_string  "J. Gardner Cassatt, Pennsylvania, 1922?"
       str.must_equal "J. Gardner Cassatt, Pennsylvania"
