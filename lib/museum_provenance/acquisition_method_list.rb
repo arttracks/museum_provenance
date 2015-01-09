@@ -72,5 +72,9 @@ module MuseumProvenance
     
     #As an agent for someone else
     AS_AGENT = AcquisitionMethod.new("As Agent", nil , "as agent", "As an agent for someone else", AcquisitionMethod::Suffix)
+ 
+    # On deposit at 
+    ON_DEPOSIT = AcquisitionMethod.new("On Deposit", "on long-term at", nil, "Located at the museum, but not owned by the museum", AcquisitionMethod::Prefix, ['on deposit", "on deposit at", "on long term at", "on longterm loan at", "on extended loan at"])
+   
   end
 end
