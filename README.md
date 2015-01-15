@@ -1,4 +1,4 @@
-# MuseumProvenance
+# `museum_provenance`
 
 `museum_provenance` is a Ruby library developed to help cultural institutions manage and understand the provenance of the objects within their collection.  It does this by parsing semi-structured provenance texts into structured data.
 
