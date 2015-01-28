@@ -3,12 +3,15 @@ module MuseumProvenance
   # This is a utility class for extracting a {Timeline} from a String.h
   class Provenance
 
-    TITLES = [ "Mme.", "Mlle.", "Mr.", "Mrs.", "M.", "Col.", "Sgt.", "Dr.", "Capt."]
+    TITLES = [ "Mme.", "Mlle.", "Mr.", "Mrs.", "M.", "Col.", "Sgt.", "Dr.", "Capt.","Hon.", "Prof."]
+    NAME_SUFFIXES = ["Esq.","Ph.D","Jr.", "Sr."]
 
     # A list of abbreviations.  A "." following any of these will not signify a new period.
-    ABBREVIATIONS  = TITLES + ["no.", "No.", "anon.", 'ca.', 'lot.',
-                      "Esq.", "Co.", "illus.", "inc.", "Inc.", "Jr.", "Sr.", 
-                      "Ltd.", "Dept.", "P.", "Miss.", "Ph.D", "DC.", "D.C.",
+    ABBREVIATIONS  = TITLES + NAME_SUFFIXES + [
+                      "no.", "No.", "anon.", 'ca.', 'lot.', "illus.", "Miss.",
+                      "Co.", "inc.", "Inc.", 
+                      "Ltd.", "Dept.", 
+                      "P.",  "DC.", "D.C.",
                       "Thos.",
                       'Ave.', "St.", "Rd.",
                       'Jan.', "Feb.", "Mar.", "Apr.", "Jun.", "Jul.", "Aug.", "Sept.", "Sep.", "Oct.", "Nov.", "Dec."]
