@@ -46,6 +46,7 @@ class Date
       str
     end
     str += certain_string unless self.certain?
+    str.gsub!("  ", " ") 
     str
   end
 
