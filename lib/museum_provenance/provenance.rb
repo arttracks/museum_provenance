@@ -18,7 +18,7 @@ module MuseumProvenance
 
     # A list of name suffixes.  A "," preceding any of these will not signify the end of a name.
     NAME_EXTENDERS = [
-      "Esq", "Jr", "Sr", "Count", "Earl",  "Lord", "MP", "M.P.", "marquis", "Dowager",
+      "Esq", "Jr", "Sr", "Count", "Earl",  "Lord", "MP", "M.P.", "marquis", "Dowager", "Baroness",
       "Inc.", "Ltd", "Ltd.", "LLC", "llc",
       "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", 
       "the artist", "the sitter",
