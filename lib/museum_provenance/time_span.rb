@@ -95,7 +95,7 @@ module MuseumProvenance
       return "#{earliest.smart_to_s(:long)}" if self.precise?
       return "#{@earliest.smart_to_s(:long)}" if self.same?
       if @earliest && @latest
-        "between #{@earliest.smart_to_s(:long)} and #{@latest.smart_to_s(:long)}"
+        "sometime between #{@earliest.smart_to_s(:long)} and #{@latest.smart_to_s(:long)}"
       elsif @latest
         "by #{@latest.smart_to_s(:long)}"
       elsif @earliest

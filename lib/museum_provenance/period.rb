@@ -131,6 +131,9 @@ module MuseumProvenance
       end
      end
 
+
+
+
      # Denormalize the period into a {PeriodOutput}.
      # @return [PeriodOutput] a populated Struct containing the {Period}'s information.
      def generate_output
@@ -186,7 +189,14 @@ module MuseumProvenance
      # @param str [String] the string to search for a time reference
      # @param recursion_count [Fixnum] Used to count number of recursions to prevent infinite recursion
      # @return [String] the string with the time reference removed
-     def parse_time_string(str, recursion_count = 0)
+     def parse_time_string(str)
+        b, e = str.split("until")
+        actually_parse_time_string(str)
+     end
+
+
+
+     def actually_parse_time_string(str, recursion_count = 0) 
       time_debug = false# str.include? "Newcastle"
 
       puts str if time_debug
@@ -231,7 +241,7 @@ module MuseumProvenance
       puts  "2: #{str}"  if time_debug
 
 
-      tokens = ["circa", "on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between", "to at least"]
+    tokens = ["circa", "on", "before", "by", "as of", "after", "until", "until sometime after", "until at least", "until sometime before", "in", "between","sometime between", "until between", "until sometime between", "to at least"]
       found_token = tokens.collect{|t| str.scan(/\b#{t}(?=\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|[1-9]|the\s[1-9]))\b/i).empty? ? nil : t }.compact.sort_by!{|t| t.length}.reverse.first
       puts found_token if time_debug
       if found_token.nil?
@@ -286,10 +296,12 @@ module MuseumProvenance
          when "in"
           self.beginning = TimeSpan.new(nil,date_string)
           self.ending = TimeSpan.new(date_string,nil)
-         when "between"
+         when "between", "sometime between"
           dates = date_string.split(" and ")
-          self.beginning = TimeSpan.new(dates[0],dates[0])
-          self.ending = TimeSpan.new(dates[1],dates[1])
+          self.beginning = TimeSpan.new(dates[0],dates[1])
+          when "until between", "until sometime between"
+           dates = date_string.split(" and ")
+           self.ending = TimeSpan.new(dates[0],dates[1])
       end
       if str.blank? 
         str =  DateExtractor.remove_dates_in_string(date_string)
@@ -300,7 +312,7 @@ module MuseumProvenance
 
       # recursively run until it can't find another date
       begin
-        rerun = parse_time_string(str, recursion_count +1)
+        rerun = actually_parse_time_string(str, recursion_count +1)
       rescue DateError
         return str
       end

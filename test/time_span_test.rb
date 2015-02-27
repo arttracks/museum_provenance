@@ -113,7 +113,7 @@ describe TimeSpan do
   end
   it "reports well with a vague date" do
     t1 = TimeSpan.new(y,m)
-    t1.to_s.must_equal "between 2014 and October 2014"
+    t1.to_s.must_equal "sometime between 2014 and October 2014"
   end
   describe "Parsing" do
      it "can take a date as a beginning" do

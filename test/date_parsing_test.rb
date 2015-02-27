@@ -297,12 +297,9 @@ describe "Date Parsing Rules" do
     p.parse_time_string "between 1954 and 1955"
     p.beginning.must_be_instance_of TimeSpan
     p.beginning.earliest.must_equal Date.new(1954).earliest
-    p.beginning.latest.must_equal Date.new(1954).latest
-    p.beginning.same?.must_equal true    
-    p.ending.must_be_instance_of TimeSpan  
-    p.ending.earliest.must_equal Date.new(1955).earliest
-    p.ending.latest.must_equal Date.new(1955).latest
-    p.ending.same?.must_equal true
+    p.beginning.latest.must_equal Date.new(1955).latest
+    p.beginning.same?.must_equal false    
+    p.ending.must_be_nil  
   end
 
   it "handles until centuries" do
@@ -311,6 +308,35 @@ describe "Date Parsing Rules" do
     p.ending.must_be_instance_of TimeSpan  
     p.ending.earliest.must_equal Date.new(601).earliest
     p.ending.latest.must_equal Date.new(700).latest
+    p.time_string.must_equal "until the 7th century CE"
+  end
+
+  it "handles until centuries" do
+    p.parse_time_string "until the 18th century"
+    p.beginning.must_be_nil
+    p.ending.must_be_instance_of TimeSpan  
+    p.ending.earliest.must_equal Date.new(1701).earliest
+    p.ending.latest.must_equal Date.new(1800).latest
+    p.time_string.must_equal "until the 18th century"
+  end
+
+  it "handles until centuries" do
+    skip
+    p.parse_time_string "until sometime in the 18th century"
+    p.beginning.must_be_nil
+    p.ending.must_be_instance_of TimeSpan  
+    p.ending.earliest.must_equal Date.new(1701).earliest
+    p.ending.latest.must_equal Date.new(1800).latest
+    p.time_string.must_equal "until the 18th century"
+  end
+
+  it "handles in the century" do
+    p.parse_time_string "the 18th century"
+    p.beginning.earliest.must_equal Date.new(1701).earliest
+    p.beginning.latest.must_equal Date.new(1800).latest
+    p.ending.must_be_nil
+    p.beginning.must_be_instance_of TimeSpan 
+    p.time_string.must_equal "the 18th century" 
   end
 
   it "handles ca. dates" do
