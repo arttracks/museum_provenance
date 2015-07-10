@@ -129,6 +129,13 @@ describe Provenance do
       timeline[0].parsable?.must_equal true
     end
 
+    it "doesn't bork on 'with' in the name" do
+      timeline = Provenance.extract "David Withings, 1990"
+      timeline[0].provenance.must_equal "David Withings, 1990"
+      timeline[0].parsable?.must_equal true
+      timeline[0].acquisition_method.must_be_nil
+    end
+
   end
 
   describe "Record Certainty" do
@@ -152,6 +159,7 @@ describe Provenance do
     let (:no_note) {"I do not have a note"}
     let (:note) {"I have a footnote [1]. 1. I am the note."}
     let (:other_note) {"I have a footnote [1]. NOTES: 1. I am the note."}
+    let (:lowercase_note) {"I have a footnote [1]. Notes: [1]. I am the note."}
  
     it "does not find notes if they don't exist" do
       timeline = Provenance.extract (no_note)
@@ -191,6 +199,13 @@ describe Provenance do
     end
     it "will find notes in note blocks" do
       timeline = Provenance.extract (other_note)
+      timeline[0].to_h[:provenance].must_equal 'I have a footnote'
+      timeline.count.must_equal 1
+      timeline[0].to_h[:footnote].must_include 'I am the note.'
+    end
+
+    it "will find notes in note blocks" do
+      timeline = Provenance.extract (lowercase_note)
       timeline[0].to_h[:provenance].must_equal 'I have a footnote'
       timeline[0].to_h[:footnote].must_include 'I am the note.'
     end

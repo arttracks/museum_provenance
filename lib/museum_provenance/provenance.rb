@@ -252,14 +252,15 @@ module MuseumProvenance
         text.gsub!(/\b(?:his|her|their)\s+gift\s+to\b/i,"gift to")
         text.gsub!(/\b(?:his|her|their)\s+sale(:?,)?\s/i,"sale ") #TODO: Might be too much magic
         text.gsub!(/^to\s/,"")
-
-        acquisition_method = AcquisitionMethod.find(text)
-        if acquisition_method
-          f = acquisition_method.forms
+        acquisition_method = nil
+        potential_acquisition_method = AcquisitionMethod.find(text)
+        if potential_acquisition_method
+          f = potential_acquisition_method.forms
           f.sort_by{|t| t.length}.reverse.each do |form|
-            new_text = text.gsub(/(:?,\s)?#{form}/i,"")
+            new_text = text.gsub(/(:?,\s)?#{form}(?=(?:\s|,\s|\z))/i,"")
             if new_text != text
               text = new_text
+              acquisition_method = potential_acquisition_method
               break
             end
           end
