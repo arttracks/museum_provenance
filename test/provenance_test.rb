@@ -443,7 +443,28 @@ describe Provenance do
       timeline = Provenance.extract("Col. David Newbury, Pittsburgh")
       timeline[0].to_h[:party].must_equal "Col. David Newbury"
       timeline[0].to_h[:location].must_equal "Pittsburgh"
-    end      
+    end 
+    it "handles her father" do
+      timeline = Provenance.extract("David Newbury, her father, Pittsburgh")
+      timeline[0].to_h[:party].must_equal "David Newbury, her father"
+      timeline[0].to_h[:location].must_equal "Pittsburgh"      
+    end     
+    it "handles his father" do
+      timeline = Provenance.extract("David Newbury, his father, Pittsburgh")
+      timeline[0].to_h[:party].must_equal "David Newbury, his father"
+      timeline[0].to_h[:location].must_equal "Pittsburgh"      
+    end
+    it "handles her father" do
+      timeline = Provenance.extract("David Newbury, his mother, Pittsburgh")
+      timeline[0].to_h[:party].must_equal "David Newbury, his mother"
+      timeline[0].to_h[:location].must_equal "Pittsburgh"      
+    end     
+    it "handles his father" do
+      timeline = Provenance.extract("David Newbury, her mother, Pittsburgh")
+      timeline[0].to_h[:party].must_equal "David Newbury, her mother"
+      timeline[0].to_h[:location].must_equal "Pittsburgh"      
+    end   
+   
   end
  
   describe "Yale Record modification" do

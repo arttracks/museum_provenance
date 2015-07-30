@@ -25,6 +25,7 @@ module MuseumProvenance
       "son of", "daughter of", "wife of", "husband of", "nephew of", "niece of", "brother of", 
       "sister of", "uncle of", "aunt of", "grandparent of", "grandfather of", "grandmother of",
       "his wife", "his nephew", "his son", "his daughter", "his niece","his godson", "his goddaughter", "his sister", "his brother",
+      "his mother", "his father", "her mother", "her father",
       "her husband", "her daughter", "her son", "her nephew", "her niece", "her godson", "her goddaughter", "her brother", "her sister",
       "their daughter", "their son", 'his widow', 'her widow', 'her widower', 'his widower',
       "Carnegie Institute"
