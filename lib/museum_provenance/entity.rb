@@ -1,3 +1,5 @@
+require_relative "certainty.rb"
+
 module MuseumProvenance
   # {Entity} is a data structure for holding information about generic entiries used in a {Period}.
   # It is not currently used on it's own, but as a generic structure to be extended by {Party} and {Location}.

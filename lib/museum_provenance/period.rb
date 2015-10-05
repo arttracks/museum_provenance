@@ -1,3 +1,5 @@
+require_relative "certainty.rb"
+
 module MuseumProvenance
   
   # {Period} is a representation of a single event within a {Timeline}.

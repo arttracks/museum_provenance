@@ -544,6 +544,12 @@ describe Provenance do
       val.count.must_equal 2
       val[0].location.name.must_equal "Paoli, PA"
     end
+    it "Doesn't fail with Washington, DC" do
+      val = Provenance.extract "Ruel P. Tolman [1879-1954], Washington, DC;  I am another sentence."
+      val.count.must_equal 2
+      val[0].location.name.must_equal "Washington, DC"
+      val[0].provenance.must_equal "Ruel P. Tolman [1879-1954], Washington, DC"
+    end
     it 'handles things with only an aquisition method' do
       val = Provenance.extract "Louis Majorelle, Villa Jika, Nancy; by descent; Charles Janoray, New York, LLC in 2007"
       val.count.must_equal 3
