@@ -4,7 +4,7 @@ module MuseumProvenance
   # {Entity} is a data structure for holding information about generic entiries used in a {Period}.
   # It is not currently used on it's own, but as a generic structure to be extended by {Party} and {Location}.
   class Entity
-    prepend Certainty
+    prepend MuseumProvenance::Certainty
     
     # @param name [String] the name of the entity. see {#name=} for more info.
     # @return The name.

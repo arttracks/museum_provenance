@@ -11,7 +11,7 @@ module MuseumProvenance
     # The string used to indicate uncertainty for an entire period.
     PERIOD_CERTAINTY_STRING = "Possibly"
 
-    prepend Certainty   
+    prepend MuseumProvenance::Certainty   
 
     # @!attribute [rw] acquisition_method
     #   @return [AcquisitionMethod] The method of acqusition of this period. 
