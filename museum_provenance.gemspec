@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'date_time_precision'
   spec.add_runtime_dependency 'chronic'
-  spec.add_runtime_dependency 'activesupport', '~> 4.1.6'
+  spec.add_runtime_dependency 'activesupport', '~> 4.2'
 end
