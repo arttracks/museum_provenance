@@ -76,7 +76,7 @@ describe "Provenance Export" do
     @output.location_certainty.must_equal true
   end
   it "captures acquisition method" do
-    @output.acquisition_method.must_equal "Purchase"
+    @output.acquisition_method.must_equal "Sale"
   end
   it "captures direct transfer" do
     @output.direct_transfer.must_equal true

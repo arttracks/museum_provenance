@@ -4,6 +4,11 @@ module MuseumProvenance
   # of which go after the name.
   #
   # It also contains a human-readable definition of the form for display.
+  # AcquisitionMethod is a data structure designed to hold forms of acquisition for lookup.  
+  # Each method can hold multiple valid forms, some of which go before the name, and some
+  # of which go after the name.
+  #
+  # It also contains a human-readable definition of the form for display.
   class AcquisitionMethod
 
     # Signifies that the form's preferred location is before the name.
@@ -28,6 +33,16 @@ module MuseumProvenance
       @@all_methods.find{|method| method.name == name}
     end
 
+
+    # Finds an instance of {AcquisitionMethod} with a given id.
+    #
+    # Returns nil if no match is found.
+    #
+    # @param id [Symbol] a symbol of an acquisition method id.
+    # @return [AcquisitionMethod] the found acquisition method.  
+    def AcquisitionMethod.find_by_id(id)
+      @@all_methods.find{|method| method.id == id}
+    end
     
     # Finds an instance of {AcquisitionMethod} containing the provided text
     #
@@ -48,23 +63,7 @@ module MuseumProvenance
       valid_methods.sort_by!{|t| t[1].length}.reverse.first[0]
     end
 
-    # Generates Markdown example files for all acquisition methods
-    #
-    # @param name [String] a name for use in examples.
-    # @param location [String] a location for use in examples.
-    # @param date [String] a date for use in examples.
-    # @return [Array] an array of markdown-formatted strings.  
-    def AcquisitionMethod.describe(name="Vincent Price [1911-1993]", location="St. Louis, Missouri", date="July 1969")
-       @@all_methods.sort_by{|m| m.name}.collect do |m|
-        s = "## #{m.name}  \n"
-        s += "\n\n*#{m.definition}*"
-        s += "\n\n**Preferred:**   #{m.send(m.preferred_form)}  "
-        s += "\n**Other Forms:**  #{m.other_forms.join("; ")}  " unless m.other_forms.empty?
-        s += "\n**Example: **    #{[m.attach_to_name(name),location,date].compact.join(", ")}#{["."].sample}  "
-        s += "\n\n"
-       end
-    end
-
+    
     # @!attribute [r] name
     #   @return [String] the name of the method
     # @!attribute [r] prefix
@@ -75,24 +74,38 @@ module MuseumProvenance
     #   @return [String] A human readable definition of the method
     # @!attribute [r] preferred_form
     #   @return [Symbol<AcquisitionMethod::Prefix,AcquisitionMethod::Suffix>] Which form is preferred for this method
+    # @!attribute [r] explanation
+    #   @return [String] A longer explanation of the method
+
        
-    attr_reader :name, :prefix, :suffix, :definition, :preferred_form
+    attr_reader  :name, :prefix, :suffix, :definition, :preferred_form, :explanation, :type, :id, :parent, :class_description
     
     # Creates a new instance of AttributionMethod.  
     # Note that this will also add it to the Class-level list of Attribution Methods, which can be queried via @AttributionMethod::valid_methods
-    def initialize(name, prefix,suffix,definition, preferred_form, synonyms = nil)
-      @name, @prefix, @suffix, @definition, @preferred_form, @synonyms = name, prefix,suffix,definition,preferred_form, synonyms
+    def initialize(opts)
+      @id   = opts[:id]
+      @name   = opts[:title]
+      @prefix = opts.fetch(:prefix, nil)
+      @suffix = opts.fetch(:suffix, nil)
+      @definition = opts.fetch(:description, nil)
+      @explanation = opts.fetch(:explanation, nil)
+      @preferred_form = opts.fetch(:preferred_form)
+      @synonyms = opts.fetch(:synonyms, [])      
       @@all_methods ||= []
       @@all_methods.push self
+
+      @parent = AcquisitionMethod.find_by_id opts[:parent]
+      @type = opts.fetch(:type, @parent && @parent.type)
+      @class_description = opts.fetch(:class_description, @parent && @parent.class_description)
     end
     
-    # Concatinates the preferred form with a given name.
+    # Concatenates the preferred form with a given name.
     # Will properly handle both prefixes and suffixes, which is why we need a method to do this.
     #
     # @param name [String] The name to which you wish to attach the method.
     # @return [String] the given name with the preferred form attached to it.
     # @example For 'Gift of' 
-    #   attach_to_name("david")  # -> "Gift of david" 
+    #   attach_to_name("David")  # -> "Gift of David" 
     def attach_to_name(name)
       if preferred_form == Prefix
         s= [prefix,name].compact.join(" ")
@@ -125,5 +138,6 @@ module MuseumProvenance
     def to_s
       name
     end
+    alias :inspect :to_s
   end
 end

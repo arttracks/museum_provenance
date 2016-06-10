@@ -13,7 +13,7 @@ describe "Provenance Records" do
 
     it "was auctioned" do
       prov[2].acquisition_method.wont_be_nil
-      prov[2].acquisition_method.must_equal AcquisitionMethod::FOR_SALE
+      prov[2].acquisition_method.must_equal AcquisitionMethod.find_by_id(:purchase_at_auction)
     end
   
     it "matches the original text to the generated text" do
@@ -57,7 +57,7 @@ describe "Provenance Records" do
   end
 
   describe  "Girl in Lavender, Seated at a Desk (modified)" do
-    let (:prov_text) {"Michel Monet, Giverny, France; Janet Fleisher Gallery, Philadelphia, until 1967; Dr. Albert Kaplan sale, Philadelphia, Samuel T. Freeman and Company, Philadelphia, April 20, 1978; Dr. And Mrs. John J. McDonough, Youngstown, Ohio, 1978; gift to the museum, 1982."}
+    let (:prov_text) {"Michel Monet, Giverny, France; Janet Fleisher Gallery, Philadelphia, until 1967; consigned to Samuel T. Freeman and Company, Philadelphia, April 20, 1978; Dr. And Mrs. John J. McDonough, Youngstown, Ohio, 1978; gift to the museum, 1982."}
     let(:prov) {Provenance.extract prov_text}
   
     it "regenerates itself" do   
@@ -202,7 +202,7 @@ describe "Provenance Records" do
       prov.first.acquisition_method.must_be_nil
     end
     it "knows the last record is a purchase" do
-      prov.last.acquisition_method.name.must_equal "Purchase"
+      prov.last.acquisition_method.name.must_equal "Sale"
     end
     it "does not have a date for the first record" do
       prov.first.beginning.must_be_nil

@@ -5,7 +5,7 @@ describe PeriodOutput do
   let (:prov) {Provenance.extract prov_text}
   let (:output) {prov[0].generate_output}
   let (:sample_data) { {:period_certainty=>false, 
-                  :acquisition_method=>"Purchase", 
+                  :acquisition_method=>"Sale", 
                   :party=>"David",
                   :party_certainty=>false, 
                   :birth=>Date.new(1950),

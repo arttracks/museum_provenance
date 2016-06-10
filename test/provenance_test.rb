@@ -84,9 +84,9 @@ describe Provenance do
     end
 
     it "removes standard prefixes" do
-      timeline = Provenance.extract "Sold to David Newbury"
+      timeline = Provenance.extract "Purchased by David Newbury"
       timeline[0].acquisition_method.must_be_instance_of AcquisitionMethod
-      timeline[0].acquisition_method.must_equal AcquisitionMethod::SALE
+      timeline[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:sale)
 
       timeline[0].to_h[:party].must_equal "David Newbury"
 
@@ -95,37 +95,37 @@ describe Provenance do
     it "removes standard suffixes" do
       timeline = Provenance.extract "David Newbury, by exchange"
       timeline[0].acquisition_method.must_be_instance_of AcquisitionMethod
-      timeline[0].acquisition_method.must_equal AcquisitionMethod::EXCHANGE
+      timeline[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:exchange)
       timeline[0].to_h[:party].must_equal "David Newbury"
     end
 
     it "doesn't bork on donation" do
       timeline = Provenance.extract "Donated to David Newbury"
-      timeline[0].acquisition_method.must_equal AcquisitionMethod::GIFT
+      timeline[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:gift)
       timeline[0].parsable?.must_equal true
     end
 
     it "doesn't bork on sold at auction" do
       timeline = Provenance.extract "sold at auction to David Newbury"
-      timeline[0].acquisition_method.must_equal AcquisitionMethod::FOR_SALE
+      timeline[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:purchase_at_auction)
       timeline[0].parsable?.must_equal true
     end
 
     it "doesn't bork on sold at" do
       timeline = Provenance.extract "sold at David Newbury"
-      timeline[0].acquisition_method.must_equal AcquisitionMethod::FOR_SALE
+      timeline[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:consignment)
       timeline[0].parsable?.must_equal true
     end
 
     it "doesn't bork on by descent" do
       timeline = Provenance.extract "David Newbury, by descent"
-      timeline[0].acquisition_method.must_equal AcquisitionMethod::BY_DESCENT
+      timeline[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:by_descent)
       timeline[0].parsable?.must_equal true
     end
 
     it "doesn't bork on by descent prefixed" do
       timeline = Provenance.extract "by descent to David Newbury"
-      timeline[0].acquisition_method.must_equal AcquisitionMethod::BY_DESCENT
+      timeline[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:by_descent)
       timeline[0].parsable?.must_equal true
     end
 
@@ -381,7 +381,7 @@ describe Provenance do
       timeline[0].to_h[:death_certainty].must_equal true
       timeline[0].to_h[:party].must_equal "George Garnier"
       timeline[0].to_h[:location].must_equal "Pittsburgh, PA"
-      timeline[0].acquisition_method.must_equal AcquisitionMethod::COMMISSION 
+      timeline[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:commission) 
     end 
     it "finds deaths with people who don't have birthdates" do
       timeline = Provenance.extract("David (-1980), Pittsburgh, PA")
@@ -469,25 +469,26 @@ describe Provenance do
  
   describe "Yale Record modification" do
     it "handles by whoms" do
+      skip
       val = Provenance.extract "Capt. Charles Golding Constable, son of the artist (d.1878), by whom sold Christie’s July 11, 1887 from whom purchased Yale"
       val.count.must_equal 3
       val[0].party.name.must_equal "Capt. Charles Golding Constable, son of the artist"
       val[0].party.death.must_equal Date.new(1878)
-      val[1].acquisition_method.must_equal AcquisitionMethod::SALE
+      val[1].acquisition_method.must_equal AcquisitionMethod.find_by_id(:sale)
       val[1].time_string.must_equal "July 11, 1887"
       val[1].party.name.must_equal "Christie’s"
       val[2].party.name.must_equal "Yale"
-      val[2].acquisition_method.must_equal AcquisitionMethod::PURCHASE
+      val[2].acquisition_method.must_equal AcquisitionMethod.find_by_id(:sale)
     end
     it "handles ca. dates in the center of acquisition methods" do
       val = Provenance.extract "sold privately 1956 to Ralph Holland [1917-2012], Newcastle upon Tyne; sold privately ca. 1956 to Ralph Holland [1917-2012], Newcastle upon Tyne;"
-      val[0].acquisition_method.must_equal AcquisitionMethod::PRIVATE_SALE
+      val[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:private_sale)
       val[0].time_string.must_equal "1956"
       val[0].location.name.must_equal "Newcastle upon Tyne"
       val[0].party.birth.must_equal Date.new(1917)
       val[0].party.death.must_equal Date.new(2012)
       val[0].party.name.must_equal "Ralph Holland"
-      val[1].acquisition_method.must_equal AcquisitionMethod::PRIVATE_SALE
+      val[1].acquisition_method.must_equal AcquisitionMethod.find_by_id(:private_sale)
       val[1].time_string.must_equal "1956?"
       val[1].location.name.must_equal "Newcastle upon Tyne"
       val[1].party.birth.must_equal Date.new(1917)
@@ -499,14 +500,14 @@ describe Provenance do
       val[0].time_string.must_equal "in 1881"
       val[0].location.must_be_nil
       val[0].party.name.must_equal "the Earl of Northbrook"
-      val[0].acquisition_method.must_equal AcquisitionMethod::EXCHANGE
+      val[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:exchange)
     end
     it "doesn't fail on random numbers in parens" do
-      val = Provenance.extract "probably sold Dartrey Castle sale, Jackson Stopes & McCabe, April 19, 1937 (220)"
+      val = Provenance.extract "probably sold at Dartrey Castle, Jackson Stopes & McCabe, April 19, 1937 (220)"
       val[0].time_string.must_equal "April 19, 1937"
       val[0].location.name.must_equal "Jackson Stopes & McCabe (220)"
-      val[0].party.name.must_equal "sold Dartrey Castle"
-      val[0].acquisition_method.must_equal AcquisitionMethod::IN_SALE
+      val[0].party.name.must_equal "Dartrey Castle"
+      val[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:consignment)
       val[0].certainty.must_equal false
     end
   end
@@ -514,7 +515,7 @@ describe Provenance do
     it "handles standard lines" do
       val =  Provenance.extract "gift 1937 to NGA"
       val[0].party.name.must_equal "NGA"
-      val[0].acquisition_method.must_equal AcquisitionMethod::GIFT
+      val[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:gift)
       val[0].time_string.must_equal "1937"
     end
     it "handles footnotes on the wrong side" do
@@ -554,7 +555,7 @@ describe Provenance do
       val = Provenance.extract "Louis Majorelle, Villa Jika, Nancy; by descent; Charles Janoray, New York, LLC in 2007"
       val.count.must_equal 3
       val[1].party.name.must_equal ""
-      val[1].acquisition_method.must_equal AcquisitionMethod::BY_DESCENT
+      val[1].acquisition_method.must_equal AcquisitionMethod.find_by_name("By Descent")
       val.to_json.must_be_instance_of String
     end
    end
@@ -578,7 +579,7 @@ describe Provenance do
     # extra space before the word "sale" 
     it "handles (sale, Alliance des Arts, Paris, 26 April 1844, no. 14)" do
       val = Provenance.extract "(sale, Alliance des Arts, Paris, 26 April 1844, no. 14)"
-      val[0].provenance.must_equal "(Sale, Alliance des Arts, Paris, April 26, 1844, no. 14)"
+      val[0].provenance.must_equal "(Consigned to Alliance des Arts, Paris, April 26, 1844, no. 14)"
     end
 
 
@@ -596,14 +597,14 @@ describe Provenance do
       val = Provenance.extract "John W. Pepper, 1900; bequest of John W. Pepper to PMA, 1935."
       val.count.must_equal 2
       val[1].provenance.must_equal "bequest to PMA, 1935"     
-      val[1].acquisition_method.must_equal AcquisitionMethod::BEQUEST
+      val[1].acquisition_method.must_equal AcquisitionMethod.find_by_id(:bequest)
       val[1].party.name.must_equal "PMA"
     end
 
     it "uses proper synonyms for painted by" do
       val = Provenance.extract  "painted for the chapel of Girolamo Ferretti, S. Francesco delle Scale, Ancona"
       val.count.must_equal 1
-      val[0].acquisition_method.must_equal AcquisitionMethod::COMMISSION
+      val[0].acquisition_method.must_equal AcquisitionMethod.find_by_id(:commission)
       val[0].party.name.must_equal "the chapel of Girolamo Ferretti"
       val[0].provenance.must_equal "Commissioned by the chapel of Girolamo Ferretti, S. Francesco delle Scale, Ancona"     
     end
@@ -618,7 +619,7 @@ describe Provenance do
       val = Provenance.extract  "his gift to Museum; her gift to Museum; their gift to Museum"
       val.count.must_equal 3
       val.each do |v|
-        v.acquisition_method.must_equal AcquisitionMethod::GIFT
+        v.acquisition_method.must_equal AcquisitionMethod.find_by_id(:gift)
         v.party.name.must_equal "Museum"
         v.provenance.downcase.must_equal "gift to museum"     
       end

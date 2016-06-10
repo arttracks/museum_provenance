@@ -2,8 +2,33 @@ require_relative "test_helper.rb"
 
 describe AcquisitionMethod do
 
-  let(:m1) {AcquisitionMethod.new("name","prefix","suffix","definition",AcquisitionMethod::Prefix, ["alternate"])}
-  let(:m2) {AcquisitionMethod.new("name","prefix","suffix","definition",AcquisitionMethod::Suffix, ["alternate", "other_alternate"])}
+  let(:opts1) {
+    {
+      id:                 :acquisition,
+      title:              "name", 
+      prefix:             "prefix", 
+      suffix:             "suffix",
+      description:        "definition",
+      explanation:        "This is the default method for acquisitions and is the base type for all acquisitions.It should be used if there are no additional details available.  If there is not an explicit acquisition method mentioned, this will be assumed.",
+      preferred_form:     AcquisitionMethod::Prefix, 
+      synonyms:           ["alternate"],
+    } 
+  }
+  let(:opts2) {
+    {
+      id:                 :acquisition,
+      title:              "name", 
+      prefix:             "prefix", 
+      suffix:             "suffix",
+      description:        "definition",
+      explanation:        "This is the default method for acquisitions and is the base type for all acquisitions.It should be used if there are no additional details available.  If there is not an explicit acquisition method mentioned, this will be assumed.",
+      preferred_form:     AcquisitionMethod::Suffix, 
+      synonyms:           ["alternate", "other_alternate"],
+    } 
+  }
+ 
+  let(:m1) {AcquisitionMethod.new opts1}
+  let(:m2) {AcquisitionMethod.new opts2}
 
   it "has a class constant for prefix and suffix" do
     AcquisitionMethod::Prefix.must_be_instance_of Symbol
@@ -62,15 +87,15 @@ describe AcquisitionMethod do
   end
 
   describe "Global Find" do
-    it "does not find when there's nothing there" do
+    it "uses the default when there's nothing there" do
       method = AcquisitionMethod.find("David Newbury [1995,200].")
-      method.must_be_nil
-
+      method.must_equal AcquisitionMethod.find_by_id(:acquisition)
     end
+
     it "finds standard acquisition methods" do
-      method = AcquisitionMethod.find("Sold to David Newbury [1995,200].")
+      method = AcquisitionMethod.find("Purchased by David Newbury [1995,200].")
       method.must_be_instance_of AcquisitionMethod
-      method.must_equal AcquisitionMethod::SALE
+      method.must_equal AcquisitionMethod.find_by_id(:sale)
     end
   end
   describe "Name Find" do
@@ -80,9 +105,9 @@ describe AcquisitionMethod do
 
     end
     it "finds standard acquisition methods" do
-      method = AcquisitionMethod.find_by_name("Sale")
+      method = AcquisitionMethod.find_by_name("On Loan")
       method.must_be_instance_of AcquisitionMethod
-      method.must_equal AcquisitionMethod::SALE
+      method.must_equal AcquisitionMethod.find_by_id(:on_loan)
     end
   end
 end
