@@ -33,17 +33,17 @@ module MuseumProvenance
     }) 
 
 
-    AcquisitionMethod.new({
-      id:                 :acquisition_for,
-      title:              "Acquisition For", 
-      prefix:             "acquired for", 
-      description:        "This object was acquired by the named party in some manner, but the named party did not take custody of the object.",
-      explanation:        "This is the generic method for ownership-only transfers.  It will generally only be used by automated systems that cannot deduce a subtype, and should rarely be manually used.",
-      preferred_form:     AcquisitionMethod::Prefix, 
-      synonyms:           [],
-      parent:             :acquisition,
-      custody_transfer:   false,
-    }) 
+    # AcquisitionMethod.new({
+    #   id:                 :acquisition_for,
+    #   title:              "Acquisition For", 
+    #   prefix:             "acquired for", 
+    #   description:        "This object was acquired by the named party in some manner, but the named party did not take custody of the object.",
+    #   explanation:        "This is the generic method for ownership-only transfers.  It will generally only be used by automated systems that cannot deduce a subtype, and should rarely be manually used.",
+    #   preferred_form:     AcquisitionMethod::Prefix, 
+    #   synonyms:           [],
+    #   parent:             :acquisition,
+    #   custody_transfer:   false,
+    # }) 
 
 
     # TODO:  Is there a better word for this?
@@ -248,7 +248,7 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:              :bequest,
       title:           "Bequest", 
-      prefix:          "bequest to", 
+      prefix:          "bequest, to", 
       suffix:          "by bequest",
       description:     "This object was given to the named party through a will or other means following the death of the previous owner.",
       preferred_form:  AcquisitionMethod::Prefix, 
