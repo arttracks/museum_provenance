@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
   spec.has_rdoc = 'yard'
+  spec.required_ruby_version = '~> 2.3.1'
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
@@ -25,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'minitest-reporters'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'yard'
+  spec.add_development_dependency "ruby-graphviz", "1.2.2"
 
   spec.add_runtime_dependency 'date_time_precision'
   spec.add_runtime_dependency 'chronic'

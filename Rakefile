@@ -14,6 +14,14 @@ YARD::Rake::YardocTask.new do |t|
   t.stats_options = ['--list-undoc']         # optional
 end
 
+task :acq do
+  require "graphviz"
+  require "./lib/museum_provenance.rb"
+  require "fileutils"
+  FileUtils.mkdir_p("./docs")
+  doxxer = MuseumProvenance::Utilities::AcquisitionMethodDocumentation.create_documentation("./docs")
+end
+
 
 desc "Clear the screen"
 task :cls do

@@ -1,7 +1,7 @@
 module MuseumProvenance
   class AcquisitionMethod
     ###############################################################################
-    TRANSFER_DESCRIPTION = <<-eos
+    TRANSFER_DESCRIPTION = <<~eos
 
     ## Transfer of an Object
 
@@ -50,13 +50,24 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:              :exhange_of_value,
       title:           "Exchange of Value", 
-      suffix:          "through an exchange of value", 
+      suffix:          "through an exchange of value, to", 
       description:     "This object was obtained in some manner by the named party through an exchange of value.",
       explanation:     "This is the base class for all transfers where something of value was exchanged between the acquiring party and the receiving party.  This does not specify any details about the manner of the sale or the type of value exchanged.  In general, if it is assumed that money was exchanged, use 'purchased by'",
       preferred_form:  AcquisitionMethod::Suffix, 
       synonyms:        [],
       parent:          :acquisition,
     }) 
+
+    AcquisitionMethod.new({
+      id:              :assignment,
+      title:           "Assignment", 
+      prefix:          "assigned to", 
+      description:     "Ownership is assigned to the named party due to a previous agreement.",
+      preferred_form:  AcquisitionMethod::Prefix, 
+      synonyms:        [],
+      parent:          :exhange_of_value,
+    }) 
+     
 
     AcquisitionMethod.new({
       id:              :sale,
@@ -69,16 +80,6 @@ module MuseumProvenance
     }) 
 
 
-    AcquisitionMethod.new({
-      id:              :sale_for,
-      title:           "Sale For", 
-      prefix:          "purchased for", 
-      description:     "This object was purchased by the named party, but the named party did not take custody of the object.",
-      preferred_form:  AcquisitionMethod::Prefix, 
-      parent:          :sale,
-      custody_transfer: false
-
-    }) 
 
     AcquisitionMethod.new({
       id:              :private_sale,
@@ -90,16 +91,6 @@ module MuseumProvenance
       parent:          :sale,
     }) 
 
-    AcquisitionMethod.new({
-      id:              :private_sale_for,
-      title:           "Private Sale For", 
-      prefix:          "privately purchased for", 
-      description:     "This object was purchased by the named party from another party in a sale that was not publicly advertised and/or available, but the named party did not take custody of the object.",
-      preferred_form:  AcquisitionMethod::Prefix, 
-      synonyms:        [],
-      parent:          :private_sale,
-      custody_transfer: false
-    }) 
 
     AcquisitionMethod.new({
       id:              :purchase_at_auction,
@@ -111,16 +102,7 @@ module MuseumProvenance
       parent:          :sale,
     }) 
 
-    AcquisitionMethod.new({
-      id:              :purchase_at_auction_for,
-      title:           "Purchase at Auction For", 
-      prefix:          "purchased at auction for", 
-      description:     "This object was purchased by the named party at auction, but the named party did not take custody of the object.",
-      preferred_form:  AcquisitionMethod::Prefix, 
-      synonyms:        [],
-      parent:          :purchase_at_auction,
-      custody_transfer: false
-    }) 
+
 
     AcquisitionMethod.new({
       id:              :exchange,
@@ -128,7 +110,7 @@ module MuseumProvenance
       suffix:          "by exchange", 
       prefix:          "by exchange, to",
       description:     "This object was acquired by the named party, but something of value was exchanged for the object instead of money.",
-      preferred_form:  AcquisitionMethod::Suffix, 
+      preferred_form:  AcquisitionMethod::Prefix, 
       synonyms:        ['acquired by exchange'],
       parent:          :exhange_of_value,
     }) 
@@ -137,11 +119,11 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:              :forced_sale,
       title:           "Forced Sale", 
-      suffix:          "by forced sale", 
+      suffix:          "", 
       prefix:          "forced sale, to",
       description:     "This object was purchased by the named party using involuntary pressure on the seller.",
-      preferred_form:  AcquisitionMethod::Suffix, 
-      synonyms:        [],
+      preferred_form:  AcquisitionMethod::Prefix, 
+      synonyms:        ["by forced sale"],
       parent:          :sale,
     }) 
 
@@ -269,7 +251,7 @@ module MuseumProvenance
     }) 
 
     ###############################################################################
-    INSTANTIATION_DESCRIPTION = <<-eos
+    INSTANTIATION_DESCRIPTION = <<~eos
 
     ## Origination of an Object.
 
@@ -345,14 +327,45 @@ module MuseumProvenance
     }) 
 
     AcquisitionMethod.new({
+      id:             :illegal_extraction,
+      title:          "Illegal Extraction", 
+      prefix:         "illegally extracted by", 
+      description:    "his object was extracted without legal permission by the named party as part of an archaeological event.",
+      preferred_form: AcquisitionMethod::Prefix, 
+      synonyms:       [],
+      parent:         :discovery,
+    }) 
+
+    AcquisitionMethod.new({
+      id:             :excavated,
+      title:          "Excavation", 
+      prefix:         "excavated by", 
+      description:    "This object was uncovered by the named party as part of an archaeological event.",
+      preferred_form: AcquisitionMethod::Prefix, 
+      synonyms:       [],
+      parent:         :discovery,
+    }) 
+
+    AcquisitionMethod.new({
+      id:             :recleared,
+      title:          "Reclearing", 
+      prefix:         "recleared by", 
+      description:    "This object was recleared by the named party as part of an archaeological event.",
+      explanation:    "This indicates and object that had been prviously been excavated, by not removed at that time.",
+      preferred_form: AcquisitionMethod::Prefix, 
+      synonyms:       [],
+      parent:         :discovery,
+    }) 
+
+    AcquisitionMethod.new({
       id:             :field_collection,
       title:          "Field Collection", 
       prefix:         "field collected by", 
       suffix:         "by field collection", 
-      description:    "This object was collected by the named party as part of an archaeological event.",
+      description:    "This object was extracted by the named party as part of an archaeological event.",
       preferred_form: AcquisitionMethod::Prefix, 
-      synonyms:       [],
-      parent:         :found,
+      synonyms:       ["extracted by", "by field collection"],
+      parent:         :discovery,
     }) 
 
     AcquisitionMethod.new({
@@ -389,22 +402,9 @@ module MuseumProvenance
     })
 
 
-    AcquisitionMethod.new({
-      id:                 :fabrication_for,
-      title:              "Fabrication For", 
-      prefix:             "fabricated for",  
-      description:        "A physical instance of a conceptual object was created for the named party, but they did not immediately have custody.",
-      explanation:        "This is typically used when an object is being fabricated by a third party, but explicitly for someone.  If you are using this, and not the usual 'Fabricated', you typically would indicate the fabricator as agent in the immediately following event.",
-      preferred_form:     AcquisitionMethod::Prefix, 
-      synonyms:           [],
-      parent:             :fabrication,
-      custody_transfer:   false
-    })
-
-
     ###############################################################################
 
-    DISBODIMENT_DESCRIPTION = <<-eos
+    DISBODIMENT_DESCRIPTION = <<~eos
 
     ## Disappearance of an Object.
 
@@ -470,7 +470,7 @@ module MuseumProvenance
 
 
     ###############################################################################
-    DIVISION_DESCRIPTION = <<-eos
+    DIVISION_DESCRIPTION = <<~eos
 
     ## Division of Custody & Ownership
 
@@ -487,7 +487,7 @@ module MuseumProvenance
       description:    "The named party has temporary custody, but not ownership of this object.",
       explanation:    "By default, ownership is assumed in this model.  This is used to explicitly indicate that the named party does NOT have ownership of the object.",
       preferred_form: AcquisitionMethod::Prefix, 
-      synonyms:       ["with"],
+      synonyms:       ["with", "posessed by"],
       parent:         nil,
       type:           :divided_custody,
       custody_transfer:   true,
@@ -496,26 +496,26 @@ module MuseumProvenance
     }) 
 
 
-    AcquisitionMethod.new({
-      id:             :as_agent,
-      title:          "As Agent", 
-      suffix:         "as agent", 
-      description:    "The named party has temporary custody as an agent or representative of the owner.",
-      explanation:    "An agent is acting as a proxy and in the interests of another party, but does not take ownership of the work.",
-      preferred_form: AcquisitionMethod::Suffix, 
-      synonyms:       ["as agent for"],
-      parent:         :possessed_by,
-    }) 
+    # AcquisitionMethod.new({
+    #   id:             :as_agent,
+    #   title:          "As Agent", 
+    #   suffix:         "as agent", 
+    #   description:    "The named party has temporary custody as an agent or representative of the owner.",
+    #   explanation:    "An agent is acting as a proxy and in the interests of another party, but does not take ownership of the work.",
+    #   preferred_form: AcquisitionMethod::Suffix, 
+    #   synonyms:       ["as agent for"],
+    #   parent:         :possessed_by,
+    # }) 
 
-    AcquisitionMethod.new({
-      id:             :as_trustee,
-      title:          "As Trustee", 
-      suffix:         "as trustee", 
-      description:    "The named party has temporary custody as trustee for an owner who is not legally capable of being responsible for the object.",
-      preferred_form: AcquisitionMethod::Suffix, 
-      synonyms:       [],
-      parent:         :as_agent,
-    }) 
+    # AcquisitionMethod.new({
+    #   id:             :as_trustee,
+    #   title:          "As Trustee", 
+    #   suffix:         "as trustee", 
+    #   description:    "The named party has temporary custody as trustee for an owner who is not legally capable of being responsible for the object.",
+    #   preferred_form: AcquisitionMethod::Suffix, 
+    #   synonyms:       [],
+    #   parent:         :as_agent,
+    # }) 
 
     AcquisitionMethod.new({
       id:             :on_deposit,
@@ -561,7 +561,7 @@ module MuseumProvenance
 
 
     ###############################################################################
-    REJOINING_DESCRIPTION = <<-eos
+    REJOINING_DESCRIPTION = <<~eos
 
     ## Rejoining of Custody & Ownership
 
@@ -601,7 +601,7 @@ module MuseumProvenance
 
     ###############################################################################
 
-    TRANSFORMATION_DESCRIPTION = <<-eos
+    TRANSFORMATION_DESCRIPTION = <<~eos
 
     ## Transformation of Party
 

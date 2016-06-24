@@ -1,6 +1,6 @@
 require 'parslet'
 require 'parslet/convenience'
-require 'parslet/graphviz'
+# require 'parslet/graphviz'
 
 require_relative 'parsers/base_parser'
 
@@ -23,8 +23,9 @@ module MuseumProvenance
       result = @peg.parse_with_debug(str, reporter: Parslet::ErrorReporter::Deepest.new)
       if result
         transformed_result = @transform.apply(result)
-       puts JSON.pretty_generate(JSON.parse(transformed_result.to_json)) 
+       #puts JSON.pretty_generate(JSON.parse(transformed_result.to_json)) 
       end
+      transformed_result
     end
 
 

@@ -22,7 +22,7 @@ module MuseumProvenance
 
       # Acquisition Method forms
       rule (:acquisition_method_by_list) { generate_list(" by") }
-      rule (:acquisition_method_to_list) { generate_list(", to") }
+      rule (:acquisition_method_to_list) { generate_list(", to") | generate_list(" to") }
       rule (:acquisition_methods) {acquisition_method_by_list | acquisition_method_to_list}
       
       # All the different options

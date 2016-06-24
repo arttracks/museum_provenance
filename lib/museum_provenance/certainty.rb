@@ -14,7 +14,7 @@ module MuseumProvenance
   module Certainty
 
     # A list of possible words that indicate that a String could be uncertain.
-    CertantyWords = ["?", "possibly", "Possibly", "probably", "Probably", "Likely", "likely", "Potentially","potentially", "Presumably", "presumably"]
+    CertantyWords = ["?", "possibly", "Possibly", "probably", "Probably", "Likely", "likely", "Potentially","potentially", "Presumably", "presumably", "Said to be", "said to be"]
     # The string which should be appended if a value is uncertain.
     CertaintyString = "?"
 
