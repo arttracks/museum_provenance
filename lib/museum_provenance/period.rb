@@ -189,7 +189,6 @@ module MuseumProvenance
      # There's an entire article on the site about the various phrases for this.
      #
      # @param str [String] the string to search for a time reference
-     # @param recursion_count [Fixnum] Used to count number of recursions to prevent infinite recursion
      # @return [String] the string with the time reference removed
      def parse_time_string(str)
         b, e = str.split("until")
@@ -197,7 +196,7 @@ module MuseumProvenance
      end
 
 
-
+     # @param recursion_count [Fixnum] Used to count number of recursions to prevent infinite recursion
      def actually_parse_time_string(str, recursion_count = 0) 
       time_debug = false# str.include? "Newcastle"
 

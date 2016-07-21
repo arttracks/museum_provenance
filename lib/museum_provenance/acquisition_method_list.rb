@@ -119,7 +119,6 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:              :forced_sale,
       title:           "Forced Sale", 
-      suffix:          "", 
       prefix:          "forced sale, to",
       description:     "This object was purchased by the named party using involuntary pressure on the seller.",
       preferred_form:  AcquisitionMethod::Prefix, 
