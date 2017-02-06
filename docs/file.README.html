@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!file.README.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'>
+<h1 id="label-museum_provenance"><code>museum_provenance</code></h1>
+
+<p><code>museum_provenance</code> is a Ruby library developed to help cultural
+institutions manage and understand the provenance of the objects within
+their collection. It does this by parsing semi-structured provenance texts
+into structured data.</p>
+
+<p>The main entry point to the tool is the
+<code>MuseumProvenance::Provenance</code> class. This is a static class
+designed to take both unstructured data and structured data and convert it
+into the tool&#39;s internal data structure.</p>
+
+<p>Using the <code>extract</code> method, you can provide a provenance string
+and it will be parsed into a <code>Timeline</code>, which is the topmost
+representation of provenance within the tool.</p>
+
+<p>The <code>museum_provenance</code> gem is a subproject of the <a
+href="http://blog.cmoa.org/tag/art-tracks/">Art Tracks</a> project for the
+<a href="http://www.cmoa.org">Carnegie Museum of Art</a> in Pittsburgh, PA.</p>
+
+<h2 id="label-Installation">Installation</h2>
+
+<p>Add this line to your application&#39;s Gemfile:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>museum_provenance</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre class="code ruby"><code class="ruby">$ gem install museum_provenance</code></pre>
+
+<h2 id="label-Usage">Usage</h2>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>museum_provenance</span><span class='tstring_end'>&#39;</span></span>
+
+    <span class='id identifier rubyid_provenance_text'>provenance_text</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Artist estate; Michel Monet, son of the artist, Sorel Moussel, Dept. Eure et Loire, 1926; Walter P. Chrysler, Jr., New York, NY, 1950; purchased by Museum, April 1962.</span><span class='tstring_end'>&quot;</span></span>
+
+    <span class='id identifier rubyid_timeline'>timeline</span> <span class='op'>=</span> <span class='const'>MuseumProvenance</span><span class='op'>::</span><span class='const'>Provenance</span><span class='period'>.</span><span class='id identifier rubyid_extract'>extract</span> <span class='id identifier rubyid_provenance_text'>provenance_text</span>
+
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_timeline'>timeline</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span>
+</code></pre>
+<hr>
+
+<h2 id="label-Data+Structure">Data Structure</h2>
+
+<p>The basic data structure of a provenance record using
+<code>museum_provenance</code> is:</p>
+
+<h3 id="label-a+Timeline-2C">a Timeline,</h3>
+
+<p>A <code>Timeline</code> represents the entire history of ownership of a
+single work. It is represented as a linked series of <code>Periods</code>,
+one per-owner of the artwork.</p>
+
+<h3 id="label-which+contains+one+or+more+Periods-2C">which contains one or more Periods,</h3>
+
+<p>A <code>Period</code> is the representation of a single disjoint period in
+time representing an single period of ownership or custody of a work. Each
+period is modeled after a CIDOC-CRM period, and has a single
+<code>Party</code> and <code>Location</code> associated with the work. Due
+to the inherent uncertainties of historical data, often periods are missing
+data, or the data contained within the record is uncertain or imprecise.</p>
+
+<p>Each period is made up of four main components, and several qualifiers and
+modifiers,</p>
+
+<h4 id="label-each+of+which+includes+a+Party-2C">each of which includes a Party,</h4>
+
+<p>The party is the individual, gallery, sale, dealer, company, museum or
+other organization who had custody or ownership of the artwork during this
+period.</p>
+
+<p>It is important to remember that this represents the owner of the work
+during this period, not the party that it was transferred from or the party
+that it will be transferred to.</p>
+
+<blockquote>
+<p>Gift of John Wayne, 1995;</p>
+</blockquote>
+
+<p>is not a correct provenance record, because it conflates to periods of
+ownership into a single clause of provenance. The correct way to model that
+relationship is:</p>
+
+<blockquote>
+<p>John Wayne; Gift to Carnegie Museum of Art, 1995.</p>
+</blockquote>
+
+<p>That way both owners are captured, the transfer is recorded, and the
+recipient of the gift is explicit, not implicit.</p>
+
+<p>Due to the prevalence of sales and auctions within provenance, it is
+important to distinguish that this does not currently include custody
+changes that are related to loans or exhibitions—those are rarely captured
+within the provenance history.</p>
+
+<p>Parties can also be uncertain; a question mark immediately following the
+name indicates that the name is uncertain.</p>
+
+<h4 id="label-an+Acquisition+Method-2C">an Acquisition Method,</h4>
+
+<p><strong>TODO:</strong> Write this.</p>
+
+<h4 id="label-and+a+Location-2C">and a Location,</h4>
+
+<p>The location is the physical location of the artwork on earth during this
+periods. It is a precise as</p>
+
+<p>Currently, provenance does not tend to record changes in this location
+during a period — a more complete representation would allow recording
+location changes within the purview of a single owner as separate events,
+but there little or no usage of this within existing records.</p>
+
+<h4 id="label-and+a+Beginning+and+an+Ending.">and a Beginning and an Ending.</h4>
+
+<p>Periods are made up of two events: the a acquisition of the work and the
+deacquisition of the work. It is also important to realize that each
+deacquisition is also the following party&#39;s acquisition.</p>
+
+<p>There are two similar ways to represent the the dates relevant to a period.
+One is as a series of ownerships, the other as a series of transfers. For
+example:</p>
+
+<blockquote>
+<p>George, 1950; Mary 1965.</p>
+</blockquote>
+
+<p>This provenance record describes two periods of ownership— George&#39;s
+ownership between 1950 and 1965, and Mary&#39;s ownership from 1965 onward.</p>
+
+<p>It also encodes two transfers: George&#39;s acquisition from an unknown
+party (likely the artist) in 1950, and Mary&#39;s acquisition from George
+in 1965.</p>
+
+<p>Both of these ways of thinking about the period are correct—they also both
+contain the same information. It is also important to realize that in both
+of these models, there is still uncertainty.</p>
+
+<p>We know that George acquired the painting in 1950; what that really means
+is that we know that he <strong>acquired</strong> the painting
+<em>between</em> January 1, 1950 and December 31, 1950 and he
+<strong>deacquired</strong> the painting <em>between</em> January 1, 1965
+and December 31, 1965.</p>
+
+<p>So, we know that George <strong>definitely</strong> owned the work
+<em>between</em> December 31, 1950 and January 1, 1965, and that he
+<strong>possibly</strong> owned the work <em>between</em> January 1, 1950
+and December 31, 1965.</p>
+
+<p>This distinction is important when discussing periods where this
+uncertainty is caused by date precision—it&#39;s even more important where
+this imprecision is caused by gaps in knowledge.</p>
+
+<p>For instance, consider:</p>
+
+<blockquote>
+<p>George, by 1960 until sometime after 1962; Mary, in 1970.</p>
+</blockquote>
+
+<p>This record could refer to the same events as the previous representation;
+but it captures a fuzziness in our information with accuracy.</p>
+
+<p>We know that George <strong>acquired</strong> the painting <em>after</em>
+1960, we know that he <strong>deacquired</strong> the painting
+<em>between</em> 1962 and 1970, and we don&#39;t have an earliest date he
+could have owned it—worst case, it is the earliest possible date of
+creation of the work.</p>
+
+<p>This also means that George <strong>definitely</strong> owned the work
+<em>between</em> December 31, 1960 and January 1, 1962, and that he
+<strong>possibly</strong> owned the work <em>between</em> its creation and
+December 31, 1970.</p>
+
+<h2 id="label-Contributing">Contributing</h2>
+<ol><li>
+<p>Fork it ( <a
+href="https://github.com/cmoa/museum_provenance/fork">github.com/cmoa/museum_provenance/fork</a>
+)</p>
+</li><li>
+<p>Create your feature branch (<code>git checkout -b my-new-feature</code>)</p>
+</li><li>
+<p>Commit your changes (<code>git commit -am &#39;Add some
+feature&#39;</code>)</p>
+</li><li>
+<p>Push to the branch (<code>git push origin my-new-feature</code>)</p>
+</li><li>
+<p>Create a new Pull Request</p>
+</li></ol>
+</div></div>
+
+    <div id="footer">
+  Generated on Mon Feb  6 09:46:36 2017 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.3.1).
+</div>
+
+  </body>
+</html>

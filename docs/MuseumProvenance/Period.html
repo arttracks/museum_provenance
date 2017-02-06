@@ -1,0 +1,4418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: MuseumProvenance::Period
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '../';
+  framesUrl = "../frames.html#!MuseumProvenance/Period.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../MuseumProvenance.html" title="MuseumProvenance (module)">MuseumProvenance</a></span></span>
+     &raquo; 
+    <span class="title">Period</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="../method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="../file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: MuseumProvenance::Period
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">MuseumProvenance::Period</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/museum_provenance/period.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p><span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span> is a representation of a single event within a <span class='object_link'><a href="Timeline.html" title="MuseumProvenance::Timeline (class)">Timeline</a></span>.</p>
+
+<p>It also functions as a linked list, where each period has a
+<span class='object_link'><a href="#previous_period-instance_method" title="MuseumProvenance::Period#previous_period (method)">#previous_period</a></span> and <span class='object_link'><a href="#next_period-instance_method" title="MuseumProvenance::Period#next_period (method)">#next_period</a></span>, and periods can be inserted before
+and after.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="PERIOD_CERTAINTY_STRING-constant" class="">PERIOD_CERTAINTY_STRING =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The string used to indicate uncertainty for an entire period.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Possibly</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#acquisition_method-instance_method" title="#acquisition_method (instance method)">- (AcquisitionMethod) <strong>acquisition_method</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The method of acqusition of this period.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#location-instance_method" title="#location (instance method)">- (Location) <strong>location</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The location where the artwork was located during this period.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#next_period-instance_method" title="#next_period (instance method)">- (Period) <strong>next_period</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The location immediately preceding this period within the record.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#note-instance_method" title="#note (instance method)">- (String) <strong>note</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The footnote associated with this period.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#original_text-instance_method" title="#original_text (instance method)">- (String) <strong>original_text</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The text used to generate this record.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#party-instance_method" title="#party (instance method)">- (Party) <strong>party</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The party who owned the work during this period.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#previous_period-instance_method" title="#previous_period (instance method)">- (Period) <strong>previous_period</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The location immediately following this period within the record.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#primary_owner-instance_method" title="#primary_owner (instance method)">- (Boolean) <strong>primary_owner</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Is the owner a primary owner, or a dealer, sale, or gallery? This is a
+concept defined in the AAM standard for Provenance.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stock_number-instance_method" title="#stock_number (instance method)">- (String) <strong>stock_number</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The stock number of the artwork in the collection of this owner.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#formatted_footnote-class_method" title="formatted_footnote (class method)">+ (Object) <strong>formatted_footnote</strong>(number, note) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#actually_parse_time_string-instance_method" title="#actually_parse_time_string (instance method)">- (Object) <strong>actually_parse_time_string</strong>(str, recursion_count = 0) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#beginning-instance_method" title="#beginning (instance method)">- (TimeSpan) <strong>beginning</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The <span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span> representing the starting of this period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#beginning%3D-instance_method" title="#beginning= (instance method)">- (TimeSpan) <strong>beginning=</strong>(val) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the beginning of the period to the value given.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#botb-instance_method" title="#botb (instance method)">- (Date) <strong>botb</strong> </a>
+    
+
+    
+      (also: #begin_of_the_begin)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The <span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span> representing the earliest possible date for the start of this
+period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bote-instance_method" title="#bote (instance method)">- (Date) <strong>bote</strong> </a>
+    
+
+    
+      (also: #begin_of_the_end)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The <span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span> representing the earliest possible date for the end of this
+period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#direct_transfer-instance_method" title="#direct_transfer (instance method)">- (Boolean, Nil) <strong>direct_transfer</strong> </a>
+    
+
+    
+      (also: #direct_transfer?)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Was this record directly transferred to the following <span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#direct_transfer%3D-instance_method" title="#direct_transfer= (instance method)">- (Boolan, Nil) <strong>direct_transfer=</strong>(b) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set this period to indicate a direct transfer to the next period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#earliest_definite-instance_method" title="#earliest_definite (instance method)">- (Date, Nil) <strong>earliest_definite</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Find the earliest definite date for this period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#earliest_possible-instance_method" title="#earliest_possible (instance method)">- (Date, Nil) <strong>earliest_possible</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Find the earliest possible date for this period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ending-instance_method" title="#ending (instance method)">- (TimeSpan) <strong>ending</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The <span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span> representing the completion of this period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ending%3D-instance_method" title="#ending= (instance method)">- (TimeSpan) <strong>ending=</strong>(b) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set the ending of the period to the value given.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eotb-instance_method" title="#eotb (instance method)">- (Date) <strong>eotb</strong> </a>
+    
+
+    
+      (also: #end_of_the_begin)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The <span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span> representing the latest possible date for the start of this
+period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eote-instance_method" title="#eote (instance method)">- (Date) <strong>eote</strong> </a>
+    
+
+    
+      (also: #end_of_the_end)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The <span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span> representing the latest possible date for the end of this
+period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#generate_output-instance_method" title="#generate_output (instance method)">- (PeriodOutput) <strong>generate_output</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Denormalize the period into a <span class='object_link'><a href="PeriodOutput.html" title="MuseumProvenance::PeriodOutput (class)">PeriodOutput</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_note%3F-instance_method" title="#has_note? (instance method)">- (Boolean) <strong>has_note?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Does the record have a footnote.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Period) <strong>initialize</strong>(_name = &quot;&quot;, opts = Hash.new) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new [Period}.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_after%3F-instance_method" title="#is_after? (instance method)">- (Boolean) <strong>is_after?</strong>(p) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determine if this period is after the provided period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_before%3F-instance_method" title="#is_before? (instance method)">- (Boolean) <strong>is_before?</strong>(p) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determine if this period is before the provided period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_ongoing%3F-instance_method" title="#is_ongoing? (instance method)">- (Boolean) <strong>is_ongoing?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Is this period currently active.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#latest_definite-instance_method" title="#latest_definite (instance method)">- (Date, Nil) <strong>latest_definite</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The latest definite date for this period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#latest_possible-instance_method" title="#latest_possible (instance method)">- (Date, Nil) <strong>latest_possible</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Find the latest possible date for this period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#max_timespan-instance_method" title="#max_timespan (instance method)">- (TimeSpan, Nil) <strong>max_timespan</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The <span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span> of the longest possible duration of this period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parsable%3F-instance_method" title="#parsable? (instance method)">- (Boolean) <strong>parsable?</strong>(strict = false) </a>
+    
+
+    
+      (also: #parsable)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Does this period output provenance that matches the original text used to
+generate it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#parse_time_string-instance_method" title="#parse_time_string (instance method)">- (String) <strong>parse_time_string</strong>(str) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Extract a time phrase out of a string, and use it to set the dates for this
+period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#provenance-instance_method" title="#provenance (instance method)">- (String) <strong>provenance</strong> </a>
+    
+
+    
+      (also: #to_s)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Generate a provenance record for this string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#siblings-instance_method" title="#siblings (instance method)">- (Array&lt;Period&gt;) <strong>siblings</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An array of all the periods linked to this period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#time_string-instance_method" title="#time_string (instance method)">- (String) <strong>time_string</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Generate a textual representation of the timeframe of the period.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_h-instance_method" title="#to_h (instance method)">- (Hash) <strong>to_h</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Denormalize the period into a [Hash].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#was_directly_transferred-instance_method" title="#was_directly_transferred (instance method)">- (Boolean, Nil) <strong>was_directly_transferred</strong> </a>
+    
+
+    
+      (also: #was_directly_transferred?)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Was this record directly received from the preceding <span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span></tt>) <strong>initialize</strong>(_name = &quot;&quot;, opts = Hash.new) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>replace the generic hash with a PeriodOutput.</p>
+</div>
+  </div>
+
+
+<p>Create a new [Period}.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>_name</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&quot;&quot;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The party name of the Period</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>opts</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>Hash.new</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>allows a period to be initialized using a hash.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 62</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid__name'>_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span><span class='op'>=</span><span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span>
+ <span class='kw'>begin</span>
+   <span class='ivar'>@direct_transfer</span> <span class='op'>=</span> <span class='kw'>false</span>
+   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_primary_owner'>primary_owner</span> <span class='op'>=</span> <span class='kw'>true</span>
+
+   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span> <span class='op'>=</span> <span class='id identifier rubyid__name'>_name</span> 
+
+   <span class='comment'># remove blank values
+</span>   <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+
+   <span class='comment'># Intialize party
+</span>   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span>  <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:party</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:party</span><span class='rbracket'>]</span>
+   <span class='ivar'>@party</span><span class='period'>.</span><span class='id identifier rubyid_certain'>certain</span><span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:party_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:party_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+   <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:birth</span><span class='rbracket'>]</span>
+     <span class='ivar'>@party</span><span class='period'>.</span><span class='id identifier rubyid_birth'>birth</span><span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_jd'>jd</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:birth</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+     <span class='ivar'>@party</span><span class='period'>.</span><span class='id identifier rubyid_birth'>birth</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span><span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:birth_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:birth_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+     <span class='ivar'>@party</span><span class='period'>.</span><span class='id identifier rubyid_birth'>birth</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span><span class='op'>=</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>YEAR</span>
+   <span class='kw'>end</span>
+   <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:death</span><span class='rbracket'>]</span>
+
+     <span class='id identifier rubyid_death_year'>death_year</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_at'>at</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:death</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_date'>to_date</span><span class='period'>.</span><span class='id identifier rubyid_year'>year</span>
+     <span class='ivar'>@party</span><span class='period'>.</span><span class='id identifier rubyid_death'>death</span><span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_jd'>jd</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:death</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_year'>year</span><span class='rparen'>)</span>
+     <span class='ivar'>@party</span><span class='period'>.</span><span class='id identifier rubyid_death'>death</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span><span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:death_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:death_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+     <span class='ivar'>@party</span><span class='period'>.</span><span class='id identifier rubyid_death'>death</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>=</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>YEAR</span>
+   <span class='kw'>end</span>
+
+   <span class='comment'># Initialize global state
+</span>   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_acquisition_method'>acquisition_method</span> <span class='op'>=</span> <span class='const'>AcquisitionMethod</span><span class='period'>.</span><span class='id identifier rubyid_find_by_name'>find_by_name</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:acquisition_method</span><span class='rbracket'>]</span><span class='rparen'>)</span> 
+   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:period_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:period_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_primary_owner'>primary_owner</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:primary_owner</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:primary_owner</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+   <span class='comment'># initialize location
+</span>   <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:location</span><span class='rbracket'>]</span>
+     <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:location</span><span class='rbracket'>]</span>
+     <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_certain'>certain</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:location_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:location_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+   <span class='kw'>end</span>
+   <span class='comment'># intialize metadata
+</span>   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_stock_number'>stock_number</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:stock_number</span><span class='rbracket'>]</span>
+   <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:footnote</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
+     <span class='comment'>#puts &quot;opts[:footnote]: #{opts[:footnote]}&quot;
+</span>     <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_note'>note</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:footnote</span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+   <span class='kw'>end</span>
+
+   <span class='comment'># intitialze dates
+</span>   <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:bote</span><span class='rbracket'>]</span>
+     <span class='id identifier rubyid_b_o_t_e'>b_o_t_e</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_jd'>jd</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:bote</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+     <span class='id identifier rubyid_b_o_t_e'>b_o_t_e</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:bote_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:bote_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+     <span class='id identifier rubyid_b_o_t_e'>b_o_t_e</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:bote_precision</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:bote_precision</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+   <span class='kw'>end</span>
+   <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eote</span><span class='rbracket'>]</span>
+     <span class='id identifier rubyid_e_o_t_e'>e_o_t_e</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_jd'>jd</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eote</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+     <span class='id identifier rubyid_e_o_t_e'>e_o_t_e</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eote_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eote_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+     <span class='id identifier rubyid_e_o_t_e'>e_o_t_e</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eote_precision</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eote_precision</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+   <span class='kw'>end</span>
+   <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:botb</span><span class='rbracket'>]</span>
+     <span class='id identifier rubyid_b_o_t_b'>b_o_t_b</span> <span class='op'>=</span>  <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_jd'>jd</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:botb</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+     <span class='id identifier rubyid_b_o_t_b'>b_o_t_b</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:botb_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:botb_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+     <span class='id identifier rubyid_b_o_t_b'>b_o_t_b</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:botb_precision</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:botb_precision</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+   <span class='kw'>end</span>
+   <span class='kw'>if</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eotb</span><span class='rbracket'>]</span>
+     <span class='id identifier rubyid_e_o_t_b'>e_o_t_b</span> <span class='op'>=</span>  <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_jd'>jd</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eotb</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+     <span class='id identifier rubyid_e_o_t_b'>e_o_t_b</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eotb_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eotb_certainty</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+     <span class='id identifier rubyid_e_o_t_b'>e_o_t_b</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>=</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eotb_precision</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='kw'>unless</span> <span class='id identifier rubyid_opts'>opts</span><span class='lbracket'>[</span><span class='symbol'>:eotb_precision</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+   <span class='kw'>end</span>
+   <span class='ivar'>@beginning</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_b_o_t_b'>b_o_t_b</span><span class='comma'>,</span><span class='id identifier rubyid_e_o_t_b'>e_o_t_b</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_b_o_t_b'>b_o_t_b</span> <span class='op'>||</span> <span class='id identifier rubyid_e_o_t_b'>e_o_t_b</span>
+   <span class='ivar'>@ending</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_b_o_t_e'>b_o_t_e</span><span class='comma'>,</span><span class='id identifier rubyid_e_o_t_e'>e_o_t_e</span><span class='rparen'>)</span>    <span class='kw'>if</span> <span class='id identifier rubyid_b_o_t_e'>b_o_t_e</span> <span class='op'>||</span> <span class='id identifier rubyid_e_o_t_e'>e_o_t_e</span> 
+ <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\nProblem with this period:\n</span><span class='tstring_end'>&quot;</span></span>
+   <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_e'>e</span>
+   <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_inspect'>inspect</span>
+   <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
+ <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="acquisition_method=-instance_method"></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="acquisition_method-instance_method">
+  
+    - (<tt><span class='object_link'><a href="AcquisitionMethod.html" title="MuseumProvenance::AcquisitionMethod (class)">AcquisitionMethod</a></span></tt>) <strong>acquisition_method</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The method of acqusition of this period.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="AcquisitionMethod.html" title="MuseumProvenance::AcquisitionMethod (class)">AcquisitionMethod</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method of acqusition of this period.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 16</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="location=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="location-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Location.html" title="MuseumProvenance::Location (class)">Location</a></span></tt>) <strong>location</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The location where the artwork was located during this period.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Location.html" title="MuseumProvenance::Location (class)">Location</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The location where the artwork was located during this period.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 43</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="next_period=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="next_period-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span></tt>) <strong>next_period</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The location immediately preceding this period within the record.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The location immediately preceding this period within the record.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 46</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="note=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="note-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>note</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The footnote associated with this period.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The footnote associated with this period.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 19</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="original_text=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="original_text-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>original_text</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The text used to generate this record. This is the text used for
+verification and comparison against the generated record.</p>
+
+<p>It can be manually set if needed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 22</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="party=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="party-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Party.html" title="MuseumProvenance::Party (class)">Party</a></span></tt>) <strong>party</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The party who owned the work during this period.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Party.html" title="MuseumProvenance::Party (class)">Party</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The party who owned the work during this period.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 40</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="previous_period=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="previous_period-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span></tt>) <strong>previous_period</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The location immediately following this period within the record.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The location immediately following this period within the record.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 50</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="primary_owner=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="primary_owner-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>primary_owner</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Is the owner a primary owner, or a dealer, sale, or gallery? This is a
+concept defined in the AAM standard for Provenance.  In the standard,
+non-primary owners have their record defined by wrapping the provenance
+clause in parentheses.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Returns true if the owner is considered a primary owner.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 29</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="stock_number=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="stock_number-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>stock_number</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The stock number of the artwork in the collection of this owner.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The stock number of the artwork in the collection of this owner.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 36</span>
+
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="formatted_footnote-class_method">
+  
+    + (<tt>Object</tt>) <strong>formatted_footnote</strong>(number, note) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+721
+722
+723</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 721</span>
+
+<span class='kw'>def</span> <span class='const'>Period</span><span class='period'>.</span><span class='id identifier rubyid_formatted_footnote'>formatted_footnote</span><span class='lparen'>(</span><span class='id identifier rubyid_number'>number</span><span class='comma'>,</span><span class='id identifier rubyid_note'>note</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_number'>number</span><span class='embexpr_end'>}</span><span class='tstring_content'>] </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_note'>note</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_note'>note</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="actually_parse_time_string-instance_method">
+  
+    - (<tt>Object</tt>) <strong>actually_parse_time_string</strong>(str, recursion_count = 0) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>recursion_count</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Fixnum.html" title="Fixnum (class)">Fixnum</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Used to count number of recursions to prevent infinite recursion</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DateError.html" title="MuseumProvenance::DateError (class)">DateError</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 200</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_actually_parse_time_string'>actually_parse_time_string</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='comma'>,</span> <span class='id identifier rubyid_recursion_count'>recursion_count</span> <span class='op'>=</span> <span class='int'>0</span><span class='rparen'>)</span> 
+  <span class='id identifier rubyid_time_debug'>time_debug</span> <span class='op'>=</span> <span class='kw'>false</span><span class='comment'># str.include? &quot;Newcastle&quot;
+</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_str'>str</span> <span class='kw'>if</span> <span class='id identifier rubyid_time_debug'>time_debug</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_recursion_count'>recursion_count</span> <span class='op'>==</span> <span class='int'>0</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span> <span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ending'>ending</span> <span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>DateError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Too much recursion</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_recursion_count'>recursion_count</span> <span class='op'>&gt;</span> <span class='int'>10</span>
+
+  <span class='comment'>#substitution for (horrible) date pattern:  &quot;1985-86&quot; becomes &quot;1985 until 1986&quot;
+</span>  <span class='id identifier rubyid_horrid_date_range_regex'>horrid_date_range_regex</span> <span class='op'>=</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(\d{2})(\d{2})\s?[-–—]\s?(\d{2})(?!-)\b</span><span class='regexp_end'>/</span></span>
+  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='id identifier rubyid_horrid_date_range_regex'>horrid_date_range_regex</span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>\1\2 until \1\3</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'>#substitution for trivial date pattern: &quot;1918-1919 or 1918/1919&quot; becomes &quot;1918 until 1919&quot;
+</span>  <span class='id identifier rubyid_date_range_regex'>date_range_regex</span> <span class='op'>=</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(\d{4})\s?[-–—\/]\s?(\d{4})(?!-)</span><span class='regexp_end'>/</span></span>
+  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='id identifier rubyid_date_range_regex'>date_range_regex</span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>\1 until \2</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'># substitution for &quot;May 5-6, 1980&quot; becomes &quot;May 5, 1980 until May 6, 1980&quot;
+</span>  <span class='id identifier rubyid_multiday_regex'>multiday_regex</span> <span class='op'>=</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\s(\d{1,2})\s?[–—-]\s?(\d{1,2}),\s(\d{2,4})</span><span class='regexp_end'>/i</span></span>
+  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='id identifier rubyid_multiday_regex'>multiday_regex</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>\1 \2, \4 until \1 \3, \4</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'># substitution for &quot;30-31 January 1922&quot; becomes &quot;January 30, 1922 until January 31, 1922&quot;
+</span>  <span class='id identifier rubyid_multiday_regex_2'>multiday_regex_2</span> <span class='op'>=</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\s(\d{1,2})\s?[–—-]\s?(\d{1,2})\s(jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)\,?\s(\d{2,4})</span><span class='regexp_end'>/i</span></span>
+  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='id identifier rubyid_multiday_regex_2'>multiday_regex_2</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> \3 \1, \4 until \3 \2, \4</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='comment'># substitution for &quot;23 October - 12 November 1926&quot;
+</span>  <span class='id identifier rubyid_multiday_regex_3'>multiday_regex_3</span> <span class='op'>=</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>
+     \b(\d{1,2})\s
+     (jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)
+     \s?[–—-]\s?
+     (\d{1,2})\s
+     (jan|january|feb|february|febuary|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december)
+     \s(\d{1,4})
+  </span><span class='regexp_end'>/ix</span></span>
+  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='id identifier rubyid_multiday_regex_3'>multiday_regex_3</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> \2 \1, \5 until \4 \3, \5</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  
+  <span class='comment'># Substitution for &quot;c. 1945&quot; or &quot;ca. 1945&quot; becomes &quot;circa 1945&quot;
+</span>  <span class='id identifier rubyid_circa_regex'>circa_regex</span> <span class='op'>=</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\bc(?:a)?\.\s(\d{4})\b</span><span class='regexp_end'>/</span></span>
+  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='id identifier rubyid_circa_regex'>circa_regex</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>circa \1</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_puts'>puts</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>2: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_str'>str</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>  <span class='kw'>if</span> <span class='id identifier rubyid_time_debug'>time_debug</span>
+
+
+<span class='id identifier rubyid_tokens'>tokens</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>circa</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>on</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>before</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>by</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>as of</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>after</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until sometime after</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until at least</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until sometime before</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>in</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>between</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sometime between</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until between</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until sometime between</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>to at least</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_found_token'>found_token</span> <span class='op'>=</span> <span class='id identifier rubyid_tokens'>tokens</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span> <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_scan'>scan</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\b</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_t'>t</span><span class='embexpr_end'>}</span><span class='tstring_content'>(?=\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|[1-9]|the\s[1-9]))\b</span><span class='regexp_end'>/i</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>?</span> <span class='kw'>nil</span> <span class='op'>:</span> <span class='id identifier rubyid_t'>t</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_sort_by!'>sort_by!</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_reverse'>reverse</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_found_token'>found_token</span> <span class='kw'>if</span> <span class='id identifier rubyid_time_debug'>time_debug</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_found_token'>found_token</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_vals'>vals</span> <span class='op'>=</span> <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>,</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    
+    <span class='id identifier rubyid_current_phrase'>current_phrase</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_last_date'>last_date</span> <span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='kw'>while</span> <span class='id identifier rubyid_vals'>vals</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='op'>&gt;=</span> <span class='int'>1</span>
+      <span class='id identifier rubyid_word'>word</span> <span class='op'>=</span> <span class='id identifier rubyid_vals'>vals</span><span class='period'>.</span><span class='id identifier rubyid_pop'>pop</span>
+      <span class='id identifier rubyid_current_phrase'>current_phrase</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span> <span class='id identifier rubyid_word'>word</span>
+
+      <span class='comment'># Look for dates that have embedded commas in them.  October 14, 1980, August, 1980
+</span>      <span class='id identifier rubyid_date_phrase'>date_phrase</span> <span class='op'>=</span> <span class='id identifier rubyid_current_phrase'>current_phrase</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>,</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_current_date'>current_date</span> <span class='op'>=</span> <span class='const'>DateExtractor</span><span class='period'>.</span><span class='id identifier rubyid_find_dates_in_string'>find_dates_in_string</span><span class='lparen'>(</span><span class='id identifier rubyid_date_phrase'>date_phrase</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+      <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_current_date'>current_date</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_current_date'>current_date</span> <span class='op'>==</span> <span class='id identifier rubyid_last_date'>last_date</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_current_date'>current_date</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>==</span> <span class='id identifier rubyid_last_date'>last_date</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span>
+        <span class='id identifier rubyid_vals'>vals</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='id identifier rubyid_current_phrase'>current_phrase</span><span class='period'>.</span><span class='id identifier rubyid_shift'>shift</span>
+        <span class='kw'>break</span>
+      <span class='kw'>end</span>
+      <span class='id identifier rubyid_last_date'>last_date</span> <span class='op'>=</span> <span class='id identifier rubyid_current_date'>current_date</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='id identifier rubyid_vals'>vals</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>,</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> 
+    <span class='id identifier rubyid_date_string'>date_string</span> <span class='op'>=</span> <span class='id identifier rubyid_current_phrase'>current_phrase</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>,</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>+=</span> <span class='const'>DateExtractor</span><span class='period'>.</span><span class='id identifier rubyid_remove_dates_in_string'>remove_dates_in_string</span><span class='lparen'>(</span><span class='id identifier rubyid_date_string'>date_string</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\s\s*</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_str'>str</span><span class='comma'>,</span> <span class='id identifier rubyid_date_string'>date_string</span> <span class='op'>=</span> <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\b</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_found_token'>found_token</span><span class='embexpr_end'>}</span><span class='tstring_content'>\b</span><span class='regexp_end'>/i</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_date_string'>date_string</span><span class='period'>.</span><span class='id identifier rubyid_strip!'>strip!</span> <span class='kw'>unless</span> <span class='id identifier rubyid_date_string'>date_string</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_str'>str</span><span class='embexpr_end'>}</span><span class='tstring_content'>, </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_date_string'>date_string</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span>  <span class='id identifier rubyid_time_debug'>time_debug</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>case</span> <span class='lparen'>(</span><span class='id identifier rubyid_found_token'>found_token</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span> <span class='kw'>rescue</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+     <span class='kw'>when</span> <span class='kw'>nil</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_date_string'>date_string</span><span class='rparen'>)</span>
+     <span class='kw'>when</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>on</span><span class='tstring_end'>&quot;</span></span>
+       <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_date_string'>date_string</span><span class='rparen'>)</span>
+       <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ending'>ending</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_date_string'>date_string</span><span class='rparen'>)</span> <span class='kw'>if</span>  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span><span class='period'>.</span><span class='id identifier rubyid_earliest_raw'>earliest_raw</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>==</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>DAY</span>
+     <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>circa</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_date_string'>date_string</span><span class='rparen'>)</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span><span class='period'>.</span><span class='id identifier rubyid_earliest_raw'>earliest_raw</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span> <span class='op'>=</span> <span class='kw'>false</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span><span class='period'>.</span><span class='id identifier rubyid_latest_raw'>latest_raw</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span> <span class='op'>=</span> <span class='kw'>false</span>            
+     <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>before</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>by</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>as of</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span> <span class='op'>=</span><span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_date_string'>date_string</span><span class='rparen'>)</span>
+     <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>after</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_date_string'>date_string</span><span class='comma'>,</span><span class='kw'>nil</span><span class='rparen'>)</span>
+     <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until sometime after</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until at least</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>to at least</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ending'>ending</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_date_string'>date_string</span><span class='comma'>,</span><span class='kw'>nil</span><span class='rparen'>)</span>
+     <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until</span><span class='tstring_end'>&quot;</span></span>
+        <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ending'>ending</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_date_string'>date_string</span><span class='comma'>,</span><span class='id identifier rubyid_date_string'>date_string</span><span class='rparen'>)</span>
+     <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until sometime before</span><span class='tstring_end'>&quot;</span></span> 
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ending'>ending</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='kw'>nil</span><span class='comma'>,</span><span class='id identifier rubyid_date_string'>date_string</span><span class='rparen'>)</span>
+     <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>in</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='kw'>nil</span><span class='comma'>,</span><span class='id identifier rubyid_date_string'>date_string</span><span class='rparen'>)</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ending'>ending</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_date_string'>date_string</span><span class='comma'>,</span><span class='kw'>nil</span><span class='rparen'>)</span>
+     <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>between</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sometime between</span><span class='tstring_end'>&quot;</span></span>
+      <span class='id identifier rubyid_dates'>dates</span> <span class='op'>=</span> <span class='id identifier rubyid_date_string'>date_string</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> and </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_dates'>dates</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span><span class='id identifier rubyid_dates'>dates</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+      <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until between</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until sometime between</span><span class='tstring_end'>&quot;</span></span>
+       <span class='id identifier rubyid_dates'>dates</span> <span class='op'>=</span> <span class='id identifier rubyid_date_string'>date_string</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> and </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+       <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ending'>ending</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_dates'>dates</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='comma'>,</span><span class='id identifier rubyid_dates'>dates</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span> 
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span>  <span class='const'>DateExtractor</span><span class='period'>.</span><span class='id identifier rubyid_remove_dates_in_string'>remove_dates_in_string</span><span class='lparen'>(</span><span class='id identifier rubyid_date_string'>date_string</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_strip!'>strip!</span>
+  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>,$</span><span class='regexp_end'>/</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='comment'># trailing commas
+</span>  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_strip!'>strip!</span>
+
+  <span class='comment'># recursively run until it can&#39;t find another date
+</span>  <span class='kw'>begin</span>
+    <span class='id identifier rubyid_rerun'>rerun</span> <span class='op'>=</span> <span class='id identifier rubyid_actually_parse_time_string'>actually_parse_time_string</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='comma'>,</span> <span class='id identifier rubyid_recursion_count'>recursion_count</span> <span class='op'>+</span><span class='int'>1</span><span class='rparen'>)</span>
+  <span class='kw'>rescue</span> <span class='const'>DateError</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_str'>str</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_rerun'>rerun</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="beginning-instance_method">
+  
+    - (<tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>) <strong>beginning</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The <span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span> representing the starting of this period.</p>
+
+<p>This will return the raw timespan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>#eotb</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+545
+546
+547</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 545</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_beginning'>beginning</span>
+  <span class='ivar'>@beginning</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="beginning=-instance_method">
+  
+    - (<tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>) <strong>beginning=</strong>(val) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Set the beginning of the period to the value given.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>val</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>, <tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>, <tt><span class='object_link'><a href="../Fixnum.html" title="Fixnum (class)">Fixnum</a></span></tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A value to search for a TimeSpan</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DateError.html" title="MuseumProvenance::DateError (class)">DateError</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>if a date cannot be found within the val</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+536
+537
+538</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 536</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_beginning='>beginning=</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+  <span class='ivar'>@beginning</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="botb-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>) <strong>botb</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='begin_of_the_begin-instance_method'>begin_of_the_begin</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The <span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span> representing the earliest possible date for the start of this
+period.</p>
+
+<p>This is the last date by which you are certain the work was NOT owned by
+the relevant party.</p>
+
+<p>This best way to think about this date is it is the last date where you
+know for sure that the period was NOT valid.  For example, if you know that
+an artwork was owned by Jane in Feb. 2000, and you know that the artwork
+was owned by Jill in March 2001, for the Jill&#39;s period of ownership the
+<span class='object_link'><a href="#botb-instance_method" title="MuseumProvenance::Period#botb (method)">#botb</a></span> is Feb. 2000.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+576
+577
+578</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 576</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_botb'>botb</span> 
+  <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span> <span class='kw'>if</span> <span class='ivar'>@beginning</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bote-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>) <strong>bote</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='begin_of_the_end-instance_method'>begin_of_the_end</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The <span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span> representing the earliest possible date for the end of this
+period.</p>
+
+<p>This is the last date by which you are certain the work was owned by the
+relevant party.</p>
+
+<p>This best way to think about this date is it is the first date where you
+know for sure that the period WAS valid.  For example, if you know that an
+artwork was owned by Jane in Feb. 2000, and you know that the artwork was
+owned by Jill in March 2001, for the Jane&#39;s period of ownership the
+<span class='object_link'><a href="#bote-instance_method" title="MuseumProvenance::Period#bote (method)">#bote</a></span> is Feb. 2000.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+609
+610
+611</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 609</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_bote'>bote</span> 
+  <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span> <span class='kw'>if</span> <span class='ivar'>@ending</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="direct_transfer-instance_method">
+  
+    - (<tt>Boolean</tt>, <tt>Nil</tt>) <strong>direct_transfer</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='direct_transfer?-instance_method'>direct_transfer?</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Was this record directly transferred to the following <span class='object_link'><a href="" title="MuseumProvenance::Period (class)">MuseumProvenance::Period</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>Nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>True if it was transferred directly, false if it wasn&#39;t, Nil if is
+there is no following record.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+442
+443
+444</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 442</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_direct_transfer'>direct_transfer</span>
+  <span class='ivar'>@next_period</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='kw'>nil</span> <span class='op'>:</span> <span class='ivar'>@direct_transfer</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="direct_transfer=-instance_method">
+  
+    - (<tt>Boolan</tt>, <tt>Nil</tt>) <strong>direct_transfer=</strong>(b) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Set this period to indicate a direct transfer to the next period.</p>
+
+<p>Will return nil if there is not a next period.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>b</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolan</tt>, <tt>Nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 423</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_direct_transfer='>direct_transfer=</span> <span class='lparen'>(</span><span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='ivar'>@next_period</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='ivar'>@direct_transfer</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@direct_transfer</span> <span class='op'>=</span> <span class='id identifier rubyid_b'>b</span><span class='period'>.</span><span class='id identifier rubyid_to_bool'>to_bool</span>
+  <span class='kw'>end</span>
+  <span class='comment'>#if @direct_transfer
+</span>    <span class='comment'># if @ending &amp;&amp; @next_period.beginning
+</span>    <span class='comment'>#   raise DateError, &quot;Date Mismatch between #{@ending} and #{@next_period.beginning}&quot; unless @ending == @next_period.beginning
+</span>    <span class='comment'># elsif @ending &amp;&amp; !@next_period.beginning
+</span>    <span class='comment'>#   @next_period.beginning = @ending
+</span>    <span class='comment'># elsif @next_period.beginning &amp;&amp; !@ending
+</span>    <span class='comment'>#   @ending = @next_period.beginning
+</span>    <span class='comment'># end
+</span>  <span class='comment'>#end
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="earliest_definite-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>, <tt>Nil</tt>) <strong>earliest_definite</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Find the earliest definite date for this period</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>, <tt>Nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The earliest definite date for this period</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+703
+704
+705
+706
+707</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 703</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_earliest_definite'>earliest_definite</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_eotb'>eotb</span> <span class='kw'>if</span> <span class='id identifier rubyid_eotb'>eotb</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_bote'>bote</span> <span class='kw'>if</span> <span class='id identifier rubyid_bote'>bote</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="earliest_possible-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>, <tt>Nil</tt>) <strong>earliest_possible</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Find the earliest possible date for this period</p>
+
+<p>This differs from <span class='object_link'><a href="#botb-instance_method" title="MuseumProvenance::Period#botb (method)">#botb</a></span> in that it will traverse the list backwards 
+looking for a date.  This is to handle periods that are ordered, but
+without any defined dates.  Will return nil if no date can be found.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>, <tt>Nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The earliest possible date for this period</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 661</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_earliest_possible'>earliest_possible</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_begin_of_the_begin'>begin_of_the_begin</span> <span class='kw'>if</span> <span class='id identifier rubyid_begin_of_the_begin'>begin_of_the_begin</span>
+  <span class='id identifier rubyid_d'>d</span> <span class='op'>=</span> <span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_birth'>birth</span> <span class='kw'>if</span> <span class='id identifier rubyid_party'>party</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_birth'>birth</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_previous_period'>previous_period</span>
+    <span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='id identifier rubyid_previous_period'>previous_period</span><span class='period'>.</span><span class='id identifier rubyid_earliest_possible'>earliest_possible</span>
+    <span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='id identifier rubyid_previous_period'>previous_period</span><span class='period'>.</span><span class='id identifier rubyid_begin_of_the_begin'>begin_of_the_begin</span> <span class='kw'>if</span> <span class='id identifier rubyid_previous_period'>previous_period</span><span class='period'>.</span><span class='id identifier rubyid_begin_of_the_begin'>begin_of_the_begin</span>
+    <span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='id identifier rubyid_previous_period'>previous_period</span><span class='period'>.</span><span class='id identifier rubyid_end_of_the_begin'>end_of_the_begin</span> <span class='kw'>if</span> <span class='id identifier rubyid_previous_period'>previous_period</span><span class='period'>.</span><span class='id identifier rubyid_end_of_the_begin'>end_of_the_begin</span>
+    <span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='id identifier rubyid_previous_period'>previous_period</span><span class='period'>.</span><span class='id identifier rubyid_begin_of_the_end'>begin_of_the_end</span> <span class='kw'>if</span> <span class='id identifier rubyid_previous_period'>previous_period</span><span class='period'>.</span><span class='id identifier rubyid_begin_of_the_end'>begin_of_the_end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_n'>n</span> <span class='kw'>if</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_d'>d</span> 
+  <span class='kw'>return</span> <span class='id identifier rubyid_d'>d</span> <span class='kw'>if</span> <span class='id identifier rubyid_d'>d</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_n'>n</span>
+  <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_n'>n</span><span class='comma'>,</span><span class='id identifier rubyid_d'>d</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span> <span class='kw'>if</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_d'>d</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ending-instance_method">
+  
+    - (<tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>) <strong>ending</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The <span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span> representing the completion of this period. This will return
+the raw timespan.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>#eote</li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+561
+562
+563</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 561</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ending'>ending</span>
+  <span class='ivar'>@ending</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="ending=-instance_method">
+  
+    - (<tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>) <strong>ending=</strong>(b) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Set the ending of the period to the value given.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>val</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>, <tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>, <tt><span class='object_link'><a href="../Fixnum.html" title="Fixnum (class)">Fixnum</a></span></tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A value to search for a TimeSpan</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="DateError.html" title="MuseumProvenance::DateError (class)">DateError</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>if a date cannot be found within the val</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+553
+554
+555</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 553</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ending='>ending=</span><span class='lparen'>(</span><span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
+  <span class='ivar'>@ending</span> <span class='op'>=</span> <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="eotb-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>) <strong>eotb</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='end_of_the_begin-instance_method'>end_of_the_begin</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The <span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span> representing the latest possible date for the start of this
+period.</p>
+
+<p>This is the first date by which you are certain the work was owned by the
+relevant party.</p>
+
+<p>This best way to think about this date is it is the first date where you
+know for sure that the period WAS valid.  For example, if you know that an
+artwork was owned by Jane in Feb. 2000, and you know that the artwork was
+owned by Jill in March 2001, for the Jill&#39;s period of ownership the
+<span class='object_link'><a href="#eotb-instance_method" title="MuseumProvenance::Period#eotb (method)">#eotb</a></span> is March 2001.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+593
+594
+595</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 593</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_eotb'>eotb</span> 
+  <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span> <span class='kw'>if</span> <span class='ivar'>@beginning</span> 
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="eote-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>) <strong>eote</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='end_of_the_end-instance_method'>end_of_the_end</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The <span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span> representing the latest possible date for the end of this
+period.</p>
+
+<p>This is the first date by which you are certain the work was NOT owned by
+the relevant party.</p>
+
+<p>This best way to think about this date is it is the first date where you
+know for sure that the period WAS valid.  For example, if you know that an
+artwork was owned by Jane in Feb. 2000, and you know that the artwork was
+owned by Jill in March 2001, for the Jane&#39;s period of ownership the
+<span class='object_link'><a href="#eote-instance_method" title="MuseumProvenance::Period#eote (method)">#eote</a></span> is March 2001.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+625
+626
+627</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 625</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_eote'>eote</span> 
+  <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span> <span class='kw'>if</span> <span class='ivar'>@ending</span> 
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="generate_output-instance_method">
+  
+    - (<tt><span class='object_link'><a href="PeriodOutput.html" title="MuseumProvenance::PeriodOutput (class)">PeriodOutput</a></span></tt>) <strong>generate_output</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Denormalize the period into a <span class='object_link'><a href="PeriodOutput.html" title="MuseumProvenance::PeriodOutput (class)">MuseumProvenance::PeriodOutput</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="PeriodOutput.html" title="MuseumProvenance::PeriodOutput (class)">PeriodOutput</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a populated Struct containing the <span class='object_link'><a href="" title="MuseumProvenance::Period (class)">MuseumProvenance::Period</a></span>&#39;s information.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 141</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_generate_output'>generate_output</span>
+  <span class='id identifier rubyid_o'>o</span> <span class='op'>=</span> <span class='const'>PeriodOutput</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_period_certainty'>period_certainty</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_acquisition_method'>acquisition_method</span> <span class='op'>=</span> <span class='id identifier rubyid_acquisition_method'>acquisition_method</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='kw'>if</span> <span class='id identifier rubyid_acquisition_method'>acquisition_method</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_party_certainty'>party_certainty</span> <span class='op'>=</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_death'>death</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_death'>death</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_death'>death</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_death_certainty'>death_certainty</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_death'>death</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_birth'>birth</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_birth'>birth</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_birth'>birth</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_birth_certainty'>birth_certainty</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_birth'>birth</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_location'>location</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_location_certainty'>location_certainty</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_location'>location</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='ivar'>@beginning</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_botb'>botb</span> <span class='op'>=</span> <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_earliest_raw'>earliest_raw</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_botb_certainty'>botb_certainty</span> <span class='op'>=</span> <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_earliest_raw'>earliest_raw</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_botb_precision'>botb_precision</span> <span class='op'>=</span> <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_earliest_raw'>earliest_raw</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_eotb'>eotb</span> <span class='op'>=</span> <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_latest_raw'>latest_raw</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_eotb_certainty'>eotb_certainty</span> <span class='op'>=</span> <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_latest_raw'>latest_raw</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_eotb_precision'>eotb_precision</span> <span class='op'>=</span> <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_latest_raw'>latest_raw</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='ivar'>@ending</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_bote'>bote</span> <span class='op'>=</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_earliest_raw'>earliest_raw</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_bote_certainty'>bote_certainty</span> <span class='op'>=</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_earliest_raw'>earliest_raw</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_bote_precision'>bote_precision</span> <span class='op'>=</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_earliest_raw'>earliest_raw</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_eote'>eote</span> <span class='op'>=</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_latest_raw'>latest_raw</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_eote_certainty'>eote_certainty</span> <span class='op'>=</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_latest_raw'>latest_raw</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_eote_precision'>eote_precision</span> <span class='op'>=</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_latest_raw'>latest_raw</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_original_text'>original_text</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_original_text'>original_text</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_provenance'>provenance</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_provenance'>provenance</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_parsable'>parsable</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_parsable?'>parsable?</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_direct_transfer'>direct_transfer</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_direct_transfer?'>direct_transfer?</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_stock_number'>stock_number</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_stock_number'>stock_number</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_footnote'>footnote</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_note'>note</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>; </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_note'>note</span>
+  <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_primary_owner'>primary_owner</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_primary_owner'>primary_owner</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_o'>o</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="has_note?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>has_note?</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Does the record have a footnote</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>True if the record has a footnote</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+477
+478
+479</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 477</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_has_note?'>has_note?</span>
+  <span class='op'>!</span><span class='lparen'>(</span><span class='id identifier rubyid_note'>note</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_note'>note</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_after?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>is_after?</strong>(p) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determine if this period is after the provided period</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>p</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a period to check</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if this period appears after the provided period</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+388
+389
+390
+391
+392
+393
+394
+395</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 388</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_after?'>is_after?</span> <span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_current'>current</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_previous_period'>previous_period</span>
+  <span class='kw'>while</span> <span class='op'>!</span><span class='id identifier rubyid_current'>current</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_current'>current</span> <span class='op'>==</span> <span class='id identifier rubyid_p'>p</span>
+    <span class='id identifier rubyid_current'>current</span> <span class='op'>=</span> <span class='id identifier rubyid_current'>current</span><span class='period'>.</span><span class='id identifier rubyid_previous_period'>previous_period</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_before?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>is_before?</strong>(p) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Determine if this period is before the provided period</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>p</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a period to check</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if this period appears before the provided period</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+376
+377
+378
+379
+380
+381
+382
+383</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 376</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_before?'>is_before?</span> <span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_current'>current</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_next_period'>next_period</span>
+  <span class='kw'>while</span> <span class='op'>!</span><span class='id identifier rubyid_current'>current</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_current'>current</span> <span class='op'>==</span> <span class='id identifier rubyid_p'>p</span>
+    <span class='id identifier rubyid_current'>current</span> <span class='op'>=</span> <span class='id identifier rubyid_current'>current</span><span class='period'>.</span><span class='id identifier rubyid_next_period'>next_period</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="is_ongoing?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>is_ongoing?</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Is this period currently active</p>
+
+<p>This is used to determine if a period continues until the present day. A
+period is defined as ongoing if there is a beginning, no ending, and no
+next period.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+636
+637
+638</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 636</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_ongoing?'>is_ongoing?</span>
+  <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="latest_definite-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>, <tt>Nil</tt>) <strong>latest_definite</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns The latest definite date for this period</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>, <tt>Nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The latest definite date for this period</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+712
+713
+714
+715
+716
+717
+718</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 712</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_latest_definite'>latest_definite</span>
+ <span class='kw'>return</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_date'>to_date</span> <span class='kw'>if</span> <span class='id identifier rubyid_is_ongoing?'>is_ongoing?</span>
+ <span class='kw'>return</span> <span class='id identifier rubyid_bote'>bote</span> <span class='kw'>if</span> <span class='id identifier rubyid_bote'>bote</span>
+ <span class='kw'>return</span> <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_botb'>botb</span> <span class='kw'>if</span> <span class='id identifier rubyid_direct_transfer?'>direct_transfer?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span><span class='period'>.</span><span class='id identifier rubyid_same?'>same?</span>
+ <span class='kw'>return</span> <span class='id identifier rubyid_eotb'>eotb</span> <span class='kw'>if</span> <span class='id identifier rubyid_eotb'>eotb</span>
+ <span class='kw'>return</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="latest_possible-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>, <tt>Nil</tt>) <strong>latest_possible</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Find the latest possible date for this period</p>
+
+<p>This differs from <span class='object_link'><a href="#eote-instance_method" title="MuseumProvenance::Period#eote (method)">#eote</a></span> in that it will traverse the list forwards 
+looking for a date.  This is to handle periods that are ordered, but
+without any defined dates.  Will return nil if no date can be found.  Will
+return today if the period is ongoing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></tt>, <tt>Nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The latest possible date for this period</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 684</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_latest_possible'>latest_possible</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_end_of_the_end'>end_of_the_end</span> <span class='kw'>if</span> <span class='id identifier rubyid_end_of_the_end'>end_of_the_end</span>
+  <span class='kw'>return</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span> <span class='kw'>if</span> <span class='id identifier rubyid_is_ongoing?'>is_ongoing?</span>
+  <span class='id identifier rubyid_d'>d</span> <span class='op'>=</span>  <span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_death'>death</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span> <span class='kw'>if</span> <span class='id identifier rubyid_party'>party</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_death'>death</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_next_period'>next_period</span>
+    <span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_latest_possible'>latest_possible</span>
+    <span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_end_of_the_end'>end_of_the_end</span> <span class='kw'>if</span> <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_end_of_the_end'>end_of_the_end</span>
+    <span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_begin_of_the_end'>begin_of_the_end</span> <span class='kw'>if</span> <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_begin_of_the_end'>begin_of_the_end</span>
+    <span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_end_of_the_begin'>end_of_the_begin</span> <span class='kw'>if</span> <span class='id identifier rubyid_next_period'>next_period</span><span class='period'>.</span><span class='id identifier rubyid_end_of_the_begin'>end_of_the_begin</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_n'>n</span> <span class='kw'>if</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_d'>d</span> 
+  <span class='kw'>return</span> <span class='id identifier rubyid_d'>d</span> <span class='kw'>if</span> <span class='id identifier rubyid_d'>d</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_n'>n</span>
+  <span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_n'>n</span><span class='comma'>,</span><span class='id identifier rubyid_d'>d</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span> <span class='kw'>if</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_d'>d</span>
+  <span class='kw'>return</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="max_timespan-instance_method">
+  
+    - (<tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>, <tt>Nil</tt>) <strong>max_timespan</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The <span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span> of the longest possible duration of this period</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TimeSpan.html" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></tt>, <tt>Nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+645
+646
+647
+648
+649
+650
+651
+652</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 645</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_max_timespan'>max_timespan</span>
+  <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='lparen'>(</span><span class='ivar'>@beginning</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@ending</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_is_ongoing?'>is_ongoing?</span>
+  <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_is_ongoing?'>is_ongoing?</span>
+    <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_botb'>botb</span><span class='comma'>,</span><span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='const'>TimeSpan</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_botb'>botb</span><span class='comma'>,</span><span class='id identifier rubyid_eote'>eote</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parsable?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>parsable?</strong>(strict = false) 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='parsable-instance_method'>parsable</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Does this period output provenance that matches the original text used to
+generate it.</p>
+
+<p>This will ignore differences in case and certainty.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>strict</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>don&#39;t account for acquisition form method changes, misplaced commas, or
+different spacing.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the <span class='object_link'><a href="#original_text-instance_method" title="MuseumProvenance::Period#original_text (method)">#original_text</a></span> matches the <span class='object_link'><a href="#provenance-instance_method" title="MuseumProvenance::Period#provenance (method)">#provenance</a></span></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 500</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_parsable?'>parsable?</span><span class='lparen'>(</span><span class='id identifier rubyid_strict'>strict</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_original_text'>original_text</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> 
+    <span class='kw'>true</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_ot'>ot</span> <span class='op'>=</span> <span class='id identifier rubyid_original_text'>original_text</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
+    <span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='id identifier rubyid_provenance'>provenance</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
+    <span class='const'>Certainty</span><span class='op'>::</span><span class='const'>CertantyWords</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_w'>w</span><span class='op'>|</span> 
+      <span class='id identifier rubyid_ot'>ot</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_basically_parsable'>basically_parsable</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_ot'>ot</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span> <span class='op'>==</span> <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_basically_parsable'>basically_parsable</span>
+    <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_strict'>strict</span>
+
+    <span class='id identifier rubyid_method'>method</span> <span class='op'>=</span> <span class='const'>AcquisitionMethod</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_ot'>ot</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+    <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_forms'>forms</span><span class='period'>.</span><span class='id identifier rubyid_sort_by!'>sort_by!</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_reverse'>reverse</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
+     <span class='id identifier rubyid_new_ot'>new_ot</span> <span class='op'>=</span> <span class='id identifier rubyid_ot'>ot</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_f'>f</span><span class='embexpr_end'>}</span><span class='regexp_end'>/i</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+     <span class='kw'>if</span> <span class='id identifier rubyid_new_ot'>new_ot</span> <span class='op'>!=</span> <span class='id identifier rubyid_ot'>ot</span>
+      <span class='id identifier rubyid_ot'>ot</span> <span class='op'>=</span> <span class='id identifier rubyid_new_ot'>new_ot</span>
+      <span class='kw'>break</span>
+     <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_ot'>ot</span> <span class='op'>=</span> <span class='id identifier rubyid_method'>method</span><span class='period'>.</span><span class='id identifier rubyid_attach_to_name'>attach_to_name</span><span class='lparen'>(</span><span class='id identifier rubyid_ot'>ot</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_complicated_match'>complicated_match</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_ot'>ot</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>,</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='op'>==</span> <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>,</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_complicated_match'>complicated_match</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="parse_time_string-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>parse_time_string</strong>(str) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Extract a time phrase out of a string, and use it to set the dates for this
+period.</p>
+
+<p>There&#39;s an entire article on the site about the various phrases for
+this.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>str</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the string to search for a time reference</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the string with the time reference removed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+193
+194
+195
+196</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 193</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_parse_time_string'>parse_time_string</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
+   <span class='id identifier rubyid_b'>b</span><span class='comma'>,</span> <span class='id identifier rubyid_e'>e</span> <span class='op'>=</span> <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>until</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+   <span class='id identifier rubyid_actually_parse_time_string'>actually_parse_time_string</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="provenance-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>provenance</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='to_s-instance_method'>to_s</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Generate a provenance record for this string.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the provenance text for this period.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+483
+484
+485
+486
+487
+488
+489
+490
+491</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 483</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_provenance'>provenance</span>
+    <span class='id identifier rubyid_new_name'>new_name</span> <span class='op'>=</span> <span class='ivar'>@acquisition_method</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_name_with_birth_death'>name_with_birth_death</span> <span class='op'>:</span> <span class='ivar'>@acquisition_method</span><span class='period'>.</span><span class='id identifier rubyid_attach_to_name'>attach_to_name</span><span class='lparen'>(</span><span class='id identifier rubyid_party'>party</span><span class='period'>.</span><span class='id identifier rubyid_name_with_birth_death'>name_with_birth_death</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_record_cert'>record_cert</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span> <span class='op'>?</span> <span class='kw'>nil</span> <span class='op'>:</span> <span class='const'>PERIOD_CERTAINTY_STRING</span>
+    <span class='id identifier rubyid_val'>val</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_record_cert'>record_cert</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='id identifier rubyid_new_name'>new_name</span><span class='comma'>,</span> <span class='ivar'>@location</span><span class='comma'>,</span><span class='id identifier rubyid_time_string'>time_string</span><span class='comma'>,</span><span class='id identifier rubyid_stock_number'>stock_number</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>, </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>  </span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_val'>val</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_val'>val</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_upcase'>upcase</span> <span class='kw'>unless</span> <span class='id identifier rubyid_was_directly_transferred'>was_directly_transferred</span> <span class='op'>||</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span>
+    <span class='id identifier rubyid_val'>val</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>(</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_val'>val</span><span class='embexpr_end'>}</span><span class='tstring_content'>)</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_primary_owner'>primary_owner</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_val'>val</span>
+
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="siblings-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span>&gt;</tt>) <strong>siblings</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>An array of all the periods linked to this period.</p>
+
+<p>The returned array will be ordered earliest-to-latest.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="" title="MuseumProvenance::Period (class)">Period</a></span>&gt;</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 402</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_siblings'>siblings</span>
+  <span class='id identifier rubyid_siblings'>siblings</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='kw'>self</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_current'>current</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_previous_period'>previous_period</span>
+  <span class='kw'>while</span> <span class='op'>!</span><span class='id identifier rubyid_current'>current</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_siblings'>siblings</span><span class='period'>.</span><span class='id identifier rubyid_unshift'>unshift</span><span class='lparen'>(</span><span class='id identifier rubyid_current'>current</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_current'>current</span> <span class='op'>=</span> <span class='id identifier rubyid_current'>current</span><span class='period'>.</span><span class='id identifier rubyid_previous_period'>previous_period</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_current'>current</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_next_period'>next_period</span>
+  <span class='kw'>while</span> <span class='op'>!</span><span class='id identifier rubyid_current'>current</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='id identifier rubyid_siblings'>siblings</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span><span class='lparen'>(</span><span class='id identifier rubyid_current'>current</span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_current'>current</span> <span class='op'>=</span> <span class='id identifier rubyid_current'>current</span><span class='period'>.</span><span class='id identifier rubyid_next_period'>next_period</span>
+  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_siblings'>siblings</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="time_string-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>time_string</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Generate a textual representation of the timeframe of the period.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 325</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_time_string'>time_string</span>
+  <span class='comment'>#  TODO:  What the hell is this?
+</span>  <span class='kw'>if</span><span class='lparen'>(</span>   <span class='ivar'>@beginning</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@ending</span> <span class='op'>&amp;&amp;</span>
+        <span class='op'>!</span><span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> 
+        <span class='op'>!</span><span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span> <span class='op'>&amp;&amp;</span> 
+        <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>==</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>&amp;&amp;</span>
+        <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_latest_raw'>latest_raw</span><span class='period'>.</span><span class='id identifier rubyid_fragments'>fragments</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_earliest_raw'>earliest_raw</span><span class='period'>.</span><span class='id identifier rubyid_fragments'>fragments</span><span class='lbracket'>[</span><span class='int'>0</span><span class='op'>..</span><span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span><span class='rbracket'>]</span>
+    <span class='rparen'>)</span>       
+    <span class='id identifier rubyid_timeframe'>timeframe</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>in </span><span class='embexpr_beg'>#{</span><span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>by </span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'># Handle &quot;on January 1, 2001&quot; instead of &quot;January 1, 2001 until January 1, 2001&quot;
+</span>  <span class='kw'>elsif</span> <span class='lparen'>(</span>
+    <span class='ivar'>@beginning</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@ending</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_precise?'>precise?</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_precise?'>precise?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_botb'>botb</span> <span class='op'>==</span> <span class='id identifier rubyid_eote'>eote</span> 
+  <span class='rparen'>)</span>
+    <span class='id identifier rubyid_timeframe'>timeframe</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>on </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_beginning'>beginning</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_timeframe'>timeframe</span> <span class='op'>=</span> <span class='ivar'>@beginning</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>unless</span> <span class='id identifier rubyid_ending'>ending</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+      <span class='id identifier rubyid_timeframe'>timeframe</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> until </span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='ivar'>@ending</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>after</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>at least</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>by</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sometime before</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_timeframe'>timeframe</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+    <span class='id identifier rubyid_timeframe'>timeframe</span> <span class='op'>=</span> <span class='kw'>nil</span> 
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_timeframe'>timeframe</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\s+</span><span class='regexp_end'>/</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_timeframe'>timeframe</span><span class='period'>.</span><span class='id identifier rubyid_strip!'>strip!</span> <span class='kw'>unless</span> <span class='id identifier rubyid_timeframe'>timeframe</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='kw'>return</span> <span class='id identifier rubyid_timeframe'>timeframe</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_h-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>to_h</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Denormalize the period into a [Hash]</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a hash of the <span class='object_link'><a href="" title="MuseumProvenance::Period (class)">MuseumProvenance::Period</a></span>&#39;s information.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 183</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_h'>to_h</span>
+  <span class='id identifier rubyid_generate_output'>generate_output</span><span class='period'>.</span><span class='id identifier rubyid_to_h'>to_h</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="was_directly_transferred-instance_method">
+  
+    - (<tt>Boolean</tt>, <tt>Nil</tt>) <strong>was_directly_transferred</strong> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='was_directly_transferred?-instance_method'>was_directly_transferred?</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Was this record directly received from the preceding <span class='object_link'><a href="" title="MuseumProvenance::Period (class)">MuseumProvenance::Period</a></span></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>, <tt>Nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>True if it was received directly, false if it wasn&#39;t, Nil if is there
+is no preciding record.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+450
+451
+452</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 450</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_was_directly_transferred'>was_directly_transferred</span>
+  <span class='ivar'>@previous_period</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='kw'>nil</span> <span class='op'>:</span> <span class='ivar'>@previous_period</span><span class='period'>.</span><span class='id identifier rubyid_direct_transfer'>direct_transfer</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Mon Feb  6 09:46:37 2017 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.3.1).
+</div>
+
+  </body>
+</html>

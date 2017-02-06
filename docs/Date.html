@@ -1,0 +1,512 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Date
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!Date.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (D)</a> &raquo;
+    
+    
+    <span class="title">Date</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Date
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Date</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/museum_provenance/fuzzy_date.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Extensions to the base Date class to support certainty and ranges</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#earliest-instance_method" title="#earliest (instance method)">- (Date) <strong>earliest</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The earliest date for an inprecise date.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#latest-instance_method" title="#latest (instance method)">- (Date) <strong>latest</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The latest date for an inprecise date.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#smart_to_s-instance_method" title="#smart_to_s (instance method)">- (Object) <strong>smart_to_s</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="earliest-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Date (class)">Date</a></span></tt>) <strong>earliest</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The earliest date for an inprecise date. The returned date will have
+DateTimePrecision::DAY</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_date'>date</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>1990</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_date'>date</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span> <span class='op'>==</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>1990</span><span class='comma'>,</span><span class='int'>1</span><span class='comma'>,</span><span class='int'>1</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_date'>date</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>1990</span><span class='comma'>,</span><span class='int'>10</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_date'>date</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span> <span class='op'>==</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>1990</span><span class='comma'>,</span><span class='int'>10</span><span class='comma'>,</span><span class='int'>1</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Date (class)">Date</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new Date containing the date of the first day in an date.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/fuzzy_date.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_earliest'>earliest</span>
+  <span class='id identifier rubyid_earliest'>earliest</span> <span class='op'>=</span> <span class='kw'>case</span> <span class='id identifier rubyid_precision'>precision</span>
+    <span class='kw'>when</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>CENTURY</span> <span class='kw'>then</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='comma'>,</span><span class='int'>1</span><span class='comma'>,</span><span class='int'>1</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>DECADE</span> <span class='kw'>then</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='comma'>,</span><span class='int'>1</span><span class='comma'>,</span><span class='int'>1</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>YEAR</span> <span class='kw'>then</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='comma'>,</span><span class='int'>1</span><span class='comma'>,</span><span class='int'>1</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>MONTH</span> <span class='kw'>then</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='comma'>,</span><span class='id identifier rubyid_month'>month</span><span class='comma'>,</span><span class='int'>1</span><span class='rparen'>)</span>
+    <span class='kw'>else</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_earliest'>earliest</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+  <span class='id identifier rubyid_earliest'>earliest</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="latest-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Date (class)">Date</a></span></tt>) <strong>latest</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>The latest date for an inprecise date. The returned date will have
+DateTimePrecision::DAY.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_date'>date</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>1990</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_date'>date</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span> <span class='op'>==</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>1990</span><span class='comma'>,</span><span class='int'>12</span><span class='comma'>,</span><span class='int'>31</span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_date'>date</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>1990</span><span class='comma'>,</span><span class='int'>10</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_date'>date</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span> <span class='op'>==</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>1990</span><span class='comma'>,</span><span class='int'>10</span><span class='comma'>,</span><span class='int'>31</span><span class='rparen'>)</span></code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Date (class)">Date</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A new Date containing the date of the last day in an date.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/fuzzy_date.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_latest'>latest</span>
+  <span class='id identifier rubyid_latest'>latest</span> <span class='op'>=</span> <span class='kw'>case</span> <span class='id identifier rubyid_precision'>precision</span>
+    <span class='kw'>when</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>CENTURY</span> <span class='kw'>then</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='op'>+</span><span class='int'>99</span><span class='comma'>,</span><span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span><span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span> 
+    <span class='kw'>when</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>DECADE</span> <span class='kw'>then</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='op'>+</span><span class='int'>9</span><span class='comma'>,</span><span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span><span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span> 
+    <span class='kw'>when</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>YEAR</span> <span class='kw'>then</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='comma'>,</span><span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span><span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span>
+    <span class='kw'>when</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>MONTH</span> <span class='kw'>then</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='comma'>,</span><span class='id identifier rubyid_month'>month</span><span class='comma'>,</span><span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span>
+    <span class='kw'>else</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_latest'>latest</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_certainty'>certainty</span>
+  <span class='id identifier rubyid_latest'>latest</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="smart_to_s-instance_method">
+  
+    - (<tt>Object</tt>) <strong>smart_to_s</strong>(*args) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/fuzzy_date.rb', line 5</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_smart_to_s'>smart_to_s</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>&gt;</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>MONTH</span>
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_strftime'>strftime</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%B %e, </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+   <span class='kw'>if</span> <span class='id identifier rubyid_year'>year</span> <span class='op'>&gt;=</span><span class='int'>1</span>
+     <span class='id identifier rubyid_year_str'>year_str</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_year'>year</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+     <span class='id identifier rubyid_year_str'>year_str</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> CE</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_year'>year</span> <span class='op'>&lt;</span> <span class='int'>1000</span>
+   <span class='kw'>elsif</span> <span class='id identifier rubyid_year'>year</span> <span class='op'>==</span> <span class='int'>0</span>
+     <span class='id identifier rubyid_year_str'>year_str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1 BCE</span><span class='tstring_end'>&quot;</span></span>
+   <span class='kw'>else</span>
+     <span class='id identifier rubyid_year_str'>year_str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='op'>-</span><span class='id identifier rubyid_year'>year</span><span class='embexpr_end'>}</span><span class='tstring_content'> BCE</span><span class='tstring_end'>&quot;</span></span>
+   <span class='kw'>end</span>
+
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>+=</span> <span class='id identifier rubyid_year_str'>year_str</span>
+  <span class='kw'>elsif</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>==</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>MONTH</span>
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='id identifier rubyid_certain_string'>certain_string</span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_splits'>splits</span> <span class='op'>=</span> <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_splits'>splits</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^0+</span><span class='regexp_end'>/</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='id identifier rubyid_splits'>splits</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> CE</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_year'>year</span> <span class='op'>&lt;</span> <span class='int'>1000</span>
+  <span class='kw'>elsif</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>==</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>YEAR</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_year'>year</span> <span class='op'>&gt;=</span><span class='int'>1</span>
+      <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_year'>year</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+      <span class='id identifier rubyid_str'>str</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> CE</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_year'>year</span> <span class='op'>&lt;</span> <span class='int'>1000</span>
+    <span class='kw'>elsif</span> <span class='id identifier rubyid_year'>year</span> <span class='op'>==</span> <span class='int'>0</span>
+      <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1 BCE</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='op'>-</span><span class='id identifier rubyid_year'>year</span><span class='embexpr_end'>}</span><span class='tstring_content'> BCE</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>elsif</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>==</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>DECADE</span>
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>the </span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_year'>year</span><span class='embexpr_end'>}</span><span class='tstring_content'>s</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_bce'>bce</span> <span class='op'>=</span> <span class='kw'>false</span>
+    <span class='id identifier rubyid_year'>year</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_century'>century</span><span class='op'>/</span><span class='int'>100</span><span class='op'>+</span><span class='int'>1</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_year'>year</span> <span class='op'>&lt;=</span> <span class='int'>0</span>
+      <span class='id identifier rubyid_year'>year</span> <span class='op'>=</span> <span class='op'>-</span><span class='lparen'>(</span><span class='id identifier rubyid_year'>year</span><span class='op'>-</span><span class='int'>2</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_bce'>bce</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='kw'>end</span>  
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>the </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_year'>year</span><span class='period'>.</span><span class='id identifier rubyid_ordinalize'>ordinalize</span><span class='embexpr_end'>}</span><span class='tstring_content'> century</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> CE</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_year'>year</span> <span class='op'>&gt;=</span> <span class='int'>1</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_year'>year</span> <span class='op'>&lt;</span> <span class='int'>10</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_bce'>bce</span>
+    <span class='id identifier rubyid_str'>str</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> BCE</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_bce'>bce</span>
+    <span class='id identifier rubyid_str'>str</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_str'>str</span> <span class='op'>+=</span> <span class='id identifier rubyid_certain_string'>certain_string</span> <span class='kw'>unless</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_certain?'>certain?</span>
+  <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>  </span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> 
+  <span class='id identifier rubyid_str'>str</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Mon Feb  6 09:46:37 2017 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.3.1).
+</div>
+
+  </body>
+</html>
