@@ -1,12 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
   Class: MuseumProvenance::Utilities::AcquisitionMethodDocumentation
   
-    &mdash; Documentation by YARD 0.8.7.6
+    &mdash; Documentation by YARD 0.9.8
   
 </title>
 
@@ -15,9 +15,8 @@
   <link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  hasFrames = window.top.frames.main ? true : false;
+  pathId = "MuseumProvenance::Utilities::AcquisitionMethodDocumentation";
   relpath = '../../';
-  framesUrl = "../../frames.html#!MuseumProvenance/Utilities/AcquisitionMethodDocumentation.html";
 </script>
 
 
@@ -28,51 +27,48 @@
 
   </head>
   <body>
-    <div id="header">
-      <div id="menu">
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
   
     <a href="../../_index.html">Index (A)</a> &raquo;
     <span class='title'><span class='object_link'><a href="../../MuseumProvenance.html" title="MuseumProvenance (module)">MuseumProvenance</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Utilities.html" title="MuseumProvenance::Utilities (module)">Utilities</a></span></span>
      &raquo; 
     <span class="title">AcquisitionMethodDocumentation</span>
   
-
-  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
 </div>
 
-      <div id="search">
+        <div id="search">
   
     <a class="full_list_link" id="class_list_link"
         href="../../class_list.html">
-      Class List
-    </a>
-  
-    <a class="full_list_link" id="method_list_link"
-        href="../../method_list.html">
-      Method List
-    </a>
-  
-    <a class="full_list_link" id="file_list_link"
-        href="../../file_list.html">
-      File List
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
     </a>
   
 </div>
-      <div class="clear"></div>
-    </div>
+        <div class="clear"></div>
+      </div>
 
-    <iframe id="search_frame"></iframe>
-
-    <div id="content"><h1>Class: MuseumProvenance::Utilities::AcquisitionMethodDocumentation
+      <div id="content"><h1>Class: MuseumProvenance::Utilities::AcquisitionMethodDocumentation
   
   
   
 </h1>
-
-<dl class="box">
+<div class="box_info">
   
-    <dt class="r1">Inherits:</dt>
-    <dd class="r1">
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
       <span class="inheritName">Object</span>
       
         <ul class="fullTree">
@@ -83,31 +79,34 @@
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
       
-      </dd>
-    
+    </dd>
+  </dl>
   
-  
-    
-  
-    
+
   
   
   
-    <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/museum_provenance/utilities/acquisition_method_documentation.rb</dd>
   
-</dl>
-<div class="clear"></div>
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/museum_provenance/utilities/acquisition_method_documentation.rb</dd>
+  </dl>
+  
+</div>
 
 
   <h2>Constant Summary</h2>
-  
-    <dl class="constants">
-      
-        <dt id="SKOS_JSON_LD-constant" class="">SKOS_JSON_LD =
-          
-        </dt>
-        <dd><pre class="code"><span class='heredoc_beg'>&lt;&lt;~eos</span>
+  <dl class="constants">
+    
+      <dt id="SKOS_JSON_LD-constant" class="">SKOS_JSON_LD =
+        
+      </dt>
+      <dd><pre class="code"><span class='heredoc_beg'>&lt;&lt;~eos</span>
 <span class='tstring_content'>{
   &quot;@context&quot;: {
     &quot;@language&quot;: &quot;en&quot;,
@@ -169,9 +168,8 @@
   ]
 }
 </span><span class='heredoc_end'>eos</span></pre></dd>
-      
-    </dl>
-  
+    
+  </dl>
 
 
 
@@ -182,7 +180,7 @@
   
     <h2>
       Class Method Summary
-      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -190,7 +188,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_documentation-class_method" title="create_documentation (class method)">+ (Object) <strong>create_documentation</strong>(output_directory = &quot;.&quot;, file_type = :png, output_file = &quot;acquisition_methods.md&quot;) </a>
+      <a href="#create_documentation-class_method" title="create_documentation (class method)">.<strong>create_documentation</strong>(output_directory = &quot;.&quot;, file_type = :png, output_file = &quot;acquisition_methods.md&quot;)  &#x21d2; Object </a>
     
 
     
@@ -212,7 +210,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_skos-class_method" title="create_skos (class method)">+ (Object) <strong>create_skos</strong>(output_directory = &quot;.&quot;, output_file = &quot;acquisition_methods.ttl&quot;, base_uri = &quot;http://vocabularies.museumprovenance.org/acquisition/&quot;, default_name = &quot;Vincent Price&quot;) </a>
+      <a href="#create_skos-class_method" title="create_skos (class method)">.<strong>create_skos</strong>(output_directory = &quot;.&quot;, output_file = &quot;acquisition_methods.ttl&quot;, base_uri = &quot;http://vocabularies.museumprovenance.org/acquisition/&quot;, default_name = &quot;Vincent Price&quot;)  &#x21d2; Object </a>
     
 
     
@@ -235,7 +233,7 @@
   
     <h2>
       Instance Method Summary
-      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+      <small><a href="#" class="summary_toggle">collapse</a></small>
     </h2>
 
     <ul class="summary">
@@ -243,7 +241,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#describe-instance_method" title="#describe (instance method)">- (Array) <strong>describe</strong>(name = &quot;Vincent Price [1911-1993]&quot;, location = &quot;St. Louis, Missouri&quot;, date = &quot;July 1969&quot;) </a>
+      <a href="#describe-instance_method" title="#describe (instance method)">#<strong>describe</strong>(name = &quot;Vincent Price [1911-1993]&quot;, location = &quot;St. Louis, Missouri&quot;, date = &quot;July 1969&quot;)  &#x21d2; Array </a>
     
 
     
@@ -267,7 +265,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">- (AcquisitionMethodDocumentation) <strong>initialize</strong>(methods) </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(methods)  &#x21d2; AcquisitionMethodDocumentation </a>
     
 
     
@@ -293,7 +291,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#output_graph-instance_method" title="#output_graph (instance method)">- (Object) <strong>output_graph</strong>(filename = &quot;methods.png&quot;, file_type = :png) </a>
+      <a href="#output_graph-instance_method" title="#output_graph (instance method)">#<strong>output_graph</strong>(filename = &quot;methods.png&quot;, file_type = :png)  &#x21d2; Object </a>
     
 
     
@@ -321,7 +319,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    - (<tt><span class='object_link'><a href="" title="MuseumProvenance::Utilities::AcquisitionMethodDocumentation (class)">AcquisitionMethodDocumentation</a></span></tt>) <strong>initialize</strong>(methods) 
+    #<strong>initialize</strong>(methods)  &#x21d2; <tt><span class='object_link'><a href="" title="MuseumProvenance::Utilities::AcquisitionMethodDocumentation (class)">AcquisitionMethodDocumentation</a></span></tt> 
   
 
   
@@ -369,7 +367,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="create_documentation-class_method">
   
-    + (<tt>Object</tt>) <strong>create_documentation</strong>(output_directory = &quot;.&quot;, file_type = :png, output_file = &quot;acquisition_methods.md&quot;) 
+    .<strong>create_documentation</strong>(output_directory = &quot;.&quot;, file_type = :png, output_file = &quot;acquisition_methods.md&quot;)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -402,12 +400,12 @@
       <pre class="code"><span class="info file"># File 'lib/museum_provenance/utilities/acquisition_method_documentation.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_documentation'>create_documentation</span><span class='lparen'>(</span><span class='id identifier rubyid_output_directory'>output_directory</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_file_type'>file_type</span><span class='op'>=</span><span class='symbol'>:png</span> <span class='comma'>,</span><span class='id identifier rubyid_output_file'>output_file</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>acquisition_methods.md</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_root_types'>root_types</span> <span class='op'>=</span> <span class='const'>AcquisitionMethod</span><span class='period'>.</span><span class='id identifier rubyid_valid_methods'>valid_methods</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_m'>m</span> <span class='kw'>if</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
+  <span class='id identifier rubyid_root_types'>root_types</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../AcquisitionMethod.html" title="MuseumProvenance::AcquisitionMethod (class)">AcquisitionMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_methods'><span class='object_link'><a href="../AcquisitionMethod.html#valid_methods-class_method" title="MuseumProvenance::AcquisitionMethod.valid_methods (method)">valid_methods</a></span></span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_m'>m</span> <span class='kw'>if</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
   <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_output_directory'>output_directory</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_output_file'>output_file</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>w</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_f'>f</span><span class='op'>|</span>
-    <span class='id identifier rubyid_root_types'>root_types</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_root'>root</span><span class='op'>|</span>
-      <span class='id identifier rubyid_methods'>methods</span> <span class='op'>=</span> <span class='const'>AcquisitionMethod</span><span class='period'>.</span><span class='id identifier rubyid_valid_methods'>valid_methods</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>!=</span> <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='rbrace'>}</span>
-      <span class='id identifier rubyid_viz'>viz</span> <span class='op'>=</span> <span class='const'>AcquisitionMethodDocumentation</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_methods'>methods</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_root_filename'>root_filename</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file_type'>file_type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_root_types'>root_types</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_root'><span class='object_link'><a href="../../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='op'>|</span>
+      <span class='id identifier rubyid_methods'>methods</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../AcquisitionMethod.html" title="MuseumProvenance::AcquisitionMethod (class)">AcquisitionMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_methods'><span class='object_link'><a href="../AcquisitionMethod.html#valid_methods-class_method" title="MuseumProvenance::AcquisitionMethod.valid_methods (method)">valid_methods</a></span></span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>!=</span> <span class='id identifier rubyid_root'><span class='object_link'><a href="../../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='rbrace'>}</span>
+      <span class='id identifier rubyid_viz'>viz</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="" title="MuseumProvenance::Utilities::AcquisitionMethodDocumentation (class)">AcquisitionMethodDocumentation</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="#initialize-instance_method" title="MuseumProvenance::Utilities::AcquisitionMethodDocumentation#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_methods'>methods</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_root_filename'>root_filename</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_root'><span class='object_link'><a href="../../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file_type'>file_type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
       <span class='id identifier rubyid_filename'>filename</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_output_directory'>output_directory</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_root_filename'>root_filename</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
       <span class='id identifier rubyid_viz'>viz</span><span class='period'>.</span><span class='id identifier rubyid_output_graph'>output_graph</span><span class='lparen'>(</span><span class='id identifier rubyid_filename'>filename</span><span class='comma'>,</span> <span class='id identifier rubyid_file_type'>file_type</span><span class='rparen'>)</span>
  
@@ -425,7 +423,7 @@
       <div class="method_details ">
   <h3 class="signature " id="create_skos-class_method">
   
-    + (<tt>Object</tt>) <strong>create_skos</strong>(output_directory = &quot;.&quot;, output_file = &quot;acquisition_methods.ttl&quot;, base_uri = &quot;http://vocabularies.museumprovenance.org/acquisition/&quot;, default_name = &quot;Vincent Price&quot;) 
+    .<strong>create_skos</strong>(output_directory = &quot;.&quot;, output_file = &quot;acquisition_methods.ttl&quot;, base_uri = &quot;http://vocabularies.museumprovenance.org/acquisition/&quot;, default_name = &quot;Vincent Price&quot;)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -528,7 +526,7 @@
   <span class='rbrace'>}</span>
 
   <span class='comment'># load the generic JSON-LD
-</span>  <span class='id identifier rubyid_input'>input</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'>SKOS_JSON_LD</span><span class='rparen'>)</span>
+</span>  <span class='id identifier rubyid_input'>input</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#SKOS_JSON_LD-constant" title="MuseumProvenance::Utilities::AcquisitionMethodDocumentation::SKOS_JSON_LD (constant)">SKOS_JSON_LD</a></span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_prefixes'>prefixes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_prefix'>prefix</span><span class='comma'>,</span><span class='id identifier rubyid_uri'>uri</span><span class='op'>|</span>
     <span class='id identifier rubyid_input'>input</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@context</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_prefix'>prefix</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_uri'>uri</span>
   <span class='kw'>end</span>
@@ -545,17 +543,17 @@
   <span class='id identifier rubyid_graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_top_level'>top_level</span><span class='comma'>,</span> <span class='id identifier rubyid_skos'>skos</span><span class='period'>.</span><span class='id identifier rubyid_prefLabel'>prefLabel</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Museum Provenance Acquisition Method Ontology</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
 
   <span class='comment'># Calculate all top-level concepts
-</span>  <span class='id identifier rubyid_root_types'>root_types</span> <span class='op'>=</span> <span class='const'>AcquisitionMethod</span><span class='period'>.</span><span class='id identifier rubyid_valid_methods'>valid_methods</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_m'>m</span> <span class='kw'>if</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
+</span>  <span class='id identifier rubyid_root_types'>root_types</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../AcquisitionMethod.html" title="MuseumProvenance::AcquisitionMethod (class)">AcquisitionMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_methods'><span class='object_link'><a href="../AcquisitionMethod.html#valid_methods-class_method" title="MuseumProvenance::AcquisitionMethod.valid_methods (method)">valid_methods</a></span></span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_m'>m</span> <span class='kw'>if</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
 
 
-  <span class='id identifier rubyid_root_types'>root_types</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_root'>root</span><span class='op'>|</span>
-    <span class='id identifier rubyid_methods'>methods</span> <span class='op'>=</span> <span class='const'>AcquisitionMethod</span><span class='period'>.</span><span class='id identifier rubyid_valid_methods'>valid_methods</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>!=</span> <span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='rbrace'>}</span>
-    <span class='id identifier rubyid_root_uri'>root_uri</span> <span class='op'>=</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>URI</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_top_level'>top_level</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_root_types'>root_types</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_root'><span class='object_link'><a href="../../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='op'>|</span>
+    <span class='id identifier rubyid_methods'>methods</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="../AcquisitionMethod.html" title="MuseumProvenance::AcquisitionMethod (class)">AcquisitionMethod</a></span></span><span class='period'>.</span><span class='id identifier rubyid_valid_methods'><span class='object_link'><a href="../AcquisitionMethod.html#valid_methods-class_method" title="MuseumProvenance::AcquisitionMethod.valid_methods (method)">valid_methods</a></span></span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span> <span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>!=</span> <span class='id identifier rubyid_root'><span class='object_link'><a href="../../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span><span class='rbrace'>}</span>
+    <span class='id identifier rubyid_root_uri'>root_uri</span> <span class='op'>=</span> <span class='const'>RDF</span><span class='op'>::</span><span class='const'>URI</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_top_level'>top_level</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_root'><span class='object_link'><a href="../../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
     
     <span class='comment'># make all root concepts top-level in SKOS
 </span>    <span class='id identifier rubyid_graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_top_level'>top_level</span><span class='comma'>,</span> <span class='id identifier rubyid_skos'>skos</span><span class='period'>.</span><span class='id identifier rubyid_hasTopConcept'>hasTopConcept</span><span class='comma'>,</span> <span class='id identifier rubyid_root_uri'>root_uri</span><span class='rbracket'>]</span>
 
-    <span class='id identifier rubyid_methods'>methods</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_root'>root</span>
+    <span class='id identifier rubyid_methods'>methods</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_root'><span class='object_link'><a href="../../top-level-namespace.html" title="Top Level Namespace (root)">root</a></span></span>
 
     <span class='comment'># Add the properties for each method.
 </span>    <span class='id identifier rubyid_methods'>methods</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_acq_method'>acq_method</span><span class='op'>|</span>
@@ -567,7 +565,7 @@
       <span class='id identifier rubyid_graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_method_uri'>method_uri</span><span class='comma'>,</span> <span class='id identifier rubyid_skos'>skos</span><span class='period'>.</span><span class='id identifier rubyid_example'>example</span><span class='comma'>,</span>    <span class='id identifier rubyid_acq_method'>acq_method</span><span class='period'>.</span><span class='id identifier rubyid_attach_to_name'>attach_to_name</span><span class='lparen'>(</span><span class='id identifier rubyid_default_name'>default_name</span><span class='rparen'>)</span><span class='rbracket'>]</span>
       <span class='id identifier rubyid_graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_method_uri'>method_uri</span><span class='comma'>,</span> <span class='id identifier rubyid_skos'>skos</span><span class='period'>.</span><span class='id identifier rubyid_inScheme'>inScheme</span><span class='comma'>,</span>   <span class='id identifier rubyid_top_level'>top_level</span><span class='rbracket'>]</span>
       <span class='id identifier rubyid_graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_method_uri'>method_uri</span><span class='comma'>,</span> <span class='id identifier rubyid_acq'>acq</span><span class='period'>.</span><span class='id identifier rubyid_prefTerm'>prefTerm</span><span class='comma'>,</span>    <span class='id identifier rubyid_acq_method'>acq_method</span><span class='period'>.</span><span class='id identifier rubyid_preferred'>preferred</span><span class='rbracket'>]</span>
-      <span class='id identifier rubyid_graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_method_uri'>method_uri</span><span class='comma'>,</span> <span class='id identifier rubyid_acq'>acq</span><span class='period'>.</span><span class='id identifier rubyid_prefForm'>prefForm</span><span class='comma'>,</span>    <span class='lparen'>(</span><span class='id identifier rubyid_acq_method'>acq_method</span><span class='period'>.</span><span class='id identifier rubyid_preferred_form'>preferred_form</span> <span class='op'>==</span> <span class='const'>AcquisitionMethod</span><span class='op'>::</span><span class='const'>Prefix</span> <span class='op'>?</span> <span class='id identifier rubyid_acq'>acq</span><span class='period'>.</span><span class='const'>Prefix</span> <span class='op'>:</span> <span class='id identifier rubyid_acq'>acq</span><span class='period'>.</span><span class='const'>Suffix</span><span class='rparen'>)</span><span class='rbracket'>]</span>
+      <span class='id identifier rubyid_graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_method_uri'>method_uri</span><span class='comma'>,</span> <span class='id identifier rubyid_acq'>acq</span><span class='period'>.</span><span class='id identifier rubyid_prefForm'>prefForm</span><span class='comma'>,</span>    <span class='lparen'>(</span><span class='id identifier rubyid_acq_method'>acq_method</span><span class='period'>.</span><span class='id identifier rubyid_preferred_form'>preferred_form</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="../AcquisitionMethod.html" title="MuseumProvenance::AcquisitionMethod (class)">AcquisitionMethod</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../AcquisitionMethod.html#Prefix-constant" title="MuseumProvenance::AcquisitionMethod::Prefix (constant)">Prefix</a></span></span> <span class='op'>?</span> <span class='id identifier rubyid_acq'>acq</span><span class='period'>.</span><span class='const'>Prefix</span> <span class='op'>:</span> <span class='id identifier rubyid_acq'>acq</span><span class='period'>.</span><span class='const'>Suffix</span><span class='rparen'>)</span><span class='rbracket'>]</span>
       <span class='id identifier rubyid_acq_method'>acq_method</span><span class='period'>.</span><span class='id identifier rubyid_other_forms'>other_forms</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_term'>term</span><span class='op'>|</span>
         <span class='id identifier rubyid_graph'>graph</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_method_uri'>method_uri</span><span class='comma'>,</span> <span class='id identifier rubyid_acq'>acq</span><span class='period'>.</span><span class='id identifier rubyid_terms'>terms</span><span class='comma'>,</span>     <span class='id identifier rubyid_term'>term</span><span class='rbracket'>]</span>
       <span class='kw'>end</span>
@@ -601,7 +599,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="describe-instance_method">
   
-    - (<tt>Array</tt>) <strong>describe</strong>(name = &quot;Vincent Price [1911-1993]&quot;, location = &quot;St. Louis, Missouri&quot;, date = &quot;July 1969&quot;) 
+    #<strong>describe</strong>(name = &quot;Vincent Price [1911-1993]&quot;, location = &quot;St. Louis, Missouri&quot;, date = &quot;July 1969&quot;)  &#x21d2; <tt>Array</tt> 
   
 
   
@@ -742,7 +740,7 @@
       <div class="method_details ">
   <h3 class="signature " id="output_graph-instance_method">
   
-    - (<tt>Object</tt>) <strong>output_graph</strong>(filename = &quot;methods.png&quot;, file_type = :png) 
+    #<strong>output_graph</strong>(filename = &quot;methods.png&quot;, file_type = :png)  &#x21d2; <tt>Object</tt> 
   
 
   
@@ -805,11 +803,12 @@
 
 </div>
 
-    <div id="footer">
-  Generated on Mon Feb  6 09:46:38 2017 by
+      <div id="footer">
+  Generated on Mon Feb  6 09:55:57 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.9.8 (ruby-2.3.1).
 </div>
 
+    </div>
   </body>
 </html>
