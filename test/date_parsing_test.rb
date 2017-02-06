@@ -386,6 +386,18 @@ describe "Date Parsing Rules" do
     p.ending.latest.must_equal Date.new(1955).latest
     p.ending.same?.must_equal true
   end
+
+  it "handles year ranges divided by slashes" do
+    p.parse_time_string "1954/1955"
+    p.beginning.must_be_instance_of TimeSpan
+    p.beginning.earliest.must_equal Date.new(1954).earliest
+    p.beginning.latest.must_equal Date.new(1954).latest
+    p.beginning.same?.must_equal true    
+    p.ending.must_be_instance_of TimeSpan  
+    p.ending.earliest.must_equal Date.new(1955).earliest
+    p.ending.latest.must_equal Date.new(1955).latest
+    p.ending.same?.must_equal true
+  end
 end
 
 describe "Date rules" do

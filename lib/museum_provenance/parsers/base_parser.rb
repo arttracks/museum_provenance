@@ -16,7 +16,7 @@ module MuseumProvenance
         key_chars.
           collect! { |char| match["#{char.upcase}#{char.downcase}"] }.
           reduce(:>>)
-      end
+    end
 
     rule(:period) {(period_certainty >> acquisition >> custody >> owner >> ownership_period >> period_end).as(:period) }
     rule(:provenance) {period.repeat(1)}

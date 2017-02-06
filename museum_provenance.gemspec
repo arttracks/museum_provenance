@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'yard'
   spec.add_development_dependency "ruby-graphviz", "1.2.2"
+  spec.add_development_dependency 'linkeddata'
 
   spec.add_runtime_dependency 'date_time_precision'
   spec.add_runtime_dependency 'chronic'

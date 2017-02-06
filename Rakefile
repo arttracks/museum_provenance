@@ -19,9 +19,23 @@ task :acq do
   require "./lib/museum_provenance.rb"
   require "fileutils"
   FileUtils.mkdir_p("./docs")
-  doxxer = MuseumProvenance::Utilities::AcquisitionMethodDocumentation.create_documentation("./docs")
+  MuseumProvenance::Utilities::AcquisitionMethodDocumentation.create_documentation("./docs")
 end
 
+task :acq_svg do
+  require "graphviz"
+  require "./lib/museum_provenance.rb"
+  require "fileutils"
+  FileUtils.mkdir_p("./docs")
+  MuseumProvenance::Utilities::AcquisitionMethodDocumentation.create_documentation("./docs", :svg)
+end
+
+task :acq_skos do
+  require "./lib/museum_provenance.rb"
+  require "fileutils"
+  FileUtils.mkdir_p("./docs")
+  MuseumProvenance::Utilities::AcquisitionMethodDocumentation.create_skos("./docs")
+end
 
 desc "Clear the screen"
 task :cls do

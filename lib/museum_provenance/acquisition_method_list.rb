@@ -53,7 +53,7 @@ module MuseumProvenance
       suffix:          "through an exchange of value, to", 
       description:     "This object was obtained in some manner by the named party through an exchange of value.",
       explanation:     "This is the base class for all transfers where something of value was exchanged between the acquiring party and the receiving party.  This does not specify any details about the manner of the sale or the type of value exchanged.  In general, if it is assumed that money was exchanged, use 'purchased by'",
-      preferred_form:  AcquisitionMethod::Suffix, 
+      preferred_form:  AcquisitionMethod::Prefix, 
       synonyms:        [],
       parent:          :acquisition,
     }) 
@@ -213,6 +213,15 @@ module MuseumProvenance
       parent:          :assumption,
     }) 
 
+    AcquisitionMethod.new({
+      id:              :prize,
+      title:           "Prize", 
+      prefix:          "won by", 
+      description:     "This object was won be the named party as part of a competition.",
+      preferred_form:  AcquisitionMethod::Prefix, 
+      synonyms:        ["awarded to"],
+      parent:          :gift,
+    }) 
 
     AcquisitionMethod.new({
       id:              :transfer,
@@ -390,12 +399,12 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:             :commission,
       title:          "Commission", 
-      prefix:         "commissioned by",  
+      prefix:         "commissioned from",  
       suffix:         "by commission",
       description:    "This object was commissioned by the named party.",
       explanation:    "Note that this does not assume the named party received custody of the object. Typically, this would be followed by an agent who would be the fabricator, and then by a delivery of the object to the named party.",
       preferred_form: AcquisitionMethod::Prefix, 
-      synonyms:       ["by commission, to", "painted for", "created for"],
+      synonyms:       ["by commission, to", "painted for", "created for", "commissioned by"],
       parent:         :creation,
       custody_transfer: false
     })
@@ -474,8 +483,8 @@ module MuseumProvenance
     ## Division of Custody & Ownership
 
     This category of events describe moments where custody, but NOT ownership 
-    of an object is given to a party.  This is used for consignment, for loans,
-    and when one party is acting as a representative or agent for another.
+    of an object is given to a party.  Typical examples of this include
+    consignment or loans.
 
     eos
 

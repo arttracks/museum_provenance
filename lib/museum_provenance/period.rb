@@ -212,8 +212,8 @@ module MuseumProvenance
       horrid_date_range_regex = /(\d{2})(\d{2})\s?[-–—]\s?(\d{2})(?!-)\b/
       str.gsub!(horrid_date_range_regex,'\1\2 until \1\3')
 
-      #substitution for trivial date pattern: "1918-1919" becomes "1918 until 1919"
-      date_range_regex = /(\d{4})\s?[-–—]\s?(\d{4})(?!-)/
+      #substitution for trivial date pattern: "1918-1919 or 1918/1919" becomes "1918 until 1919"
+      date_range_regex = /(\d{4})\s?[-–—\/]\s?(\d{4})(?!-)/
       str.gsub!(date_range_regex,'\1 until \2')
 
       # substitution for "May 5-6, 1980" becomes "May 5, 1980 until May 6, 1980"
@@ -636,6 +636,8 @@ module MuseumProvenance
     def is_ongoing?
       next_period.nil? && @ending.nil? && !@beginning.nil?
     end
+
+
 
     # The {TimeSpan} of the longest possible duration of this period
     #

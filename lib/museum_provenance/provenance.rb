@@ -52,7 +52,7 @@ module MuseumProvenance
         # Handle strange footnote types
         provenance_string = handle_asterisk_footnotes(provenance_string)
         provenance_string = handle_inline_footnotes(provenance_string)
-
+        provenance_string.gsub!("Notes:",FOOTNOTE_DIVIDER)
         text, notes = extract_text_and_notes(provenance_string)
 
         # Handle strange punctuation

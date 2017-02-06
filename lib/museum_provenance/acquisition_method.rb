@@ -78,7 +78,7 @@ module MuseumProvenance
     #   @return [String] A longer explanation of the method
 
        
-    attr_reader  :name, :prefix, :suffix, :definition, :preferred_form, :explanation, :type, :id, :parent, :class_description
+    attr_reader  :name, :prefix, :suffix, :definition, :preferred_form, :explanation, :type, :id, :parent, :class_description, :custody_transfer, :ownership_transfer
     
     # Creates a new instance of AttributionMethod.  
     # Note that this will also add it to the Class-level list of Attribution Methods, which can be queried via @AttributionMethod::valid_methods
@@ -95,8 +95,11 @@ module MuseumProvenance
       @@all_methods.push self
 
       @parent = AcquisitionMethod.find_by_id opts[:parent]
-      @type = opts.fetch(:type, @parent && @parent.type)
-      @class_description = opts.fetch(:class_description, @parent && @parent.class_description)
+
+      @type               = opts.fetch(:type,               @parent && @parent.type)
+      @ownership_transfer = opts.fetch(:ownership_transfer, @parent && @parent.ownership_transfer)
+      @custody_transfer   = opts.fetch(:custody_transfer,   @parent && @parent.custody_transfer)
+      @class_description  = opts.fetch(:class_description , @parent && @parent.class_description)
     end
     
     # Concatenates the preferred form with a given name.
