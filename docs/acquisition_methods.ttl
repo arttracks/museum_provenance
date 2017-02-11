@@ -1,0 +1,661 @@
+@prefix acq: <http://vocabularies.museumprovenance.org/acquisition/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+acq:assignment a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "assigned to";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:exhange_of_value;
+   skos:definition "Ownership is assigned to the named party due to a previous agreement.";
+   skos:example "assigned to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Assignment" .
+
+acq:by_descent a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "by descent to";
+   acq:terms "by descent",
+     "by inheritance to",
+     "by inheritance";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:bequest;
+   skos:definition "This object was given to the named party following the death of a previous owner who was their family member.";
+   skos:example "by descent to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "By Descent";
+   skos:scopeNote "Note that this does not include the automatic transfer to a spouse following post WWII property law.   See 'via marriage' for those instances." .
+
+acq:commission a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "commissioned from";
+   acq:terms "by commission",
+     "by commission, to",
+     "painted for",
+     "created for",
+     "commissioned by";
+   acq:transfersCustody false;
+   acq:transfersOwnership true;
+   skos:broader acq:creation;
+   skos:definition "This object was commissioned by the named party.";
+   skos:example "commissioned from Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Commission";
+   skos:scopeNote "Note that this does not assume the named party received custody of the object. Typically, this would be followed by an agent who would be the fabricator, and then by a delivery of the object to the named party." .
+
+acq:conceptualization a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "conceptualized by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:creation;
+   skos:definition "This abstract object was conceived by the named party as an artistic object.";
+   skos:example "conceptualized by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Conceptualization" .
+
+acq:consignment a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "consigned to";
+   acq:terms "In sale at",
+     "sale",
+     "sold by",
+     "sold at",
+     "sale,";
+   acq:transfersCustody true;
+   acq:transfersOwnership false;
+   skos:broader acq:on_deposit;
+   skos:definition "The named party has been given custody with the intent for them to sell the object.";
+   skos:example "consigned to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Consigned" .
+
+acq:consolidation a acq:AcquisitionMethod;
+   acq:prefForm acq:Suffix;
+   acq:prefTerm "via consolidation";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:party_transformation;
+   skos:definition "One organization has joined with another organization, and the combined organization has assumed ownership.";
+   skos:example "Vincent Price via consolidation";
+   skos:inScheme acq:;
+   skos:prefLabel "Organizational Consolidation" .
+
+acq:conversion a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "appropriated by";
+   acq:terms "by appropriation",
+     "by conversion, to",
+     "by conversion";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:confiscation;
+   skos:definition "This object was acquired by the named party through some form of eminent domain.";
+   skos:example "appropriated by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Conversion" .
+
+acq:death a acq:AcquisitionMethod;
+   acq:prefForm acq:Suffix;
+   acq:prefTerm "via death";
+   acq:terms "via his death",
+     "via her death",
+     "via their death";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:party_transformation;
+   skos:definition "This is used for the transfer to an estate from a party who has died.";
+   skos:example "Vincent Price via death";
+   skos:inScheme acq:;
+   skos:prefLabel "Death" .
+
+acq:destruction a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "destroyed by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:disappearance;
+   skos:definition "This object was permanently destroyed.";
+   skos:example "destroyed by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Physical Destruction" .
+
+acq:divorce a acq:AcquisitionMethod;
+   acq:prefForm acq:Suffix;
+   acq:prefTerm "via divorce";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:party_transformation;
+   skos:definition "A marriage has been legally dissolved, and ownership has been assumed by one of the married parties.";
+   skos:example "Vincent Price via divorce";
+   skos:inScheme acq:;
+   skos:prefLabel "Divorce" .
+
+acq:excavated a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "excavated by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:discovery;
+   skos:definition "This object was uncovered by the named party as part of an archaeological event.";
+   skos:example "excavated by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Excavation" .
+
+acq:exchange a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "by exchange, to";
+   acq:terms "by exchange",
+     "acquired by exchange";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:exhange_of_value;
+   skos:definition "This object was acquired by the named party, but something of value was exchanged for the object instead of money.";
+   skos:example "by exchange, to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Exchange" .
+
+acq:expiration a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "completed by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:disappearance;
+   skos:definition "This object came to its intended temporal ending.";
+   skos:example "completed by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Expiration" .
+
+acq:fabrication a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "fabricated by";
+   acq:terms "published by",
+     "printed by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:creation;
+   skos:definition "A physical instance of a conceptual object was created by the named party.";
+   skos:example "fabricated by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Fabrication" .
+
+acq:field_collection a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "field collected by";
+   acq:terms "by field collection",
+     "extracted by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:discovery;
+   skos:definition "This object was extracted by the named party as part of an archaeological event.";
+   skos:example "field collected by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Field Collection" .
+
+acq:forced_sale a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "forced sale, to";
+   acq:terms "by forced sale";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:sale;
+   skos:definition "This object was purchased by the named party using involuntary pressure on the seller.";
+   skos:example "forced sale, to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Forced Sale" .
+
+acq:illegal_extraction a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "illegally extracted by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:discovery;
+   skos:definition "his object was extracted without legal permission by the named party as part of an archaeological event.";
+   skos:example "illegally extracted by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Illegal Extraction" .
+
+acq:looting a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "looted by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:theft;
+   skos:definition "This object was looted during a conflict by the named party.";
+   skos:example "looted by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Looting" .
+
+acq:lost a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "lost by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:disappearance;
+   skos:definition "This object has been lost and is not believed to be findable.";
+   skos:example "lost by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Loss" .
+
+acq:marriage a acq:AcquisitionMethod;
+   acq:prefForm acq:Suffix;
+   acq:prefTerm "via marriage";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:party_transformation;
+   skos:definition "One individual has married another, and ownership is now shared.";
+   skos:example "Vincent Price via marriage";
+   skos:inScheme acq:;
+   skos:prefLabel "Marriage" .
+
+acq:on_tour a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "toured to";
+   acq:transfersCustody true;
+   acq:transfersOwnership false;
+   skos:broader acq:on_loan;
+   skos:definition "The named party has been granted custody as part of a series of loans.";
+   skos:example "toured to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "On Tour" .
+
+acq:partial_gift a acq:AcquisitionMethod;
+   acq:prefForm acq:Suffix;
+   acq:prefTerm "via partial gift";
+   acq:terms "partial gift to";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:party_transformation;
+   skos:definition "This is used for the transfer from one party to a legal entity that includes both themselves and another party.";
+   skos:example "Vincent Price via partial gift";
+   skos:inScheme acq:;
+   skos:prefLabel "Partial Gift" .
+
+acq:prefTerm a owl:DatatypeProperty,
+     owl:FunctionalProperty,
+     owl:InverseFunctionalProperty;
+   rdfs:label "This is the preferred prefix term used to describe the method of acquisition."@en;
+   rdfs:domain acq:AcquisitionMethod;
+   rdfs:range xsd:string;
+   rdfs:subPropertyOf acq:terms .
+
+acq:private_sale a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "privately purchased by";
+   acq:terms "sold privately";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:sale;
+   skos:definition "This object was purchased by the named party from another party in a sale that was not publicly advertised and/or available.";
+   skos:example "privately purchased by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Private Sale" .
+
+acq:prize a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "won by";
+   acq:terms "awarded to";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:gift;
+   skos:definition "This object was won be the named party as part of a competition.";
+   skos:example "won by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Prize" .
+
+acq:purchase_at_auction a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "purchased at auction by";
+   acq:terms "by auction, to",
+     "by auction",
+     "sold at auction",
+     "sold at auction to",
+     "bought at sale by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:sale;
+   skos:definition "This object was purchased by the named party at auction.";
+   skos:example "purchased at auction by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Purchase at Auction" .
+
+acq:recleared a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "recleared by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:discovery;
+   skos:definition "This object was recleared by the named party as part of an archaeological event.";
+   skos:example "recleared by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Reclearing";
+   skos:scopeNote "This indicates and object that had been prviously been excavated, by not removed at that time." .
+
+acq:recognization a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "recognized by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:found;
+   skos:definition "This object was recognized as an artistic object by the named party.";
+   skos:example "recognized by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Recognization" .
+
+acq:restitution a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "restituted to";
+   acq:terms "by restitution",
+     "via restitution";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:appropriation;
+   skos:definition "This object was returned to the named party after having previously been illegally taken from them.";
+   skos:example "restituted to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Restitution" .
+
+acq:returned a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "returned to";
+   acq:transfersCustody true;
+   acq:transfersOwnership false;
+   skos:broader acq:delivered;
+   skos:definition "This object was returned to the owning party from a party which had temporary custody.";
+   skos:example "returned to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Returned" .
+
+acq:transfer a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "transferred to";
+   acq:terms "by transfer";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:gift;
+   skos:definition "This object was given to the named party from another part or element of the same named party.";
+   skos:example "transferred to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Transfer";
+   skos:scopeNote "This is typically used for objects transferring from one department to another within an organization.  It is NOT used for moments when an organization changes legal form;  see `by consolidation` for that.  This is also often used when an item is transferring from some form of partial ownership to being completely owned by one of the partial owners." .
+
+acq:transfersCustody a owl:DatatypeProperty;
+   rdfs:label "This method allows custody transfer."@en;
+   rdfs:domain acq:AcquisitionMethod;
+   rdfs:range xsd:boolean .
+
+acq:transfersOwnership a owl:DatatypeProperty;
+   rdfs:label "This method allows ownership transfer."@en;
+   rdfs:domain acq:AcquisitionMethod;
+   rdfs:range xsd:boolean .
+
+acq:widowhood a acq:AcquisitionMethod;
+   acq:prefForm acq:Suffix;
+   acq:prefTerm "via widowhood";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:party_transformation;
+   skos:definition "One individual in a marriage has died, and ownership is assumed by the surviving party.";
+   skos:example "Vincent Price via widowhood";
+   skos:inScheme acq:;
+   skos:prefLabel "Widowhood" .
+
+acq:bequest a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "bequest, to";
+   acq:terms "by bequest",
+     "bequeathed to";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:gift;
+   skos:definition "This object was given to the named party through a will or other means following the death of the previous owner.";
+   skos:example "bequest, to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Bequest" .
+
+acq:confiscation a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "confiscated by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:appropriation;
+   skos:definition "This object was legally appropriated by an entity without the consent of the previous owner.";
+   skos:example "confiscated by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Confiscation" .
+
+acq:on_loan a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "loaned to";
+   acq:terms "on loan to",
+     "on permanent loan to",
+     "on long term at",
+     "on longterm loan at",
+     "on extended loan at";
+   acq:transfersCustody true;
+   acq:transfersOwnership false;
+   skos:broader acq:on_deposit;
+   skos:definition "The named party has been given temporary custody for use, but without permission to sell the object.";
+   skos:example "loaned to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "On Loan" .
+
+acq:terms a owl:DatatypeProperty,
+     owl:InverseFunctionalProperty;
+   rdfs:label "This is the list of prefix terms used to describe the method of acquisition."@en;
+   rdfs:domain acq:AcquisitionMethod;
+   rdfs:range xsd:string .
+
+acq:theft a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "stolen by";
+   acq:terms "by theft",
+     "via theft";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:appropriation;
+   skos:definition "This object was stolen by the named party.";
+   skos:example "stolen by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Theft" .
+
+acq:assumption a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "ownership assumed by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:acquisition;
+   skos:definition "This object was acquired by the named party in some way that did not involve an exchange of value.";
+   skos:example "ownership assumed by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Assumption of Ownership" .
+
+acq:delivered a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "delivered to";
+   acq:transfersCustody true;
+   acq:transfersOwnership false;
+   skos:definition "This object was delivered to the owning party by a party which had temporary custody.";
+   skos:example "delivered to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Delivered" .
+
+acq:found a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "found by";
+   acq:terms "discovered by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:origin;
+   skos:definition "This object was found by the named party.";
+   skos:example "found by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Found" .
+
+acq:on_deposit a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "on deposit to";
+   acq:terms "on deposit",
+     "on deposit at";
+   acq:transfersCustody true;
+   acq:transfersOwnership false;
+   skos:broader acq:possessed_by;
+   skos:definition "The named party has been given temporary custody without permission to sell or exhibit the object.";
+   skos:example "on deposit to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "On Deposit";
+   skos:scopeNote "This differs from `on loan` chiefly when the temporary custody is done for the owner's benefit, not the temporary custodian's benefit." .
+
+acq:possessed_by a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "in custody of";
+   acq:terms "with",
+     "posessed by";
+   acq:transfersCustody true;
+   acq:transfersOwnership false;
+   skos:definition "The named party has temporary custody, but not ownership of this object.";
+   skos:example "in custody of Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "In Possession";
+   skos:scopeNote "By default, ownership is assumed in this model.  This is used to explicitly indicate that the named party does NOT have ownership of the object." .
+
+acq:acquisition a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "";
+   acq:terms "by acquisition",
+     "acquired by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:definition "This object was acquired by the named party in an unknown fashion.";
+   skos:example "Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Acquisition";
+   skos:scopeNote "This is the default method for acquisitions and is the base type for all acquisitions.It should be used if there are no additional details available.  If there is not an explicit acquisition method mentioned, this will be assumed." .
+
+acq:appropriation a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "appropriated by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:assumption;
+   skos:definition "This object was acquired by the named party without the consent of and without an exchange of value to the previous owner.";
+   skos:example "appropriated by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Appropriation" .
+
+acq:creation a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "created by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:origin;
+   skos:definition "This object was created by the named party.";
+   skos:example "created by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Creation" .
+
+acq:exhange_of_value a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "through an exchange of value, to";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:acquisition;
+   skos:definition "This object was obtained in some manner by the named party through an exchange of value.";
+   skos:example "through an exchange of value, to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Exchange of Value";
+   skos:scopeNote "This is the base class for all transfers where something of value was exchanged between the acquiring party and the receiving party.  This does not specify any details about the manner of the sale or the type of value exchanged.  In general, if it is assumed that money was exchanged, use 'purchased by'" .
+
+acq:gift a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "gift to";
+   acq:terms "gifted to",
+     "donated to",
+     "given to";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:assumption;
+   skos:definition "This object was given to the named party.";
+   skos:example "gift to Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Gift" .
+
+acq:origin a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "gave origin by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:definition "This object was brought into existence in some manner.";
+   skos:example "gave origin by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Origination";
+   skos:scopeNote "This is the most general form of origination.  It does not specify any particulars about the origination event, only that it existed and some party had agency in then origination." .
+
+acq:sale a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "purchased by";
+   acq:terms "bought by",
+     "by purchase",
+     "purchased",
+     "sold to";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:exhange_of_value;
+   skos:definition "This object was purchased by the named party.";
+   skos:example "purchased by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Sale" .
+
+acq:disappearance a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "disappeared by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:definition "This object was removed from existence in some manner.";
+   skos:example "disappeared by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Disappearance" .
+
+acq:discovery a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "discovered by";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:broader acq:found;
+   skos:definition "This object was discovered by the named party as part of an archaeological event.";
+   skos:example "discovered by Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Discovery" .
+
+acq:Suffix a owl:Class;
+   rdfs:subClassOf skos:Concept .
+
+acq:party_transformation a acq:AcquisitionMethod;
+   acq:prefForm acq:Prefix;
+   acq:prefTerm "who became";
+   acq:transfersCustody true;
+   acq:transfersOwnership true;
+   skos:definition "One legal party has transformed itself another legal party.";
+   skos:example "who became Vincent Price";
+   skos:inScheme acq:;
+   skos:prefLabel "Party Transformation" .
+
+acq:Prefix a owl:Class;
+   rdfs:subClassOf skos:Concept .
+
+acq: a skos:ConceptScheme;
+   skos:hasTopConcept acq:acquisition,
+     acq:origin,
+     acq:disappearance,
+     acq:possessed_by,
+     acq:delivered,
+     acq:party_transformation;
+   skos:prefLabel "Museum Provenance Acquisition Method Ontology" .
+
+acq:AcquisitionMethod a owl:Class;
+   rdfs:subClassOf skos:Concept .

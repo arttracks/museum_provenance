@@ -153,7 +153,7 @@ module MuseumProvenance
             graph << [method_uri, acq.transfersCustody, acq_method.custody_transfer]
             graph << [method_uri, acq.transfersOwnership, acq_method.ownership_transfer]
             if acq_method.parent
-              graph << [method_uri, skos.broaderTransitive, RDF::URI("#{top_level}#{acq_method.parent.id}")] 
+              graph << [method_uri, skos.broader, RDF::URI("#{top_level}#{acq_method.parent.id}")] 
             end
           end
 

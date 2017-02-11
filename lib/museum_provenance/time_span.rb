@@ -32,7 +32,8 @@ module MuseumProvenance
 
     # Find a TimeSpan within an arbitrary value.
     #
-    # It assumes that any date that it finds is both the earliest and the latest date of the timespan—
+    # It assumes that any date that it finds is both the earliest and 
+    # the latest date of the timespan—
     # if you need to set them independantly, use {TimeSpan#initialize}.
     #
     # @param val [Date,TimeSpan,Fixnum,String] A value to search for a TimeSpan

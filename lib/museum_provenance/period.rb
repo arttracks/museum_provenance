@@ -34,7 +34,7 @@ module MuseumProvenance
     #   @return [Boolean] Returns true if the owner is considered a primary owner. 
 
     # @!attribute [rw] stock_number
-    #   @depreciated true
+    #   @deprecated This was depricated in version 0.1.0, but will return in 0.2.0
     #   @return [String] The stock number of the artwork in the collection of this owner.
 
     # @!attribute [r] party

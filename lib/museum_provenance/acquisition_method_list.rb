@@ -50,7 +50,7 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:              :exhange_of_value,
       title:           "Exchange of Value", 
-      suffix:          "through an exchange of value, to", 
+      prefix:          "through an exchange of value, to", 
       description:     "This object was obtained in some manner by the named party through an exchange of value.",
       explanation:     "This is the base class for all transfers where something of value was exchanged between the acquiring party and the receiving party.  This does not specify any details about the manner of the sale or the type of value exchanged.  In general, if it is assumed that money was exchanged, use 'purchased by'",
       preferred_form:  AcquisitionMethod::Prefix, 

@@ -17,6 +17,7 @@ end
 task :acq do
   require "graphviz"
   require "./lib/museum_provenance.rb"
+  require "./lib/museum_provenance/utilities/acquisition_method_documentation.rb"
   require "fileutils"
   FileUtils.mkdir_p("./docs")
   MuseumProvenance::Utilities::AcquisitionMethodDocumentation.create_documentation("./docs")
@@ -25,6 +26,7 @@ end
 task :acq_svg do
   require "graphviz"
   require "./lib/museum_provenance.rb"
+  require "./lib/museum_provenance/utilities/acquisition_method_documentation.rb"
   require "fileutils"
   FileUtils.mkdir_p("./docs")
   MuseumProvenance::Utilities::AcquisitionMethodDocumentation.create_documentation("./docs", :svg)
@@ -32,6 +34,7 @@ end
 
 task :acq_skos do
   require "./lib/museum_provenance.rb"
+  require "./lib/museum_provenance/utilities/acquisition_method_documentation.rb"
   require "fileutils"
   FileUtils.mkdir_p("./docs")
   MuseumProvenance::Utilities::AcquisitionMethodDocumentation.create_skos("./docs")
