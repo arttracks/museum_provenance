@@ -11,6 +11,7 @@ describe Parsers::SaleDataParser do
       results[:sale_currency_symbol].must_equal "$"
       results[:sale_value].must_equal "100"
       results[:sale_amount].must_be_nil
+      puts "\nSALE DATA STRUCTURE:\n#{JSON.pretty_generate results}" if ENV["DEBUG"]
 
 
     rescue Parslet::ParseFailed => failure

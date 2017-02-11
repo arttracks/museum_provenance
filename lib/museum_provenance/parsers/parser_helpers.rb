@@ -24,7 +24,7 @@ module MuseumProvenance
       rule(:comma)            { str(",") >> space }
       rule(:period)           { str(".") >> space }
       rule(:period_end)       { (str(".") | str(";")) >> (space | eof) }
-      rule(:phrase_end)       { (comma | space) }
+      rule(:phrase_end)       { (comma | space | eof) }
       rule(:certainty)        { (str("?") | str("")).as(:certainty)}
       rule(:lparen)           { str("(")}
       rule(:rparen)           { str(")")}
