@@ -1,5 +1,5 @@
-require "chronic"
-require 'date_time_precision/format/iso8601'
+# require "chronic"
+# require 'date_time_precision/format/iso8601'
 
 module MuseumProvenance
 

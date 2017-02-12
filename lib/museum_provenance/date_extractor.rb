@@ -182,7 +182,7 @@ module MuseumProvenance
           months = months.collect do |d|
             date_val = d[0].to_s
             certain = date_val.gsub!("?","")
-            val = Chronic.parse(date_val).to_date
+            val = nil # val = Chronic.parse(date_val).to_date
             m = Date.new(val.year,val.month)
             m.certainty = certain.nil?
             m
@@ -236,7 +236,7 @@ module MuseumProvenance
             date_val = d[0].to_s
             certain = date_val.gsub!("?","")
             is_BCE = d[1] && (d[1].upcase == "BC" || d[1].upcase == "BCE")
-            day = Chronic.parse(date_val)
+            day = nil # day = Chronic.parse(date_val)
             unless day.nil?
               day = day.to_date 
               day = Date.new(day.year*-1,day.month,day.day) if is_BCE

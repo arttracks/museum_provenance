@@ -1,4 +1,6 @@
 require_relative "parser_helpers"
+require_relative "place_parser"
+require_relative "date_parser"
 
 module MuseumProvenance
   module Parsers
@@ -19,20 +21,15 @@ module MuseumProvenance
       root(:actor)
 
 
-       # Location Stuff  
-      rule(:location) do
-        comma >> (word_phrase.repeat(1).as(:string)  >> certainty).as(:location) >> phrase_end
-      end
-      
-      rule (:era)  {(space >> str("CE").as(:era) | space >> str("BCE").as(:era) | str("").as(:era))}
-      rule (:year) {(match["1-9"] >> match["0-9"].repeat(0,3)).as(:year) >> era }
+      #rule (:era)  {(space >> str("CE").as(:era) | space >> str("BCE").as(:era) | str("").as(:era))}
+      #rule (:year) {(match["1-9"] >> match["0-9"].repeat(0,3)).as(:year) >> era }
 
       rule (:life_dates) do
         space >>
         str("[") >> 
-        (year.maybe >> certainty).as(:birth) >>
+        (DateParser.new.maybe).as(:birth) >>
         (str("-") | str(" - ")) >>
-        (year.maybe >> certainty).as(:death) >>
+        (DateParser.new.maybe).as(:death) >>
         str("]") >>
         space?
       end
@@ -59,9 +56,8 @@ module MuseumProvenance
       rule (:actor_clause) {comma >> (the_artist | familial_relationship).as(:clause)}
 
       # Name Stuff
-      rule(:token) {str("$AUTHORITY_TOKEN_") >> match["0-9"].repeat(6,6)}
       rule(:proper_name) {((words.as(:string) | token.as(:token)) >> certainty).as(:name) >> life_dates.maybe}
-      rule(:actor)       {proper_name >> actor_clause.maybe >> location.maybe}
+      rule(:actor)       {proper_name >> actor_clause.maybe >> (comma >> PlaceParser.new).maybe}
 
     end
   end

@@ -6,11 +6,11 @@ module MuseumProvenance
     class DateStringParser < Parslet::Parser
 
       include ParserHelpers
-      include DateParser
+      date = DateParser.new
 
 
       # KEYWORDS      
-      rule(:no_date)              { (str("no date").as("nodate") | eof.as("nodate"))}
+      rule(:no_date)              { (str("no date").as("nodate") | str("").as("nodate"))}
       rule(:begin_end_separator)  { space.maybe >> str("until") >> space }
       rule(:after)                { str("after")                >> space }
       rule(:by)                   { str("by")                   >> space }
@@ -42,7 +42,7 @@ module MuseumProvenance
                        }
       
 
-      rule(:date_string) { one_date | no_date | fallback }
+      rule(:date_string) { one_date | no_date }
       root(:date_string)
 
     end

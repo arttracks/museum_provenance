@@ -1,7 +1,13 @@
+require_relative "parser_helpers"
 module MuseumProvenance
   module Parsers
-    module AcquisitionMethodParser
+    class AcquisitionMethodParser < Parslet::Parser
       include Parslet
+      include ParserHelpers
+
+      def initialize(acq_methods)
+        @acquisition_methods = acq_methods
+      end
 
       def generate_list(magic_word)        
         all_forms = @acquisition_methods.collect do |m| 
@@ -9,7 +15,7 @@ module MuseumProvenance
         end.flatten
 
         (all_forms.sort_by{|t| t[:str].length}.reverse.inject(false) do |parslet,val| 
-          parslet ?  parslet | stri(val[:str]).as(val[:id]) : stri(val[:str]).as(val[:id])
+          parslet ?  parslet | str_i(val[:str]).as(val[:id]) : str_i(val[:str]).as(val[:id])
         end >> space?).as(:acquisition_method)
       end
 
@@ -17,35 +23,24 @@ module MuseumProvenance
       rule (:custody_start_by)     { str("by")  >> space }
       rule (:custody_start_to)     { str("to") >> space }
       rule (:custody_start)        {custody_start_by | custody_start_to}
-      rule (:ownership_start)      { str("for") >> space }
-      rule (:event_location_start) { str("in")  >> space }
 
       # Acquisition Method forms
       rule (:acquisition_method_by_list) { generate_list(" by") }
       rule (:acquisition_method_to_list) { generate_list(", to") | generate_list(" to") }
-      rule (:acquisition_methods) {acquisition_method_by_list | acquisition_method_to_list}
+      rule (:acquisition_method) {acquisition_method_by_list | acquisition_method_to_list}
       
-      # All the different options
-      rule (:acquisition) {
-        (
-          (acquisition_method_by_list >> custody_start_by.absent? >> event_location >> custody_start_by) |
-          (acquisition_method_to_list >> custody_start_to.absent? >> event_location >> custody_start_to) |
-          (acquisition_methods >> custody_start.absent? >> event_location) |
-          (acquisition_methods >> custody_start ) |
-          (acquisition_methods >> ownership_start.present? ) |
-          acquisition_methods >> comma.maybe
-        ).maybe
-      }
-
-      # Location
-      rule (:event_location)    {event_location_start >> location.as(:event_location)}
-
-      # People
-      rule (:owner)             {(ownership_start >> proper_name >> location.maybe.as("location")).maybe.as(:owner)}
-      rule (:custody)           {((ownership_start.absent? >> proper_name >> location.maybe.as("location")).maybe.as(:custodian))}
-
-      # The generic rule     
-      rule (:party_metadata) {acquisition >> custody >> owner}
+      root :acquisition_method
+      # # All the different options
+      # rule (:acquisition) {
+      #   (
+      #     (acquisition_method_by_list >> custody_start_by.absent? >> event_location >> custody_start_by) |
+      #     (acquisition_method_to_list >> custody_start_to.absent? >> event_location >> custody_start_to) |
+      #     (acquisition_methods >> custody_start.absent? >> event_location) |
+      #     (acquisition_methods >> custody_start ) |
+      #     (acquisition_methods >> ownership_start.present? ) |
+      #     acquisition_methods >> comma.maybe
+      #   ).maybe
+      # }
 
     end
   end
