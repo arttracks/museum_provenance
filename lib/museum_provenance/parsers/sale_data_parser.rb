@@ -24,13 +24,13 @@ module MuseumProvenance
       root(:sale_clause)
 
       rule(:currency_value)  { 
-                               (currency_symbol.as(:sale_currency_symbol) >> space? >> numeric.as(:sale_value)) | 
-                               (numeric.as(:sale_value) >> space? >> currency_symbol.as(:sale_currency_symbol))
+                               (currency_symbol.as(:currency_symbol) >> space? >> numeric.as(:value)) | 
+                               (numeric.as(:value) >> space? >> currency_symbol.as(:currency_symbol))
                              }
-      rule(:currency_phrase) {currency_value | texts.as(:sale_amount)}
+      rule(:currency_phrase) {currency_value | texts.as(:string)}
       rule(:stock_number)    {str("for").absent? >> texts.as(:stock_number) >> comma.maybe}
-      rule(:sale_amount)     {str("for") >> space >> currency_phrase}
-      rule(:sale_clause)     {lparen >> stock_number.maybe >> sale_amount.maybe >> rparen}
+      rule(:sale_amount)     {str("for") >> space >> currency_phrase.as(:purchase)}
+      rule(:sale_clause)     {(space | comma).maybe >> lparen >> stock_number.maybe >> sale_amount.maybe >> rparen}
 
     end
   end
