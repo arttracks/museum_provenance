@@ -9,25 +9,38 @@ module MuseumProvenance
         @acquisition_methods = acq_methods
       end
 
-      def generate_list(magic_word)        
+      def preferred_form
         all_forms = @acquisition_methods.collect do |m| 
-          m.forms.find_all{|m| (m =~ /#{Regexp.quote(magic_word)}$/)}.collect{|a| {str: a.gsub(/#{Regexp.quote(magic_word)}$/, "").downcase, id: "acquisition_method_#{m.id}"}}
-        end.flatten
+          str = String.new(m.preferred)
+          str[0] = str[0].upcase if str[0]
+          [m.preferred, str]
+        end.compact.flatten
+        all_forms = all_forms.sort_by{|t| t.length}.reverse
 
-        (all_forms.sort_by{|t| t[:str].length}.reverse.inject(false) do |parslet,val| 
-          parslet ?  parslet | str_i(val[:str]).as(val[:id]) : str_i(val[:str]).as(val[:id])
-        end >> space?).as(:acquisition_method)
+        (all_forms.reduce(false) do |parslet,val| 
+          parslet ? parslet | str(val) : str(val)
+        end).as(:acquisition_method)
       end
 
-      # Magic Words
-      rule (:custody_start_by)     { str("by")  >> space }
-      rule (:custody_start_to)     { str("to") >> space }
-      rule (:custody_start)        {custody_start_by | custody_start_to}
+      # def generate_list(magic_word)        
+      #   all_forms = @acquisition_methods.collect do |m| 
+      #     m.forms.find_all{|m| (m =~ /#{Regexp.quote(magic_word)}$/)}.collect{|a| {str: a.gsub(/#{Regexp.quote(magic_word)}$/, "").downcase, id: "acquisition_method_#{m.id}"}}
+      #   end.flatten
 
-      # Acquisition Method forms
-      rule (:acquisition_method_by_list) { generate_list(" by") }
-      rule (:acquisition_method_to_list) { generate_list(", to") | generate_list(" to") }
-      rule (:acquisition_method) {acquisition_method_by_list | acquisition_method_to_list}
+      #   (all_forms.reduce(false) do |parslet,val| 
+      #     parslet ? parslet | str_i(val[:str]).as(val[:id]) : str_i(val[:str]).as(val[:id])
+      #   end >> space?).as(:acquisition_method)
+      # end
+
+      # # Magic Words
+      # rule (:custody_start_by)     { str("by")  >> space }
+      # rule (:custody_start_to)     { str("to") >> space }
+      # rule (:custody_start)        {custody_start_by | custody_start_to}
+
+      # # Acquisition Method forms
+      # rule (:acquisition_method_by_list) { generate_list(" by") }
+      # rule (:acquisition_method_to_list) { generate_list(", to") | generate_list(" to") }
+      rule (:acquisition_method) {preferred_form  >> space}
       
       root :acquisition_method
       # # All the different options

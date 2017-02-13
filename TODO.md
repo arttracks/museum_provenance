@@ -1,3 +1,10 @@
+
+## Parser TODOS
+* [ ] Rebuild acquisition tests
+* [ ] Date String Tests
+* [ ] Footnotes and Citation marks
+
+
 ## Todos for Acquisition Methods
 
 * [ ] Look into Move as a type.

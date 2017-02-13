@@ -14,7 +14,7 @@ module MuseumProvenance
 
     actor = ActorParser.new
     rule (:actors) do
-      (actor.as(:custodian) >> str("for") >> actor.as(:owner)) |
+      (actor.as(:purchasing_agent) >> (comma | space) >> str("for") >> space >> actor.as(:owner)) |
       actor.as(:owner)
     end
 
@@ -27,10 +27,11 @@ module MuseumProvenance
       period_certainty >> 
       AcquisitionMethodParser.new(@acquisition_methods).maybe >> 
       actors  >>
-      NamedEventParser.new.maybe >>
-      transfer_location.maybe >>
-      DateStringParser.new.as(:date).maybe >> 
-      SaleDataParser.new.maybe >>
+      ((comma | space) >> NamedEventParser.new).maybe >>
+      (comma.maybe >> transfer_location).maybe >>
+      (comma.maybe >> DateStringParser.new.as(:timespn)).maybe >> 
+      (comma.maybe >> SaleDataParser.new).maybe >>
+      NotesParser.new.maybe >>
       period_end)
     }
 

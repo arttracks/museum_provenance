@@ -46,25 +46,25 @@ describe Parsers::ActorParser do
   it "works with a name and life dates" do
     results = p.parse("John Doe [1990-1991]")
     results[:name][:string].must_equal "John Doe"
-    results[:birth][:year].must_equal "1990"
-    results[:death][:year].must_equal "1991"
-    results[:birth][:certainty].must_equal ""
-    results[:death][:certainty].must_equal ""
+    results[:birth][:date][:year].must_equal "1990"
+    results[:death][:date][:year].must_equal "1991"
+    results[:birth][:date][:certainty].must_equal ""
+    results[:death][:date][:certainty].must_equal ""
   end
 
   it "works with just birth dates" do
     results = p.parse("John Doe [1990-]")
     results[:name][:string].must_equal "John Doe"
-    results[:birth][:year].must_equal "1990"
-    results[:birth][:certainty].must_equal ""
+    results[:birth][:date][:year].must_equal "1990"
+    results[:birth][:date][:certainty].must_equal ""
     results[:death].must_be_nil
   end
 
   it "works with just death dates" do
     results = p.parse("John Doe [-1990]")
     results[:name][:string].must_equal "John Doe"
-    results[:death][:year].must_equal "1990"
-    results[:death][:certainty].must_equal ""
+    results[:death][:date][:year].must_equal "1990"
+    results[:death][:date][:certainty].must_equal ""
     results[:birth].must_be_nil
   end
 
@@ -72,18 +72,18 @@ describe Parsers::ActorParser do
     results = p.parse("John Doe [-1990 BCE]")
 
     results[:name][:string].must_equal "John Doe"
-    results[:death][:year].must_equal "1990"
-    results[:death][:era].must_equal "BCE"
+    results[:death][:date][:year].must_equal "1990"
+    results[:death][:date][:era].must_equal "BCE"
     results[:birth].must_be_nil
-    results[:death][:certainty].must_equal ""
+    results[:death][:date][:certainty].must_equal ""
   end
 
   it "works with CE years" do
     results = p.parse("John Doe [-1990 CE]")
     results[:name][:string].must_equal "John Doe"
-    results[:death][:year].must_equal "1990"
-    results[:death][:era].must_equal "CE"
-    results[:death][:certainty].must_equal ""
+    results[:death][:date][:year].must_equal "1990"
+    results[:death][:date][:era].must_equal "CE"
+    results[:death][:date][:certainty].must_equal ""
     results[:birth].must_be_nil
   end
 end

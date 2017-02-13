@@ -19,11 +19,14 @@ module MuseumProvenance
       include Parslet
       root(:named_event)
 
+      rule(:event) {(str("\"") >> ((word_phrase.as(:string) | token.as(:token)) >> certainty).as(:event) >> str("\""))}
+      rule(:sellers_agent) {ActorParser.new.as(:sellers_agent)}
+      
+      rule(:both) {event >> comma >> sellers_agent}
+
       rule (:named_event) do
-       str("at") >> space >> str("\"") >>
-       ((word_phrase.as(:string) | token.as(:token)) >> certainty).as(:event) >>
-        str("\"") >> 
-        (comma >> ActorParser.new.as(:event_actor)).maybe
+        (str("at") >> space >> (both | event | sellers_agent)) |
+        (str("through") >> space >> sellers_agent >> ( (space | comma) >> str("at") >> space >> event).maybe)
       end
       
     

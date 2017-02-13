@@ -12,17 +12,19 @@ module MuseumProvenance
       #
       # @author [@workergnome]
       # 
-    class PlaceParser < Parslet::Parser
-
+    class NotesParser < Parslet::Parser
       include ParserHelpers
       include Parslet
-      root(:place)
 
-      rule(:place) do
-        (((captal_word >> capitalized_word_phrase).as(:string) | captal_word.as(:string) | token.as(:token)) >> certainty).as(:place)
+      root(:notes)
+
+      rule(:footnote) {str("[") >> (match["1-9"] >> match["0-9"].repeat(0)).as(:footnote) >> str("]")}
+      rule(:citation) {str("[") >> match(["a-zA-Z"]).repeat(1).as(:value) >> str("]")}
+      rule(:notes) do
+         (citation.repeat(0,nil).as(:citations) >> footnote.maybe |
+         footnote.maybe >> citation.repeat(0,nil).as(:citations))
       end
-      
-    
+
     end
   end
 end

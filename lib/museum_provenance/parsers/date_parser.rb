@@ -48,12 +48,12 @@ module MuseumProvenance
       rule(:date) {
           (century | 
           decade  |
+          day     |
           year    |
           month   |
-          day     |
           euroday |
           numdate |
-          isodate)
+          isodate).as(:date)
       }
 
       root(:date)

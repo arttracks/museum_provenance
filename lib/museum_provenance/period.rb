@@ -198,7 +198,7 @@ module MuseumProvenance
 
      # @param recursion_count [Fixnum] Used to count number of recursions to prevent infinite recursion
      def actually_parse_time_string(str, recursion_count = 0) 
-      time_debug = false# str.include? "Newcastle"
+      time_debug = false
 
       puts str if time_debug
       if str.strip == "" && recursion_count == 0

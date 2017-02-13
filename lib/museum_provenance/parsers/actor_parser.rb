@@ -42,12 +42,14 @@ module MuseumProvenance
         str("father")        |
         str("son")           |
         str("daughter")      |
-        str("grandson")      |
-        str("granddaughter") |
+        str("grandchild")    |
+        str("grandparent")   |
         str("nephew")        |
         str("niece")         |
         str("uncle")         |
         str("aunt")          |
+        str("husband")       |
+        str("wife")          |
         str("relative")
       end
       rule (:gendered_clause)       {str("his") | str("her") | str("their")}
@@ -56,7 +58,7 @@ module MuseumProvenance
       rule (:actor_clause) {comma >> (the_artist | familial_relationship).as(:clause)}
 
       # Name Stuff
-      rule(:proper_name) {((words.as(:string) | token.as(:token)) >> certainty).as(:name) >> life_dates.maybe}
+      rule(:proper_name) {((capitalized_words.as(:string) | token.as(:token)) >> certainty).as(:name) >> life_dates.maybe}
       rule(:actor)       {proper_name >> actor_clause.maybe >> (comma >> PlaceParser.new).maybe}
 
     end

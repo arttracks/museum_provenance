@@ -14,6 +14,7 @@ describe Parsers::PlaceParser do
   it "works with a comma" do
     results = p.parse(%{at "Sale of Pleasant, Lovely Goods", Christie's})
     results[:event][:string].must_equal "Sale of Pleasant, Lovely Goods"
+    results[:sellers_agent][:name][:string].must_equal "Christie's"
   end 
 
   it "works with a token" do
@@ -25,4 +26,33 @@ describe Parsers::PlaceParser do
     results = p.parse(%{at "Sale of Pleasant, Lovely Goods"})
     results[:event][:string].must_equal "Sale of Pleasant, Lovely Goods"
   end 
+
+  it "works without an event" do
+    results = p.parse(%{at Paul PurchasingAgent})
+    results[:sellers_agent][:name][:string].must_equal "Paul PurchasingAgent"
+  end
+
+  it "works with a through" do
+    results = p.parse(%{through Paul PurchasingAgent})
+    results[:sellers_agent][:name][:string].must_equal "Paul PurchasingAgent"
+  end
+
+  it "works with a through and an at" do
+    results = p.parse(%{through Paul PurchasingAgent at "Sale of Pleasant, Lovely Goods"})
+    results[:sellers_agent][:name][:string].must_equal "Paul PurchasingAgent"
+    results[:event][:string].must_equal "Sale of Pleasant, Lovely Goods"
+  end
+  it "works with a through and an at w/location " do
+    results = p.parse_with_debug(%{through Paul PurchasingAgent, London, England, at "Sale of Pleasant, Lovely Goods"})
+    results[:sellers_agent][:name][:string].must_equal "Paul PurchasingAgent"
+    results[:sellers_agent][:place][:string].must_equal "London, England"
+    results[:event][:string].must_equal "Sale of Pleasant, Lovely Goods"
+  end
+  it "works with a through and an at w/location without a comma " do
+    results = p.parse_with_debug(%{through Paul PurchasingAgent, London, England at "Sale of Pleasant, Lovely Goods"})
+    results[:sellers_agent][:name][:string].must_equal "Paul PurchasingAgent"
+    results[:sellers_agent][:place][:string].must_equal "London, England"
+    results[:event][:string].must_equal "Sale of Pleasant, Lovely Goods"
+  end
+
 end

@@ -20,8 +20,9 @@ module MuseumProvenance
       rule(:word)             { (match["A-Za-z"] | str("\'")).repeat(1) }
       rule(:captal_word)      { match["A-Z"] >> match["A-Za-z'"].repeat(1) }
       rule(:words)            { (word | space >> word ).repeat(1)}
+      rule(:capitalized_words){ (captal_word | space >> stop_words.absent? >> captal_word ).repeat(1)}
       rule(:word_phrase)      { (word | space >> word | comma >> stop_words.absent? >> word).repeat(1)}
-      rule(:capitalized_word_phrase)  { (word | space >> word | comma >> captal_word).repeat(1)}
+      rule(:capitalized_word_phrase)  { (word | space >> stop_words.absent? >> word | comma >> captal_word).repeat(1)}
       rule(:text)             { (word | match["0-9."] | currency_symbol).repeat(1) }
       rule(:texts)            { (text | space >> text).repeat(1)}
       rule(:numeric)          { match(["0-9.,"]).repeat(1) }

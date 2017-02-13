@@ -638,9 +638,9 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:             :marriage,
       title:          "Marriage", 
-      suffix:         "via marriage", 
+      prefix:         "via marriage, to", 
       description:    "One individual has married another, and ownership is now shared.",
-      preferred_form: AcquisitionMethod::Suffix, 
+      preferred_form: AcquisitionMethod::Prefix, 
       synonyms:       [],
       parent:         :party_transformation,
 
@@ -649,9 +649,9 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:             :widowhood,
       title:          "Widowhood", 
-      suffix:         "via widowhood", 
+      prefix:         "via widowhood, to", 
       description:    "One individual in a marriage has died, and ownership is assumed by the surviving party.",
-      preferred_form: AcquisitionMethod::Suffix, 
+      preferred_form: AcquisitionMethod::Prefix, 
       synonyms:       [],
       parent:         :party_transformation,
 
@@ -660,9 +660,9 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:             :divorce,
       title:          "Divorce", 
-      suffix:         "via divorce", 
+      prefix:         "via divorce, to", 
       description:    "A marriage has been legally dissolved, and ownership has been assumed by one of the married parties.",
-      preferred_form: AcquisitionMethod::Suffix, 
+      preferred_form: AcquisitionMethod::Prefix, 
       synonyms:       [],
       parent:         :party_transformation,
     }) 
@@ -670,9 +670,9 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:             :death,
       title:          "Death", 
-      suffix:         "via death", 
+      prefix:         "via death, to", 
       description:    "This is used for the transfer to an estate from a party who has died.",
-      preferred_form: AcquisitionMethod::Suffix, 
+      preferred_form: AcquisitionMethod::Prefix, 
       synonyms:       ["via his death", "via her death", "via their death"],
       parent:         :party_transformation,
     }) 
@@ -680,10 +680,10 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:             :partial_gift,
       title:          "Partial Gift", 
-      suffix:         "via partial gift", 
+      prefix:         "partial gift to", 
       description:    "This is used for the transfer from one party to a legal entity that includes both themselves and another party.",
-      preferred_form: AcquisitionMethod::Suffix, 
-      synonyms:       ["partial gift to"],
+      preferred_form: AcquisitionMethod::Prefix, 
+      synonyms:       ["via partial gift"],
       parent:         :party_transformation,
     }) 
 
@@ -691,9 +691,9 @@ module MuseumProvenance
     AcquisitionMethod.new({
       id:             :consolidation,
       title:          "Organizational Consolidation", 
-      suffix:         "via consolidation", 
+      prefix:         "via consolidation, to", 
       description:    "One organization has joined with another organization, and the combined organization has assumed ownership.",
-      preferred_form: AcquisitionMethod::Suffix, 
+      preferred_form: AcquisitionMethod::Prefix, 
       synonyms:       [],
       parent:         :party_transformation,
     }) 
