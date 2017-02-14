@@ -19,7 +19,7 @@ module MuseumProvenance
       root(:place)
 
       rule(:place) do
-        (((captal_word >> capitalized_word_phrase).as(:string) | captal_word.as(:string) | token.as(:token)) >> certainty).as(:place)
+        ((( capitalized_word_phrase).as(:string) | captal_word.as(:string) | token.as(:token)) >> certainty).as(:place)
       end
       
     

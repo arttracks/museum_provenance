@@ -17,6 +17,38 @@ describe Parsers::ActorParser do
     results[:name][:string].must_equal "John Doe"
   end 
 
+  it "works with all lowercase names" do
+    str = "an unnamed dealer"
+    results = p.parse(str)
+    results[:name][:string].must_equal str
+  end
+
+  it "works with a name with a single letter" do
+    str = "John G Doe"
+     results = p.parse(str)
+    results[:name][:string].must_equal str
+  end
+
+  it "works with a name with an initial" do
+    str = "John G. Doe"
+     results = p.parse_with_debug(str)
+    results[:name][:string].must_equal str
+  end
+
+  it "works with unicode names" do
+    str =  "Fundació Gala-Salvador Dalí"
+    results = p.parse_with_debug(str)
+    results[:name][:string].must_equal str
+  end
+
+  it "works with a all caps name" do
+    str = "IBM"
+    results = p.parse_with_debug(str)
+    results[:name][:string].must_equal str
+  end
+
+  
+
   it "works with a name and a relationship" do
     results = p.parse("John Doe, his son")
     results[:name][:string].must_equal "John Doe"

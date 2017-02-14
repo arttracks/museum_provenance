@@ -30,8 +30,7 @@ module MuseumProvenance
         (DateParser.new.maybe).as(:birth) >>
         (str("-") | str(" - ")) >>
         (DateParser.new.maybe).as(:death) >>
-        str("]") >>
-        space?
+        str("]")
       end
 
       # Descriptive Clause stuff
@@ -58,7 +57,7 @@ module MuseumProvenance
       rule (:actor_clause) {comma >> (the_artist | familial_relationship).as(:clause)}
 
       # Name Stuff
-      rule(:proper_name) {((capitalized_words.as(:string) | token.as(:token)) >> certainty).as(:name) >> life_dates.maybe}
+      rule(:proper_name) {(((capitalized_words | words).as(:string) | token.as(:token)) >> certainty).as(:name) >> life_dates.maybe}
       rule(:actor)       {proper_name >> actor_clause.maybe >> (comma >> PlaceParser.new).maybe}
 
     end

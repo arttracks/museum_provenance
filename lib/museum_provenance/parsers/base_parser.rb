@@ -29,9 +29,9 @@ module MuseumProvenance
       actors  >>
       ((comma | space) >> NamedEventParser.new).maybe >>
       (comma.maybe >> transfer_location).maybe >>
-      (comma.maybe >> DateStringParser.new.as(:timespn)).maybe >> 
+      (comma.maybe >> DateStringParser.new.as(:timespan)).maybe >> 
       (comma.maybe >> SaleDataParser.new).maybe >>
-      NotesParser.new.maybe >>
+      (space.maybe >> NotesParser.new).maybe >>
       period_end)
     }
 

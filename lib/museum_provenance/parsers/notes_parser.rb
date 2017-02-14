@@ -18,11 +18,15 @@ module MuseumProvenance
 
       root(:notes)
 
-      rule(:footnote) {str("[") >> (match["1-9"] >> match["0-9"].repeat(0)).as(:footnote) >> str("]")}
-      rule(:citation) {str("[") >> match(["a-zA-Z"]).repeat(1).as(:value) >> str("]")}
+      rule(:footnote) {str("[") >> (match["1-9"] >> match["0-9"].repeat).as(:footnote) >> str("]")}
+
+      rule(:citation) {(str("[") >> match["1-9"]).absent? >> str("[") >>  match["A-Za-z"].repeat(1).as(:value) >> str("]")}
+     
       rule(:notes) do
-         (citation.repeat(0,nil).as(:citations) >> footnote.maybe |
-         footnote.maybe >> citation.repeat(0,nil).as(:citations))
+         (footnote >> citation.repeat(1).as(:citations)) |
+         (citation.repeat(1).as(:citations) >> footnote) |
+         footnote |
+         citation.repeat(1).as(:citations)
       end
 
     end

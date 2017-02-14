@@ -18,7 +18,7 @@ module MuseumProvenance
       rule(:at_least)             { str("at least")                  >> space }
       rule(:before)               { sometime.maybe >> str("before")  >> space }
       rule(:between)              { sometime.maybe >> str("between") >> space }
-      rule(:in_kw)                { str("in")                        >> space }
+      rule(:in_kw)                { sometime.maybe >> str("in")      >> space }
       rule(:and_kw)               { space? >> str("and")             >> space?}
 
       # DATE GRAMMAR (Needs rewritten)
@@ -34,11 +34,12 @@ module MuseumProvenance
       rule(:between_end)   { between  >> date.as(:bote) >> and_kw >> date.as(:eote)}
      
       rule (:start_clause) {(in_date | between_begin | begin_date | date.as(:begin))}
-      rule (:end_clause)   {(begin_end_separator >> (between_end | end_date | date.as(:end)))}
+      rule (:end_clause)   {(between_end | end_date | date.as(:end))}
      
       # SENTENCE GRAMMARS
       rule(:one_date)  {
-                         start_clause >> end_clause.maybe |
+                         start_clause >>begin_end_separator >>  end_clause |
+                         start_clause |
                          end_clause
                        }
       

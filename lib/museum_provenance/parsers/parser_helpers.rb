@@ -1,7 +1,9 @@
+require_relative "date_word_helpers"
 module MuseumProvenance
   module Parsers
     module ParserHelpers 
       include Parslet
+      include DateWordHelpers
 
       def str_i(str)
           key_chars = str.split(//)
@@ -14,15 +16,16 @@ module MuseumProvenance
       rule(:space?)   { space.maybe }
       rule(:eof)      { any.absent? }
 
-      rule(:stop_words) {str("for") | str("in") | str("at")}
+      rule(:stop_words) {str("for") | str("in") | str("at") | month_names_tc}
 
       # Word rules    
-      rule(:word)             { (match["A-Za-z"] | str("\'")).repeat(1) }
-      rule(:captal_word)      { match["A-Z"] >> match["A-Za-z'"].repeat(1) }
-      rule(:words)            { (word | space >> word ).repeat(1)}
-      rule(:capitalized_words){ (captal_word | space >> stop_words.absent? >> captal_word ).repeat(1)}
+      rule(:word)             { (match["[[:alpha:]]'-"]).repeat(1)  }
+      rule(:initial)          { match["[[:upper:]]"] >> period }
+      rule(:captal_word)      { initial | match["[[:upper:]]"] >> word  }
+      rule(:words)            { (word | space >> word).repeat(1)}
+      rule(:capitalized_words){ ((initial | captal_word) | space >> stop_words.absent? >> (initial | word) ).repeat(1)}
       rule(:word_phrase)      { (word | space >> word | comma >> stop_words.absent? >> word).repeat(1)}
-      rule(:capitalized_word_phrase)  { (word | space >> stop_words.absent? >> word | comma >> captal_word).repeat(1)}
+      rule(:capitalized_word_phrase)  { (captal_word | space >> stop_words.absent? >> word | comma >> stop_words.absent? >> captal_word).repeat(1)}
       rule(:text)             { (word | match["0-9."] | currency_symbol).repeat(1) }
       rule(:texts)            { (text | space >> text).repeat(1)}
       rule(:numeric)          { match(["0-9.,"]).repeat(1) }
