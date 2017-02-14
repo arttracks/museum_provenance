@@ -25,7 +25,7 @@ module MuseumProvenance
       rule(:words)            { (word | space >> word).repeat(1)}
       rule(:capitalized_words){ ((initial | captal_word) | space >> stop_words.absent? >> (initial | word) ).repeat(1)}
       rule(:word_phrase)      { (word | space >> word | comma >> stop_words.absent? >> word).repeat(1)}
-      rule(:capitalized_word_phrase)  { (captal_word | space >> stop_words.absent? >> word | comma >> stop_words.absent? >> captal_word).repeat(1)}
+      rule(:capitalized_word_phrase)  { (captal_word | space >> stop_words.absent? >> word | comma >> stop_words.absent? >>  captal_word).repeat(1)}
       rule(:text)             { (word | match["0-9."] | currency_symbol).repeat(1) }
       rule(:texts)            { (text | space >> text).repeat(1)}
       rule(:numeric)          { match(["0-9.,"]).repeat(1) }
@@ -37,14 +37,10 @@ module MuseumProvenance
       # Punctuation
       rule(:comma)            { str(",") >> space }
       rule(:period)           { str(".") >> space }
-      rule(:period_end)       { (str(".") | str(";")) >> space.maybe }
-      rule(:certainty)        { (str("?") | str("")).as(:certainty)}
+      rule(:period_end)       { (str(".") | str(";")).as(:transfer_punctuation) >> space.maybe }
+      rule(:certainty)        { (str("?") | str("")).as(:certainty_value).as(:certainty)}
       rule(:lparen)           { str("(")}
-      rule(:rparen)           { str(")")}
-
-
-      rule(:fallback) { any.repeat.maybe.as("trash") }
-      
+      rule(:rparen)           { str(")")}      
 
     end
   end

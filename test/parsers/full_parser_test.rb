@@ -24,7 +24,7 @@ describe "Full Text Parser" do
      # puts str
      # puts (0..20).collect{|n| "#{n}0".ljust(10)}.join("")
     results = p.parse_with_debug(str, reporter: Parslet::ErrorReporter::Deepest.new)
-    puts JSON.pretty_generate results if ENV["DEBUG"]
+    results[0][:owner][:name][:string].must_equal "Sally Moe"
   end
 
   it "works with sale info" do    
@@ -62,8 +62,24 @@ describe "Full Text Parser" do
     results[0][:acquisition_method].must_equal "via marriage, to"
   end
 
+  it "handles garbage periods" do
+    str = "John Doe; yo, I ain't somthing Febuary; Larry King."
+    results = p.parse_with_debug(str, reporter: Parslet::ErrorReporter::Contextual.new)
+    results[0][:owner][:name][:string].must_equal "John Doe"
+    results[1][:unparsable].must_equal("yo, I ain't somthing Febuary")
+    results[2][:owner][:name][:string].must_equal "Larry King"
+  end
+
+  it "handles period uncertainty" do
+    str = "Possibly John Doe."
+    results = p.parse_with_debug(str, reporter: Parslet::ErrorReporter::Contextual.new)
+    results[0][:owner][:name][:string].must_equal "John Doe"
+    results[0][:period_certainty][:period_certainty_value].must_equal "Possibly"
+  end
+
   it "works with dali test" do
     str = %{Created by Salvador Dali [1904-1989], the artist, 1934. Purchased by Cyrus L. Sulzberger [1912-1993], Pittsburgh, PA, at "International Exhibition of Paintings", Carnegie Institute, in Pittsburgh, PA, November 5, 1934 (for $350) [1][a]; purchased by unnamed dealer, sometime in 1938? [b]; purchased by Thomas J. Watson [1874-1956] for IBM, sometime before May 1939 [2][c]; purchased by Cyrus L. Sulzberger, 1942 until at least 1969 [3][d]. Purchased by Nesuhi Ertegun and Selma Ertegun, New York, NY, sometime before June 1999 [e]; purchased by unknown private collection? [f]; purchased by Fundació Gala-Salvador Dalí, sometime before May 2011 (for $11M) [g].}
     results = p.parse_with_debug(str, reporter: Parslet::ErrorReporter::Contextual.new)
+    results[0][:owner][:name][:string].must_equal "Salvador Dali"
   end
 end

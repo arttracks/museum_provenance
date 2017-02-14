@@ -56,7 +56,7 @@ describe Parsers::ActorParser do
   end 
 
 
-  it "works with a name and a relationship" do
+  it "works with a name and a previous relationship" do
     results = p.parse("John Doe, son of previous")
     results[:name][:string].must_equal "John Doe"
     results[:clause].must_equal "son of previous"
@@ -80,15 +80,15 @@ describe Parsers::ActorParser do
     results[:name][:string].must_equal "John Doe"
     results[:birth][:date][:year].must_equal "1990"
     results[:death][:date][:year].must_equal "1991"
-    results[:birth][:date][:certainty].must_equal ""
-    results[:death][:date][:certainty].must_equal ""
+    results[:birth][:date][:certainty][:certainty_value].must_equal ""
+    results[:death][:date][:certainty][:certainty_value].must_equal ""
   end
 
   it "works with just birth dates" do
     results = p.parse("John Doe [1990-]")
     results[:name][:string].must_equal "John Doe"
     results[:birth][:date][:year].must_equal "1990"
-    results[:birth][:date][:certainty].must_equal ""
+    results[:birth][:date][:certainty][:certainty_value].must_equal ""
     results[:death].must_be_nil
   end
 
@@ -96,7 +96,7 @@ describe Parsers::ActorParser do
     results = p.parse("John Doe [-1990]")
     results[:name][:string].must_equal "John Doe"
     results[:death][:date][:year].must_equal "1990"
-    results[:death][:date][:certainty].must_equal ""
+    results[:death][:date][:certainty][:certainty_value].must_equal ""
     results[:birth].must_be_nil
   end
 
@@ -107,7 +107,7 @@ describe Parsers::ActorParser do
     results[:death][:date][:year].must_equal "1990"
     results[:death][:date][:era].must_equal "BCE"
     results[:birth].must_be_nil
-    results[:death][:date][:certainty].must_equal ""
+    results[:death][:date][:certainty][:certainty_value].must_equal ""
   end
 
   it "works with CE years" do
@@ -115,7 +115,7 @@ describe Parsers::ActorParser do
     results[:name][:string].must_equal "John Doe"
     results[:death][:date][:year].must_equal "1990"
     results[:death][:date][:era].must_equal "CE"
-    results[:death][:date][:certainty].must_equal ""
+    results[:death][:date][:certainty][:certainty_value].must_equal ""
     results[:birth].must_be_nil
   end
 end

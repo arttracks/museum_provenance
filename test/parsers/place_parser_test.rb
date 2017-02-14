@@ -42,7 +42,7 @@ describe Parsers::PlaceParser do
   it "works with uncertainty" do
     results = p.parse("London, England?")
     results[:place][:string].must_equal "London, England"
-    results[:place][:certainty].must_equal "?"
+    results[:place][:certainty][:certainty_value].must_equal "?"
   end 
 
   it "works with a token" do

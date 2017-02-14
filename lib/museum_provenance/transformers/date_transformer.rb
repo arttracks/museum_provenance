@@ -12,7 +12,6 @@ module MuseumProvenance
         date_obj = regularize_decade(date_obj)
         date_obj = regularize_year(date_obj)
         date_obj = regularize_month(date_obj)
-        date_obj = regularize_day(date_obj)
         date_obj
       end
 

@@ -4,25 +4,36 @@ require_relative "date_parser"
 
 module MuseumProvenance
   module Parsers
-      # 
-      # This parser will parse a Actor entity block, for example:
-      # > John Doe? [1910?-1995?], Boise, ID
-      # 
-      # If it parses, it can return:
-      #
-      # * :stock_number           # The text of the stock number phrase
-      #
-      # @author [@workergnome]
-      # 
+    # 
+    # This parser will parse a Actor entity block, for example:
+    # > John Doe? [1910?-1995?], Boise, ID
+    # 
+    # If it parses, it can return:
+    #
+    # * :birth          # The birthdate of the actor (as a :date)
+    # * :death          # The deathdate of the actor (as a :date)
+    # * :clause         # a qualifiers for the actor; familial or artist
+    # * :name           # The name of the artist, either a :string or a :token
+    # * :place          # The location associated with the artist as a :place, 
+    #                   #     containing neither a :string or a :token
+    #
+    # (Valid clauses are either "the artist" or "his/her/their <relationship>",
+    # for example "his brother".  It will also accept them as 
+    # "<relationship> of previous", for example "sister of previous."  This is
+    # perhaps a better form, since it does not assign a gender to the previous
+    # entity, and does a better job of conveying the semantic meaning of the
+    # clause.)
+    # 
+    # @author [@workergnome]
+    # 
     class ActorParser < Parslet::Parser
 
       include ParserHelpers
       include Parslet
+
+      RELATIONSHIP_WORDS = %w{brother sister sibling mother father parent son daughter child grandchild grandparent nephew niece uncle aunt husband wife spouse relative}
+
       root(:actor)
-
-
-      #rule (:era)  {(space >> str("CE").as(:era) | space >> str("BCE").as(:era) | str("").as(:era))}
-      #rule (:year) {(match["1-9"] >> match["0-9"].repeat(0,3)).as(:year) >> era }
 
       rule (:life_dates) do
         space >>
@@ -35,22 +46,9 @@ module MuseumProvenance
 
       # Descriptive Clause stuff
       rule (:relationship) do
-        str("brother")       |
-        str("sister")        |
-        str("mother")        |
-        str("father")        |
-        str("son")           |
-        str("daughter")      |
-        str("grandchild")    |
-        str("grandparent")   |
-        str("nephew")        |
-        str("niece")         |
-        str("uncle")         |
-        str("aunt")          |
-        str("husband")       |
-        str("wife")          |
-        str("relative")
+        RELATIONSHIP_WORDS.collect{ |word| str("#{word}") }.reduce(:|)
       end
+
       rule (:gendered_clause)       {str("his") | str("her") | str("their")}
       rule (:familial_relationship) {gendered_clause >> space >> relationship | relationship  >> space  >>  str( "of previous")}
       rule (:the_artist)   {str("the artist")}

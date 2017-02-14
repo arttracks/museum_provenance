@@ -20,7 +20,7 @@ module MuseumProvenance
 
       rule(:footnote) {str("[") >> (match["1-9"] >> match["0-9"].repeat).as(:footnote) >> str("]")}
 
-      rule(:citation) {(str("[") >> match["1-9"]).absent? >> str("[") >>  match["A-Za-z"].repeat(1).as(:value) >> str("]")}
+      rule(:citation) {(str("[") >> match["1-9"]).absent? >> str("[") >>  match["A-Za-z"].repeat(1).as(:citation_value) >> str("]")}
      
       rule(:notes) do
          (footnote >> citation.repeat(1).as(:citations)) |
