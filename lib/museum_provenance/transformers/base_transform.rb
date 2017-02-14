@@ -7,6 +7,7 @@ module MuseumProvenance
         obj = TransferModeTransform.new.apply(obj)
         obj = CertaintyTransform.new.apply(obj)
         obj = CitationTransform.new.apply(obj)
+        obj = DateTransform.new.apply(obj)
         return obj
       end
     end

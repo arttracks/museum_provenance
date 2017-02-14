@@ -25,8 +25,13 @@ describe Parsers::DateStringParser do
 
   it "works with 'sometime before'" do
     results = p.parse_with_debug("sometime before 1999", reporter: Parslet::ErrorReporter::Contextual.new)
+    results[:eotb][:date][:year].must_equal "1999"
+  end 
+  it "works with 'until sometime before'" do
+    results = p.parse_with_debug("until sometime before 1999", reporter: Parslet::ErrorReporter::Contextual.new)
     results[:eote][:date][:year].must_equal "1999"
   end 
+
 
   it "works with 'sometime after'" do
     results = p.parse_with_debug("sometime after 1999", reporter: Parslet::ErrorReporter::Deepest.new)

@@ -26,7 +26,8 @@ module MuseumProvenance
 
       # CLAUSES
       rule(:begin_date)    { after    >> date.as(:botb) | 
-                             by       >> date.as(:eotb) }
+                             by       >> date.as(:eotb) |
+                             before   >> date.as(:eotb) }
       rule(:end_date)      { at_least >> date.as(:bote) | 
                              before   >> date.as(:eote) }
       rule(:in_date)       { in_kw    >> date.as(:in) }
@@ -40,7 +41,7 @@ module MuseumProvenance
       rule(:one_date)  {
                          start_clause >>begin_end_separator >>  end_clause |
                          start_clause |
-                         end_clause
+                         begin_end_separator >> end_clause
                        }
       
 

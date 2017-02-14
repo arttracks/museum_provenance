@@ -5,6 +5,7 @@ describe Transformers::BaseTransform do
 
     def parse_and_tranform(str)
       results = p.parse_with_debug(str, reporter: Parslet::ErrorReporter::Contextual.new)
+      #puts JSON.pretty_generate results
       results = Transformers::BaseTransform.transform(results)
     end
 
@@ -51,8 +52,11 @@ describe Transformers::BaseTransform do
 
       results = parse_and_tranform("David Newbury.")
       results[0][:citations].must_be_nil
+    end
 
-
+    it "regularizes dates" do
+      results = parse_and_tranform("David Newbury, the 1990s?.")
+      results[0][:timespan].wont_be_nil
     end
 
 end
