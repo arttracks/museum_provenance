@@ -2,23 +2,23 @@
 ## Parser TODOS
 * [ ] Rebuild acquisition tests
 * [ ] Date String Tests
-* [X] Footnotes and Citation marks
-* [ ] Get raw string (maybe through the offsets of the direct transfers?)
+* [x] Footnotes and Citation marks
+* [x] Get raw string (maybe through the offsets of the direct transfers?)
 * [ ] Test for No Date in full parser
 
 ## Transformation TODOS
-* [X] Convert Date into EDTF
-* [X] Convert Date into String
-* [X] Convert Date into earliest/latest pair (through EDTF?)
-* [X] Token
+* [x] Convert Date into EDTF
+* [x] Convert Date into String
+* [x] Convert Date into earliest/latest pair (through EDTF?)
+* [x] Token
 * [ ] Open Dates
 * [ ] No Dates
-* [ ] String/Token replacement in unparsable things
+* [X] String/Token replacement in unparsable things
 * [ ] 
 
 ## Splitter Parser
-* [ ] Add citations
-* [ ] Add footnotes
+* [x] Add citations
+* [x] Add footnotes
 
 ## Todos for Acquisition Methods
 

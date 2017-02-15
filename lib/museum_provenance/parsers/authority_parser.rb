@@ -22,7 +22,7 @@ module MuseumProvenance
       rule(:entity_name) {(str(":").absent? >> any).repeat(1).as(:string) >> str(":")}
       rule(:uri) {(str("\n").absent? >> any).repeat(1).as(:uri) >> str("\n").maybe }
       rule(:authority) {str("\n").repeat >> entity_name >> space >> uri}
-      rule(:authorities) {authority.repeat.as(:authorities)}
+      rule(:authorities) {authority.repeat.as(:authorities)>> str("\n").repeat}
 
       root(:authorities)
   

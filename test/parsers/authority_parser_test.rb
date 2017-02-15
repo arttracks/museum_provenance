@@ -27,9 +27,15 @@ describe Parsers::AuthorityParser do
     end
   end
 
-  it "works with just a name" do
-    skip
-    results = p.parse("John Doe")
-    results[:name][:string].must_equal "John Doe"
+  it "works with leading newlines" do
+    results = p.parse("\n\nJohn Doe: uri")
+    results[:authorities].first[:string].must_equal "John Doe"
+    results[:authorities].first[:uri].must_equal "uri"
+  end 
+
+  it "works with trailing newlines" do
+    results = p.parse("John Doe: uri\n\n")
+    results[:authorities].first[:string].must_equal "John Doe"
+    results[:authorities].first[:uri].must_equal "uri"
   end 
 end
