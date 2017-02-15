@@ -49,27 +49,48 @@ describe Parser do
     @p.notes.wont_be_nil
   end
 
-  it "processes authorities" do
-    @p.authorities.first[:string].must_equal "Salvador Dali"
-    @p.authorities.first[:token].must_include "$AUTHORITY_TOKEN_1"
-    @p.authorities.first[:uri].must_equal "http://vocab.getty.edu/ulan/500009365"
+
+  describe "Notes and Citations" do
+    it "processes notes" do
+      # puts JSON.pretty_generate @p.notes
+      @p.notes.first[:string].must_match "Cyrus L. Sulzberger, a 24-year-old Harvard graduate"
+      @p.notes.first[:key].must_equal "1"
+    end
+
+    it "processes citations" do
+      # puts JSON.pretty_generate @p.citations
+      @p.citations.first[:string].must_match "C.L. Sulzberger, Letter to John O’Connor,"
+      @p.citations.first[:key].must_equal "a"
+    end
+
+    it "inserts notes" do
+       @p.paragraph[1][:footnote].must_match "Cyrus L. Sulzberger, a 24-year-old Harvard graduate"
+    end
+    it "inserts citations" do
+       @p.paragraph[1][:citations].first.must_match "C.L. Sulzberger, Letter to John O’Connor,"
+    end
   end
 
-  it "sets authorities to nil if they're missing" do
-    @p.authorities[10][:string].must_equal "unknown private collection"
-    @p.authorities[10][:token].must_include "$AUTHORITY_TOKEN_11"
-    @p.authorities[10][:uri].must_be_nil
-  end
+  describe "Authority Section" do
+    it "processes authorities" do
+      @p.authorities.first[:string].must_equal "Salvador Dali"
+      @p.authorities.first[:token].must_include "$AUTHORITY_TOKEN_1"
+      @p.authorities.first[:uri].must_equal "http://vocab.getty.edu/ulan/500009365"
+    end
 
-  it "replaces names with tokens" do
-    @p.paragraph.first[:owner][:name][:token].must_equal "$AUTHORITY_TOKEN_1"
-  end
+    it "sets authorities to nil if they're missing" do
+      @p.authorities[10][:string].must_equal "unknown private collection"
+      @p.authorities[10][:token].must_include "$AUTHORITY_TOKEN_11"
+      @p.authorities[10][:uri].must_be_nil
+    end
 
-  it "appends names back to tokens as strings" do
-    puts JSON.pretty_generate @p.paragraph
+    it "replaces names with tokens" do
+      @p.paragraph.first[:owner][:name][:token].must_equal "$AUTHORITY_TOKEN_1"
+    end
 
-    @p.paragraph.first[:owner][:name][:string].must_equal "Salvador Dali"
-
+    it "appends names back to tokens as strings" do
+      @p.paragraph.first[:owner][:name][:string].must_equal "Salvador Dali"
+    end
   end
   
 end

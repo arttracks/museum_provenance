@@ -39,17 +39,6 @@ describe Transformers::ParagraphTransform do
       results[0][:owner][:name][:certainty].must_equal false
     end
 
-    it "fixes citation notes" do
-      results = parse_and_tranform("David Newbury[a].")
-      results[0][:citations].must_equal ["a"]
-
-      results = parse_and_tranform("David Newbury[a][b].")
-      results[0][:citations].must_equal ["a","b"]
-
-      results = parse_and_tranform("David Newbury.")
-      results[0][:citations].must_be_nil
-    end
-
     it "regularizes dates" do
       results = parse_and_tranform("David Newbury, the 1990s?.")
       results[0][:timespan].wont_be_nil

@@ -11,6 +11,10 @@
 * [X] Convert Date into String
 * [X] Convert Date into earliest/latest pair (through EDTF?)
 * [X] Token
+* [ ] Open Dates
+* [ ] No Dates
+* [ ] String/Token replacement in unparsable things
+* [ ] 
 
 ## Splitter Parser
 * [ ] Add citations

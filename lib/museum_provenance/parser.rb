@@ -16,9 +16,18 @@ module MuseumProvenance
         end
       end 
 
+      if @notes
+        @notes = NoteSectionParser.new.parse(@notes)[:notes]
+      end
+
+      if @citations
+        @citations = NoteSectionParser.new.parse(@citations)[:notes]
+      end
+
       @paragraph = ParagraphParser.new.parse(@paragraph)
       @paragraph = ParagraphTransform.new.apply(@paragraph)
       @paragraph = TokenTransform.new(@authorities).apply(@paragraph)
+      @paragraph = NoteInsertionTransform.new(@notes,@citations).apply(@paragraph)
     end
 
 
