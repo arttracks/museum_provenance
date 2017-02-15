@@ -4,9 +4,8 @@ Dir["#{File.dirname(__FILE__)}/transformers/*.rb"].sort.each { |f| require(f)}
 module MuseumProvenance
   class Parser
     include Parsers
-    include Enumerable
     include MuseumProvenance::Transformers
-    attr_reader :authorities, :notes, :paragraph, :citations, :original
+    attr_reader :authorities, :paragraph, :notes, :citations, :original
     def initialize(str)
       @original = str
       split(str)
@@ -36,6 +35,10 @@ module MuseumProvenance
       @paragraph = NoteInsertionTransform.new(@notes,@citations).apply(@paragraph)
     end
 
+
+    # Make it enumerable
+    include Enumerable
+
     def each &block
       @paragraph.each{|member| block.call(member)}
     end
@@ -47,6 +50,11 @@ module MuseumProvenance
       @paragraph.last
     end
 
+    # Add a easy JSONification
+    def to_json
+      JSON.pretty_generate(@paragraph)
+    end
+
     private
 
     def add_original_text_to_periods
@@ -54,7 +62,7 @@ module MuseumProvenance
 
       fake_original = @original.clone
       
-      @authorities.each do |auth|
+      @authorities.reverse.each do |auth|
         fake_original.gsub!(auth[:string],auth[:token])
       end
 
@@ -64,7 +72,7 @@ module MuseumProvenance
         val = fake_original[prev_offset..offset]
         prev_offset = offset +2
 
-        @authorities.each do |auth|
+        @authorities.reverse.each do |auth|
           val.gsub!(auth[:token],auth[:string])
         end
 

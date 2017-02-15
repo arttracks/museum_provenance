@@ -30,11 +30,24 @@ describe Parser do
   end
 
   it "maintains the original text of each period" do
-    str = p({paragraph: "David Newbury, 1990. John Doe, 1995."})
+    parag = "David Newbury, 1990. John Doe, 1995."
+    str = p({paragraph: parag})
     results = Parser.new(str)
     results.first[:text].must_equal "David Newbury, 1990."
     results.last[:text].must_equal "John Doe, 1995."
+    results.collect{|n| n[:text]}.join(" ").must_equal parag
   end
+
+
+  describe "Dates and Timespans" do
+    it "works without dates" do
+      str = p({paragraph: "David Newbury."})
+      results = Parser.new(str)
+      results.first[:timespan].must_be_nil
+    end
+  end
+
+
 
 
   it "works without notes" do

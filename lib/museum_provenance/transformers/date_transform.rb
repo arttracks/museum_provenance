@@ -5,6 +5,7 @@ module MuseumProvenance
      
       rule(:begin => subtree(:x)) { {botb: x, eotb: x}}
       rule(:end => subtree(:x)) { {bote: x, eote: x}}
+      rule(:nodate => simple(:x)) {nil}
 
       rule(:date => subtree(:x)) do |dictionary|
         obj = regularize(dictionary[:x])

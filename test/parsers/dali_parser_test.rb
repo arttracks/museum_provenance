@@ -47,6 +47,7 @@ describe "The Dali Provenance" do
     @p.citations.wont_be_nil
     @p.paragraph.wont_be_nil
     @p.notes.wont_be_nil
+    puts @p.to_json
   end
 
 
