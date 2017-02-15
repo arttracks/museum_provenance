@@ -1,22 +1,18 @@
 require_relative "../test_helper.rb"
-describe Transformers::BaseTransform do
+describe Transformers::ParagraphTransform do
 
-    let(:p) {Parsers::BaseParser.new}
+    let(:p) {Parsers::ParagraphParser.new}
 
     def parse_and_tranform(str)
       results = p.parse_with_debug(str, reporter: Parslet::ErrorReporter::Contextual.new)
       #puts JSON.pretty_generate results
-      results = Transformers::BaseTransform.transform(results)
+      results = Transformers::ParagraphTransform.new.apply(results)
     end
 
     it "doesn't crash" do
       str = "David Newbury[a][b]."
+      parse_and_tranform(str)
       results = p.parse_with_debug(str, reporter: Parslet::ErrorReporter::Contextual.new)
-      puts JSON.pretty_generate results if ENV["DEBUG"]
-      results = Transformers::BaseTransform.transform(results)
-      puts "-----\n"if ENV["DEBUG"]
-      puts JSON.pretty_generate results if ENV["DEBUG"]
-
     end
 
     it "fixes transfer punctuation" do

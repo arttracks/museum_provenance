@@ -2,7 +2,7 @@ Dir["#{File.dirname(__FILE__)}/*.rb"].sort.each { |f| require(f) }
 
 module MuseumProvenance
   module Parsers
-    class BaseParser < Parslet::Parser
+    class ParagraphParser < Parslet::Parser
     include Parslet
     include ParserHelpers
 

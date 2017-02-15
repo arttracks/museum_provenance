@@ -1,3 +1,5 @@
+require "parslet"
+
 module MuseumProvenance
   module Parsers
     module DateWordHelpers 

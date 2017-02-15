@@ -21,9 +21,6 @@ module MuseumProvenance
       rule(:in_kw)                { sometime.maybe >> str("in")      >> space }
       rule(:and_kw)               { space? >> str("and")             >> space?}
 
-      # DATE GRAMMAR (Needs rewritten)
-      # rule(:date) {any.repeat(4,4)}
-
       # CLAUSES
       rule(:begin_date)    { after    >> date.as(:botb) | 
                              by       >> date.as(:eotb) |

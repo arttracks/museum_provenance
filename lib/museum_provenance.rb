@@ -2,6 +2,8 @@ require "museum_provenance/version"
 
 # Load dependent files
 require 'date'
+require 'parslet'
+require 'parslet/convenience'
 #require 'date_time_precision'
 #require 'date_time_precision/format/iso8601'
 #require 'date_time_precision/format/string'

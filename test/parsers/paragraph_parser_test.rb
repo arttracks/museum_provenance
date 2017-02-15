@@ -3,7 +3,7 @@ describe "Full Text Parser" do
 
 
 
-  let(:p) {Parsers::BaseParser.new}
+  let(:p) {Parsers::ParagraphParser.new}
 
 
   it "generically works" do 
@@ -53,13 +53,13 @@ describe "Full Text Parser" do
   it "works with acquisition info" do    
     results = p.parse_with_debug("Purchased by John Doe.", reporter: Parslet::ErrorReporter::Contextual.new)
     results[0][:owner][:name][:string].must_equal "John Doe"
-    results[0][:acquisition_method].must_equal "Purchased by"
+    results[0][:acquisition_method][:acquisition_method_string].must_equal "Purchased by"
   end
 
   it "works with acquisition info as lowercase" do    
     results = p.parse_with_debug("via marriage, to John Doe.", reporter: Parslet::ErrorReporter::Contextual.new)
     results[0][:owner][:name][:string].must_equal "John Doe"
-    results[0][:acquisition_method].must_equal "via marriage, to"
+    results[0][:acquisition_method][:acquisition_method_string].must_equal "via marriage, to"
   end
 
   it "handles garbage periods" do

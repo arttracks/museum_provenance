@@ -1,33 +1,35 @@
-require 'parslet'
-require 'parslet/convenience'
-# require 'parslet/graphviz'
-
-require_relative 'parsers/base_parser'
+Dir["#{File.dirname(__FILE__)}/parsers/*.rb"].sort.each { |f| require(f)}
+Dir["#{File.dirname(__FILE__)}/transformers/*.rb"].sort.each { |f| require(f)}
 
 module MuseumProvenance
-  
   class Parser
-    include MuseumProvenance::Parsers
+    include Parsers
+    include MuseumProvenance::Transformers
+    attr_reader :authorities, :notes, :paragraph, :citations
+    def initialize(str)
+      split(str)
+      if @authorities
+        @authorities = AuthorityParser.new.parse(@authorities)
+        @authorities = AuthorityTransform.new.apply(@authorities)[:authorities]
+        @authorities.each do |auth|
+          @paragraph.gsub!(auth[:string],auth[:token])
+        end
+      end 
 
-    def initialize(opts={})
-      # opts[:acquisition_methods] ||= AcquisitionMethod.valid_methods
-
-      @peg = BaseParser.new(opts)
-      @transform = CertaintyTransform.new()
-
-      # BaseParser.graph(pdf: 'grammar.pdf')
-
+      @paragraph = ParagraphParser.new.parse(@paragraph)
+      @paragraph = ParagraphTransform.new.apply(@paragraph)
+      @paragraph = TokenTransform.new(@authorities).apply(@paragraph)
     end
 
-    def parse(str)
-      result = @peg.parse_with_debug(str, reporter: Parslet::ErrorReporter::Deepest.new)
-      if result
-        transformed_result = @transform.apply(result)
-       #puts JSON.pretty_generate(JSON.parse(transformed_result.to_json)) 
-      end
-      transformed_result
-    end
 
+
+    private
+
+    def split(str)
+      rest, @citations = str.split("\nCitations:\n")
+      rest, @authorities = rest.split("\nAuthorities:\n")
+      @paragraph, @notes = rest.split("\nNotes:\n")
+    end
 
   end
 end

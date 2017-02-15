@@ -32,7 +32,7 @@ module MuseumProvenance
       rule(:currency_symbol)  {match(["$ƒ£€¢¥₱"])}
 
       # Token Rules
-      rule(:token) {str("$AUTHORITY_TOKEN_") >> match["0-9"].repeat(6,6)}
+      rule(:token) {str("$AUTHORITY_TOKEN_") >> match["0-9"].repeat(1)}
       
       # Punctuation
       rule(:comma)            { str(",") >> space }
