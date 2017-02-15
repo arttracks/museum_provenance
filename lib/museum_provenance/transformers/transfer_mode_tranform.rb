@@ -1,4 +1,3 @@
-
 module MuseumProvenance
   module Transformers
     class TransferModeTransform < Parslet::Transform
