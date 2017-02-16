@@ -8,6 +8,8 @@ module MuseumProvenance
         obj = CertaintyTransform.new.apply(obj)
         obj = DateTransform.new.apply(obj)
         obj = AcquisitionTransform.new.apply(obj)
+        obj = PurchaseTransform.new.apply(obj)
+
         return obj
       end
     end

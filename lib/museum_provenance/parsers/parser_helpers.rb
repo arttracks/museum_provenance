@@ -28,7 +28,7 @@ module MuseumProvenance
       rule(:capitalized_word_phrase)  { (captal_word | space >> stop_words.absent? >> word | comma >> stop_words.absent? >>  captal_word).repeat(1)}
       rule(:text)             { (word | match["0-9."] | currency_symbol).repeat(1) }
       rule(:texts)            { (text | space >> text).repeat(1)}
-      rule(:numeric)          { match(["0-9.,"]).repeat(1) }
+      rule(:numeric)          { match(["0-9.,M"]).repeat(1) }
       rule(:currency_symbol)  {match(["$ƒ£€¢¥₱"])}
 
       # Token Rules

@@ -1,6 +1,6 @@
 module MuseumProvenance
   
-  # This is a utility class for extracting a {Timeline} from a String.h
+  # This is a utility class for extracting a {Timeline} from a String
   class Provenance
 
     TITLES = [ "Mme.", "Mlle.", "Mr.", "Mrs.", "M.", "Col.", "Sgt.", "Dr.", "Capt.","Hon.", "Prof."]

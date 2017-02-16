@@ -3,20 +3,31 @@
 * [ ] Rebuild acquisition tests
 * [ ] Date String Tests
 
+* [ ] Reclassify acquisitions using CRM events: purchase/custody/ownership/creation.
+* [ ] Document the EDTF pattern
+* [ ] Find AAT type for "place associated with"
+* [ ] add in the ownership period and the other date relationships to the model
+* [ ] make sure the model covers all possible fields
+* [X] write up a AST for something with everything filled out
+* [X] write a test for it!
 
 ## High Level Components
 * [ ] JSON -> CIDOC-CRM
-* [ ] 
+* [ ] JSON -> Text
+* [ ] JSON -> HTML
+* [ ] Extract out Date logic
+* [ ] Extract Acquisitions
+* [ ] Microthesaurii
+* [ ] Determine what parts of the base system are still needed.
 
 ## Features 
 * [ ] Handle Open Dates
 * [ ] Look into EDTF intervals?
-* [ ] "purchase": {"string": "$11M"}
-
+* [ ] clause/location either order
+* [ ] see if I can remove date specificity
 
 
 ## Todos for Acquisition Methods
-
 * [ ] Integrate into m_p codebase
 * [ ] Finish extracting self-documentation into class
 * [ ] Think about `suffix`/`prefix`
@@ -43,3 +54,5 @@
 * [X] Test for No Date in full parser
 * [x] Add citations
 * [x] Add footnotes
+* [X] should decade precision be 199u-uu-uu, not 199x?
+* [X] "purchase": {"string": "$11M"}

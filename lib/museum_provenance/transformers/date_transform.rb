@@ -24,14 +24,18 @@ module MuseumProvenance
     class << self
 
       def earliest(d)
-        return d.first if d.is_a? EDTF::Epoch
         EDTF.parse(d.to_s)
       end
 
       def latest(d)
-        return d.last if d.is_a? EDTF::Epoch
         new_d = d.clone
-        if new_d.unspecified? :day
+        if new_d.unspecified.year[2]
+          new_d = new_d.advance(:years =>99)
+          new_d.year_precision!
+        elsif new_d.unspecified.year[3]
+          new_d = new_d.advance(:years =>9)
+          new_d.year_precision!
+        elsif new_d.unspecified? :day
          new_d.month_precision!
          if new_d.unspecified? :month
            new_d.year_precision!
@@ -44,44 +48,42 @@ module MuseumProvenance
       
        def formatted_string(date, certain = false)
         str = ""
-        if date.is_a? Date
-          if !date.unspecified? :day
-            str = date.strftime("%B %e, ")
-            if date.year >=1
-              year_str = date.year.to_s
-              year_str += " CE" if date.year < 1000
-            elsif year == 0
-              year_str = "1 BCE"
-            else
-              year_str = "#{-year} BCE"
-            end
-            str += year_str
-
-          elsif !date.unspecified? :month
-            str = date.strftime("%B ")
-            if date.year >=1
-              year_str = date.year.to_s
-              year_str += " CE" if date.  year < 1000
-            elsif year == 0
-              year_str = "1 BCE"
-            else
-              year_str = "#{-year} BCE"
-            end
-            str += year_str
-
-          elsif !date.unspecified? :year
-            if date.year >=1
-              str = date.year.to_s
-              str += " CE" if date.year < 1000
-            elsif date.year == 0
-              str = "1 BCE"
-            else
-              str = "#{-year} BCE"
-            end
+        if !date.unspecified? :day
+          str = date.strftime("%B%e, ")
+          if date.year >=1
+            year_str = date.year.to_s
+            year_str += " CE" if date.year < 1000
+          elsif year == 0
+            year_str = "1 BCE"
+          else
+            year_str = "#{-year} BCE"
           end
-         elsif date.is_a? EDTF::Decade
+          str += year_str
+
+        elsif !date.unspecified? :month
+          str = date.strftime("%B ")
+          if date.year >=1
+            year_str = date.year.to_s
+            year_str += " CE" if date.  year < 1000
+          elsif year == 0
+            year_str = "1 BCE"
+          else
+            year_str = "#{-year} BCE"
+          end
+          str += year_str
+
+        elsif !date.unspecified? :year
+          if date.year >=1
+            str = date.year.to_s
+            str += " CE" if date.year < 1000
+          elsif date.year == 0
+            str = "1 BCE"
+          else
+            str = "#{-year} BCE"
+          end
+         elsif !date.unspecified.year[2]
            str = "the #{date.year}s"
-         elsif date.is_a? EDTF::Century
+         else
            bce = false
            year = (date.year/100+1)
            if year <= 0
@@ -114,26 +116,31 @@ module MuseumProvenance
           date.unspecified! :day
           date.uncertain! unless  d[:certainty]      
         elsif(d[:decade])
-          date = EDTF::Decade.new(d[:decade] )
+          date = Date.new(d[:decade])
+          date.unspecified.year[3]= true 
+          date.unspecified! :month
+          date.unspecified! :day
+
         elsif(d[:century])
-          date = EDTF::Century.new(d[:century] * 100)
+          date = Date.new(d[:century] * 100)
+          date.unspecified.year[3]= true 
+          date.unspecified.year[2]= true
+          date.unspecified! :month
+          date.unspecified! :day 
         end  
         date
        end
 
-       def to_date_pair(date_obj)
-          date_obj = regularize(date_obj)
-        end 
 
-        def regularize(date_obj)
-          date_obj = regularize_era(date_obj)
-          date_obj = regularize_century(date_obj)
-          date_obj = regularize_decade(date_obj)
-          date_obj = regularize_year(date_obj)
-          date_obj = regularize_month(date_obj)
-          date_obj = regularize_day(date_obj)
-          date_obj
-        end
+      def regularize(date_obj)
+        date_obj = regularize_era(date_obj)
+        date_obj = regularize_century(date_obj)
+        date_obj = regularize_decade(date_obj)
+        date_obj = regularize_year(date_obj)
+        date_obj = regularize_month(date_obj)
+        date_obj = regularize_day(date_obj)
+        date_obj
+      end
 
 
 

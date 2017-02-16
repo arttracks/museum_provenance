@@ -31,9 +31,9 @@ describe Parsers::SaleDataParser do
     it "handles money amounts followed by letters" do
     results = p.parse("(for $100M)")
     results[:stock_number].must_be_nil
-    results[:purchase][:currency_symbol].must_be_nil 
-    results[:purchase][:value].must_be_nil 
-    results[:purchase][:string].must_equal "$100M"
+    results[:purchase][:currency_symbol].must_equal "$" 
+    results[:purchase][:value].must_equal "100M" 
+    results[:purchase][:string].must_be_nil
 
   end
 
