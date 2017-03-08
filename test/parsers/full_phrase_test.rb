@@ -78,32 +78,32 @@ describe "A full provenance period" do
 
   describe "Dates" do
     it "has a botb" do
-      @p.first[:timespan][:botb][:edtf].must_equal "1982-01-05"
-      @p.first[:timespan][:botb][:earliest].must_equal Date.new(1982,1,05)
-      @p.first[:timespan][:botb][:latest].must_equal  Date.new(1982,1,05)
-      @p.first[:timespan][:botb][:string].must_equal "January 5, 1982"
-      @p.first[:timespan][:botb][:certainty].must_equal true
+      @p.first[:timespan][:botb].must_equal "1982-01-05"
+      # @p.first[:timespan][:botb][:earliest].must_equal Date.new(1982,1,05)
+      # @p.first[:timespan][:botb][:latest].must_equal  Date.new(1982,1,05)
+      # @p.first[:timespan][:botb][:string].must_equal "January 5, 1982"
+      # @p.first[:timespan][:botb][:certainty].must_equal true
     end
     it "has a eotb" do
-      @p.first[:timespan][:eotb][:edtf].must_equal "1982-02-uu"
-      @p.first[:timespan][:eotb][:earliest].must_equal  Date.new(1982,2,1)
-      @p.first[:timespan][:eotb][:latest].must_equal  Date.new(1982,2,28)
-      @p.first[:timespan][:eotb][:string].must_equal "February 1982"
-      @p.first[:timespan][:eotb][:certainty].must_equal true
+      @p.first[:timespan][:eotb].must_equal "1982-02-uu"
+      # @p.first[:timespan][:eotb][:earliest].must_equal  Date.new(1982,2,1)
+      # @p.first[:timespan][:eotb][:latest].must_equal  Date.new(1982,2,28)
+      # @p.first[:timespan][:eotb][:string].must_equal "February 1982"
+      # @p.first[:timespan][:eotb][:certainty].must_equal true
     end
     it "has a bote" do
-      @p.first[:timespan][:bote][:edtf].must_equal "1999-uu-uu?"
-      @p.first[:timespan][:bote][:earliest].must_equal Date.new(1999,1,1)
-      @p.first[:timespan][:bote][:latest].must_equal Date.new(1999,12,31)
-      @p.first[:timespan][:bote][:string].must_equal "1999?"
-      @p.first[:timespan][:bote][:certainty].must_equal false
+      @p.first[:timespan][:bote].must_equal "1999-uu-uu?"
+      # @p.first[:timespan][:bote][:earliest].must_equal Date.new(1999,1,1)
+      # @p.first[:timespan][:bote][:latest].must_equal Date.new(1999,12,31)
+      # @p.first[:timespan][:bote][:string].must_equal "1999?"
+      # @p.first[:timespan][:bote][:certainty].must_equal false
     end
     it "has a eote" do
-      @p.first[:timespan][:eote][:edtf].must_equal "20uu-uu-uu"
-      @p.first[:timespan][:eote][:earliest].must_equal Date.new(2000,1,1)
-      @p.first[:timespan][:eote][:latest].must_equal Date.new(2099,12,31)
-      @p.first[:timespan][:eote][:string].must_equal "the 21st century"
-      @p.first[:timespan][:eote][:certainty].must_equal true
+      @p.first[:timespan][:eote].must_equal "20uu-uu-uu"
+      # @p.first[:timespan][:eote][:earliest].must_equal Date.new(2000,1,1)
+      # @p.first[:timespan][:eote][:latest].must_equal Date.new(2099,12,31)
+      # @p.first[:timespan][:eote][:string].must_equal "the 21st century"
+      # @p.first[:timespan][:eote][:certainty].must_equal true
     end
   end
 
@@ -141,10 +141,8 @@ describe "A full provenance period" do
       @p.first[:purchasing_agent][:place][:string].must_equal "Pittsburgh, PA"
       @p.first[:purchasing_agent][:place][:uri].must_equal "http://example.org/pgh"
       @p.first[:purchasing_agent][:place][:certainty].must_equal true
-      @p.first[:purchasing_agent][:birth][:edtf].must_equal "1910-uu-uu"
-      @p.first[:purchasing_agent][:birth][:certainty].must_equal true
-      @p.first[:purchasing_agent][:death][:edtf].must_equal "1980-uu-uu"
-      @p.first[:purchasing_agent][:death][:certainty].must_equal true
+      @p.first[:purchasing_agent][:birth].must_equal "1910-uu-uu"
+      @p.first[:purchasing_agent][:death].must_equal "1980-uu-uu"
     end
 
     it "handles Owners" do
@@ -154,10 +152,8 @@ describe "A full provenance period" do
       @p.first[:owner][:place][:string].must_equal "Boise, ID"
       @p.first[:owner][:place][:uri].must_equal "http://example.org/boise"
       @p.first[:owner][:place][:certainty].must_equal true
-      @p.first[:owner][:birth][:edtf].must_equal "1920-uu-uu"
-      @p.first[:owner][:birth][:certainty].must_equal true
-      @p.first[:owner][:death][:edtf].must_equal "1990-uu-uu?"
-      @p.first[:owner][:death][:certainty].must_equal false
+      @p.first[:owner][:birth].must_equal "1920-uu-uu"
+      @p.first[:owner][:death].must_equal "1990-uu-uu?"
       @p.first[:owner][:clause].must_equal "son of previous"
     end
 
