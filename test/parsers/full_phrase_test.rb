@@ -34,7 +34,7 @@ describe "A full provenance period" do
   end
 
   it "creates a json" do
-    # puts @p.to_json
+    # puts @p.to_json # for debugging purposes
     JSON.parse(@p.to_json)
   end
 

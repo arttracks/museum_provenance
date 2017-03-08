@@ -63,4 +63,8 @@ Repatriated vs Restituted
 
 
 <http://portal.unesco.org/culture/en/files/39308/12458323313Terminology.pdf/Terminology.pdf>
+
+https://github.com/vkaravir/bib-publication-list
+
+http://d-nb.info/standards/elementset/agrelon.owl#RelatedAgent
   

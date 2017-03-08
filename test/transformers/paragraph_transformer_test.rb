@@ -5,7 +5,6 @@ describe Transformers::ParagraphTransform do
 
     def parse_and_tranform(str)
       results = p.parse_with_debug(str, reporter: Parslet::ErrorReporter::Contextual.new)
-      #puts JSON.pretty_generate results
       results = Transformers::ParagraphTransform.new.apply(results)
     end
 

@@ -8,8 +8,7 @@
 * [ ] Find AAT type for "place associated with"
 * [ ] add in the ownership period and the other date relationships to the model
 * [ ] make sure the model covers all possible fields
-* [X] write up a AST for something with everything filled out
-* [X] write a test for it!
+
 
 ## High Level Components
 * [ ] JSON -> CIDOC-CRM
@@ -18,6 +17,7 @@
 * [ ] Extract out Date logic
 * [ ] Extract Acquisitions
 * [ ] Microthesaurii
+* [ ] MicroAuthority
 * [ ] Determine what parts of the base system are still needed.
 
 ## Features 
@@ -56,3 +56,5 @@
 * [x] Add footnotes
 * [X] should decade precision be 199u-uu-uu, not 199x?
 * [X] "purchase": {"string": "$11M"}
+* [X] write up a AST for something with everything filled out
+* [X] write a test for it!

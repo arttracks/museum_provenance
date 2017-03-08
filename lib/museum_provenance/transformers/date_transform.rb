@@ -2,6 +2,10 @@ require "edtf"
 module MuseumProvenance
   module Transformers
     class DateTransform < Parslet::Transform
+
+      # included for standalone use
+      rule(:certainty_value => simple(:x)) { x != "?"}
+
      
       rule(:begin => subtree(:x)) { {botb: x, eotb: x}}
       rule(:end => subtree(:x)) { {bote: x, eote: x}}
@@ -79,7 +83,7 @@ module MuseumProvenance
           elsif date.year == 0
             str = "1 BCE"
           else
-            str = "#{-year} BCE"
+            str = "#{-date.year} BCE"
           end
          elsif !date.unspecified.year[2]
            str = "the #{date.year}s"
@@ -87,7 +91,7 @@ module MuseumProvenance
            bce = false
            year = (date.year/100+1)
            if year <= 0
-             year = -(year-2)
+             year = -(year-1)
              bce = true
            end  
            str = "the #{year.ordinalize} century"
@@ -104,30 +108,29 @@ module MuseumProvenance
         if d[:day]
           date = Date.new(d[:year],d[:month],d[:day])
           date.day_precision!
-          date.uncertain! unless  d[:certainty]      
         elsif(d[:month])
           date = Date.new(d[:year],d[:month])
           date.unspecified! :day
-          date.uncertain! unless  d[:certainty]      
-
         elsif(d[:year])
           date = Date.new(d[:year])
           date.unspecified! :month
           date.unspecified! :day
-          date.uncertain! unless  d[:certainty]      
         elsif(d[:decade])
           date = Date.new(d[:decade])
           date.unspecified.year[3]= true 
           date.unspecified! :month
           date.unspecified! :day
-
         elsif(d[:century])
-          date = Date.new(d[:century] * 100)
+          c = d[:century] * 100
+          c -=100 if (d[:era] == "BCE")
+
+          date = Date.new(c)         
           date.unspecified.year[3]= true 
           date.unspecified.year[2]= true
           date.unspecified! :month
           date.unspecified! :day 
         end  
+        date.uncertain! unless  d[:certainty]      
         date
        end
 
