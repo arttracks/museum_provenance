@@ -1,6 +1,6 @@
 require_relative "parser_helpers"
 require_relative "place_parser"
-require_relative "date_parser"
+require 'cultural_dates'
 
 module MuseumProvenance
   module Parsers
@@ -38,9 +38,9 @@ module MuseumProvenance
       rule (:life_dates) do
         space >>
         str("[") >> 
-        (DateParser.new.maybe).as(:birth) >>
+        (CulturalDates::DateParser.new.maybe).as(:birth) >>
         (str("-") | str(" - ")) >>
-        (DateParser.new.maybe).as(:death) >>
+        (CulturalDates::DateParser.new.maybe).as(:death) >>
         str("]")
       end
 

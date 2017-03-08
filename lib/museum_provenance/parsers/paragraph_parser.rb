@@ -1,4 +1,5 @@
 Dir["#{File.dirname(__FILE__)}/*.rb"].sort.each { |f| require(f) }
+require 'cultural_dates'
 
 module MuseumProvenance
   module Parsers
@@ -31,7 +32,7 @@ module MuseumProvenance
       actors  >>
       ((comma | space) >> NamedEventParser.new).maybe >>
       (comma.maybe >> transfer_location).maybe >>
-      (comma.maybe >> DateStringParser.new.as(:timespan)).maybe >> 
+      (comma.maybe >> CulturalDates::DateStringParser.new.as(:timespan)).maybe >> 
       (comma.maybe >> SaleDataParser.new).maybe >>
       (space.maybe >> NotesParser.new).maybe >>
       period_end.as(:direct_transfer))

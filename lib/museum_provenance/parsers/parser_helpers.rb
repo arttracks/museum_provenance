@@ -1,9 +1,10 @@
-require_relative "date_word_helpers"
+require 'cultural_dates'
+
 module MuseumProvenance
   module Parsers
     module ParserHelpers 
       include Parslet
-      include DateWordHelpers
+      include CulturalDates::DateWordHelpers
 
       def str_i(str)
           key_chars = str.split(//)
