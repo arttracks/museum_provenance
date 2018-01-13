@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'linkeddata'
 
   spec.add_runtime_dependency 'edtf', ">= 3.0.1"
+  spec.add_runtime_dependency 'cultural_dates'
   spec.add_runtime_dependency 'parslet'
   spec.add_runtime_dependency 'activesupport', '~> 4.2'
 end
