@@ -1,5 +1,6 @@
 require_relative "test_helper.rb"
 describe TimeSpan do
+  
   let(:y) {Date.new(2014)}
   let(:m) {Date.new(2014,10)}
   let(:d) {Date.new(2014,10,17)}

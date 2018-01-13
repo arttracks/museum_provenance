@@ -1,5 +1,6 @@
 require_relative "test_helper.rb"
 def check(pattern,result)
+  
   string = "John Doe, Paris, France, "
 
   part_a, part_b = pattern.split("...")

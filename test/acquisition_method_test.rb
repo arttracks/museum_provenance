@@ -1,7 +1,7 @@
 require_relative "test_helper.rb"
 
 describe AcquisitionMethod do
-
+  
   let(:opts1) {
     {
       id:                 :acquisition,

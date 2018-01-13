@@ -50,13 +50,19 @@ module MuseumProvenance
       end
 
       rule (:gendered_clause)       {str("his") | str("her") | str("their")}
-      rule (:familial_relationship) {gendered_clause >> space >> relationship | relationship  >> space  >>  str( "of previous")}
+      rule (:familial_relationship) {proper_name >> str("'s") >> space >> relationship.as(:type) >> comma}
       rule (:the_artist)   {str("the artist")}
-      rule (:actor_clause) {comma >> (the_artist | familial_relationship).as(:clause)}
+      rule (:actor_clause) {comma >> (the_artist).as(:clause)}
+
+      rule(:unpossesive_word)              { ((str("'s") >> space >> relationship).absent? >> word_parts).repeat(1) }
+      rule(:unpossessive_captal_word)      { initial | match["[[:upper:]]"] >> unpossesive_word |  match["[[:upper:]]"] }
+      rule(:unpossesive_words)             { (unpossesive_word | space >> unpossesive_word).repeat(1)}
+      rule(:unpossesive_capitalized_words) { ((initial | unpossessive_captal_word) | space >> stop_words.absent? >> (initial | unpossessive_captal_word) ).repeat(1)}
+
 
       # Name Stuff
-      rule(:proper_name) {(((capitalized_words | words).as(:string) | token.as(:token)) >> certainty).as(:name) >> life_dates.maybe}
-      rule(:actor)       {proper_name >> actor_clause.maybe >> (comma >> PlaceParser.new).maybe}
+      rule(:proper_name) {(((unpossesive_capitalized_words | unpossesive_words).as(:string) | token.as(:token)) >> certainty).as(:name) >> life_dates.maybe}
+      rule(:actor)       {familial_relationship.as(:relationship).maybe >> proper_name >> actor_clause.maybe >> (comma >> PlaceParser.new).maybe}
 
     end
   end

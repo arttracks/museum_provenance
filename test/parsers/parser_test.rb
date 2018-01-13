@@ -3,8 +3,8 @@ describe Parser do
 
   def p(obj={})
     paragraph   = obj.fetch(:paragraph, "David Newbury, 1990[1][a].")
-    notes       = obj.fetch(:notes, "[1]: Footnote.")
-    citations   = obj.fetch(:citations, "[a]: Citation.")
+    notes       = obj.fetch(:notes, "[1]. Footnote.")
+    citations   = obj.fetch(:citations, "[a]. Citation.")
     authorities = obj.fetch(:authorities, "David Newbury:  http://www.davidnewbury.com")
 
     <<~EOF

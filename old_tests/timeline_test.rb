@@ -1,7 +1,7 @@
 require_relative "test_helper.rb"
 
 describe Timeline do
-
+  
   let(:t) {Timeline.new}
   let(:p1) {Period.new("P1")}
   let(:p2) {Period.new("P2")}

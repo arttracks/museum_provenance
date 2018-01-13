@@ -17,18 +17,20 @@ module MuseumProvenance
       rule(:space?)   { space.maybe }
       rule(:eof)      { any.absent? }
 
-      rule(:stop_words) {str("for") | str("in") | str("at") | month_names_tc}
+      rule(:stop_words) {str("for") | str("in") | str("from") | month_names_tc}
 
       # Word rules    
-      rule(:word)             { (match["[[:alpha:]]'-"]).repeat(1)  }
+      rule(:word_parts)       { match["[[:alpha:]]'-"]}
+      rule(:word)             { word_parts.repeat(1)  }
       rule(:initial)          { match["[[:upper:]]"] >> period }
       rule(:captal_word)      { initial | match["[[:upper:]]"] >> word  }
       rule(:words)            { (word | space >> word).repeat(1)}
-      rule(:capitalized_words){ ((initial | captal_word) | space >> stop_words.absent? >> (initial | word) ).repeat(1)}
       rule(:word_phrase)      { (word | space >> word | comma >> stop_words.absent? >> word).repeat(1)}
       rule(:capitalized_word_phrase)  { (captal_word | space >> stop_words.absent? >> word | comma >> stop_words.absent? >>  captal_word).repeat(1)}
       rule(:text)             { (word | match["0-9."] | currency_symbol).repeat(1) }
       rule(:texts)            { (text | space >> text).repeat(1)}
+      rule(:text_with_commas) { text >> comma | text }
+      rule(:texts_with_commas){ (text_with_commas | space >> text_with_commas).repeat(1)}
       rule(:numeric)          { match(["0-9.,M"]).repeat(1) }
       rule(:currency_symbol)  {match(["$ƒ£€¢¥₱"])}
 

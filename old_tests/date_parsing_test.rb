@@ -1,5 +1,6 @@
 require_relative "test_helper.rb"
 describe DateExtractor do
+  
   it "looks for centuries" do
     date = DateExtractor.find_dates_in_string("20th century")
     date.length.must_equal 1

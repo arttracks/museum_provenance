@@ -359,7 +359,7 @@ concept defined in the AAM standard for Provenance.</p>
 </li>
 
     
-      <li class="public ">
+      <li class="public deprecated">
   <span class="summary_signature">
     
       <a href="#stock_number-instance_method" title="#stock_number (instance method)">#<strong>stock_number</strong>  &#x21d2; String </a>
@@ -375,12 +375,12 @@ concept defined in the AAM standard for Provenance.</p>
   
   
   
-  
+  <span class="deprecated note title">deprecated</span>
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The stock number of the artwork in the collection of this owner.</p>
+    <span class="summary_desc"><strong>Deprecated.</strong> <div class='inline'>
+<p>This was depricated in version 0.1.0, but will return in 0.2.0</p>
 </div></span>
   
 </li>
@@ -1858,7 +1858,10 @@ clause in parentheses.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'>
+<p>This was depricated in version 0.1.0, but will return in 0.2.0</p>
+</div></div>
+
 <p>Returns The stock number of the artwork in the collection of this owner.</p>
 
 
@@ -2131,8 +2134,8 @@ clause in parentheses.</p>
       <pre class="code"><span class="info file"># File 'lib/museum_provenance/period.rb', line 200</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_actually_parse_time_string'>actually_parse_time_string</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='comma'>,</span> <span class='id identifier rubyid_recursion_count'>recursion_count</span> <span class='op'>=</span> <span class='int'>0</span><span class='rparen'>)</span> 
-  <span class='id identifier rubyid_time_debug'>time_debug</span> <span class='op'>=</span> <span class='kw'>false</span><span class='comment'># str.include? &quot;Newcastle&quot;
-</span>
+  <span class='id identifier rubyid_time_debug'>time_debug</span> <span class='op'>=</span> <span class='kw'>false</span>
+
   <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_str'>str</span> <span class='kw'>if</span> <span class='id identifier rubyid_time_debug'>time_debug</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_recursion_count'>recursion_count</span> <span class='op'>==</span> <span class='int'>0</span>
     <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_beginning'>beginning</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -3906,7 +3909,7 @@ different spacing.</p>
   <span class='kw'>else</span>
     <span class='id identifier rubyid_ot'>ot</span> <span class='op'>=</span> <span class='id identifier rubyid_original_text'>original_text</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
     <span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='id identifier rubyid_provenance'>provenance</span><span class='period'>.</span><span class='id identifier rubyid_clone'>clone</span>
-    <span class='const'><span class='object_link'><a href="Certainty.html" title="MuseumProvenance::Certainty (module)">Certainty</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Certainty.html#CertantyWords-constant" title="MuseumProvenance::Certainty::CertantyWords (constant)">CertantyWords</a></span></span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_w'>w</span><span class='op'>|</span> 
+    <span class='const'><span class='object_link'><a href="Certainty.html" title="MuseumProvenance::Certainty (module)">Certainty</a></span></span><span class='op'>::</span><span class='const'>CertantyWords</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_w'>w</span><span class='op'>|</span> 
       <span class='id identifier rubyid_ot'>ot</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
       <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='id identifier rubyid_w'>w</span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
     <span class='kw'>end</span>
@@ -4407,7 +4410,7 @@ is no preciding record.</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Feb  6 09:55:55 2017 by
+  Generated on Sat Jan 13 08:50:22 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.3.1).
 </div>

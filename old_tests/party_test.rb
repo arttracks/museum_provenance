@@ -1,5 +1,6 @@
 require_relative "test_helper.rb"
 describe Party do
+  
   let(:p) {Party.new("Roberta")}
   it "accepts a birth year" do
     p.birth = Date.new(1990)

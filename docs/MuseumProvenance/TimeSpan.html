@@ -535,7 +535,6 @@ first period.</p>
       <pre class="lines">
 
 
-65
 66
 67
 68
@@ -545,10 +544,11 @@ first period.</p>
 72
 73
 74
-75</pre>
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid__earliest'>_earliest</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span><span class='id identifier rubyid__latest'>_latest</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid__earliest'>_earliest</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></span>
@@ -587,7 +587,7 @@ first period.</p>
     
 <p>Find a TimeSpan within an arbitrary value.</p>
 
-<p>It assumes that any date that it finds is both the earliest and the latest
+<p>It assumes that any date that it finds is both the earliest and  the latest
 date of the timespan— if you need to set them independantly, use
 <span class='object_link'><a href="#initialize-instance_method" title="MuseumProvenance::TimeSpan#initialize (method)">#initialize</a></span>.</p>
 
@@ -659,7 +659,6 @@ date of the timespan— if you need to set them independantly, use
       <pre class="lines">
 
 
-41
 42
 43
 44
@@ -673,10 +672,11 @@ date of the timespan— if you need to set them independantly, use
 52
 53
 54
-55</pre>
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='const'><span class='object_link'><a href="" title="MuseumProvenance::TimeSpan (class)">TimeSpan</a></span></span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_val'>val</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'><span class='object_link'><a href="../Date.html" title="Date (class)">Date</a></span></span>
@@ -730,12 +730,12 @@ date of the timespan— if you need to set them independantly, use
       <pre class="lines">
 
 
-179
 180
-181</pre>
+181
+182</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 179</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 180</span>
 
 <span class='kw'>def</span> <span class='op'>==</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_other'>other</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span> <span class='op'>==</span> <span class='id identifier rubyid_earliest'>earliest</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_other'>other</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span> <span class='op'>==</span> <span class='id identifier rubyid_latest'>latest</span>
@@ -789,12 +789,12 @@ date of the timespan— if you need to set them independantly, use
       <pre class="lines">
 
 
-191
 192
-193</pre>
+193
+194</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 191</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 192</span>
 
 <span class='kw'>def</span> <span class='kw'>defined?</span>
   <span class='op'>!</span><span class='lparen'>(</span><span class='ivar'>@earliest</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@latest</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
@@ -872,12 +872,12 @@ that is accurate to the day, not the date with the precision set.</p>
       <pre class="lines">
 
 
-122
 123
-124</pre>
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 123</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_earliest'>earliest</span>
   <span class='ivar'>@earliest</span><span class='period'>.</span><span class='id identifier rubyid_earliest'>earliest</span> <span class='kw'>if</span> <span class='ivar'>@earliest</span>
@@ -953,12 +953,12 @@ precision set, not the earliest day.</p>
       <pre class="lines">
 
 
-139
 140
-141</pre>
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_earliest_raw'>earliest_raw</span>
   <span class='ivar'>@earliest</span>
@@ -1036,12 +1036,12 @@ is accurate to the day, not a date with the precision set.</p>
       <pre class="lines">
 
 
-157
 158
-159</pre>
+159
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 158</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_latest'>latest</span>
   <span class='ivar'>@latest</span><span class='period'>.</span><span class='id identifier rubyid_latest'>latest</span> <span class='kw'>if</span> <span class='ivar'>@latest</span>
@@ -1117,12 +1117,12 @@ precision set, not the latest day.</p>
       <pre class="lines">
 
 
-174
 175
-176</pre>
+176
+177</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 175</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_latest_raw'>latest_raw</span>
   <span class='ivar'>@latest</span>
@@ -1176,12 +1176,12 @@ precision set, not the latest day.</p>
       <pre class="lines">
 
 
-185
 186
-187</pre>
+187
+188</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 185</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 186</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_nil?'>nil?</span>
   <span class='id identifier rubyid_earliest'>earliest</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_latest'>latest</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1235,12 +1235,12 @@ precision set, not the latest day.</p>
       <pre class="lines">
 
 
-208
 209
-210</pre>
+210
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_precise?'>precise?</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_same?'>same?</span> <span class='op'>&amp;&amp;</span> <span class='ivar'>@earliest</span><span class='period'>.</span><span class='id identifier rubyid_precision'>precision</span> <span class='op'>&gt;=</span> <span class='const'>DateTimePrecision</span><span class='op'>::</span><span class='const'>DAY</span>
@@ -1294,17 +1294,17 @@ precision set, not the latest day.</p>
       <pre class="lines">
 
 
-197
 198
 199
 200
 201
 202
 203
-204</pre>
+204
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 198</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_same?'>same?</span>
   <span class='op'>!</span><span class='op'>!</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_defined?'>defined?</span> <span class='op'>&amp;&amp;</span> 
@@ -1400,7 +1400,6 @@ precision set, not the latest day.</p>
       <pre class="lines">
 
 
-93
 94
 95
 96
@@ -1413,10 +1412,11 @@ precision set, not the latest day.</p>
 103
 104
 105
-106</pre>
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/museum_provenance/time_span.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_s'>to_s</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>unless</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_defined?'>defined?</span>
@@ -1442,7 +1442,7 @@ precision set, not the latest day.</p>
 </div>
 
       <div id="footer">
-  Generated on Mon Feb  6 09:55:56 2017 by
+  Generated on Sat Jan 13 08:50:23 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.8 (ruby-2.3.1).
 </div>

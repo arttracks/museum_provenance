@@ -101,4 +101,12 @@ describe Parsers::SaleDataParser do
     results[:purchase][:value].must_be_nil
     results[:purchase][:currency_symbol].must_be_nil
   end 
+
+    it "handles strange money amounts with commas" do
+    results = p.parse("(for 5 shillings, three pence)")
+    results[:stock_number].must_be_nil
+    results[:purchase][:string].must_equal "5 shillings, three pence"
+    results[:purchase][:value].must_be_nil
+    results[:purchase][:currency_symbol].must_be_nil
+  end 
 end

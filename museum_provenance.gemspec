@@ -20,12 +20,9 @@ Gem::Specification.new do |spec|
   spec.has_rdoc = 'yard'
   spec.required_ruby_version = '~> 2.3.1'
 
-  spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency "bundler", "~> 1.13"
+  spec.add_development_dependency "rake", '< 11'
   spec.add_development_dependency "minitest"
-  spec.add_development_dependency "m"
-  spec.add_development_dependency 'minitest-reporters'
-  spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'yard'
   spec.add_development_dependency "ruby-graphviz", "1.2.2"
   spec.add_development_dependency 'linkeddata'

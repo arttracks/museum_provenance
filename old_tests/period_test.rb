@@ -1,7 +1,7 @@
 require_relative "test_helper.rb"
 
 describe Period do
-
+  
   let(:p1) {Period.new("P1")}
   let(:p2) {Period.new("P2")}
   let(:p3) {Period.new("P3")}

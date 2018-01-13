@@ -27,7 +27,7 @@ module MuseumProvenance
                                (currency_symbol.as(:currency_symbol) >> space? >> numeric.as(:value) >> rparen.present?)  | 
                                (numeric.as(:value) >> space? >> currency_symbol.as(:currency_symbol) >> rparen.present?)
                              }
-      rule(:currency_phrase) {currency_value | texts.as(:string)}
+      rule(:currency_phrase) {currency_value | texts_with_commas.as(:string)}
       rule(:stock_number)    {str("for").absent? >> texts.as(:stock_number) >> comma.maybe}
       rule(:sale_amount)     {str("for") >> space >> currency_phrase.as(:purchase)}
       rule(:sale_clause)     {(space | comma).maybe >> lparen >> stock_number.maybe >> sale_amount.maybe >> rparen}

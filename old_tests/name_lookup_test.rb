@@ -1,6 +1,7 @@
 require_relative "test_helper.rb"
 
 describe Entity do
+  
   let(:p) {Entity.new("David N.")}
   it "has a name" do
     p.name.must_equal "David N."

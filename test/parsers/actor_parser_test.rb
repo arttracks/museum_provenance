@@ -25,7 +25,7 @@ describe Parsers::ActorParser do
 
   it "works with a name with a single letter" do
     str = "John G Doe"
-     results = p.parse(str)
+     results = p.parse_with_debug(str)
     results[:name][:string].must_equal str
   end
 
@@ -47,19 +47,12 @@ describe Parsers::ActorParser do
     results[:name][:string].must_equal str
   end
 
-  
-
-  it "works with a name and a relationship" do
-    results = p.parse("John Doe, his son")
-    results[:name][:string].must_equal "John Doe"
-    results[:clause].must_equal "his son"
-  end 
-
 
   it "works with a name and a previous relationship" do
-    results = p.parse("John Doe, son of previous")
+    results = p.parse_with_debug("Jane Doe's son, John Doe", reporter: Parslet::ErrorReporter::Deepest.new)
     results[:name][:string].must_equal "John Doe"
-    results[:clause].must_equal "son of previous"
+    results[:relationship][:name][:string].must_equal "Jane Doe"
+    results[:relationship][:type].must_equal "son"
   end 
 
 

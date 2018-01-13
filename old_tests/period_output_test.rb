@@ -1,6 +1,7 @@
 require_relative "test_helper.rb"
 
 describe PeriodOutput do
+  
   let (:prov_text) {"Possibly purchased by David? [1950-2014?], Belgrade, by October 1990 until at least January 5, 2000, stock no. 1"}
   let (:prov) {Provenance.extract prov_text}
   let (:output) {prov[0].generate_output}

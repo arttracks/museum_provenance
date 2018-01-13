@@ -2,11 +2,11 @@ require_relative "../test_helper.rb"
 describe "A full provenance period" do
   let(:str) do
     <<~EOF
-      Possibly purchased by Bob Buyer? [1910-1980], Pittsburgh, PA for Owen Owner [1920-1990?], son of previous, Boise, ID, at "Sale of Sales", Gallery G, New York, NY?, in Miami, FL, sometime between Jan 5, 1982 and February 1982 until between 1999? and the 21st Century (lot no. 1, for $100,000)[a][1].
+      Possibly purchased by Bob Buyer? [1910-1980], Pittsburgh, PA for Bob Buyer's son, Owen Owner [1920-1990?], Boise, ID, from "Sale of Sales", Gallery G, New York, NY?, in Miami, FL, sometime between Jan 5, 1982 and February 1982 until between 1999? and the 21st Century (lot no. 1, for $100,000)[a][1].
       
       Notes:
 
-      [1]: Note a note.
+      [1]. Note a note.
       
 
       Authorities:
@@ -23,7 +23,7 @@ describe "A full provenance period" do
 
       Citations:
 
-      [a]: Book of Books
+      [a]. Book of Books
 
     EOF
   end
@@ -36,11 +36,12 @@ describe "A full provenance period" do
   it "creates a json" do
     # puts @p.to_json # for debugging purposes
     JSON.parse(@p.to_json)
+    
   end
 
   describe "Period-level Content" do
     it "has text" do
-      @p.first[:text].must_equal 'Possibly purchased by Bob Buyer? [1910-1980], Pittsburgh, PA for Owen Owner [1920-1990?], son of previous, Boise, ID, at "Sale of Sales", Gallery G, New York, NY?, in Miami, FL, sometime between Jan 5, 1982 and February 1982 until between 1999? and the 21st Century (lot no. 1, for $100,000)[a][1].'
+      @p.first[:text].must_equal 'Possibly purchased by Bob Buyer? [1910-1980], Pittsburgh, PA for Bob Buyer\'s son, Owen Owner [1920-1990?], Boise, ID, from "Sale of Sales", Gallery G, New York, NY?, in Miami, FL, sometime between Jan 5, 1982 and February 1982 until between 1999? and the 21st Century (lot no. 1, for $100,000)[a][1].'
     end
     it "is uncertain" do
       @p.first[:period_certainty].must_equal false
@@ -154,7 +155,9 @@ describe "A full provenance period" do
       @p.first[:owner][:place][:certainty].must_equal true
       @p.first[:owner][:birth].must_equal "1920-uu-uu"
       @p.first[:owner][:death].must_equal "1990-uu-uu?"
-      @p.first[:owner][:clause].must_equal "son of previous"
+      @p.first[:owner][:relationship][:name][:string].must_equal "Bob Buyer"
+      @p.first[:owner][:relationship][:name][:uri].must_equal "http://example.org/bob"
+      @p.first[:owner][:relationship][:type].must_equal "son"
     end
 
   end

@@ -1,6 +1,7 @@
 require_relative "test_helper.rb"
 
 describe "Provenance Records from JSON" do
+  
   it "incepts" do
     @record_text = "Possibly purchased by David? [1950-2014?], Belgrade, by October 1990 until at least January 5, 2000, stock no. 1"
     @prov_text = "#{@record_text} [1]; another record.  1. I am a footnote."

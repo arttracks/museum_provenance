@@ -1,6 +1,7 @@
 require_relative "test_helper.rb"
 
 describe "Provenance Records" do
+  
   describe "Giverny Winter" do
     let (:prov_text) {"Gaston and Clarisse Baudy, Giverny, France;
                       by descent through the Baudy Family, until 1993; 

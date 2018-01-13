@@ -11,9 +11,8 @@ describe "Full Text Parser" do
     str += "purchased at auction by "
     str += "John Doe? [1910?-1995?], "
     str += "Boise, ID, "
-    str += "for Sally Moe, "
-    str += "wife of previous, "
-    str += %{at "Sale of Pleasant Goods", Christie's, London}
+    str += "for John Doe's wife, Sally Moe, "
+    str += %{from "Sale of Pleasant Goods", Christie's, London, }
     str += "in London, England, "
     str += "sometime after November 5, 1975 "
     str += "(stock no. 10, for $1000)"
@@ -36,7 +35,7 @@ describe "Full Text Parser" do
   end
 
   it "works with both types of agents" do
-    str = "Paul PurchaserAgent for Owen Owner at Sally SellerAgent."
+    str = "Paul PurchaserAgent for Owen Owner from Sally SellerAgent."
     results = p.parse_with_debug(str, reporter: Parslet::ErrorReporter::Deepest.new)
     results[0][:owner][:name][:string].must_equal "Owen Owner"
     results[0][:purchasing_agent][:name][:string].must_equal "Paul PurchaserAgent"

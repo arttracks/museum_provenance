@@ -1,6 +1,7 @@
 require 'json'
 
 describe "Provenance Files" do
+  
   it "handles all existing files" do
     skip "Provenances need to be updated with the new acquisition methods"
     f = File.open( "#{File.dirname(__FILE__)}/sample_data/prov.txt", "r" )

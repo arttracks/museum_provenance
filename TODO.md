@@ -1,3 +1,9 @@
+TODO:  Confirm year zero implementation
+add date link into standard
+confirm that 200BCE dates can be used in death dates
+
+TODO:  recorded in "Graves Art Sales"?
+
 
 ## Additional Testing
 * [ ] Rebuild acquisition tests

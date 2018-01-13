@@ -25,8 +25,8 @@ module MuseumProvenance
       rule(:both) {event >> comma >> sellers_agent}
 
       rule (:named_event) do
-        (str("at") >> space >> (both | event | sellers_agent)) |
-        (str("through") >> space >> sellers_agent >> ( (space | comma) >> str("at") >> space >> event).maybe)
+        (str("from") >> space >> (both | event | sellers_agent)) |
+        (str("through") >> space >> sellers_agent >> ( (space | comma) >> str("from") >> space >> event).maybe)
       end
       
     
